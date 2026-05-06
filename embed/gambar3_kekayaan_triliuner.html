@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Total Kekayaan 50 Triliuner di Indonesia</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; background: #fff; }
+  #chart { width: 100%; height: 100vh; min-height: 480px; }
+</style>
+</head>
+<body>
+<div id="chart"></div>
+<script>
+const tahun = ["2019","2020","2021","2022","2023","2024","2025","2026"];
+const totalKekayaan = [2508, 2479, 2746, 3016, 3501, 4571, 4405, 4651];
+const sektorEkstraktif = [986, 1026, 1212, 1388, 1720, 2611, 2514, 2690];
+const persenEkstraktif = [39.3, 41.4, 44.1, 46.0, 49.1, 57.1, 57.1, 57.8];
+
+function fmtRp(v) {
+  return "Rp" + v.toLocaleString("id-ID") + " T";
+}
+
+const traces = [
+  {
+    type: "bar",
+    name: "Total Kekayaan",
+    x: tahun,
+    y: totalKekayaan,
+    marker: { color: "#9B8FD8", line: { width: 0 } },
+    text: totalKekayaan.map(fmtRp),
+    textposition: "outside",
+    textfont: { size: 10, color: "#4B3FA0", family: "Arial" },
+    hovertemplate: "<b>%{x}</b><br>Total: <b>%{text}</b><extra></extra>",
+    offsetgroup: 1,
+  },
+  {
+    type: "bar",
+    name: "Kekayaan dari Sektor Ekstraktif",
+    x: tahun,
+    y: sektorEkstraktif,
+    marker: { color: "#2B1B8F", line: { width: 0 } },
+    text: sektorEkstraktif.map(fmtRp),
+    textposition: "inside",
+    textfont: { size: 9, color: "white", family: "Arial" },
+    hovertemplate: "<b>%{x}</b><br>Ekstraktif: <b>%{text}</b><extra></extra>",
+    offsetgroup: 2,
+  },
+  {
+    type: "scatter",
+    name: "Proporsi Sektor Ekstraktif (%)",
+    x: tahun,
+    y: persenEkstraktif,
+    mode: "lines+markers+text",
+    line: { color: "#FFC107", width: 2.5 },
+    marker: { color: "#FFC107", size: 9 },
+    text: persenEkstraktif.map(v => `<b>${v.toFixed(1)}%</b>`),
+    textposition: "top center",
+    textfont: { size: 10, color: "#FFC107", family: "Arial Black" },
+    yaxis: "y2",
+    hovertemplate: "<b>%{x}</b><br>Proporsi: <b>%{y:.1f}%</b><extra></extra>",
+  }
+];
+
+const layout = {
+  barmode: "group",
+  bargap: 0.3,
+  bargroupgap: 0.08,
+  plot_bgcolor: "#F2EEFF",
+  paper_bgcolor: "#ffffff",
+  legend: {
+    orientation: "h",
+    y: -0.18,
+    x: 0,
+    xanchor: "left",
+    font: { size: 12, family: "Arial" },
+    bgcolor: "rgba(0,0,0,0)",
+  },
+  yaxis: {
+    showgrid: true,
+    gridcolor: "#E0D8F8",
+    gridwidth: 1,
+    zeroline: false,
+    showticklabels: false,
+    range: [0, 6000],
+  },
+  yaxis2: {
+    overlaying: "y",
+    side: "right",
+    showticklabels: false,
+    showgrid: false,
+    range: [0, 100],
+    zeroline: false,
+  },
+  xaxis: {
+    type: "category",
+    tickfont: { size: 12, color: "#333", family: "Arial" },
+    showgrid: false,
+  },
+  margin: { t: 30, b: 100, l: 20, r: 60 },
+  autosize: true,
+};
+
+const config = {
+  responsive: true,
+  displaylogo: false,
+  modeBarButtonsToRemove: ["lasso2d", "select2d"],
+};
+
+Plotly.newPlot("chart", traces, layout, config);
+window.addEventListener("resize", () => Plotly.Plots.resize("chart"));
+</script>
+</body>
+</html>
