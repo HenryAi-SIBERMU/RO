@@ -2,6 +2,8 @@ import streamlit as st
 import os
 
 def render_sidebar():
+    if st.query_params.get("embed") == "true":
+        return
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     logo_path = os.path.join(base_dir, "assets", "logo_celios.png")
     
