@@ -17,13 +17,11 @@ components.html(html_content, height=1100, scrolling=True)
 
 chart_footer("Dielaborasi oleh peneliti berdasarkan Wright Mills et al., dalam Bugiaccini dkk (2024)")
 
-with st.expander("🔗 Kode Embed WordPress"):
+with st.expander("🔗 Kode Embed WordPress — Gambar 1"):
     st.code("""<!-- Gambar 1: Framework Oligarki dan Ketimpangan Ekonomi -->
-<div style="position:relative; width:100%; padding-top:75%; overflow:hidden; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-  <iframe
-    src="https://[YOUR-APP].streamlit.app/Framework_Oligarki?embed=true"
-    style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
-    allowfullscreen
-    loading="lazy">
-  </iframe>
-</div>""", language="html")
+<iframe
+  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Framework_Oligarki?embed=true"
+  width="100%" height="1200" frameborder="0"
+  style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
+  allowfullscreen loading="lazy">
+</iframe>""", language="html")

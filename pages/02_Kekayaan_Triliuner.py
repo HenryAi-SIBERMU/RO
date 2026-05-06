@@ -131,7 +131,7 @@ with st.expander("📋 Data lengkap"):
 with st.expander("🔗 Kode Embed WordPress — Gambar 3"):
     st.code("""<!-- Gambar 3: Total Kekayaan 50 Triliuner di Indonesia -->
 <iframe
-  src="https://[YOUR-APP].streamlit.app/Kekayaan_Triliuner?embed=true"
+  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
   width="100%" height="560" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   allowfullscreen loading="lazy">
@@ -147,7 +147,7 @@ with open(_GRID_PATH, "r", encoding="utf-8") as _f:
 with st.expander("🔗 Kode Embed WordPress — Grid 50 Triliuner"):
     st.code("""<!-- Grid 50 Orang Terkaya Indonesia (CAGR Ranking) -->
 <iframe
-  src="https://[YOUR-APP].streamlit.app/Kekayaan_Triliuner?embed=true"
+  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
   width="100%" height="1800" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   allowfullscreen loading="lazy">
@@ -160,7 +160,7 @@ st.info("⏳ Data belum diinput. Lihat PDF hal. 13.")
 with st.expander("🔗 Kode Embed WordPress — Tabel 1"):
     st.code("""<!-- Tabel 1: Peningkatan Kekayaan Orang Superkaya di Indonesia -->
 <iframe
-  src="https://[YOUR-APP].streamlit.app/Kekayaan_Triliuner?embed=true"
+  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
   width="100%" height="400" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   allowfullscreen loading="lazy">
@@ -173,7 +173,7 @@ st.info("⏳ Data belum diinput. Lihat PDF hal. 16.")
 with st.expander("🔗 Kode Embed WordPress — Gambar 2"):
     st.code("""<!-- Gambar 2: Proyeksi Median Kekayaan 50 Superkaya hingga 2050 -->
 <iframe
-  src="https://[YOUR-APP].streamlit.app/Kekayaan_Triliuner?embed=true"
+  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
   width="100%" height="560" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   allowfullscreen loading="lazy">
