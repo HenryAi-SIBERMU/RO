@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #fff;
+  padding: 14px 12px;
+  color: #222;
+}
+
+:root {
+  --d:   #3d1a6e;
+  --m:   #7234ad;
+  --bg:  #f5eeff;
+  --bor: #c89fe8;
+  --gld: #ffdb75;
+}
+
+/* ── Title ─────────────────────────────── */
+.title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.tag { background: var(--d); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.title-text { font-size: 13.5px; font-weight: 700; color: var(--d); }
+
+/* ── Top framework dashed box ──────────── */
+.fw-box { border: 2px dashed var(--bor); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+
+/* Col headers — 3 cols only (no arrow gaps) */
+.col-headers {
+  display: grid;
+  grid-template-columns: 48% 32% 20%;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.col-head { background: var(--m); color: #fff; text-align: center; padding: 8px 5px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+
+/* Main rows grid */
+.fw-grid {
+  display: grid;
+  grid-template-columns: 44% 4% 28% 4% 20%;
+  grid-template-rows: auto auto auto auto;
+  gap: 6px;
+}
+
+/* T1 — WHITE background, centered, "+" separators */
+.t1 {
+  grid-column: 1;
+  background: #fff;
+  border: 1px solid var(--bor);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.t1-item { font-size: 10.5px; color: #333; line-height: 1.4; padding: 1px 0; }
+.t1-plus { font-size: 13px; font-weight: 900; color: var(--m); line-height: 1.1; margin: 1px 0; }
+
+/* Arrows */
+.arr { display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--m); font-weight: 900; }
+.arr1 { grid-column: 2; }
+.arr2 { grid-column: 4; }
+
+/* T2 boxes — dark purple */
+.t2 {
+  grid-column: 3;
+  background: var(--m);
+  color: #fff;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4;
+}
+
+/* T3 — Kekuasaan Bisnis (spans 4 rows) */
+.t3 {
+  grid-column: 5;
+  grid-row: 1 / span 4;
+  background: var(--d);
+  color: #fff;
+  text-align: center;
+  padding: 10px 5px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  letter-spacing: 2px;
+}
+
+.r1 { grid-row: 1; }
+.r2 { grid-row: 2; }
+.r3 { grid-row: 3; }
+.r4 { grid-row: 4; }
+
+/* ── Bottom section ────────────────────── */
+.bottom-outer {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+/* Side labels (vertical text) */
+.side-label {
+  writing-mode: vertical-rl;
+  font-size: 9.5px;
+  color: var(--d);
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 5px;
+  background: var(--bg);
+  border: 1px solid var(--bor);
+  border-radius: 8px;
+  min-width: 28px;
+  line-height: 1.4;
+}
+.side-label.left { transform: rotate(180deg); }
+
+.bottom-main { flex: 1; }
+
+/* Impact: 3-row grid (box LEFT | arrow | content RIGHT) */
+.impact-grid {
+  display: grid;
+  grid-template-columns: 175px 24px 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.impact-label {
+  background: var(--m);
+  color: #fff;
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.impact-arr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--m);
+}
+.impact-content {
+  background: var(--bg);
+  border: 1px solid var(--bor);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.impact-content ul { list-style: none; }
+.impact-content ul li {
+  font-size: 10.5px;
+  color: #333;
+  padding: 2.5px 0 2.5px 14px;
+  position: relative;
+  line-height: 1.4;
+}
+.impact-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 3px;
+  color: var(--m);
+  font-weight: 700;
+}
+
+/* Connector + bottom bar */
+.connector { text-align: center; font-size: 15px; color: var(--d); margin-bottom: 5px; }
+.bottom-bar {
+  background: var(--gld);
+  color: var(--d);
+  text-align: center;
+  padding: 11px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Source */
+.source {
+  margin-top: 10px;
+  font-size: 9px;
+  color: #555;
+  background: #fffbe6;
+  border-left: 3px solid var(--gld);
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<!-- Title -->
+<div class="title-bar">
+  <span class="tag">Gambar 1.</span>
+  <span class="title-text">Framework Oligarki dan Ketimpangan Ekonomi di Indonesia</span>
+</div>
+
+<!-- TOP: dashed framework -->
+<div class="fw-box">
+
+  <div class="col-headers">
+    <div class="col-head">Tingkat Tersier</div>
+    <div class="col-head">Tingkat Menengah / Secondary</div>
+    <div class="col-head">Tingkat Dasar</div>
+  </div>
+
+  <div class="fw-grid">
+
+    <!-- Row 1 — Kekuasaan Instrumental -->
+    <div class="t1 r1">
+      <div class="t1-item">Lewat partai politik</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Ikut dalam forum resmi (konsultasi kebijakan)</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Masuk ke pemerintahan</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Menduduki jabatan publik</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Lewat jaringan informal</div>
+    </div>
+    <div class="arr arr1 r1">→</div>
+    <div class="t2 r1">Kekuasaan<br>Instrumental</div>
+    <div class="arr arr2 r1">→</div>
+
+    <!-- Row 2 — Kekuasaan Struktural -->
+    <div class="t1 r2">
+      <div class="t1-item">Ancam keluar<br>(misal pindahan investasi)</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Tahan sumber daya<br>(misal tidak investasi)</div>
+    </div>
+    <div class="arr arr1 r2">→</div>
+    <div class="t2 r2">Kekuasaan<br>Struktural</div>
+    <div class="arr arr2 r2">→</div>
+
+    <!-- Row 3 — Kekuasaan Institusional -->
+    <div class="t1 r3">
+      <div class="t1-item">Delegasi (wewenang kepada elite)</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Derogasi (aturan dilonggarkan/dikurangi)</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Akresi (perubahan berkala sampai sistem berubah)</div>
+    </div>
+    <div class="arr arr1 r3">→</div>
+    <div class="t2 r3">Kekuasaan<br>Institusional</div>
+    <div class="arr arr2 r3">→</div>
+
+    <!-- Row 4 — Kekuasaan Material -->
+    <div class="t1 r4">
+      <div class="t1-item">Kapasitas Koersif</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Pemanfaatan layanan perlindungan (hukum/lobi)</div>
+      <div class="t1-plus">+</div>
+      <div class="t1-item">Opportunity Hoarding</div>
+    </div>
+    <div class="arr arr1 r4">→</div>
+    <div class="t2 r4">Kekuasaan<br>Material</div>
+    <div class="arr arr2 r4">→</div>
+
+    <!-- T3 spans all rows -->
+    <div class="t3">Kekuasaan Bisnis</div>
+
+  </div>
+</div>
+
+<!-- BOTTOM section -->
+<div class="bottom-outer">
+  <div class="side-label left">Kebijakan tanpa keberpihakan ke masyarakat</div>
+
+  <div class="bottom-main">
+    <div class="impact-grid">
+
+      <!-- Row 1: Pekerja Informal -->
+      <div class="impact-label">Pekerja Informal</div>
+      <div class="impact-arr">→</div>
+      <div class="impact-content">
+        <ul>
+          <li>Upah rendah</li>
+          <li>Persaingan tinggi</li>
+          <li>Kerja tanpa pensiun</li>
+          <li>Kerja tanpa perlindungan</li>
+          <li>Tuntutan kerja yang tinggi</li>
+        </ul>
+      </div>
+
+      <!-- Row 2: Kesenjangan Gender -->
+      <div class="impact-label">Kesenjangan Gender</div>
+      <div class="impact-arr">→</div>
+      <div class="impact-content">
+        <ul>
+          <li>Kesejahteraan kurang terjamin</li>
+          <li>Sulit membangun keluarga yang aman dan sejahtera</li>
+        </ul>
+      </div>
+
+      <!-- Row 3: Generasi Muda -->
+      <div class="impact-label">Generasi Muda</div>
+      <div class="impact-arr">→</div>
+      <div class="impact-content">
+        <ul>
+          <li>Akses kebutuhan dasar terbatas</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="connector">▼</div>
+    <div class="bottom-bar">Ketimpangan Ekonomi yang Persisten</div>
+  </div>
+
+  <div class="side-label">↑ Mereproduksi ketimpangan dan memperkuat kedudukan oligarki</div>
+</div>
+
+<!-- Source -->
+<div class="source">
+  Sumber: Dielaborasi oleh peneliti berdasarkan Wright Mills (1956)*, Lindblom (1982)*, Winters (2011)*, Fairfield (2015)* and Busemeyer and Thalen (2020)* dalam Bugiaccini dkk (2024)
+</div>
+
+</body>
+</html>
