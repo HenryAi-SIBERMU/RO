@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from pathlib import Path
 from components.embed_layout import apply_embed_mode
 from components.sidebar import render_sidebar
@@ -17,17 +18,13 @@ if not csv_files:
     st.info("Belum ada file data.")
 else:
     st.markdown(f"Total **{len(csv_files)} file CSV** tersedia.")
-    st.markdown("")
 
     for f in csv_files:
-        size_kb = f.stat().st_size / 1024
-        col1, col2, col3 = st.columns([4, 1, 1])
-        col1.markdown(f"`{f.name}`")
-        col2.markdown(f"`{size_kb:.1f} KB`")
-        col3.download_button(
-            label="Download",
-            data=f.read_bytes(),
-            file_name=f.name,
-            mime="text/csv",
-            key=f"dl_{f.name}",
-        )
+        try:
+            df = pd.read_csv(f)
+            if df.empty:
+                continue
+            with st.expander(f"`{f.name}` — {len(df)} baris × {len(df.columns)} kolom"):
+                st.dataframe(df, use_container_width=True, hide_index=True)
+        except Exception:
+            pass
