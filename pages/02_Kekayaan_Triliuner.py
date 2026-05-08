@@ -131,10 +131,10 @@ with st.expander("📋 Data lengkap"):
 with st.expander("🔗 Kode Embed WordPress — Gambar 3"):
     st.code("""<!-- Gambar 3: Total Kekayaan 50 Triliuner di Indonesia -->
 <iframe
-  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
-  width="100%" height="560" frameborder="0"
+  src="https://henryai-sibermu.github.io/RO/embed/gambar3_kekayaan_triliuner.html"
+  width="100%" height="520" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
-  allowfullscreen loading="lazy">
+  loading="lazy">
 </iframe>""", language="html")
 
 # ── Grid 50 Triliuner ────────────────────────────────────────────────
