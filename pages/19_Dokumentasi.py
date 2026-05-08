@@ -1,7 +1,15 @@
+import re
 import streamlit as st
 from pathlib import Path
 from components.embed_layout import apply_embed_mode
 from components.sidebar import render_sidebar
+
+def strip_emoji(text: str) -> str:
+    return re.compile(
+        "[\U00010000-\U0010ffff\U0001F300-\U0001F9FF"
+        "\U00002600-\U000027BF\U0000FE00-\U0000FE0F\u200d]+",
+        flags=re.UNICODE,
+    ).sub("", text)
 
 st.set_page_config(page_title="Dokumentasi", layout="wide")
 apply_embed_mode()
@@ -24,6 +32,6 @@ with tab1:
 with tab2:
     f = docs_dir / "CHART-INVENTORY.md"
     if f.exists():
-        st.markdown(f.read_text(encoding="utf-8"))
+        st.markdown(strip_emoji(f.read_text(encoding="utf-8")))
     else:
         st.error("CHART-INVENTORY.md tidak ditemukan.")
