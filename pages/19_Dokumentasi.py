@@ -18,20 +18,8 @@ render_sidebar()
 st.title("Dokumentasi")
 st.markdown("---")
 
-docs_dir = Path(__file__).resolve().parent.parent / "docs"
-
-tab1, tab2 = st.tabs(["Strategi & Arsitektur", "Chart Inventory"])
-
-with tab1:
-    f = docs_dir / "STRATEGY.md"
-    if f.exists():
-        st.markdown(f.read_text(encoding="utf-8"))
-    else:
-        st.error("STRATEGY.md tidak ditemukan.")
-
-with tab2:
-    f = docs_dir / "CHART-INVENTORY.md"
-    if f.exists():
-        st.markdown(strip_emoji(f.read_text(encoding="utf-8")))
-    else:
-        st.error("CHART-INVENTORY.md tidak ditemukan.")
+f = Path(__file__).resolve().parent.parent / "docs" / "CHART-INVENTORY.md"
+if f.exists():
+    st.markdown(strip_emoji(f.read_text(encoding="utf-8")))
+else:
+    st.error("CHART-INVENTORY.md tidak ditemukan.")

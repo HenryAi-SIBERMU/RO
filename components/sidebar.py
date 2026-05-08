@@ -47,7 +47,6 @@ def render_sidebar():
         st.markdown("---")
 
         st.markdown("### Dokumentasi")
-        st.page_link("pages/19_Dokumentasi.py", label="Strategi & Arsitektur")
         st.page_link("pages/21_Chart_Inventory.py", label="Chart Inventory")
 
         st.markdown("### Dataset")
