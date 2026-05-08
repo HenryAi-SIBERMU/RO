@@ -1,42 +1,31 @@
 import streamlit as st
 import os
+from pathlib import Path
 
 def render_sidebar():
     if st.query_params.get("embed") == "true":
         return
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    logo_path = os.path.join(base_dir, "assets", "logo_celios.png")
-    
-    st.markdown("""
-    <style>
-    .sidebar-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #66BB6A;
-        text-align: center;
-        padding-bottom: 20px;
-        margin-bottom: 0px;
-        border-bottom: 1px solid #ffffff11;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    base_dir = Path(__file__).resolve().parent.parent
+    logo_path = base_dir / "assets" / "logo_celios.png"
+    strategy_path = base_dir / "docs" / "STRATEGY.md"
+    data_dir = base_dir / "data"
 
     with st.sidebar:
-        if os.path.exists(logo_path):
-            st.image(logo_path, use_column_width=True)
-            
-        st.markdown('<div class="sidebar-title">Celios - Ketimpangan Ekonomi</div>', unsafe_allow_html=True)
+        if logo_path.exists():
+            st.image(str(logo_path), use_column_width=True)
+
+        st.markdown("**Celios — Ketimpangan Ekonomi**")
         st.markdown("---")
-        
-        st.page_link("app.py", label="Dashboard Utama", icon="📊")
-        
+
+        st.page_link("app.py", label="Dashboard Utama")
+
         st.markdown("### Seksi A — Kekayaan")
         st.page_link("pages/01_Framework_Oligarki.py", label="Framework Oligarki")
         st.page_link("pages/02_Kekayaan_Triliuner.py", label="Kekayaan Triliuner")
         st.page_link("pages/03_Sektor_Ekstraktif.py", label="Sektor Ekstraktif")
         st.page_link("pages/04_Ketimpangan_Historis.py", label="Ketimpangan Historis")
         st.page_link("pages/05_Komparasi_Global.py", label="Komparasi Global")
-        
+
         st.markdown("### Seksi B — Pejabat Publik")
         st.page_link("pages/06_Harta_Pejabat.py", label="Harta Pejabat")
         st.page_link("pages/07_Oligarki_Parpol.py", label="Oligarki Parpol")
@@ -57,3 +46,32 @@ def render_sidebar():
         st.page_link("pages/16_Reformasi_Fiskal.py", label="Reformasi Fiskal")
         st.page_link("pages/17_Pajak_Kekayaan.py", label="Pajak Kekayaan")
         st.page_link("pages/18_Pembiayaan_Parpol.py", label="Pembiayaan Parpol")
+
+        st.markdown("---")
+
+        # ── Dokumentasi ───────────────────────────────────────────────
+        st.markdown("### Dokumentasi")
+        with st.expander("Strategi & Arsitektur"):
+            if strategy_path.exists():
+                st.markdown(strategy_path.read_text(encoding="utf-8"))
+            else:
+                st.warning("STRATEGY.md tidak ditemukan.")
+
+        # ── Dataset ───────────────────────────────────────────────────
+        st.markdown("### Dataset")
+        with st.expander("Data Files (CSV)"):
+            csv_files = sorted([f for f in data_dir.iterdir() if f.suffix == ".csv"])
+            if csv_files:
+                for f in csv_files:
+                    size_kb = f.stat().st_size / 1024
+                    col1, col2 = st.columns([3, 1])
+                    col1.markdown(f"`{f.name}`")
+                    col2.download_button(
+                        label="DL",
+                        data=f.read_bytes(),
+                        file_name=f.name,
+                        mime="text/csv",
+                        key=f"dl_{f.name}",
+                    )
+            else:
+                st.info("Belum ada data.")
