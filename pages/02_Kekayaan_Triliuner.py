@@ -131,7 +131,7 @@ with st.expander("📋 Data lengkap"):
 with st.expander("🔗 Kode Embed WordPress — Gambar 3"):
     st.code("""<!-- Gambar 3: Total Kekayaan 50 Triliuner di Indonesia -->
 <iframe
-  src="https://henryai-sibermu.github.io/RO/embed/gambar3_kekayaan_triliuner.html"
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner.html"
   width="100%" height="520" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   loading="lazy">
@@ -147,7 +147,7 @@ with open(_GRID_PATH, "r", encoding="utf-8") as _f:
 with st.expander("🔗 Kode Embed WordPress — Grid 50 Triliuner"):
     st.code("""<!-- Grid 50 Orang Terkaya Indonesia (CAGR Ranking) -->
 <iframe
-  src="https://henryai-sibermu.github.io/RO/embed/grid_50_triliuner.html"
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_grid.html"
   width="100%" height="1700" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   loading="lazy">
