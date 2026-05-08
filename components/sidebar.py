@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 from pathlib import Path
 
 def render_sidebar():
@@ -7,8 +6,6 @@ def render_sidebar():
         return
     base_dir = Path(__file__).resolve().parent.parent
     logo_path = base_dir / "assets" / "logo_celios.png"
-    strategy_path = base_dir / "docs" / "STRATEGY.md"
-    data_dir = base_dir / "data"
 
     with st.sidebar:
         if logo_path.exists():
@@ -49,29 +46,8 @@ def render_sidebar():
 
         st.markdown("---")
 
-        # ── Dokumentasi ───────────────────────────────────────────────
         st.markdown("### Dokumentasi")
-        with st.expander("Strategi & Arsitektur"):
-            if strategy_path.exists():
-                st.markdown(strategy_path.read_text(encoding="utf-8"))
-            else:
-                st.warning("STRATEGY.md tidak ditemukan.")
+        st.page_link("pages/19_Dokumentasi.py", label="Strategi & Arsitektur")
 
-        # ── Dataset ───────────────────────────────────────────────────
         st.markdown("### Dataset")
-        with st.expander("Data Files (CSV)"):
-            csv_files = sorted([f for f in data_dir.iterdir() if f.suffix == ".csv"])
-            if csv_files:
-                for f in csv_files:
-                    size_kb = f.stat().st_size / 1024
-                    col1, col2 = st.columns([3, 1])
-                    col1.markdown(f"`{f.name}`")
-                    col2.download_button(
-                        label="DL",
-                        data=f.read_bytes(),
-                        file_name=f.name,
-                        mime="text/csv",
-                        key=f"dl_{f.name}",
-                    )
-            else:
-                st.info("Belum ada data.")
+        st.page_link("pages/20_Dataset.py", label="Data Files (CSV)")
