@@ -147,10 +147,10 @@ with open(_GRID_PATH, "r", encoding="utf-8") as _f:
 with st.expander("🔗 Kode Embed WordPress — Grid 50 Triliuner"):
     st.code("""<!-- Grid 50 Orang Terkaya Indonesia (CAGR Ranking) -->
 <iframe
-  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
-  width="100%" height="1800" frameborder="0"
+  src="https://henryai-sibermu.github.io/RO/embed/grid_50_triliuner.html"
+  width="100%" height="1700" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
-  allowfullscreen loading="lazy">
+  loading="lazy">
 </iframe>""", language="html")
 
 # ── Tabel 1 — Hal. 13 ────────────────────────────────────────────────

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #140828;
+  --card:   #2a1258;
+  --gold:   #ffdb75;
+  --purple: #7234ad;
+  --sub:    #c4a8e0;
+  --neg:    #f87171;
+}
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  padding: 14px 12px 12px;
+}
+
+/* ── Title ─── */
+.pg-title {
+  text-align: center;
+  margin-bottom: 14px;
+}
+.pg-title h2 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.4px;
+  margin-bottom: 3px;
+}
+.pg-title p {
+  font-size: 9px;
+  color: var(--sub);
+}
+
+/* ── Grids ─── */
+.top3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.rest {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+/* ── Card ─── */
+.card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 10px 7px 9px;
+  text-align: center;
+  position: relative;
+}
+.card.big {
+  padding: 14px 10px 12px;
+}
+
+/* Rank badge */
+.rank {
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--sub);
+  color: var(--bg);
+  font-size: 8.5px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card.big .rank {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+.rank.g { background: var(--gold); color: #1a0a36; }
+
+/* Avatar silhouette */
+.av {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--purple);
+  border: 2.5px solid var(--sub);
+  margin: 0 auto 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.card.big .av {
+  width: 68px;
+  height: 68px;
+  border-width: 3px;
+}
+.r1 .av, .r2 .av, .r3 .av { border-color: var(--gold); }
+.av svg { width: 55%; height: 55%; fill: rgba(255,255,255,0.65); }
+
+/* Name */
+.nm {
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #fff;
+  margin-bottom: 5px;
+  min-height: 24px;
+}
+.card.big .nm { font-size: 12px; min-height: 30px; margin-bottom: 6px; }
+
+/* Year + value */
+.yr  { font-size: 7.5px; color: var(--sub); }
+.val { font-size: 9.5px; font-weight: 700; color: #fff; margin: 1px 0 3px; }
+.card.big .val { font-size: 12px; }
+
+/* CAGR */
+.cl  { font-size: 7px; color: var(--sub); letter-spacing: 0.5px; }
+.cv  { font-size: 9.5px; font-weight: 800; }
+.card.big .cv { font-size: 14px; }
+.pos { color: var(--gold); }
+.neg { color: var(--neg); }
+.zer { color: var(--sub); }
+
+/* Note + Source */
+.note {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 9.5px;
+  color: #fff;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.note strong { color: var(--gold); }
+
+.source {
+  background: #fffbe6;
+  color: #444;
+  font-size: 8.5px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+.source b { color: var(--purple); }
+</style>
+</head>
+<body>
+
+<div class="pg-title">
+  <h2>50 Orang Terkaya Indonesia — Forbes 2026</h2>
+  <p>Diurutkan berdasarkan CAGR (Compound Annual Growth Rate) tertinggi</p>
+</div>
+
+<div class="top3" id="top3"></div>
+<div class="rest"  id="rest"></div>
+
+<div class="note">
+  <strong>50 orang terkaya Indonesia</strong> yang secara statistik hanya 0,00000174% dari total populasi,
+  menguasai kekayaan setara <strong>18,6%</strong> kekayaan seluruh rakyat Indonesia.
+</div>
+
+<div class="source">
+  <b>Sumber:</b> Data Forbes 50 orang terkaya 2026, diolah oleh peneliti CELIOS &nbsp;|&nbsp;
+  <b>CAGR:</b> Compound Annual Growth Rate (Rata-rata tingkat pertumbuhan tahunan)
+</div>
+
+<script>
+const D = [
+  {r:1,  n:"Haryanto Tjiptodihardjo",              v:84.40,  c:71.0},
+  {r:2,  n:"Marina Budiman",                        v:113.09, c:47.9},
+  {r:3,  n:"Lim Hariyanto Wijaya Sarwono",          v:108.03, c:42.2},
+  {r:4,  n:"Han Arming Hanafia",                    v:74.27,  c:41.4},
+  {r:5,  n:"Otto Toto Sugiri",                      v:168.88, c:40.7},
+  {r:6,  n:"Low Tuck Kwong",                        v:340.98, c:38.4},
+  {r:7,  n:"Sjamsul Nursalim",                      v:47.28,  c:36.5},
+  {r:8,  n:"Prajogo Pangestu",                      v:852.74, c:36.6},
+  {r:9,  n:"Manoj Punjabi",                         v:55.70,  c:31.6},
+  {r:10, n:"Wijono & Hermanto Tanoto keluarga",     v:60.64,  c:27.4},
+  {r:11, n:"Tahir & keluarga",                      v:178.92, c:18.1},
+  {r:12, n:"Widjaja keluarga",                      v:477.88, c:16.7},
+  {r:13, n:"Jogi Hendra Atmadja & keluarga",        v:69.08,  c:16.2},
+  {r:14, n:"Hamami & keluarga",                     v:28.69,  c:14.6},
+  {r:15, n:"Sulistyo & keluarga",                   v:24.47,  c:13.2},
+  {r:16, n:"Sukanto Tanoto",                        v:72.58,  c:12.7},
+  {r:17, n:"Arini Subianto & keluarga",             v:40.61,  c:12.7},
+  {r:18, n:"Martua Sitorus",                        v:60.78,  c:12.6},
+  {r:19, n:"Theodore Rachmat",                      v:75.98,  c:12.4},
+  {r:20, n:"Anthony Salim & keluarga",              v:221.11, c:8.7},
+  {r:21, n:"R. Budi & Michael Hartono",             v:849.84, c:8.6},
+  {r:22, n:"Irwan Hidayat & keluarga",              v:19.41,  c:8.1},
+  {r:23, n:"Peter Sondakh",                         v:64.14,  c:7.8},
+  {r:24, n:"Sri Prakash Lohia",                     v:146.16, c:7.4},
+  {r:25, n:"Bambang Sutantio",                      v:36.45,  c:7.0},
+  {r:26, n:"Djoko Susanto",                         v:42.20,  c:6.8},
+  {r:27, n:"Garibaldi Thohir & keluarga",           v:64.14,  c:4.8},
+  {r:28, n:"Putera Sampoerna & keluarga",           v:42.20,  c:3.3},
+  {r:29, n:"Ciputra keluarga",                      v:27.01,  c:3.0},
+  {r:30, n:"Agoes Projosasmito",                    v:99.69,  c:3.0},
+  {r:31, n:"Bachtiar & Burhan Bahari Karim & kel.", v:70.89,  c:2.8},
+  {r:32, n:"Alexander Ramlie",                      v:45.67,  c:2.6},
+  {r:33, n:"Husodo Angkosubroto & keluarga",        v:25.32,  c:2.3},
+  {r:34, n:"Hilmi Panigoro & keluarga",             v:48.96,  c:1.2},
+  {r:35, n:"Ciliandra & Wirastuty Fangiono kel.",   v:25.32,  c:0.7},
+  {r:36, n:"Mochtar Riady",                         v:137.13, c:0.5},
+  {r:37, n:"Chairul Tanjung",                       v:62.71,  c:0.0},
+  {r:38, n:"Hary Tanoesoedibjo",                    v:18.57,  c:0.0},
+  {r:39, n:"Jenny Quantero & Engki Wibowo",         v:24.97,  c:-0.5},
+  {r:40, n:"Soegiarto Adikoesoemo",                 v:21.94,  c:-0.7},
+  {r:41, n:"Husain Djojonegoro & keluarga",         v:16.53,  c:-0.8},
+  {r:42, n:"Eddy Sugianto",                         v:18.57,  c:-2.9},
+  {r:43, n:"Lim Chai Hock",                         v:21.94,  c:-3.6},
+  {r:44, n:"Hartati Murdaya Family",                v:21.10,  c:-4.1},
+  {r:45, n:"Dewi Kam",                              v:60.76,  c:-5.0},
+  {r:46, n:"Eddy Katuari & keluarga",               v:16.79,  c:-5.2},
+  {r:47, n:"Setiawan & keluarga",                   v:60.76,  c:-5.8},
+  {r:48, n:"Susilo Wonowidjojo & keluarga",         v:64.01,  c:-7.7},
+  {r:49, n:"Eddy Kusnadi Sariastmadja & kel.",      v:18.57,  c:-8.1},
+  {r:50, n:"Edwin Soeryadjana & keluarga",          v:16.88,  c:-9.6},
+];
+
+const SILHOUETTE = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/>
+</svg>`;
+
+function cc(c) { return c > 0 ? 'pos' : c < 0 ? 'neg' : 'zer'; }
+function cs(c) { return (c > 0 ? '+' : '') + c.toFixed(1) + '%'; }
+function fmt(v){ return 'Rp' + v.toFixed(2).replace('.',',') + ' T'; }
+
+function card(d, big) {
+  const rClass = d.r <= 3 ? 'rank g' : 'rank';
+  const cClass = big ? `card big r${d.r}` : 'card';
+  return `<div class="${cClass}">
+    <div class="${rClass}">${d.r}</div>
+    <div class="av">${SILHOUETTE}</div>
+    <div class="nm">${d.n}</div>
+    <div class="yr">2026</div>
+    <div class="val">${fmt(d.v)}</div>
+    <div class="cl">CAGR</div>
+    <div class="cv ${cc(d.c)}">${cs(d.c)}</div>
+  </div>`;
+}
+
+document.getElementById('top3').innerHTML = D.slice(0,3).map(d=>card(d,true)).join('');
+document.getElementById('rest').innerHTML  = D.slice(3).map(d=>card(d,false)).join('');
+</script>
+</body>
+</html>
