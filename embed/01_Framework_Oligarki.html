@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Framework Oligarki</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary-purple': '#7B3CBA',
+            'secondary-purple': '#652D90',
+            'tertiary-purple': '#8E44AD',
+            'highlight-yellow': '#F3E5AB',
+            'gold': '#D4AF37'
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-utilities">
+    .connector-line {
+      position: absolute;
+      border-top: 2px dashed #000;
+      width: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .connector-arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid #000;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .solid-connector-line {
+      position: absolute;
+      border-top: 2px solid #000;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .vertical-line {
+      position: absolute;
+      border-left: 2px solid #000;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #D4AF37;
+      border-radius: 50%;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-8 font-sans text-sm">
+<!-- BEGIN: Main Container -->
+<div class="max-w-4xl mx-auto bg-white p-8 relative">
+<!-- BEGIN: Header -->
+<header class="flex items-center mb-8 gap-4">
+<div class="bg-primary-purple text-white px-4 py-2 font-bold rounded-sm">
+        Gambar 1.
+      </div>
+<h1 class="text-primary-purple font-bold text-lg">Framework Oligarki dan Ketimpangan Ekonomi di Indonesia</h1>
+</header>
+<!-- END: Header -->
+<div class="flex relative">
+<!-- Left Annotation -->
+<div class="w-32 flex-shrink-0 flex items-center pr-4 relative">
+<div class="text-center font-bold text-sm">
+          Kebijakan tanpa keberpihakan ke masyarakat
+        </div>
+<!-- Arrow from bottom box up to main box -->
+<div class="absolute left-[80%] bottom-0 top-[20%] w-[2px] bg-black"></div>
+<div class="absolute left-[80%] top-[20%] w-4 h-[2px] bg-black"></div>
+<div class="absolute left-[80%] bottom-0 w-8 h-[2px] bg-black"></div>
+<div class="absolute left-[100%] bottom-[-5px] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black ml-[4px]"></div>
+</div>
+<!-- Main Central Section -->
+<div class="flex-grow">
+<!-- BEGIN: Dashed Box Container -->
+<div class="border-2 border-dashed border-gray-400 rounded-xl p-6 relative">
+<!-- Column Headers -->
+<div class="grid grid-cols-[1.2fr_1.2fr_0.8fr] gap-4 mb-4">
+<div class="bg-secondary-purple text-white text-center py-2 rounded-xl font-bold">Tingkat Tersier</div>
+<div class="bg-secondary-purple text-white text-center py-2 rounded-xl font-bold">Tingkat Menengah/Secondary</div>
+<div class="bg-secondary-purple text-white text-center py-2 rounded-xl font-bold">Tingkat Dasar</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-[1.2fr_1.2fr_0.8fr] gap-4 relative">
+<!-- Column 1 & 2 Rows -->
+<div class="flex flex-col gap-4 col-span-2">
+<!-- Row 1 -->
+<div class="flex gap-4 relative">
+<div class="bg-primary-purple text-white p-3 rounded-xl flex-1 text-center text-xs flex flex-col justify-center min-h-[100px] relative">
+<div>Lewat partai politik</div>
+<div>+</div>
+<div>Ikut dalam forum resmi<br/>(konsultasi kebijakan)</div>
+<div>+</div>
+<div>Masuk ke pemerintahan</div>
+<div>+</div>
+<div>Menduduki jabatan publik</div>
+<div>+</div>
+<div>Lewat jaringan informal</div>
+<div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+<!-- Connection -->
+<div class="w-8 relative flex items-center justify-center">
+<div class="border-t-2 border-dashed border-black w-full absolute top-1/2 -translate-y-1/2"></div>
+<div class="absolute right-0 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black top-1/2 -translate-y-1/2 translate-x-[2px]"></div>
+</div>
+<div class="bg-primary-purple text-white p-4 rounded-xl flex-1 flex items-center justify-center font-bold relative">
+                  Kekuasaan Instrumental
+                  <div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex gap-4 relative">
+<div class="bg-primary-purple text-white p-3 rounded-xl flex-1 text-center text-xs flex flex-col justify-center min-h-[80px] relative">
+<div>Ancam keluar<br/>(misal pindahkan investasi)</div>
+<div>+</div>
+<div>Tahan sumber daya<br/>(misal tidak investasi)</div>
+<div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+<!-- Connection -->
+<div class="w-8 relative flex items-center justify-center">
+<div class="border-t-2 border-dashed border-black w-full absolute top-1/2 -translate-y-1/2"></div>
+<div class="absolute right-0 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black top-1/2 -translate-y-1/2 translate-x-[2px]"></div>
+</div>
+<div class="bg-primary-purple text-white p-4 rounded-xl flex-1 flex items-center justify-center font-bold relative">
+                  Kekuasaan Struktural
+                  <div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex gap-4 relative">
+<div class="bg-primary-purple text-white p-3 rounded-xl flex-1 text-center text-xs flex flex-col justify-center min-h-[100px] relative">
+<div>Delegasi<br/>(wewenang kepada elite)</div>
+<div>+</div>
+<div>Derogasi<br/>(aturan dilonggarkan/dikurangi)</div>
+<div>+</div>
+<div>Akresi<br/>(perubahan berkala sampai<br/>sistem berubah)</div>
+<div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+<!-- Connection -->
+<div class="w-8 relative flex items-center justify-center">
+<div class="border-t-2 border-dashed border-black w-full absolute top-1/2 -translate-y-1/2"></div>
+<div class="absolute right-0 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black top-1/2 -translate-y-1/2 translate-x-[2px]"></div>
+</div>
+<div class="bg-primary-purple text-white p-4 rounded-xl flex-1 flex items-center justify-center font-bold relative">
+                  Kekuasaan Institusional
+                  <div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="flex gap-4 relative">
+<div class="bg-primary-purple text-white p-3 rounded-xl flex-1 text-center text-xs flex flex-col justify-center min-h-[80px] relative">
+<div>Kapasitas Koersif</div>
+<div>+</div>
+<div>Pemanfaatan layanan<br/>perlindungan (hukum/lobi)</div>
+<div>+</div>
+<div>Opportunity Hoarding</div>
+<div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+<!-- Connection -->
+<div class="w-8 relative flex items-center justify-center">
+<div class="border-t-2 border-dashed border-black w-full absolute top-1/2 -translate-y-1/2"></div>
+<div class="absolute right-0 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black top-1/2 -translate-y-1/2 translate-x-[2px]"></div>
+</div>
+<div class="bg-primary-purple text-white p-4 rounded-xl flex-1 flex items-center justify-center font-bold relative">
+                  Kekuasaan Material
+                  <div class="dot -right-[5px] z-10 border-2 border-white"></div>
+</div>
+</div>
+</div>
+<!-- Column 3 (Spans all rows) -->
+<div class="col-span-1 relative flex items-center justify-center">
+<!-- Connectors from col 2 to col 3 -->
+<div class="absolute left-[-1rem] w-4 top-[12.5%] h-[2px] bg-black"></div>
+<div class="absolute left-[calc(-1rem+4px)] top-[12.5%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+<div class="absolute left-[-1rem] w-4 top-[37.5%] h-[2px] bg-black"></div>
+<div class="absolute left-[calc(-1rem+4px)] top-[37.5%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+<div class="absolute left-[-1rem] w-4 top-[62.5%] h-[2px] bg-black"></div>
+<div class="absolute left-[calc(-1rem+4px)] top-[62.5%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+<div class="absolute left-[-1rem] w-4 top-[87.5%] h-[2px] bg-black"></div>
+<div class="absolute left-[calc(-1rem+4px)] top-[87.5%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+<div class="bg-secondary-purple text-white w-full h-full rounded-xl flex items-center justify-center font-bold text-center p-4">
+                Kekuasaan<br/>Bisnis
+              </div>
+</div>
+</div>
+</div>
+<!-- END: Dashed Box Container -->
+<!-- Bottom Section: Impact -->
+<div class="mt-8 flex items-stretch gap-8 relative pl-12">
+<!-- Factors -->
+<div class="flex flex-col gap-4 w-64">
+<div class="bg-secondary-purple text-gold font-bold p-3 rounded-full text-center">
+              Pekerja Informal
+            </div>
+<div class="bg-secondary-purple text-gold font-bold p-3 rounded-full text-center">
+              Kesenjangan Gender
+            </div>
+<div class="bg-secondary-purple text-gold font-bold p-3 rounded-full text-center">
+              Generasi Muda
+            </div>
+</div>
+<!-- Connecting lines from factors to list -->
+<div class="relative w-8">
+<div class="absolute left-0 w-8 top-1/6 h-[2px] bg-black top-[16.6%] -translate-y-1/2"></div>
+<div class="absolute left-0 w-8 top-1/2 h-[2px] bg-black -translate-y-1/2"></div>
+<div class="absolute left-0 w-8 bottom-1/6 h-[2px] bg-black bottom-[16.6%] -translate-y-1/2"></div>
+<div class="absolute left-[24px] top-[16.6%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+<div class="absolute left-[24px] top-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+<div class="absolute left-[24px] bottom-[16.6%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-black -translate-y-1/2"></div>
+</div>
+<!-- Consequences List -->
+<div class="bg-secondary-purple text-white p-6 rounded-xl flex-grow">
+<ul class="list-disc pl-5 space-y-1 text-sm">
+<li>Upah rendah</li>
+<li>Persaingan tinggi</li>
+<li>Kerja tanpa pensiun</li>
+<li>Kerja tanpa perlindungan</li>
+<li>Tuntunan kerja yang tinggi</li>
+<li>Kesejahteraan kurang terjamin</li>
+<li>Sulit membangun keluarga yang aman dan sejahtera</li>
+<li>Akses kebutuhan dasar terbatas</li>
+</ul>
+</div>
+</div>
+<!-- Connection to Final Outcome -->
+<div class="flex justify-center my-4 relative h-8">
+<div class="absolute w-[2px] h-full bg-black left-1/2 -translate-x-1/2"></div>
+<div class="absolute bottom-0 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-black left-1/2 -translate-x-1/2"></div>
+</div>
+<!-- Final Outcome Box -->
+<div class="bg-tertiary-purple text-gold font-bold text-lg text-center py-4 rounded-full w-4/5 mx-auto relative shadow-md">
+          Ketimpangan Ekonomi yang Persisten
+        </div>
+</div>
+<!-- Right Annotation -->
+<div class="w-40 flex-shrink-0 flex items-center pl-8 relative">
+<div class="text-left font-bold text-sm">
+          Mereproduksi ketimpangan dan memperkuat kedudukan oligarki
+        </div>
+<!-- Arrow from main box down to bottom -->
+<div class="absolute right-[80%] top-[40%] bottom-[10%] w-[2px] bg-black"></div>
+<div class="absolute right-[80%] top-[40%] w-8 h-[2px] bg-black"></div>
+<div class="absolute right-[80%] bottom-[10%] w-8 h-[2px] bg-black"></div>
+<div class="absolute right-[100%] bottom-[10%] w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[8px] border-r-black mr-[4px] transform translate-y-1/2"></div>
+<!-- Note: This arrow structure is an approximation of the right sidebar arrow flow -->
+</div>
+</div>
+<!-- BEGIN: Footer Citation -->
+<footer class="mt-12 w-4/5 mx-auto bg-highlight-yellow text-center p-3 rounded-md text-xs border border-yellow-200">
+      Sumber: Dielaborasi oleh peneliti berdasarkan Wright Mills (1956)<sup>2</sup>, Lindblom (1982)<sup>3</sup>, Winters (2011)<sup>4</sup>, Fairfield (2015)<sup>5</sup> and Busemeyer and Thelen (2020)<sup>6</sup> dalam Bogliaccini dkk (2024)<sup>7</sup>
+</footer>
+<!-- END: Footer Citation -->
+</div>
+<!-- END: Main Container -->
+</body></html>
