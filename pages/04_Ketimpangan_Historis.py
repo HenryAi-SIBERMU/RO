@@ -60,9 +60,9 @@ fig.update_layout(
         orientation="v",
         yanchor="top",
         y=0.98,
-        xanchor="left",
-        x=0.02,
-        font=dict(size=12, family="Arial"),
+        xanchor="right",
+        x=0.98,
+        font=dict(size=11, family="Arial"),
         bgcolor="rgba(255,255,255,0.95)",
         bordercolor="#DDD",
         borderwidth=1,
@@ -85,19 +85,34 @@ fig.update_layout(
         tickfont=dict(size=11, color="#333"),
         dtick=10,  # interval 10 tahun
     ),
-    margin=dict(t=40, b=60, l=60, r=40),
-    height=500,
+    margin=dict(t=40, b=120, l=60, r=40),
+    height=600,
     hovermode="x unified",
+    annotations=[
+        dict(
+            text=(
+                "Kelompok 1% teratas di Indonesia menguasai sekitar <b>20–21%</b> total kekayaan dan sekitar <b>17–18%</b> dari pendapatan nasional sebelum pajak.<br>"
+                "Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum<br>"
+                "redistribusi melalui pajak (lihat Gambar 5)."
+            ),
+            xref="paper",
+            yref="paper",
+            x=0.5,
+            y=-0.15,
+            xanchor="center",
+            yanchor="top",
+            showarrow=False,
+            font=dict(size=11, color="#333", family="Arial"),
+            align="center",
+            bgcolor="rgba(240, 248, 255, 0.9)",
+            bordercolor="#2196F3",
+            borderwidth=2,
+            borderpad=10,
+        )
+    ],
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
-# ── Keterangan di bawah chart ────────────────────────────────────────
-st.markdown("""
-<div style="background: #F0F8FF; padding: 16px; border-left: 4px solid #2196F3; border-radius: 4px; margin: 20px 0; font-size: 14px; line-height: 1.7;">
-Kelompok 1% teratas di Indonesia menguasai sekitar <strong>20–21%</strong> total kekayaan dan sekitar <strong>17–18%</strong> dari pendapatan nasional sebelum pajak. Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum redistribusi melalui pajak (lihat Gambar 5).
-</div>
-""", unsafe_allow_html=True)
 
 chart_footer("World Inequality Database (2024), diolah CELIOS")
 
