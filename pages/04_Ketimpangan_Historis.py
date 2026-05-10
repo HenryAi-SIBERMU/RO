@@ -62,11 +62,12 @@ fig.update_layout(
         y=0.98,
         xanchor="left",
         x=0.02,
-        font=dict(size=11, family="Arial"),
-        bgcolor="rgba(255,255,255,0.9)",
-        bordercolor="#CCC",
+        font=dict(size=12, family="Arial"),
+        bgcolor="rgba(255,255,255,0.95)",
+        bordercolor="#DDD",
         borderwidth=1,
     ),
+    showlegend=True,
     yaxis=dict(
         title="Proporsi terhadap total (%)",
         showgrid=True,
@@ -91,13 +92,14 @@ fig.update_layout(
 
 st.plotly_chart(fig, use_container_width=True)
 
-chart_footer("World Inequality Database (2024), diolah CELIOS")
+# ── Keterangan di bawah chart ────────────────────────────────────────
+st.markdown("""
+<div style="background: #F0F8FF; padding: 16px; border-left: 4px solid #2196F3; border-radius: 4px; margin: 20px 0; font-size: 14px; line-height: 1.7;">
+Kelompok 1% teratas di Indonesia menguasai sekitar <strong>20–21%</strong> total kekayaan dan sekitar <strong>17–18%</strong> dari pendapatan nasional sebelum pajak. Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum redistribusi melalui pajak (lihat Gambar 5).
+</div>
+""", unsafe_allow_html=True)
 
-# ── Insight Box ──────────────────────────────────────────────────────
-st.info("""
-**📊 Insight:**  
-Kelompok 1% teratas di Indonesia menguasai sekitar **20–21%** total kekayaan dan sekitar **17–18%** dari pendapatan nasional sebelum pajak. Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum redistribusi melalui pajak.
-""")
+chart_footer("World Inequality Database (2024), diolah CELIOS")
 
 # ── Catatan data ──────────────────────────────────────────────────────
 with st.expander("📋 Data lengkap (1965-2024)"):
