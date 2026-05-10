@@ -14,7 +14,7 @@ apply_embed_mode()
 render_sidebar()
 
 # ── Load HTML Infografik ──────────────────────────────────────────────
-HTML_PATH = Path(__file__).resolve().parent.parent / "embed" / "05_Komparasi_Global.html"
+HTML_PATH = Path(__file__).resolve().parent.parent / "embed" / "05_Komparasi_Global_gambar6.html"
 components.html(HTML_PATH.read_text(encoding="utf-8"), height=2400, scrolling=True)
 
 chart_footer("Data Forbes (2026), diolah oleh peneliti")
@@ -66,8 +66,8 @@ with st.expander("📋 Daftar 20 Orang Terkaya (Indonesia vs Global)"):
 with st.expander("🔗 Kode Embed WordPress — Gambar 6"):
     st.code("""<!-- Gambar 6: Superkaya Indonesia vs Triliuner Global -->
 <iframe
-  src="https://celios-ketimpangan.streamlit.app/Komparasi_Global?embed=true"
-  width="100%" height="2450" frameborder="0"
+  src="https://henryai-sibermu.github.io/RO/embed/05_Komparasi_Global_gambar6.html"
+  width="100%" height="2400" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
   loading="lazy">
 </iframe>""", language="html")
