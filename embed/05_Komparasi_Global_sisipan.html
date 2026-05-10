@@ -51,6 +51,7 @@
       stroke: #6B7280;
       stroke-width: 2;
       stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* Card background patterns */
@@ -75,18 +76,18 @@
 <div class="absolute top-0 left-0 w-32 h-64 bg-gray-200 rounded-r-3xl opacity-50 z-0"></div>
 <div class="absolute bottom-0 left-0 w-32 h-64 bg-gray-200 rounded-r-3xl opacity-50 z-0"></div>
 <!-- BEGIN: Section 1 - Wealth Increase -->
-<section class="relative z-10 mb-24" data-purpose="wealth-increase-section">
+<section class="relative z-10 mb-24" data-purpose="wealth-increase-section" data-connector-section>
 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-16">
         Kekayaan 50 orang terkaya di Indonesia bertambah
       </h2>
 <div class="relative w-full h-[400px] md:h-[300px]">
 <!-- Connecting Lines (SVG) -->
-<svg class="connector-svg hidden md:block" viewBox="0 0 800 300" preserveAspectRatio="none">
-<path class="connector-path" d="M 230 128 C 230 70, 290 70, 290 192"/>
-<path class="connector-path" d="M 490 64 C 490 10, 560 10, 560 128"/>
+<svg class="connector-svg hidden md:block" viewBox="0 0 100 100" preserveAspectRatio="none">
+<path class="connector-path" data-connector="up"></path>
+<path class="connector-path" data-connector="down"></path>
 </svg>
 <!-- Card 1: Per Second -->
-<div class="absolute top-32 left-0 w-full md:w-64 z-20">
+<div class="absolute top-32 left-0 w-full md:w-64 z-20" data-card>
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex items-center h-32 card-pattern-coins">
 <div class="ml-12 md:ml-16">
 <div class="flex items-center text-brand-yellow font-bold text-2xl md:text-3xl leading-none mb-1">
@@ -99,7 +100,7 @@
 </div>
 </div>
 <!-- Card 2: Per Day -->
-<div class="absolute top-16 left-0 md:left-1/3 w-full md:w-64 mt-40 md:mt-0 z-30">
+<div class="absolute top-16 left-0 md:left-1/3 w-full md:w-64 mt-40 md:mt-0 z-30" data-card>
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex items-center h-32 card-pattern-coins">
 <div class="ml-12 md:ml-16">
 <div class="flex items-center text-brand-yellow font-bold text-2xl md:text-3xl leading-none mb-1">
@@ -112,7 +113,7 @@
 </div>
 </div>
 <!-- Card 3: Per Year -->
-<div class="absolute top-0 right-0 w-full md:w-64 mt-80 md:mt-0 z-40">
+<div class="absolute top-0 right-0 w-full md:w-64 mt-80 md:mt-0 z-40" data-card>
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex items-center h-32 card-pattern-coins">
 <div class="ml-12 md:ml-16">
 <div class="flex items-center text-brand-yellow font-bold text-2xl md:text-3xl leading-none mb-1">
@@ -128,18 +129,18 @@
 </section>
 <!-- END: Section 1 -->
 <!-- BEGIN: Section 2 - Wage Increase -->
-<section class="relative z-10 mt-64 md:mt-24" data-purpose="wage-increase-section">
+<section class="relative z-10 mt-64 md:mt-24" data-purpose="wage-increase-section" data-connector-section>
 <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-16">
         Sementara rerata upah buruh di Indonesia hanya meningkat
       </h2>
 <div class="relative w-full h-[400px] md:h-[300px]">
 <!-- Connecting Lines (SVG) -->
-<svg class="connector-svg hidden md:block" viewBox="0 0 800 300" preserveAspectRatio="none">
-<path class="connector-path" d="M 230 128 C 230 70, 290 70, 290 192"/>
-<path class="connector-path" d="M 490 64 C 490 10, 560 10, 560 128"/>
+<svg class="connector-svg hidden md:block" viewBox="0 0 100 100" preserveAspectRatio="none">
+<path class="connector-path" data-connector="up"></path>
+<path class="connector-path" data-connector="down"></path>
 </svg>
 <!-- Card 1: Per Second -->
-<div class="absolute top-32 left-0 w-full md:w-64 z-20">
+<div class="absolute top-32 left-0 w-full md:w-64 z-20" data-card>
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex flex-col justify-center h-32 card-pattern-hand">
 <div class="ml-12 md:ml-16 text-left">
 <div class="text-brand-yellow font-bold text-2xl md:text-3xl leading-none mb-1">
@@ -150,7 +151,7 @@
 </div>
 </div>
 <!-- Card 2: Per Day -->
-<div class="absolute top-16 left-0 md:left-1/3 w-full md:w-64 mt-40 md:mt-0 z-30">
+<div class="absolute top-16 left-0 md:left-1/3 w-full md:w-64 mt-40 md:mt-0 z-30" data-card>
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex flex-col justify-center h-32 card-pattern-hand">
 <div class="ml-12 md:ml-16 text-left">
 <div class="text-brand-yellow font-bold text-2xl md:text-3xl leading-none mb-1">
@@ -161,7 +162,7 @@
 </div>
 </div>
 <!-- Card 3: Per Year -->
-<div class="absolute top-0 right-0 w-full md:w-64 mt-80 md:mt-0 z-40">
+<div class="absolute top-0 right-0 w-full md:w-64 mt-80 md:mt-0 z-40" data-card>
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex flex-col justify-center h-32 card-pattern-hand">
 <div class="ml-12 md:ml-16 text-left">
 <div class="text-brand-yellow font-bold text-2xl md:text-3xl leading-none mb-1">
@@ -176,4 +177,70 @@
 <!-- END: Section 2 -->
 </main>
 <!-- END: Main Container -->
+<script>
+  (function () {
+    const sections = document.querySelectorAll('[data-connector-section]');
+
+    const computePath = (fromRect, toRect, svgRect, direction) => {
+      const startX = fromRect.left - svgRect.left + fromRect.width * 0.88;
+      const endX = toRect.left - svgRect.left + toRect.width * 0.12;
+
+      const startYBase = direction === 'up'
+        ? fromRect.top - svgRect.top + fromRect.height * 0.15
+        : fromRect.bottom - svgRect.top - fromRect.height * 0.15;
+
+      const endYBase = direction === 'up'
+        ? toRect.top - svgRect.top + toRect.height * 0.15
+        : toRect.bottom - svgRect.top - toRect.height * 0.15;
+
+      const horizontalSpan = Math.max(1, Math.abs(endX - startX));
+      const controlXOffset = horizontalSpan * 0.4;
+      const controlX1 = startX + controlXOffset;
+      const controlX2 = endX - controlXOffset;
+
+      const curvatureMagnitude = Math.max(horizontalSpan * 0.55, Math.max(fromRect.height, toRect.height) * 1.2);
+      const controlY = direction === 'up'
+        ? Math.min(startYBase, endYBase) - curvatureMagnitude
+        : Math.max(startYBase, endYBase) + curvatureMagnitude;
+
+      return `M ${startX} ${startYBase} C ${controlX1} ${controlY}, ${controlX2} ${controlY}, ${endX} ${endYBase}`;
+    };
+
+    const updateSection = (section) => {
+      const svg = section.querySelector('.connector-svg');
+      if (!svg) return;
+      const paths = svg.querySelectorAll('path');
+      if (paths.length < 2) return;
+
+      const cards = section.querySelectorAll('[data-card]');
+      if (cards.length < 3) return;
+
+      const svgRect = svg.getBoundingClientRect();
+      if (svgRect.width === 0 || svgRect.height === 0) return;
+
+      svg.setAttribute('viewBox', `0 0 ${svgRect.width} ${svgRect.height}`);
+
+      const rects = Array.from(cards, (card) => card.getBoundingClientRect());
+
+      paths[0].setAttribute('d', computePath(rects[0], rects[1], svgRect, 'up'));
+      paths[1].setAttribute('d', computePath(rects[1], rects[2], svgRect, 'down'));
+    };
+
+    const updateAll = () => sections.forEach(updateSection);
+
+    const scheduleUpdate = () => requestAnimationFrame(updateAll);
+
+    window.addEventListener('load', scheduleUpdate);
+    document.addEventListener('DOMContentLoaded', scheduleUpdate);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleUpdate).catch(() => {});
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(scheduleUpdate, 120);
+    });
+  })();
+</script>
 </body></html>
