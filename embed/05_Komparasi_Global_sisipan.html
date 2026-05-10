@@ -35,38 +35,30 @@
       background-size: 100px 100px;
     }
     
-    /* Curved connecting lines */
+    /* Curved connecting lines - arch shape (∩) using border-radius 50% trick */
     .connection-line {
       position: absolute;
-      border: 2px solid #6B7280;
+      border: 2px solid transparent;
+      border-top-color: #6B7280;
+      border-radius: 50%;
       z-index: 5;
       pointer-events: none;
     }
     
-    /* Section 1 & 2 Lines - Half circles/arcs */
-    /* Connecting Card 1 (Bottom Left) to Card 2 (Middle) */
+    /* Connecting Card 1 (Bottom Left) to Card 2 (Middle) - arch on top */
     .line-1, .line-3 {
-      top: 120px;
-      left: 240px;
-      width: 160px;
-      height: 90px;
-      border-bottom: none;
-      border-left: none;
-      border-top-right-radius: 100px;
-      border-bottom-right-radius: 0;
+      top: 75px;
+      left: 200px;
+      width: 140px;
+      height: 80px;
     }
 
-    /* Connecting Card 2 (Middle) to Card 3 (Top Right) */
+    /* Connecting Card 2 (Middle) to Card 3 (Top Right) - arch on top */
     .line-2, .line-4 {
-      top: 80px;
-      left: 520px;
-      width: 150px;
-      height: 90px;
-      border-top: none;
-      border-left: none;
-      border-bottom-right-radius: 100px;
-      border-top-right-radius: 0;
-      transform: translateY(-50%);
+      top: 10px;
+      left: 460px;
+      width: 140px;
+      height: 80px;
     }
 
     /* Card background patterns */
