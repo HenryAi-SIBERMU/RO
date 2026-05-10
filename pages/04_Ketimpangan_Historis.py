@@ -85,31 +85,31 @@ fig.update_layout(
         tickfont=dict(size=11, color="#333"),
         dtick=10,  # interval 10 tahun
     ),
-    margin=dict(t=40, b=120, l=60, r=40),
-    height=600,
+    margin=dict(t=40, b=140, l=60, r=40),
+    height=650,
     hovermode="x unified",
-    annotations=[
-        dict(
-            text=(
-                "Kelompok 1% teratas di Indonesia menguasai sekitar <b>20–21%</b> total kekayaan dan sekitar <b>17–18%</b> dari pendapatan nasional sebelum pajak.<br>"
-                "Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum<br>"
-                "redistribusi melalui pajak (lihat Gambar 5)."
-            ),
-            xref="paper",
-            yref="paper",
-            x=0.5,
-            y=-0.15,
-            xanchor="center",
-            yanchor="top",
-            showarrow=False,
-            font=dict(size=11, color="#333", family="Arial"),
-            align="center",
-            bgcolor="rgba(240, 248, 255, 0.9)",
-            bordercolor="#2196F3",
-            borderwidth=2,
-            borderpad=10,
-        )
-    ],
+)
+
+# Tambahkan annotation SETELAH layout (lebih reliable di Streamlit Cloud)
+fig.add_annotation(
+    text=(
+        "Kelompok 1% teratas di Indonesia menguasai sekitar <b>20–21%</b> total kekayaan dan sekitar <b>17–18%</b> dari pendapatan nasional sebelum pajak.<br>"
+        "Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum<br>"
+        "redistribusi melalui pajak (lihat Gambar 5)."
+    ),
+    xref="paper",
+    yref="paper",
+    x=0.5,
+    y=-0.18,
+    xanchor="center",
+    yanchor="top",
+    showarrow=False,
+    font=dict(size=11, color="#333", family="Arial"),
+    align="center",
+    bgcolor="rgba(240, 248, 255, 0.95)",
+    bordercolor="#2196F3",
+    borderwidth=2,
+    borderpad=12,
 )
 
 st.plotly_chart(fig, use_container_width=True)
