@@ -35,30 +35,22 @@
       background-size: 100px 100px;
     }
     
-    /* Curved connecting lines - arch shape (∩) using border-radius 50% trick */
-    .connection-line {
+    /* SVG connector overlay */
+    .connector-svg {
       position: absolute;
-      border: 2px solid transparent;
-      border-top-color: #6B7280;
-      border-radius: 50%;
-      z-index: 5;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 15;
       pointer-events: none;
+      overflow: visible;
     }
-    
-    /* Connecting Card 1 (Bottom Left) to Card 2 (Middle) - arch on top */
-    .line-1, .line-3 {
-      top: 75px;
-      left: 200px;
-      width: 140px;
-      height: 80px;
-    }
-
-    /* Connecting Card 2 (Middle) to Card 3 (Top Right) - arch on top */
-    .line-2, .line-4 {
-      top: 10px;
-      left: 460px;
-      width: 140px;
-      height: 80px;
+    .connector-path {
+      fill: none;
+      stroke: #6B7280;
+      stroke-width: 2;
+      stroke-linecap: round;
     }
 
     /* Card background patterns */
@@ -88,9 +80,11 @@
         Kekayaan 50 orang terkaya di Indonesia bertambah
       </h2>
 <div class="relative w-full h-[400px] md:h-[300px]">
-<!-- Connecting Lines -->
-<div class="connection-line line-1 md:block"></div>
-<div class="connection-line line-2 md:block"></div>
+<!-- Connecting Lines (SVG) -->
+<svg class="connector-svg hidden md:block" viewBox="0 0 800 300" preserveAspectRatio="none">
+<path class="connector-path" d="M 230 128 C 230 70, 290 70, 290 192"/>
+<path class="connector-path" d="M 490 64 C 490 10, 560 10, 560 128"/>
+</svg>
 <!-- Card 1: Per Second -->
 <div class="absolute top-32 left-0 w-full md:w-64 z-20">
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex items-center h-32 card-pattern-coins">
@@ -139,9 +133,11 @@
         Sementara rerata upah buruh di Indonesia hanya meningkat
       </h2>
 <div class="relative w-full h-[400px] md:h-[300px]">
-<!-- Connecting Lines -->
-<div class="connection-line line-3 md:block"></div>
-<div class="connection-line line-4 md:block"></div>
+<!-- Connecting Lines (SVG) -->
+<svg class="connector-svg hidden md:block" viewBox="0 0 800 300" preserveAspectRatio="none">
+<path class="connector-path" d="M 230 128 C 230 70, 290 70, 290 192"/>
+<path class="connector-path" d="M 490 64 C 490 10, 560 10, 560 128"/>
+</svg>
 <!-- Card 1: Per Second -->
 <div class="absolute top-32 left-0 w-full md:w-64 z-20">
 <div class="bg-brand-purple rounded-3xl p-6 shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-purple/50 flex flex-col justify-center h-32 card-pattern-hand">
