@@ -156,14 +156,21 @@ with st.expander("🔗 Kode Embed WordPress — Grid 50 Triliuner"):
 # ── Tabel 1 — Hal. 13 ────────────────────────────────────────────────
 st.divider()
 chart_header("Peningkatan Kekayaan Orang Superkaya di Indonesia", "Tabel 1 — Hal. 13")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 13.")
+
+_T1_PATH = Path(__file__).resolve().parent.parent / "data" / "page013_tabel1.csv"
+_df_t1 = pd.read_csv(_T1_PATH)
+_df_t1.columns = ["#", "Nama", "Kekayaan 2026 (T Rp)", "CAGR (%)"]
+_df_t1["Kekayaan 2026 (T Rp)"] = _df_t1["Kekayaan 2026 (T Rp)"].apply(lambda x: f"Rp {x:,.2f} T")
+_df_t1["CAGR (%)"] = _df_t1["CAGR (%)"].apply(lambda x: f"+{x:.1f}%" if x > 0 else f"{x:.1f}%")
+st.dataframe(_df_t1, use_container_width=True, hide_index=True, height=420)
+
 with st.expander("🔗 Kode Embed WordPress — Tabel 1"):
     st.code("""<!-- Tabel 1: Peningkatan Kekayaan Orang Superkaya di Indonesia -->
 <iframe
-  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
-  width="100%" height="400" frameborder="0"
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_tabel1.html"
+  width="100%" height="500" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
-  allowfullscreen loading="lazy">
+  loading="lazy">
 </iframe>""", language="html")
 
 # ── Gambar 2 — Hal. 16 ────────────────────────────────────────────────

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabel 1 — Peningkatan Kekayaan Orang Superkaya di Indonesia</title>
+<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator_midnight.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #140828;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 16px;
+    color: #fff;
+  }
+  .tabulator {
+    background: #1e0e3e !important;
+    border: 1px solid #3a1a6e !important;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .tabulator .tabulator-header {
+    background: #2a1258 !important;
+    border-bottom: 2px solid #7234ad !important;
+  }
+  .tabulator .tabulator-header .tabulator-col {
+    background: #2a1258 !important;
+    color: #ffdb75 !important;
+    font-weight: 700;
+    border-right: 1px solid #3a1a6e !important;
+  }
+  .tabulator .tabulator-row {
+    background: #140828 !important;
+    border-bottom: 1px solid #2a1258 !important;
+    color: #e0d0f8;
+  }
+  .tabulator .tabulator-row:nth-child(even) {
+    background: #1a0c34 !important;
+  }
+  .tabulator .tabulator-row:hover {
+    background: #2a1258 !important;
+  }
+  .tabulator .tabulator-row .tabulator-cell {
+    border-right: 1px solid #2a1258 !important;
+  }
+  .cagr-pos { color: #4ade80; font-weight: 700; }
+  .cagr-neg { color: #f87171; font-weight: 700; }
+  .cagr-zer { color: #94a3b8; font-weight: 600; }
+  .rank-top { color: #ffdb75; font-weight: 800; }
+  .tabulator-footer { background: #1e0e3e !important; color: #94a3b8 !important; }
+  .tabulator-paginator { color: #c4a8e0 !important; }
+  .tabulator-page { background: #2a1258 !important; color: #fff !important; border: 1px solid #7234ad !important; }
+  .tabulator-page.active { background: #7234ad !important; }
+</style>
+</head>
+<body>
+<div id="table"></div>
+<script>
+const data = [
+  {rank:1,  nama:"Haryanto Tjiptodihardjo",              kekayaan:84.40,  cagr:71.0},
+  {rank:2,  nama:"Marina Budiman",                        kekayaan:113.09, cagr:47.9},
+  {rank:3,  nama:"Lim Hariyanto Wijaya Sarwono",          kekayaan:108.03, cagr:42.2},
+  {rank:4,  nama:"Han Arming Hanafia",                    kekayaan:74.27,  cagr:41.4},
+  {rank:5,  nama:"Otto Toto Sugiri",                      kekayaan:168.88, cagr:40.7},
+  {rank:6,  nama:"Low Tuck Kwong",                        kekayaan:340.98, cagr:38.4},
+  {rank:7,  nama:"Sjamsul Nursalim",                      kekayaan:47.28,  cagr:36.5},
+  {rank:8,  nama:"Prajogo Pangestu",                      kekayaan:852.74, cagr:36.6},
+  {rank:9,  nama:"Manoj Punjabi",                         kekayaan:55.70,  cagr:31.6},
+  {rank:10, nama:"Wijono & Hermanto Tanoto keluarga",     kekayaan:60.64,  cagr:27.4},
+  {rank:11, nama:"Tahir & keluarga",                      kekayaan:178.92, cagr:18.1},
+  {rank:12, nama:"Widjaja keluarga",                      kekayaan:477.88, cagr:16.7},
+  {rank:13, nama:"Jogi Hendra Atmadja & keluarga",        kekayaan:69.08,  cagr:16.2},
+  {rank:14, nama:"Hamami & keluarga",                     kekayaan:28.69,  cagr:14.6},
+  {rank:15, nama:"Sulistyo & keluarga",                   kekayaan:24.47,  cagr:13.2},
+  {rank:16, nama:"Sukanto Tanoto",                        kekayaan:72.58,  cagr:12.7},
+  {rank:17, nama:"Arini Subianto & keluarga",             kekayaan:40.61,  cagr:12.7},
+  {rank:18, nama:"Martua Sitorus",                        kekayaan:60.78,  cagr:12.6},
+  {rank:19, nama:"Theodore Rachmat",                      kekayaan:75.98,  cagr:12.4},
+  {rank:20, nama:"Anthony Salim & keluarga",              kekayaan:221.11, cagr:8.7},
+  {rank:21, nama:"R. Budi & Michael Hartono",             kekayaan:849.84, cagr:8.6},
+  {rank:22, nama:"Irwan Hidayat & keluarga",              kekayaan:19.41,  cagr:8.1},
+  {rank:23, nama:"Peter Sondakh",                         kekayaan:64.14,  cagr:7.8},
+  {rank:24, nama:"Sri Prakash Lohia",                     kekayaan:146.16, cagr:7.4},
+  {rank:25, nama:"Bambang Sutantio",                      kekayaan:36.45,  cagr:7.0},
+  {rank:26, nama:"Djoko Susanto",                         kekayaan:42.20,  cagr:6.8},
+  {rank:27, nama:"Garibaldi Thohir & keluarga",           kekayaan:64.14,  cagr:4.8},
+  {rank:28, nama:"Putera Sampoerna & keluarga",           kekayaan:42.20,  cagr:3.3},
+  {rank:29, nama:"Ciputra keluarga",                      kekayaan:27.01,  cagr:3.0},
+  {rank:30, nama:"Agoes Projosasmito",                    kekayaan:99.69,  cagr:3.0},
+  {rank:31, nama:"Bachtiar & Burhan Bahari Karim & kel.", kekayaan:70.89,  cagr:2.8},
+  {rank:32, nama:"Alexander Ramlie",                      kekayaan:45.67,  cagr:2.6},
+  {rank:33, nama:"Husodo Angkosubroto & keluarga",        kekayaan:25.32,  cagr:2.3},
+  {rank:34, nama:"Hilmi Panigoro & keluarga",             kekayaan:48.96,  cagr:1.2},
+  {rank:35, nama:"Ciliandra & Wirastuty Fangiono kel.",   kekayaan:25.32,  cagr:0.7},
+  {rank:36, nama:"Mochtar Riady",                         kekayaan:137.13, cagr:0.5},
+  {rank:37, nama:"Chairul Tanjung",                       kekayaan:62.71,  cagr:0.0},
+  {rank:38, nama:"Hary Tanoesoedibjo",                    kekayaan:18.57,  cagr:0.0},
+  {rank:39, nama:"Jenny Quantero & Engki Wibowo",         kekayaan:24.97,  cagr:-0.5},
+  {rank:40, nama:"Soegiarto Adikoesoemo",                 kekayaan:21.94,  cagr:-0.7},
+  {rank:41, nama:"Husain Djojonegoro & keluarga",         kekayaan:16.53,  cagr:-0.8},
+  {rank:42, nama:"Eddy Sugianto",                         kekayaan:18.57,  cagr:-2.9},
+  {rank:43, nama:"Lim Chai Hock",                         kekayaan:21.94,  cagr:-3.6},
+  {rank:44, nama:"Hartati Murdaya Family",                kekayaan:21.10,  cagr:-4.1},
+  {rank:45, nama:"Dewi Kam",                              kekayaan:60.76,  cagr:-5.0},
+  {rank:46, nama:"Eddy Katuari & keluarga",               kekayaan:16.79,  cagr:-5.2},
+  {rank:47, nama:"Setiawan & keluarga",                   kekayaan:60.76,  cagr:-5.8},
+  {rank:48, nama:"Susilo Wonowidjojo & keluarga",         kekayaan:64.01,  cagr:-7.7},
+  {rank:49, nama:"Eddy Kusnadi Sariastmadja & kel.",      kekayaan:18.57,  cagr:-8.1},
+  {rank:50, nama:"Edwin Soeryadjana & keluarga",          kekayaan:16.88,  cagr:-9.6},
+];
+
+new Tabulator("#table", {
+  data,
+  layout: "fitColumns",
+  pagination: "local",
+  paginationSize: 25,
+  initialSort: [{column:"rank", dir:"asc"}],
+  columns: [
+    {
+      title: "#", field: "rank", width: 55, hozAlign: "center",
+      formatter: (cell) => {
+        const v = cell.getValue();
+        return v <= 3
+          ? `<span class="rank-top">${v}</span>`
+          : `<span style="color:#c4a8e0">${v}</span>`;
+      }
+    },
+    { title: "Nama", field: "nama", minWidth: 220, headerFilter: "input" },
+    {
+      title: "Kekayaan 2026 (T Rp)", field: "kekayaan", width: 180,
+      hozAlign: "right",
+      formatter: (cell) => `<span style="color:#fff">Rp ${cell.getValue().toFixed(2).replace(".", ",")} T</span>`,
+      sorter: "number",
+    },
+    {
+      title: "CAGR (%)", field: "cagr", width: 120, hozAlign: "center",
+      sorter: "number",
+      formatter: (cell) => {
+        const v = cell.getValue();
+        const cls = v > 0 ? "cagr-pos" : v < 0 ? "cagr-neg" : "cagr-zer";
+        const sign = v > 0 ? "+" : "";
+        return `<span class="${cls}">${sign}${v.toFixed(1)}%</span>`;
+      }
+    },
+  ],
+});
+</script>
+</body>
+</html>
