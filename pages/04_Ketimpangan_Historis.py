@@ -85,34 +85,29 @@ fig.update_layout(
         tickfont=dict(size=11, color="#333"),
         dtick=10,  # interval 10 tahun
     ),
-    margin=dict(t=40, b=140, l=60, r=40),
-    height=650,
+    margin=dict(t=40, b=60, l=60, r=40),
+    height=520,
     hovermode="x unified",
 )
 
-# Tambahkan annotation SETELAH layout (lebih reliable di Streamlit Cloud)
-fig.add_annotation(
-    text=(
-        "Kelompok 1% teratas di Indonesia menguasai sekitar <b>20–21%</b> total kekayaan dan sekitar <b>17–18%</b> dari pendapatan nasional sebelum pajak.<br>"
-        "Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum<br>"
-        "redistribusi melalui pajak (lihat Gambar 5)."
-    ),
-    xref="paper",
-    yref="paper",
-    x=0.5,
-    y=-0.18,
-    xanchor="center",
-    yanchor="top",
-    showarrow=False,
-    font=dict(size=11, color="#333", family="Arial"),
-    align="center",
-    bgcolor="rgba(240, 248, 255, 0.95)",
-    bordercolor="#2196F3",
-    borderwidth=2,
-    borderpad=12,
-)
-
 st.plotly_chart(fig, use_container_width=True)
+
+# ── Keterangan (di luar chart tapi styling matching) ─────────────────
+st.markdown("""
+<div style="
+    background: linear-gradient(to right, rgba(240, 248, 255, 0.95), rgba(240, 248, 255, 0.8));
+    border: 2px solid #2196F3;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: -10px 0 20px 0;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #1a1a1a;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+">
+Kelompok 1% teratas di Indonesia menguasai sekitar <strong style="color: #7B3CBA;">20–21%</strong> total kekayaan dan sekitar <strong style="color: #A52A2A;">17–18%</strong> dari pendapatan nasional sebelum pajak. Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum redistribusi melalui pajak (lihat Gambar 5).
+</div>
+""", unsafe_allow_html=True)
 
 chart_footer("World Inequality Database (2024), diolah CELIOS")
 
