@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gambar 2 — Proyeksi Kekayaan 50 Superkaya 2050</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #6B21A8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.wrap {
+  width: 100%;
+  max-width: 520px;
+  background: #6B21A8;
+  padding: 32px 28px 24px;
+}
+
+/* ── Callout Text ── */
+.callout {
+  color: #fff;
+  margin-bottom: 28px;
+}
+.callout p {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.callout strong {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+  display: block;
+}
+
+/* ── Chart Card ── */
+.chart-card {
+  background: #3B0764;
+  border-radius: 12px;
+  padding: 20px 20px 16px;
+}
+.chart-title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.chart-sub {
+  color: #c4b5fd;
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+.chart-wrap {
+  position: relative;
+  height: 260px;
+}
+.source {
+  color: #a78bfa;
+  font-size: 10px;
+  margin-top: 12px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="callout">
+    <p>Tanpa perubahan struktur ekonomi dan politik, pada tahun 2050,</p>
+    <strong>50 orang terkaya di Indonesia akan punya kekayaan setara 111 juta penduduk indonesia</strong>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Total Kekayaan 50 Triliuner di Indonesia (2019–2026)</div>
+    <div class="chart-sub">(dalam triliun rupiah)</div>
+    <div class="chart-wrap">
+      <canvas id="chart"></canvas>
+    </div>
+    <div class="source">Sumber: Data Forbes (2026), diolah oleh peneliti</div>
+  </div>
+</div>
+
+<script>
+const labels = ['2019','2020','2021','2022','2023','2024','2025','2026'];
+const ekstraktif    = [986,  1026, 1212, 1388, 1720, 2611, 2514, 2690];
+const nonEkstraktif = [1522, 1453, 1534, 1628, 1781, 1960, 1891, 1961];
+const totals        = [2508, 2479, 2746, 3016, 3501, 4571, 4405, 4651];
+
+new Chart(document.getElementById('chart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      {
+        label: 'Non-Ekstraktif',
+        data: nonEkstraktif,
+        backgroundColor: '#A855F7',
+        borderWidth: 0,
+        borderRadius: { topRight: 4, bottomRight: 4 },
+        borderSkipped: false,
+      },
+      {
+        label: 'Sektor Ekstraktif',
+        data: ekstraktif,
+        backgroundColor: '#FBBF24',
+        borderWidth: 0,
+        borderRadius: { topRight: 4, bottomRight: 4 },
+        borderSkipped: false,
+      },
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          footer: (items) => {
+            const idx = items[0].dataIndex;
+            return `Total: Rp${totals[idx].toLocaleString()} T`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        display: false,
+        grid: { display: false },
+      },
+      y: {
+        stacked: true,
+        ticks: {
+          color: '#e9d5ff',
+          font: { size: 12, weight: '600' },
+        },
+        grid: { display: false },
+        border: { display: false },
+      }
+    },
+    layout: { padding: { right: 60 } },
+    animation: { duration: 800 },
+  },
+  plugins: [{
+    id: 'valueLabels',
+    afterDatasetsDraw(chart) {
+      const ctx = chart.ctx;
+      chart.data.datasets.forEach((ds, dsIdx) => {
+        if (ds.label !== 'Sektor Ekstraktif') return;
+        const meta = chart.getDatasetMeta(dsIdx);
+        meta.data.forEach((bar, i) => {
+          const val = totals[i];
+          ctx.save();
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 11px Segoe UI, Arial';
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(`Rp${val.toLocaleString()}`, bar.x + 6, bar.y);
+          ctx.restore();
+        });
+      });
+    }
+  }]
+});
+</script>
+</body>
+</html>

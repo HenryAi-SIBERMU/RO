@@ -175,13 +175,18 @@ with st.expander("🔗 Kode Embed WordPress — Tabel 1"):
 
 # ── Gambar 2 — Hal. 16 ────────────────────────────────────────────────
 st.divider()
-chart_header("Proyeksi Median Kekayaan 50 Superkaya hingga 2050", "Gambar 2 — Hal. 16")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 16.")
+chart_header("Proyeksi Kekayaan 50 Superkaya hingga 2050", "Gambar 2 — Hal. 16")
+
+_G2 = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_gambar2.html"
+components.html(_G2.read_text(encoding="utf-8"), height=560, scrolling=True)
+
+chart_footer("Forbes, diolah CELIOS (2026)")
+
 with st.expander("🔗 Kode Embed WordPress — Gambar 2"):
-    st.code("""<!-- Gambar 2: Proyeksi Median Kekayaan 50 Superkaya hingga 2050 -->
+    st.code("""<!-- Gambar 2: Proyeksi Kekayaan 50 Superkaya hingga 2050 -->
 <iframe
-  src="https://ro-dvwjkrbnwirub7872387.streamlit.app/Kekayaan_Triliuner?embed=true"
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_gambar2.html"
   width="100%" height="560" frameborder="0"
   style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
-  allowfullscreen loading="lazy">
+  loading="lazy">
 </iframe>""", language="html")
