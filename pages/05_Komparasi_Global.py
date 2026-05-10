@@ -13,7 +13,28 @@ st.set_page_config(
 apply_embed_mode()
 render_sidebar()
 
+# ── Sisipan: Perbandingan Kekayaan ────────────────────────────────────
+st.divider()
+st.markdown("### 📊 Perbandingan Kekayaan: Superkaya vs Buruh")
+
+_SISIPAN = Path(__file__).resolve().parent.parent / "embed" / "05_Komparasi_Global_sisipan.html"
+components.html(_SISIPAN.read_text(encoding="utf-8"), height=900, scrolling=True)
+
+chart_footer("Data CELIOS (2026)")
+
+with st.expander("🔗 Kode Embed WordPress — Sisipan Perbandingan"):
+    st.code("""<!-- Sisipan: Perbandingan Kekayaan Superkaya vs Buruh -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/05_Komparasi_Global_sisipan.html"
+  width="100%" height="900" frameborder="0"
+  style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
+  loading="lazy">
+</iframe>""", language="html")
+
 # ── Load HTML Infografik ──────────────────────────────────────────────
+st.divider()
+st.markdown("### 🌍 Gambar 6: Superkaya Indonesia vs Global")
+
 HTML_PATH = Path(__file__).resolve().parent.parent / "embed" / "05_Komparasi_Global_gambar6.html"
 components.html(HTML_PATH.read_text(encoding="utf-8"), height=2400, scrolling=True)
 
