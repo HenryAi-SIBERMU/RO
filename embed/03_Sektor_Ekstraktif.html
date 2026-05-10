@@ -6,235 +6,169 @@
 <title>Gambar 4 — Sektor Ekstraktif sebagai Sumber Kekayaan Elite</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
+html, body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #fff;
+  height: 100%;
+}
+body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 24px 16px;
+  padding: 20px;
 }
-
-.card {
+.wrap {
   width: 100%;
   max-width: 860px;
   background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
 }
 
-/* ── Label ── */
-.label-row {
+/* ── Header label ── */
+.header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
-.label-tag {
-  background: #7234ad;
+.g-tag {
+  background: #6b21c8;
   color: #fff;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
-  padding: 5px 14px;
+  padding: 5px 16px;
   border-radius: 4px;
-  white-space: nowrap;
+  flex-shrink: 0;
 }
-.label-title {
-  font-size: 17px;
+.g-title {
+  font-size: 16px;
   font-weight: 700;
-  color: #4a1a8c;
+  color: #6b21c8;
+  line-height: 1.3;
 }
 
-/* ── Body ── */
-.body {
+/* ── Main row ── */
+.main {
   display: flex;
   align-items: stretch;
-  gap: 0;
-  border-radius: 12px;
+  min-height: 200px;
+  border-radius: 8px;
   overflow: hidden;
-  min-height: 220px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 /* ── Illustration ── */
 .illus {
-  flex: 1.4;
-  background: linear-gradient(135deg, #f0f4ff 0%, #e8f5e9 100%);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 44%;
+  background: linear-gradient(160deg, #e8f5e9 0%, #f3e5f5 60%, #e3f2fd 100%);
+  padding: 18px 14px 28px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.icons-grid {
+.emoji-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px 6px;
   width: 100%;
 }
-.icon-item {
+.e-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
-.icon-item svg {
-  width: 38px;
-  height: 38px;
+.e-icon {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
 }
-.icon-label {
-  font-size: 9px;
-  color: #555;
-  text-align: center;
+.e-label {
+  font-size: 8px;
+  color: #444;
   font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.2px;
 }
-.source-tag {
+.src {
   position: absolute;
-  bottom: 8px;
-  left: 12px;
-  font-size: 9px;
-  color: #7234ad;
-  font-weight: 700;
+  bottom: 7px;
+  left: 10px;
+  font-size: 8.5px;
+  color: #6b21c8;
+  font-weight: 600;
 }
 
 /* ── Stat ── */
-.stat-box {
-  flex: 0 0 180px;
-  background: #7234ad;
+.stat {
+  flex: 0 0 28%;
+  background: #7c3aed;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .stat-num {
-  font-size: 72px;
+  font-size: 76px;
   font-weight: 900;
   color: #fff;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
   line-height: 1;
 }
 
-/* ── Text ── */
-.text-box {
-  flex: 1.2;
-  background: #f9f5ff;
-  padding: 28px 24px;
+/* ── Description ── */
+.desc {
+  flex: 1;
+  background: #fff;
+  padding: 28px 22px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-left: 4px solid #7234ad;
+  border-left: 1px solid #f0e6ff;
 }
-.text-title {
-  font-size: 16px;
+.desc-title {
+  font-size: 15px;
   font-weight: 800;
-  color: #1a0040;
+  color: #1a1a2e;
   margin-bottom: 10px;
-  line-height: 1.3;
+  line-height: 1.4;
 }
-.text-body {
-  font-size: 13.5px;
-  color: #333;
-  line-height: 1.7;
+.desc-body {
+  font-size: 13px;
+  color: #444;
+  line-height: 1.75;
 }
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="label-row">
-    <span class="label-tag">Gambar 4.</span>
-    <span class="label-title">Sektor Ekstraktif sebagai Sumber Kekayaan Elite</span>
+<div class="wrap">
+  <div class="header">
+    <span class="g-tag">Gambar 4.</span>
+    <span class="g-title">Sektor Ekstraktif sebagai Sumber Kekayaan Elite</span>
   </div>
 
-  <div class="body">
+  <div class="main">
     <!-- Illustration -->
     <div class="illus">
-      <div class="icons-grid">
-        <!-- Mining -->
-        <div class="icon-item">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="36" width="30" height="16" rx="3" fill="#f5a623"/>
-            <rect x="6" y="44" width="52" height="8" rx="4" fill="#e8891a"/>
-            <circle cx="14" cy="54" r="6" fill="#555"/>
-            <circle cx="14" cy="54" r="3" fill="#ccc"/>
-            <circle cx="44" cy="54" r="6" fill="#555"/>
-            <circle cx="44" cy="54" r="3" fill="#ccc"/>
-            <rect x="28" y="20" width="6" height="18" rx="2" fill="#bbb"/>
-            <polygon points="24,20 44,20 38,8 30,8" fill="#f5a623"/>
-            <rect x="34" y="28" width="22" height="10" rx="2" fill="#f5a623"/>
-          </svg>
-          <span class="icon-label">Pertambangan</span>
-        </div>
-        <!-- Coal -->
-        <div class="icon-item">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="32" cy="44" rx="24" ry="10" fill="#555"/>
-            <ellipse cx="32" cy="38" rx="24" ry="10" fill="#777"/>
-            <ellipse cx="32" cy="32" rx="24" ry="10" fill="#666"/>
-            <ellipse cx="32" cy="32" rx="14" ry="5" fill="#999"/>
-          </svg>
-          <span class="icon-label">Batubara</span>
-        </div>
-        <!-- Palm Oil -->
-        <div class="icon-item">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="28" y="30" width="8" height="28" rx="3" fill="#8B5E3C"/>
-            <path d="M32 30 Q20 22 12 10 Q22 14 32 26" fill="#4CAF50"/>
-            <path d="M32 30 Q44 22 52 10 Q42 14 32 26" fill="#388E3C"/>
-            <path d="M32 28 Q22 18 18 6 Q28 12 32 24" fill="#66BB6A"/>
-            <path d="M32 28 Q42 18 46 6 Q36 12 32 24" fill="#4CAF50"/>
-            <ellipse cx="32" cy="58" rx="10" ry="4" fill="#6D4C41"/>
-          </svg>
-          <span class="icon-label">Kelapa Sawit</span>
-        </div>
-        <!-- Agriculture -->
-        <div class="icon-item">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="34" width="36" height="14" rx="3" fill="#e74c3c"/>
-            <rect x="2" y="42" width="56" height="10" rx="5" fill="#c0392b"/>
-            <circle cx="12" cy="54" r="7" fill="#333"/>
-            <circle cx="12" cy="54" r="3.5" fill="#aaa"/>
-            <circle cx="46" cy="54" r="7" fill="#333"/>
-            <circle cx="46" cy="54" r="3.5" fill="#aaa"/>
-            <rect x="36" y="26" width="8" height="12" rx="2" fill="#27ae60"/>
-            <rect x="30" y="22" width="20" height="8" rx="2" fill="#2ecc71"/>
-          </svg>
-          <span class="icon-label">Pertanian</span>
-        </div>
-        <!-- Oil/Gas -->
-        <div class="icon-item">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="26" y="10" width="12" height="44" rx="3" fill="#999"/>
-            <rect x="20" y="8" width="24" height="8" rx="2" fill="#bbb"/>
-            <rect x="18" y="50" width="28" height="8" rx="2" fill="#bbb"/>
-            <rect x="38" y="26" width="16" height="6" rx="2" fill="#999"/>
-            <rect x="10" y="26" width="16" height="6" rx="2" fill="#999"/>
-            <polygon points="32,4 28,10 36,10" fill="#f5a623"/>
-            <ellipse cx="32" cy="20" rx="6" ry="3" fill="#f5a623" opacity="0.7"/>
-          </svg>
-          <span class="icon-label">Migas</span>
-        </div>
-        <!-- Forest -->
-        <div class="icon-item">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="32,6 10,38 54,38" fill="#2ecc71"/>
-            <polygon points="32,18 12,44 52,44" fill="#27ae60"/>
-            <rect x="26" y="44" width="12" height="16" rx="2" fill="#8B5E3C"/>
-            <rect x="4" y="52" width="56" height="6" rx="3" fill="#7CB342" opacity="0.5"/>
-          </svg>
-          <span class="icon-label">Kehutanan</span>
-        </div>
+      <div class="emoji-grid">
+        <div class="e-item"><span class="e-icon">⛏️</span><span class="e-label">Pertambangan</span></div>
+        <div class="e-item"><span class="e-icon">🏗️</span><span class="e-label">Konstruksi</span></div>
+        <div class="e-item"><span class="e-icon">🌴</span><span class="e-label">Kelapa Sawit</span></div>
+        <div class="e-item"><span class="e-icon">🚜</span><span class="e-label">Pertanian</span></div>
+        <div class="e-item"><span class="e-icon">🛢️</span><span class="e-label">Migas</span></div>
+        <div class="e-item"><span class="e-icon">🪵</span><span class="e-label">Kehutanan</span></div>
       </div>
-      <div class="source-tag">Ketimpangan Ekonomi Indonesia 2026</div>
+      <div class="src">Ketimpangan Ekonomi Indonesia 2026</div>
     </div>
 
     <!-- Stat -->
-    <div class="stat-box">
+    <div class="stat">
       <span class="stat-num">58%</span>
     </div>
 
-    <!-- Text -->
-    <div class="text-box">
-      <div class="text-title">Dominasi Sektor Ekstraktif</div>
-      <div class="text-body">
+    <!-- Description -->
+    <div class="desc">
+      <div class="desc-title">Dominasi Sektor Ekstraktif</div>
+      <div class="desc-body">
         Kekayaan 50 orang terkaya bersumber dari bisnis ekstraktif yang mengeksploitasi sumber daya alam
       </div>
     </div>
