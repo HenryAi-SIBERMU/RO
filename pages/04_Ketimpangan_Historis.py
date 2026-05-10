@@ -102,10 +102,10 @@ st.markdown("""
     margin: -10px 0 20px 0;
     font-size: 13px;
     line-height: 1.8;
-    color: #1a1a1a;
+    color: #000000;
     box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
 ">
-Kelompok 1% teratas di Indonesia menguasai sekitar <strong style="color: #7B3CBA;">20–21%</strong> total kekayaan dan sekitar <strong style="color: #A52A2A;">17–18%</strong> dari pendapatan nasional sebelum pajak. Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum redistribusi melalui pajak (lihat Gambar 5).
+Kelompok 1% teratas di Indonesia menguasai sekitar <strong style="color: #000000;">20–21%</strong> total kekayaan dan sekitar <strong style="color: #000000;">17–18%</strong> dari pendapatan nasional sebelum pajak. Artinya, segelintir orang super kaya menikmati hampir seperlima dari seluruh kekayaan dan pendapatan yang dihasilkan sebelum redistribusi melalui pajak (lihat Gambar 5).
 </div>
 """, unsafe_allow_html=True)
 
