@@ -250,8 +250,6 @@
   </main>
 
   <script>
-    const DATA_URL = "../data/page027_gambar11_profiles.json";
-
     const palette = [
       { base: '#5c26b5', accent: '#f3c64f' },
       { base: '#462296', accent: '#ffd166' },
@@ -321,23 +319,33 @@
       return card;
     }
 
-    async function populateProfiles() {
-      try {
-        const res = await fetch(DATA_URL);
-        if (!res.ok) throw new Error('Gagal memuat data');
-        const profiles = await res.json();
-        const grid = document.getElementById('profileGrid');
-        profiles.forEach((profile, index) => {
-          grid.appendChild(buildCard(profile, index));
-        });
-      } catch (error) {
-        console.error(error);
-        const grid = document.getElementById('profileGrid');
-        grid.innerHTML = '<p style="color:#c00; font-weight:600;">Data profil gagal dimuat.</p>';
-      }
-    }
+    const profiles = [
+      { name: 'Budi & Michael Hartono', base: 'Kudus & Jakarta (Djarum, BCA)', operations: 'Kudus (rokok), nasional (BCA)', sector: 'Perbankan, rokok' },
+      { name: 'Dewi Kam', base: 'Jakarta', operations: 'Kalimantan (pembangkit listrik)', sector: 'Energi' },
+      { name: 'Prajogo Pangestu', base: 'Jakarta (Barito Pacific)', operations: 'Banten (petrokimia), Kalimantan', sector: 'Energi, petrokimia' },
+      { name: 'Martua Sitorus', base: 'Jakarta (Wilmar)', operations: 'Sumatra & Kalimantan', sector: 'Sawit' },
+      { name: 'Low Tuck Kwong', base: 'Jakarta (Bayan Resources)', operations: 'Kalimantan Timur', sector: 'Batu bara' },
+      { name: 'Sukanto Tanoto', base: 'Singapura (RGE)', operations: 'Riau (APRIL), Sumatra', sector: 'Pulp, sawit' },
+      { name: 'Anthoni Salim', base: 'Jakarta (Salim Group)', operations: 'Nasional (Indofood)', sector: 'Konsumer' },
+      { name: 'Chairul Tanjung', base: 'Jakarta (CT Corp)', operations: 'Nasional', sector: 'Diversifikasi' },
+      { name: 'Sri Prakash Lohia', base: 'Jakarta (Indorama)', operations: 'Purwakarta (Jawa Barat)', sector: 'Petrokimia' },
+      { name: 'Theodore Rachmat', base: 'Jakarta (Triputra)', operations: 'Kalimantan, Sumatra', sector: 'Agribisnis' },
+      { name: 'Otto Toto Sugiri', base: 'Jakarta (DCI Indonesia)', operations: 'Cikarang (data center)', sector: 'Teknologi' },
+      { name: 'Bachtiar Karim', base: 'Jakarta (Musim Mas)', operations: 'Sumatra (Medan, Riau)', sector: 'Sawit' },
+      { name: 'Tahir', base: 'Jakarta (Mayapada Group)', operations: 'Jakarta (bank, RS)', sector: 'Keuangan' },
+      { name: 'Ciliandra Fangiono', base: 'Jakarta (First Resources)', operations: 'Kalimantan & Riau', sector: 'Sawit' },
+      { name: 'Widjaja keluarga', base: 'Jakarta (Sinar Mas)', operations: 'Riau, Sumatra Selatan', sector: 'Sawit, pulp' },
+      { name: 'Hilmi Panigoro', base: 'Jakarta (Medco)', operations: 'Kalimantan, Papua, Timur', sector: 'Energi' },
+      { name: 'Agoes Projosasmito', base: 'Jakarta (Amman Mineral)', operations: 'NTB (Batu Hijau)', sector: 'Tambang' },
+      { name: 'Arini Subianto', base: 'Jakarta (Persada Capital)', operations: 'Kalimantan (tambang)', sector: 'Energi' },
+      { name: 'Garibaldi Thohir', base: 'Jakarta (Adaro)', operations: 'Kalimantan Selatan', sector: 'Batu bara' },
+      { name: 'Susilo Wonowidjojo', base: 'Kediri (Gudang Garam)', operations: 'Kediri, Jawa Timur', sector: 'Rokok' }
+    ];
 
-    populateProfiles();
+    const grid = document.getElementById('profileGrid');
+    profiles.forEach((profile, index) => {
+      grid.appendChild(buildCard(profile, index));
+    });
   </script>
 </body>
 </html>
