@@ -1,378 +1,418 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Gambar 8 — Klasemen Pejabat Publik Terkaya 2025</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<style>
-  :root {
-    --bg-gradient: linear-gradient(135deg, #5b2b9a 0%, #8c3add 52%, #5b2b9a 100%);
-    --card-bg: rgba(22, 8, 45, 0.35);
-    --surface: rgba(255, 255, 255, 0.12);
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.72);
-    --gold: #f6d866;
-    --lavender: #b58cff;
-    --purple: #8347d4;
-    --deep-purple: #54228f;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-gradient);
-    color: var(--text-primary);
-    display: flex;
-    justify-content: center;
-    padding: clamp(24px, 4vw, 48px);
-  }
-  main {
-    width: min(1180px, 100%);
-    background: rgba(14, 0, 43, 0.35);
-    border-radius: 32px;
-    padding: clamp(28px, 4vw, 48px);
-    backdrop-filter: blur(18px);
-    position: relative;
-    overflow: hidden;
-  }
-  main::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 10% 12%, rgba(255, 255, 255, 0.18), transparent 55%),
-                radial-gradient(circle at 85% 18%, rgba(255, 198, 94, 0.18), transparent 58%);
-    pointer-events: none;
-  }
-  header {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .tag {
-    align-self: flex-start;
-    padding: 10px 24px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.18);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-  h1 {
-    margin: 0;
-    font-size: clamp(26px, 4vw, 36px);
-    font-weight: 800;
-  }
-  .subtitle {
-    margin: 0;
-    font-size: 14px;
-    letter-spacing: 0.38em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-  }
-  .chart-shell {
-    position: relative;
-    margin-top: clamp(28px, 4vw, 48px);
-    padding: clamp(20px, 3vw, 34px);
-    border-radius: 24px;
-    background: rgba(16, 0, 43, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    z-index: 1;
-  }
-  canvas {
-    width: 100% !important;
-    height: clamp(960px, 140vh, 1480px) !important;
-  }
-  .legend {
-    display: flex;
-    gap: 16px;
-    margin-top: 24px;
-    font-size: 14px;
-    color: var(--text-secondary);
-  }
-  .legend span {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .legend i {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  .summary {
-    margin-top: clamp(28px, 4vw, 46px);
-    padding: clamp(20px, 3vw, 34px);
-    border-radius: 24px;
-    background: rgba(9, 0, 28, 0.42);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px);
-    color: var(--text-secondary);
-    font-size: 15px;
-    line-height: 1.65;
-  }
-  .summary strong {
-    color: #fff0b3;
-  }
-  .source {
-    margin-top: 18px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 0.08em;
-  }
-  @media (max-width: 768px) {
-    canvas {
-      height: 1180px !important;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gambar 8 – Klasemen Pejabat Publik Terkaya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main-1: #7037d5;
+      --bg-main-2: #5222a6;
+      --bg-main-3: #2c0e5f;
+      --tag-gradient: linear-gradient(135deg, #ffd762 0%, #f1b423 100%);
+      --elite-card: linear-gradient(145deg, #9b5cfd 0%, #6726c3 100%);
+      --upper-card: linear-gradient(145deg, #7f41de 0%, #5320a4 100%);
+      --core-card: linear-gradient(145deg, #6431c4 0%, #3d147a 100%);
+      --badge-gradient: linear-gradient(135deg, #fde986 0%, #f2b83a 100%);
+      --text-strong: #ffffff;
+      --text-soft: rgba(255, 255, 255, 0.78);
+      --text-muted: rgba(255, 255, 255, 0.62);
+      --shadow-card: 0 22px 46px rgba(26, 0, 70, 0.32);
     }
-    .summary {
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(120% 120% at 5% 0%, #7f4dff 0%, var(--bg-main-1) 35%, var(--bg-main-2) 62%, var(--bg-main-3) 100%);
+      color: var(--text-strong);
+      display: flex;
+      justify-content: center;
+      padding: clamp(24px, 5vw, 48px);
+    }
+
+    main {
+      width: min(1220px, 100%);
+      padding: clamp(36px, 5vw, 64px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    main::before,
+    main::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      filter: blur(0px);
+    }
+
+    main::before {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 70%);
+      top: -160px;
+      left: -120px;
+    }
+
+    main::after {
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(255, 208, 115, 0.25) 0%, rgba(255, 208, 115, 0) 70%);
+      bottom: -120px;
+      right: -100px;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: var(--tag-gradient);
+      color: #4b2d00;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 20px 0 12px 0;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      margin: 0;
       font-size: 14px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
     }
-  }
-</style>
+
+    .cards-grid {
+      margin-top: clamp(36px, 4vw, 52px);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(16px, 2vw, 22px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      position: relative;
+      padding: 26px 22px 24px;
+      border-radius: 26px;
+      min-height: 230px;
+      background: var(--core-card);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.26), transparent 65%);
+      top: -80px;
+      right: -70px;
+      opacity: 0.4;
+    }
+
+    .card--elite {
+      background: var(--elite-card);
+    }
+
+    .card--upper {
+      background: var(--upper-card);
+    }
+
+    .card__badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--badge-gradient);
+      color: #4d3200;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      box-shadow: 0 12px 20px rgba(19, 0, 45, 0.25);
+    }
+
+    .card__photo {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      margin-top: 18px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 700;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .card__name {
+      margin: 18px 0 6px 0;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .card__role {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .card__wealth {
+      margin-top: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .summary-block {
+      position: relative;
+      z-index: 1;
+      margin-top: clamp(40px, 5vw, 64px);
+      display: grid;
+      gap: 18px;
+    }
+
+    .summary-text {
+      background: rgba(18, 0, 52, 0.45);
+      border-radius: 24px;
+      padding: clamp(24px, 3vw, 32px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .summary-text em {
+      font-style: italic;
+    }
+
+    .disclaimer {
+      background: rgba(255, 214, 102, 0.2);
+      border-radius: 22px;
+      border: 1px solid rgba(254, 214, 120, 0.45);
+      padding: clamp(22px, 3vw, 28px);
+      color: rgba(57, 35, 0, 0.92);
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 600;
+      box-shadow: 0 18px 48px rgba(32, 0, 45, 0.22);
+      background-image: linear-gradient(135deg, rgba(255, 229, 150, 0.28) 0%, rgba(255, 229, 150, 0.08) 74%);
+    }
+
+    .source {
+      margin-top: clamp(18px, 2vw, 26px);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    @media (max-width: 1200px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        padding: 36px 28px 64px;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .card {
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .card__name {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 22px;
+        min-height: 220px;
+      }
+      .card__photo {
+        width: 80px;
+        height: 80px;
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-<main>
-  <header>
-    <div class="tag">Gambar 8.</div>
-    <h1>Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025</h1>
-    <p class="subtitle">Dalam miliar rupiah</p>
-  </header>
+  <main>
+    <header>
+      <span class="tag">Gambar 8.</span>
+      <h1>Klasemen Pejabat Publik Terkaya Kabinet Merah Putih per 2025</h1>
+      <p class="subtitle">Dalam miliar rupiah</p>
+    </header>
 
-  <section class="chart-shell">
-    <canvas id="chartGambar8" aria-label="Peringkat 50 pejabat publik terkaya" role="img"></canvas>
-  </section>
+    <section class="cards-grid" id="cardsGrid" aria-label="Daftar 50 pejabat publik terkaya"></section>
 
-  <div class="legend">
-    <span><i style="background: var(--gold);"></i> Top 5 kekayaan</span>
-    <span><i style="background: var(--lavender);"></i> Peringkat 6–20</span>
-    <span><i style="background: var(--purple);"></i> Peringkat 21–50</span>
-  </div>
+    <section class="summary-block" aria-labelledby="ringkasan-gambar8">
+      <article class="summary-text" id="ringkasan-gambar8">
+        Gambar 8 menunjukkan bahwa pejabat publik terkaya di Kabinet Merah Putih didominasi oleh kelompok triliuner, dengan
+        Widiyanti Putri Wardhana (Rp5,4 triliun) di posisi teratas, diikuti Sakti Wahyu Trenggono (Rp2,44 triliun), Erick Thohir
+        (Rp2,41 triliun), dan Prabowo Subianto (Rp2,06 triliun). Sejumlah nama seperti Maruarar Sirait (Rp1,55 triliun), Otto Hasibuan
+        (Rp1,53 triliun), dan Setiawan Ichlas (Rp1,52 triliun) juga berada pada rentang kekayaan di atas satu triliun rupiah. Secara
+        keseluruhan, fenomena ini menegaskan adanya konsentrasi kekayaan dalam struktur pemerintahan, mencerminkan <em>elite consolidation</em>
+        di mana kekayaan dan kekuasaan saling memperkuat dalam satu lingkaran yang sama.
+      </article>
+      <article class="disclaimer">
+        Total kekayaan pejabat publik yang dihitung berdasarkan LHKPN belum tentu merepresentasikan kondisi yang sebenarnya. Instrumen ini
+        masih menyisakan kemungkinan adanya aset yang tidak dilaporkan, baik secara sengaja maupun tidak. Dengan demikian, angka yang tercantum
+        berpotensi hanya mencerminkan batas minimum, sementara kekayaan riil yang dimiliki pejabat ini dapat jauh lebih besar dari yang dilaporkan.
+      </article>
+      <p class="source">Sumber: LHKPN (2025), diolah CELIOS</p>
+    </section>
+  </main>
 
-  <div class="summary">
-    <strong>Pejabat publik di kabinet 2025 didominasi oleh kelompok triliuner baru.</strong>
-    Widiyanti Putri Wardhana memuncaki klasemen dengan kekayaan Rp5.435,83 miliar, diikuti oleh Sakti Wahyu
-    Trenggono (Rp2.440,11 miliar), Erick Thohir (Rp2.414,31 miliar), dan Prabowo Subianto (Rp2.062,24 miliar).
-    Konsentrasi ini menunjukkan fenomena <em>elite consolidation</em>, di mana kekayaan dan pengaruh politik bertemu
-    dalam lingkaran yang sama.
-  </div>
+  <script>
+    const officials = [
+      { rank: 1, name: "Widiyanti Putri Wardhana", role: "Menteri Pariwisata", wealth: "Rp5.435,83", group: "elite" },
+      { rank: 2, name: "Sakti Wahyu Trenggono", role: "Menteri Kelautan dan Perikanan", wealth: "Rp2.440,11", group: "elite" },
+      { rank: 3, name: "Erick Thohir", role: "Menteri BUMN", wealth: "Rp2.414,31", group: "elite" },
+      { rank: 4, name: "Prabowo Subianto", role: "Presiden RI", wealth: "Rp2.062,24", group: "elite" },
+      { rank: 5, name: "Maruarar Sirait", role: "Menteri Permukiman dan Perumahan", wealth: "Rp1.554", group: "elite" },
+      { rank: 6, name: "Otto Hasibuan", role: "Menteri Hukum dan HAM", wealth: "Rp1.526,31", group: "upper" },
+      { rank: 7, name: "Setiawan Ichlas", role: "Bidang Ekonomi dan Perbankan", wealth: "Rp1.518,77", group: "upper" },
+      { rank: 8, name: "Luhut Binsar Pandjaitan", role: "Ketua Dewan Ekonomi Nasional", wealth: "Rp1.509,13", group: "upper" },
+      { rank: 9, name: "Amran Sulaiman", role: "Menteri Pertanian", wealth: "Rp1.382,90", group: "upper" },
+      { rank: 10, name: "Muhamad Mardiono", role: "Kepala Badan Ketahanan Pangan", wealth: "Rp1.151,19", group: "upper" },
+      { rank: 11, name: "Raffi Farid Ahmad", role: "Menteri Informasi dan Hiburan", wealth: "Rp1.034", group: "upper" },
+      { rank: 12, name: "Rosan Perkasa Roeslani", role: "Menteri Investasi dan Hilirisasi", wealth: "Rp864,65", group: "upper" },
+      { rank: 13, name: "Purnomo Yusgiantoro", role: "Menteri Energi", wealth: "Rp464,47", group: "upper" },
+      { rank: 14, name: "Airlangga Hartarto", role: "Menko Perekonomian", wealth: "Rp436,97", group: "upper" },
+      { rank: 15, name: "Bahlil Lahadalia", role: "Menteri Penanaman Modal", wealth: "Rp337,31", group: "upper" },
+      { rank: 16, name: "Ario Bimo Nandito Ariotedjo", role: "Menteri Pemuda dan Olahraga", wealth: "Rp292,20", group: "upper" },
+      { rank: 17, name: "Yusril Ihza Mahendra", role: "Menteri Sekretaris Negara", wealth: "Rp269,05", group: "upper" },
+      { rank: 18, name: "Muhammad Qodari", role: "Wakil Kepala Staf Kepresidenan", wealth: "Rp261,94", group: "upper" },
+      { rank: 19, name: "Silmy Karim", role: "Menteri Integrasi dan Permukiman", wealth: "Rp234,60", group: "upper" },
+      { rank: 20, name: "Rachmat Pambudy", role: "Menteri PPN/Bappenas", wealth: "Rp222,42", group: "upper" },
+      { rank: 21, name: "Budi Gunadi Sadikin", role: "Menteri Kesehatan", wealth: "Rp221,46", group: "core" },
+      { rank: 22, name: "Agus Gumiwang Kartasasmita", role: "Menteri Perindustrian", wealth: "Rp198,65", group: "core" },
+      { rank: 23, name: "Wiranto", role: "Menko Politik dan Keamanan", wealth: "Rp193,30", group: "core" },
+      { rank: 24, name: "Todotua Berry P. Pasaribu", role: "Wakil Menteri Investasi", wealth: "Rp175,62", group: "core" },
+      { rank: 25, name: "Diaz Faisal Malik Hendropriyono", role: "Staf Khusus Presiden", wealth: "Rp169,54", group: "core" },
+      { rank: 26, name: "Aris Marsudiyanto", role: "Menteri Agraria & Tata Ruang", wealth: "Rp158,86", group: "core" },
+      { rank: 27, name: "Terawan Agus Putranto", role: "Penasihat Bidang Kesehatan", wealth: "Rp147,52", group: "core" },
+      { rank: 28, name: "Kartika Wirjoatmodjo", role: "Wakil Menteri BUMN", wealth: "Rp138,40", group: "core" },
+      { rank: 29, name: "Suahasil Nazara", role: "Wakil Menteri Keuangan", wealth: "Rp138,17", group: "core" },
+      { rank: 30, name: "Agus Harimurti Yudhoyono", role: "Menteri Pendidikan & Kebudayaan", wealth: "Rp117,19", group: "core" },
+      { rank: 31, name: "Muhammad Fithla S. Suryanegara", role: "Menteri Transmigrasi", wealth: "Rp113,95", group: "core" },
+      { rank: 32, name: "Zita Anjani", role: "Staf Khusus Pariwisata", wealth: "Rp109,33", group: "core" },
+      { rank: 33, name: "Didit Herdiawan", role: "Wakil Menteri Pertahanan", wealth: "Rp106,46", group: "core" },
+      { rank: 34, name: "Dante Saksono Harbuwono", role: "Wakil Menteri Kesehatan", wealth: "Rp105,92", group: "core" },
+      { rank: 35, name: "Sjafrie Sjamsoeddin", role: "Menteri Pertahanan Senior", wealth: "Rp105,79", group: "core" },
+      { rank: 36, name: "Budi Arie Setiadi", role: "Menteri Koperasi", wealth: "Rp103,89", group: "core" },
+      { rank: 37, name: "Nasaruddin Umar", role: "Menteri Agama", wealth: "Rp100", group: "core" },
+      { rank: 38, name: "Bambang P.S. Brodjonegoro", role: "Menteri Perencanaan Strategis", wealth: "Rp99,35", group: "core" },
+      { rank: 39, name: "Purwadi Arianto", role: "Menteri Pekerjaan Umum", wealth: "Rp95,97", group: "core" },
+      { rank: 40, name: "Mari Elka Pangestu", role: "Menteri Perdagangan", wealth: "Rp89,18", group: "core" },
+      { rank: 41, name: "Taufik Hidayat", role: "Menteri Perhubungan", wealth: "Rp89,06", group: "core" },
+      { rank: 42, name: "Dudy Purwagandhi", role: "Wakil Menteri Perhubungan", wealth: "Rp79,49", group: "core" },
+      { rank: 43, name: "Dody Hanggodo", role: "Wakil Menteri Pekerjaan Umum", wealth: "Rp73,65", group: "core" },
+      { rank: 44, name: "Ahmad Ridha Sabana", role: "Menteri Informasi Digital", wealth: "Rp61,21", group: "core" },
+      { rank: 45, name: "Lodewyk Pusung", role: "Kepala Badan Gizi Nasional", wealth: "Rp60,54", group: "core" },
+      { rank: 46, name: "Zulkifli Hasan", role: "Menteri Perdagangan Dalam Negeri", wealth: "Rp59,82", group: "core" },
+      { rank: 47, name: "Purbaya Yudhi Sadewa", role: "Menteri Keuangan", wealth: "Rp57,48", group: "core" },
+      { rank: 48, name: "Mualiman Darmansyah Hadad", role: "Penasihat Keuangan Negara", wealth: "Rp48,40", group: "core" },
+      { rank: 49, name: "Fadli Zon", role: "Menteri Kebudayaan", wealth: "Rp45,24", group: "core" },
+      { rank: 50, name: "Yovie Widianto", role: "Staf Khusus Presiden Bidang Ekonomi Kreatif", wealth: "Rp45,01", group: "core" }
+    ];
 
-  <div class="source">Sumber: LHKPN (2025), diolah oleh peneliti</div>
-</main>
+    const grid = document.getElementById('cardsGrid');
 
-<script>
-const officials = [
-  { rank: 1, name: "Widiyanti Putri Wardhana", role: "Menteri Pariwisata", wealth: 5435.83 },
-  { rank: 2, name: "Sakti Wahyu Trenggono", role: "Menteri Kelautan dan Perikanan", wealth: 2440.11 },
-  { rank: 3, name: "Erick Thohir", role: "Menteri BUMN", wealth: 2414.31 },
-  { rank: 4, name: "Prabowo Subianto", role: "Presiden RI", wealth: 2062.24 },
-  { rank: 5, name: "Maruarar Sirait", role: "Menteri Permukiman dan Perumahan", wealth: 1554.00 },
-  { rank: 6, name: "Otto Hasibuan", role: "Menteri Hukum dan HAM", wealth: 1526.31 },
-  { rank: 7, name: "Setiawan Ichlas", role: "Bidang Ekonomi dan Perbankan", wealth: 1518.77 },
-  { rank: 8, name: "Luhut Binsar Pandjaitan", role: "Ketua Dewan Ekonomi Nasional", wealth: 1509.13 },
-  { rank: 9, name: "Amran Sulaiman", role: "Menteri Pertanian", wealth: 1382.90 },
-  { rank: 10, name: "Muhamad Mardiono", role: "Kepala Badan Ketahanan Pangan", wealth: 1151.19 },
-  { rank: 11, name: "Raffi Farid Ahmad", role: "Menteri Informasi dan Hiburan", wealth: 1034.00 },
-  { rank: 12, name: "Rosan Perkasa Roeslani", role: "Menteri Investasi dan Hilirisasi", wealth: 864.65 },
-  { rank: 13, name: "Purnomo Yusgiantoro", role: "Menteri Energi", wealth: 464.47 },
-  { rank: 14, name: "Airlangga Hartarto", role: "Menko Perekonomian", wealth: 436.97 },
-  { rank: 15, name: "Bahlil Lahadalia", role: "Menteri Penanaman Modal", wealth: 337.31 },
-  { rank: 16, name: "Ario Bimo Nandito Ariotedjo", role: "Menteri Pemuda dan Olahraga", wealth: 292.20 },
-  { rank: 17, name: "Yusril Ihza Mahendra", role: "Menteri Sekretaris Negara", wealth: 269.05 },
-  { rank: 18, name: "Muhammad Qodari", role: "Wakil Kepala Staf Kepresidenan", wealth: 261.94 },
-  { rank: 19, name: "Silmy Karim", role: "Menteri Integrasi dan Permukiman", wealth: 234.60 },
-  { rank: 20, name: "Rachmat Pambudy", role: "Menteri PPN/Bappenas", wealth: 222.42 },
-  { rank: 21, name: "Budi Gunadi Sadikin", role: "Menteri Kesehatan", wealth: 221.46 },
-  { rank: 22, name: "Agus Gumiwang Kartasasmita", role: "Menteri Perindustrian", wealth: 198.65 },
-  { rank: 23, name: "Wiranto", role: "Menko Politik & Keamanan", wealth: 193.30 },
-  { rank: 24, name: "Todotua Berry P. Pasaribu", role: "Wakil Menteri Investasi", wealth: 175.62 },
-  { rank: 25, name: "Diaz Faisal Malik Hendropriyono", role: "Staf Khusus Presiden", wealth: 169.54 },
-  { rank: 26, name: "Aris Marsudiyanto", role: "Menteri Agraria & Tata Ruang", wealth: 158.86 },
-  { rank: 27, name: "Terawan Agus Putranto", role: "Penasihat Bidang Kesehatan", wealth: 147.52 },
-  { rank: 28, name: "Kartika Wirjoatmodjo", role: "Wakil Menteri BUMN", wealth: 138.40 },
-  { rank: 29, name: "Suahasil Nazara", role: "Wakil Menteri Keuangan", wealth: 138.17 },
-  { rank: 30, name: "Agus Harimurti Yudhoyono", role: "Menteri Pendidikan & Kebudayaan", wealth: 117.19 },
-  { rank: 31, name: "Muhammad Fithla S. Suryanegara", role: "Menteri Transmigrasi", wealth: 113.95 },
-  { rank: 32, name: "Zita Anjani", role: "Staf Khusus Pariwisata", wealth: 109.33 },
-  { rank: 33, name: "Didit Herdiawan", role: "Wakil Menteri Pertahanan", wealth: 106.46 },
-  { rank: 34, name: "Dante Saksono Harbuwono", role: "Wakil Menteri Kesehatan", wealth: 105.92 },
-  { rank: 35, name: "Sjafrie Sjamsoeddin", role: "Menteri Pertahanan Senior", wealth: 105.79 },
-  { rank: 36, name: "Budi Arie Setiadi", role: "Menteri Koperasi", wealth: 103.89 },
-  { rank: 37, name: "Nasaruddin Umar", role: "Menteri Agama", wealth: 100.00 },
-  { rank: 38, name: "Bambang P.S. Brodjonegoro", role: "Menteri Perencanaan Strategis", wealth: 99.35 },
-  { rank: 39, name: "Purwadi Arianto", role: "Menteri Pekerjaan Umum", wealth: 95.97 },
-  { rank: 40, name: "Mari Elka Pangestu", role: "Menteri Perdagangan", wealth: 89.18 },
-  { rank: 41, name: "Taufik Hidayat", role: "Menteri Perhubungan", wealth: 89.06 },
-  { rank: 42, name: "Dudy Purwagandhi", role: "Wakil Menteri Perhubungan", wealth: 79.49 },
-  { rank: 43, name: "Dody Hanggodo", role: "Wakil Menteri Pekerjaan Umum", wealth: 73.65 },
-  { rank: 44, name: "Ahmad Ridha Sabana", role: "Menteri Informasi Digital", wealth: 61.21 },
-  { rank: 45, name: "Lodewyk Pusung", role: "Kepala Badang Gizi Nasional", wealth: 60.54 },
-  { rank: 46, name: "Zulkifli Hasan", role: "Menteri Perdagangan Dalam Negeri", wealth: 59.82 },
-  { rank: 47, name: "Purbaya Yudhi Sadewa", role: "Menteri Keuangan", wealth: 57.48 },
-  { rank: 48, name: "Mualiman Darmansyah Hadad", role: "Penasihat Keuangan Negara", wealth: 48.40 },
-  { rank: 49, name: "Fadli Zon", role: "Menteri Kebudayaan", wealth: 45.24 },
-  { rank: 50, name: "Yovie Widianto", role: "Staf Khusus Presiden Bidang Ekonomi Kreatif", wealth: 45.01 }
-];
+    const initials = (name) => {
+      const parts = name.split(/\s+/).filter(Boolean);
+      if (!parts.length) return '';
+      const letters = parts.slice(0, 2).map(part => part[0]);
+      return letters.join('').toUpperCase();
+    };
 
-const labels = officials.map(item => [`${item.rank}. ${item.name}`, item.role]);
-const values = officials.map(item => item.wealth);
-const barColors = officials.map((_, idx) => {
-  if (idx < 5) return '#f6d866';
-  if (idx < 20) return '#c7a8ff';
-  return '#6a3bd6';
-});
+    const createCard = (item) => {
+      const card = document.createElement('article');
+      card.className = `card card--${item.group}`;
 
-const formatter = new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      const badge = document.createElement('span');
+      badge.className = 'card__badge';
+      badge.textContent = item.rank;
 
-const labelPlugin = {
-  id: 'valueLabel',
-  afterDatasetsDraw(chart) {
-    const { ctx, data } = chart;
-    ctx.save();
-    ctx.font = '600 12px "Inter"';
-    ctx.fillStyle = '#ffffff';
-    ctx.textBaseline = 'middle';
+      const photo = document.createElement('div');
+      photo.className = 'card__photo';
+      photo.textContent = initials(item.name);
 
-    chart.getDatasetMeta(0).data.forEach((bar, index) => {
-      if (!bar) return;
-      const value = `Rp${formatter.format(data.datasets[0].data[index])}`;
-      const x = bar.x + 12;
-      const y = bar.y;
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText(value, x, y);
+      const name = document.createElement('h3');
+      name.className = 'card__name';
+      name.textContent = item.name;
 
-      // Draw rank chips
-      const rank = officials[index].rank;
-      const color = index < 5 ? '#f6d866' : index < 20 ? '#c7a8ff' : '#57309d';
-      const textColor = index < 5 ? '#5a3d00' : '#ffffff';
-      const chipX = chart.chartArea.left - 42;
-      const chipY = y;
-      ctx.fillStyle = color;
-      const rectX = chipX - 18;
-      const rectY = chipY - 16;
-      const rectW = 32;
-      const rectH = 32;
-      const radius = 16;
-      ctx.beginPath();
-      if (typeof ctx.roundRect === 'function') {
-        ctx.roundRect(rectX, rectY, rectW, rectH, radius);
-      } else {
-        ctx.moveTo(rectX + radius, rectY);
-        ctx.lineTo(rectX + rectW - radius, rectY);
-        ctx.quadraticCurveTo(rectX + rectW, rectY, rectX + rectW, rectY + radius);
-        ctx.lineTo(rectX + rectW, rectY + rectH - radius);
-        ctx.quadraticCurveTo(rectX + rectW, rectY + rectH, rectX + rectW - radius, rectY + rectH);
-        ctx.lineTo(rectX + radius, rectY + rectH);
-        ctx.quadraticCurveTo(rectX, rectY + rectH, rectX, rectY + rectH - radius);
-        ctx.lineTo(rectX, rectY + radius);
-        ctx.quadraticCurveTo(rectX, rectY, rectX + radius, rectY);
-      }
-      ctx.fill();
-      ctx.fillStyle = textColor;
-      ctx.font = '700 13px "Inter"';
-      ctx.textAlign = 'center';
-      ctx.fillText(rank, chipX - 2, chipY + 1);
-    });
+      const role = document.createElement('p');
+      role.className = 'card__role';
+      role.textContent = item.role;
 
-    ctx.restore();
-  }
-};
+      const wealth = document.createElement('p');
+      wealth.className = 'card__wealth';
+      wealth.textContent = item.wealth;
 
-const chartCanvas = document.getElementById('chartGambar8');
-const ctx = chartCanvas.getContext('2d');
+      card.append(badge, photo, name, role, wealth);
+      grid.appendChild(card);
+    };
 
-const chartInstance = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels,
-    datasets: [
-      {
-        label: 'Total kekayaan (miliar rupiah)',
-        data: values,
-        backgroundColor: barColors,
-        borderRadius: 16,
-        maxBarThickness: 22,
-        borderSkipped: false,
-        borderWidth: 0
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    indexAxis: 'y',
-    layout: {
-      padding: {
-        top: 12,
-        bottom: 12,
-        left: 36,
-        right: 160
-      }
-    },
-    scales: {
-      x: {
-        grid: {
-          color: 'rgba(255,255,255,0.08)'
-        },
-        border: {
-          display: false
-        },
-        ticks: {
-          color: 'rgba(255,255,255,0.58)',
-          font: {
-            family: 'Inter',
-            weight: '600'
-          },
-          callback: value => `Rp${formatter.format(value)}`
-        }
-      },
-      y: {
-        grid: {
-          display: false
-        },
-        border: {
-          display: false
-        },
-        ticks: {
-          color: '#ffffff',
-          font: {
-            family: 'Inter',
-            size: 12,
-            weight: '600'
-          }
-        }
-      }
-    },
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: 'rgba(12, 7, 22, 0.95)',
-        borderColor: 'rgba(255, 255, 255, 0.1)',
-        borderWidth: 1,
-        padding: 12,
-        cornerRadius: 12,
-        titleFont: { family: 'Inter', weight: '700', size: 13 },
-        bodyFont: { family: 'Inter', weight: '500', size: 12 },
-        callbacks: {
-          title: items => items[0].label[0],
-          label: () => ''
-        }
-      }
-    }
-  },
-  plugins: [labelPlugin]
-});
-
-// Update tooltip label callback with formatted value & role
-chartInstance.options.plugins.tooltip.callbacks.label = (context) => {
-  const official = officials[context.dataIndex];
-  return `Rp${formatter.format(official.wealth)} • ${official.role}`;
-};
-chartInstance.update();
-</script>
+    officials.forEach(createCard);
+  </script>
 </body>
 </html>

@@ -46,28 +46,28 @@ with tab_plotly:
 st.divider()
 chart_header("Klasemen Pejabat Terkaya Kabinet Merah Putih 2025", "Gambar 8 — Hal. 21")
 
-tab_g8_chartjs, tab_g8_plotly = st.tabs(["Versi Chart.js", "Versi Plotly Alternatif"])
+tab_g8_chartjs, tab_g8_plotly = st.tabs(["Replika PDF (Statis)", "Versi Interaktif (Filter)"])
 
 with tab_g8_chartjs:
-    components.html(_G8_chartjs.read_text(encoding="utf-8"), height=1080, scrolling=True)
+    components.html(_G8_chartjs.read_text(encoding="utf-8"), height=2300, scrolling=True)
     chart_footer("LHKPN (2025), diolah CELIOS")
-    with st.expander("🔗 Kode Embed WordPress — Gambar 8 (Chart.js)"):
-        st.code("""<!-- Gambar 8: Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025 — Versi Chart.js -->
+    with st.expander("🔗 Kode Embed WordPress — Gambar 8 (Replika Statis)"):
+        st.code("""<!-- Gambar 8: Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025 — Replika Statis -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/06_Harta_Pejabat_gambar8.html"
-  width="100%" height="1080" frameborder="0"
-  style="border-radius:32px; background:#3b1b6b;"
+  width="100%" height="2320" frameborder="0"
+  style="border-radius:32px; background:#5a26b6;"
   loading="lazy">
 </iframe>""", language="html")
 
 with tab_g8_plotly:
-    components.html(_G8_plotly.read_text(encoding="utf-8"), height=1080, scrolling=True)
+    components.html(_G8_plotly.read_text(encoding="utf-8"), height=2300, scrolling=True)
     chart_footer("LHKPN (2025), diolah CELIOS")
-    with st.expander("🔗 Kode Embed WordPress — Gambar 8 (Plotly)"):
-        st.code("""<!-- Gambar 8: Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025 — Versi Plotly -->
+    with st.expander("🔗 Kode Embed WordPress — Gambar 8 (Interaktif)"):
+        st.code("""<!-- Gambar 8: Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025 — Versi Interaktif -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/06_Harta_Pejabat_gambar8_plotly.html"
-  width="100%" height="1080" frameborder="0"
-  style="border-radius:32px; background:#3b1b6b;"
+  width="100%" height="2320" frameborder="0"
+  style="border-radius:32px; background:#5a26b6;"
   loading="lazy">
 </iframe>""", language="html")
