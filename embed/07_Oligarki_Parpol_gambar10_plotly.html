@@ -445,10 +445,15 @@
       width: 0.7
     };
 
+    const maxEliteVal = Math.max(...elites);
+    const maxCitizenVal = Math.max(...citizens);
+    const citizenScale = (maxEliteVal * 0.42) / maxCitizenVal;
+    const citizensScaled = citizens.map(v => v * citizenScale);
+
     const citizensTrace = {
       type: 'bar',
       orientation: 'h',
-      x: citizens,
+      x: citizensScaled,
       y: labels,
       text: citizens.map(val => `Rp${val.toLocaleString('id-ID')}`),
       textposition: 'inside',
@@ -468,14 +473,13 @@
     };
 
     const maxElite = Math.max(...elites);
-    const maxCitizen = Math.max(...citizens);
-    const xMax = maxCitizen * 1.12;
+    const xMax = maxElite * 0.46;
     const xMin = -maxElite * 1.08;
 
     const layout = {
       barmode: 'overlay',
       bargap: 0.18,
-      margin: { l: 180, r: 140, t: 86, b: 20 },
+      margin: { l: 180, r: 80, t: 20, b: 20 },
       paper_bgcolor: 'rgba(255,255,255,0)',
       plot_bgcolor: 'rgba(255,255,255,0)',
       xaxis: {
@@ -502,21 +506,7 @@
           weight: 600
         }
       },
-      legend: {
-        orientation: 'h',
-        xanchor: 'left',
-        yanchor: 'bottom',
-        x: 0,
-        y: 1.16,
-        bgcolor: 'rgba(255, 255, 255, 0.92)',
-        bordercolor: 'rgba(92, 38, 181, 0.22)',
-        borderwidth: 1,
-        font: {
-          family: 'Plus Jakarta Sans',
-          color: '#3d1a7c',
-          size: 13
-        }
-      },
+      showlegend: false,
       hovermode: 'closest',
       hoverlabel: {
         bgcolor: '#291552',
@@ -541,7 +531,8 @@
         }
       ],
       annotations: ratios.map((ratio, idx) => ({
-        x: xMax - (idx % 2 === 0 ? 30 : 80),
+        x: xMax,
+        xanchor: 'right',
         y: labels[idx],
         text: `${ratio}×`,
         showarrow: false,
