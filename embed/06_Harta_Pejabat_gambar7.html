@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gambar 7 - Total Harta Pejabat Publik Kabinet</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --purple-bg: #561f8b;
+      --purple-accent: #6d28d9;
+      --yellow-accent: #f3d24f;
+      --text-dark: #1f2937;
+    }
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top left, rgba(111,66,193,0.14), transparent 45%),
+                  radial-gradient(circle at bottom right, rgba(236,233,252,0.6), transparent 55%),
+                  #f9fafb;
+      color: var(--text-dark);
+    }
+    .chart-card {
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.92);
+      border-radius: 28px;
+      box-shadow: 0 25px 55px rgba(86,31,139,0.12);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center py-12 px-4">
+  <main class="w-full max-w-5xl chart-card p-10 relative overflow-hidden">
+    <div class="absolute -top-24 -left-16 w-48 h-48 bg-purple-100/40 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-32 right-10 w-56 h-56 bg-yellow-200/30 rounded-full blur-3xl"></div>
+
+    <header class="relative z-10 flex flex-col gap-4">
+      <div class="flex items-center gap-4">
+        <span class="px-5 py-2 bg-[var(--purple-accent)] text-white font-semibold rounded-full shadow-lg shadow-purple-500/30">Gambar 7.</span>
+        <h1 class="text-2xl md:text-3xl font-bold text-[var(--text-dark)] leading-snug">Total Harta Pejabat Publik Kabinet (2019&ndash;2025)</h1>
+      </div>
+      <p class="text-sm md:text-base text-[var(--text-dark)]/70 uppercase tracking-[0.2em]">Dalam miliar rupiah</p>
+    </header>
+
+    <section class="relative z-10 mt-10">
+      <div class="h-[460px] md:h-[420px]">
+        <canvas id="chartGambar7" aria-label="Total harta pejabat publik dan jumlah pejabat per tahun" role="img"></canvas>
+      </div>
+    </section>
+
+    <footer class="relative z-10 mt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <span class="w-3.5 h-3.5 rounded-full bg-[var(--purple-accent)]"></span>
+          <span class="text-sm md:text-base font-semibold text-[var(--text-dark)]">Total Harta Pejabat Kabinet</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-3.5 h-3.5 rounded-full bg-[var(--yellow-accent)]"></span>
+          <span class="text-sm md:text-base font-semibold text-[var(--text-dark)]">Jumlah Pejabat Publik</span>
+        </div>
+      </div>
+      <div class="bg-[var(--yellow-accent)]/80 text-[var(--text-dark)] text-xs md:text-sm font-medium px-4 py-2 rounded-full shadow-md shadow-yellow-400/30">
+        Sumber: Data Laporan Harta Kekayaan Penyelenggara Negara (2026), diolah oleh peneliti
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const ctx = document.getElementById('chartGambar7');
+
+    const tahun = [2019, 2020, 2021, 2022, 2023, 2024, 2025];
+    const totalHarta = [13601, 16468, 24059, 28038, 21500, 30405, 30340];
+    const jumlahPejabat = [57, 59, 58, 59, 61, 140, 143];
+
+    const formatterRupiah = new Intl.NumberFormat('id-ID');
+
+    const labelPlugin = {
+      id: 'valueLabels',
+      afterDatasetsDraw(chart, args, pluginOptions) {
+        const { ctx } = chart;
+        ctx.save();
+
+        const barMeta = chart.getDatasetMeta(0);
+        barMeta.data.forEach((bar, index) => {
+          if (!bar || !bar.x || !Number.isFinite(totalHarta[index])) return;
+          const value = `Rp${formatterRupiah.format(totalHarta[index])}`;
+          ctx.font = '600 13px "Inter"';
+          ctx.fillStyle = '#1f2937';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.fillText(value, bar.x, bar.y - 8);
+        });
+
+        const lineMeta = chart.getDatasetMeta(1);
+        lineMeta.data.forEach((point, index) => {
+          if (!point || !point.x) return;
+          const value = formatterRupiah.format(jumlahPejabat[index]);
+          ctx.font = '600 12px "Inter"';
+          ctx.fillStyle = '#f59e0b';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.fillText(value, point.x, point.y - 14);
+        });
+      }
+    };
+
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: tahun,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Total Harta Pejabat Kabinet',
+            data: totalHarta,
+            backgroundColor: '#6d28d9',
+            hoverBackgroundColor: '#7c3aed',
+            borderRadius: 12,
+            barPercentage: 0.55,
+            categoryPercentage: 0.72,
+            order: 1,
+            yAxisID: 'y'
+          },
+          {
+            type: 'line',
+            label: 'Jumlah Pejabat Publik',
+            data: jumlahPejabat,
+            borderColor: '#f3d24f',
+            backgroundColor: '#f3d24f',
+            pointBackgroundColor: '#f3d24f',
+            pointBorderColor: '#f3d24f',
+            pointRadius: 7,
+            pointHoverRadius: 9,
+            tension: 0.35,
+            borderWidth: 3,
+            yAxisID: 'y1',
+            order: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 40,
+            right: 30,
+            left: 10,
+            bottom: 20
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#4b5563',
+              font: {
+                family: 'Inter',
+                weight: '600'
+              }
+            }
+          },
+          y: {
+            position: 'left',
+            beginAtZero: true,
+            grid: {
+              color: '#e5e7eb'
+            },
+            ticks: {
+              color: '#4b5563',
+              font: {
+                family: 'Inter',
+                weight: '600'
+              },
+              callback: (value) => `Rp${formatterRupiah.format(value)}`
+            }
+          },
+          y1: {
+            position: 'right',
+            beginAtZero: true,
+            grid: {
+              drawBorder: false,
+              drawOnChartArea: false
+            },
+            ticks: {
+              color: '#d97706',
+              font: {
+                family: 'Inter',
+                weight: '600'
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#111827',
+            padding: 12,
+            titleFont: {
+              family: 'Inter',
+              weight: '700',
+              size: 13
+            },
+            bodyFont: {
+              family: 'Inter',
+              weight: '500',
+              size: 12
+            },
+            callbacks: {
+              label: (context) => {
+                if (context.dataset.type === 'bar') {
+                  return `${context.dataset.label}: Rp${formatterRupiah.format(context.parsed.y)}`;
+                }
+                return `${context.dataset.label}: ${formatterRupiah.format(context.parsed.y)} pejabat`;
+              }
+            }
+          }
+        }
+      },
+      plugins: [labelPlugin]
+    });
+  </script>
+</body>
+</html>
