@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gambar 11 – Profil Elite Bisnis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-body: #f5f3ff;
+      --purple-main: #5c26b5;
+      --purple-dark: #381a76;
+      --purple-soft: #efe8ff;
+      --yellow-main: #f3c64f;
+      --text-dark: #24194c;
+      --text-muted: rgba(36, 25, 76, 0.65);
+      --card-radius: 30px;
+      --chip-radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-dark);
+      padding: 48px 22px 64px;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(213, 200, 255, 0.55));
+      border-radius: 40px;
+      padding: 54px 58px 70px;
+      position: relative;
+      box-shadow: 0 40px 70px rgba(81, 49, 148, 0.18);
+      overflow: hidden;
+    }
+
+    main::before,
+    main::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 16% 18%, rgba(108, 70, 190, 0.22), transparent 52%),
+                  radial-gradient(circle at 86% 84%, rgba(243, 198, 79, 0.28), transparent 60%);
+      mix-blend-mode: screen;
+    }
+
+    header {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 20px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: var(--purple-main);
+      color: #fff;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 16px 40px rgba(92, 38, 181, 0.25);
+      width: fit-content;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 3.2vw, 36px);
+      font-weight: 800;
+      color: var(--purple-dark);
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .meta-copy {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 780px;
+    }
+
+    .grid {
+      position: relative;
+      z-index: 2;
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+    }
+
+    .profile-card {
+      background: linear-gradient(140deg, rgba(92, 38, 181, 0.92), rgba(64, 24, 132, 0.88));
+      color: #fff;
+      border-radius: var(--card-radius);
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+    }
+
+    .profile-card::after {
+      content: "";
+      position: absolute;
+      inset: -40% 40% 20% -20%;
+      background: radial-gradient(circle at top right, rgba(243, 198, 79, 0.55), transparent 60%);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.16);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .mini-intro {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .pill-stack {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.12);
+      border-radius: var(--chip-radius);
+      padding: 14px 16px 12px;
+      display: grid;
+      gap: 4px;
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .pill-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    .pill-value {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .source {
+      margin-top: 44px;
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: 20px;
+      background: rgba(243, 198, 79, 0.16);
+      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: inset 0 0 0 1px rgba(243,198,79,0.45);
+    }
+
+    @media (max-width: 960px) {
+      main {
+        padding: 44px 30px 58px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 32px 16px 48px;
+      }
+      main {
+        border-radius: 30px;
+        padding: 36px 24px 48px;
+      }
+      .grid {
+        gap: 16px;
+      }
+      .profile-card {
+        padding: 22px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="tag">Gambar 11.</span>
+      <h1>Profil Elite Bisnis: Basis, Lokasi Operasi, dan Sektor</h1>
+      <p class="subtitle">Hal. 27</p>
+      <p class="meta-copy">Para konglomerat Indonesia mengendalikan bisnis dari pusat ekonomi di Jakarta dan kota besar lainnya, sementara operasional dan ekstraksi sumber daya tersebar di Kalimantan, Sumatra, Papua, hingga NTB. Visual ini memetakan basis domisili, lokasi operasi utama, dan sektor yang mereka dominasi.</p>
+    </header>
+
+    <section class="grid" id="profileGrid" aria-live="polite"></section>
+
+    <div class="source">Sumber: Laporan Ketimpangan Ekonomi Indonesia 2026, diolah CELIOS</div>
+  </main>
+
+  <script>
+    const DATA_URL = "../data/page027_gambar11_profiles.json";
+
+    const palette = [
+      { base: '#5c26b5', accent: '#f3c64f' },
+      { base: '#462296', accent: '#ffd166' },
+      { base: '#432476', accent: '#ffadad' },
+      { base: '#5c26b5', accent: '#7ae6dd' }
+    ];
+
+    function initialsFromName(name) {
+      return name
+        .split(/\s+/)
+        .filter(segment => segment.length > 0)
+        .slice(0, 2)
+        .map(word => word[0])
+        .join('')
+        .toUpperCase();
+    }
+
+    function buildCard(profile, index) {
+      const colors = palette[index % palette.length];
+      const card = document.createElement('article');
+      card.className = 'profile-card';
+      card.style.background = `linear-gradient(140deg, ${colors.base}, ${colors.base}d4)`;
+      card.style.setProperty('--accent', colors.accent);
+
+      const header = document.createElement('div');
+      header.className = 'profile-header';
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = initialsFromName(profile.name);
+      const identity = document.createElement('div');
+      const nameEl = document.createElement('div');
+      nameEl.className = 'name';
+      nameEl.textContent = profile.name;
+      const intro = document.createElement('div');
+      intro.className = 'mini-intro';
+      intro.textContent = 'Elite Bisnis';
+      identity.appendChild(nameEl);
+      identity.appendChild(intro);
+      header.appendChild(avatar);
+      header.appendChild(identity);
+
+      const stack = document.createElement('div');
+      stack.className = 'pill-stack';
+
+      const items = [
+        { title: 'Basis (Domisili/Perusahaan)', value: profile.base },
+        { title: 'Lokasi Operasi yang TERVERIFIKASI', value: profile.operations },
+        { title: 'Sektor', value: profile.sector }
+      ];
+
+      items.forEach(item => {
+        const pill = document.createElement('div');
+        pill.className = 'pill';
+        const title = document.createElement('span');
+        title.className = 'pill-title';
+        title.textContent = item.title;
+        const value = document.createElement('span');
+        value.className = 'pill-value';
+        value.textContent = item.value;
+        pill.appendChild(title);
+        pill.appendChild(value);
+        stack.appendChild(pill);
+      });
+
+      card.appendChild(header);
+      card.appendChild(stack);
+      return card;
+    }
+
+    async function populateProfiles() {
+      try {
+        const res = await fetch(DATA_URL);
+        if (!res.ok) throw new Error('Gagal memuat data');
+        const profiles = await res.json();
+        const grid = document.getElementById('profileGrid');
+        profiles.forEach((profile, index) => {
+          grid.appendChild(buildCard(profile, index));
+        });
+      } catch (error) {
+        console.error(error);
+        const grid = document.getElementById('profileGrid');
+        grid.innerHTML = '<p style="color:#c00; font-weight:600;">Data profil gagal dimuat.</p>';
+      }
+    }
+
+    populateProfiles();
+  </script>
+</body>
+</html>
