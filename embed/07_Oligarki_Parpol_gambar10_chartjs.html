@@ -3,22 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gambar 10 — Perbandingan Kekayaan Elite vs Publik (Chart.js)</title>
+  <title>Gambar 10  Perbandingan Kekayaan Elite vs Publik (Chart.js)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
   <style>
     :root {
-      --purple-main: #5526b5;
-      --purple-soft: #6b3bd4;
-      --purple-light: rgba(116, 92, 201, 0.18);
-      --purple-bg: rgba(82, 46, 166, 0.12);
-      --yellow-main: #f6c454;
-      --yellow-soft: rgba(246, 196, 84, 0.25);
-      --text-primary: #1f1840;
-      --text-muted: rgba(31, 24, 64, 0.6);
-      --radius-lg: 32px;
+      --purple: #5526b5;
+      --purple-soft: rgba(86, 60, 176, 0.16);
+      --yellow: #f6c454;
+      --yellow-soft: rgba(246, 196, 84, 0.22);
+      --text-main: #1f1840;
+      --text-muted: rgba(31, 24, 64, 0.62);
+      --sheet-bg: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(223,216,255,0.65));
     }
 
     * {
@@ -28,30 +26,29 @@
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #f6f4ff;
-      color: var(--text-primary);
+      background: #f1efff;
       padding: 32px 16px 48px;
       display: flex;
       justify-content: center;
+      color: var(--text-main);
     }
 
-    main.infographic {
+    main.sheet {
       position: relative;
-      max-width: min(1220px, 100%);
-      width: 100%;
-      background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(214,206,255,0.64));
+      width: min(1200px, 100%);
+      background: var(--sheet-bg);
       border-radius: 40px;
       padding: 48px 56px 64px;
-      box-shadow: 0 32px 72px rgba(60, 34, 115, 0.18);
+      box-shadow: 0 32px 68px rgba(60, 34, 115, 0.18);
       overflow: hidden;
     }
 
-    main.infographic::before {
+    main.sheet::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 18% 14%, rgba(122, 99, 204, 0.3), transparent 60%),
-                  radial-gradient(circle at 82% 86%, rgba(132, 103, 213, 0.28), transparent 58%);
+      background: radial-gradient(circle at 18% 16%, rgba(129,106,214,0.28), transparent 58%),
+                  radial-gradient(circle at 82% 84%, rgba(138,110,220,0.24), transparent 60%);
       pointer-events: none;
     }
 
@@ -61,18 +58,19 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
-    .chart-tag {
+    .tag {
       display: inline-flex;
-      background: var(--purple-main);
+      align-items: center;
+      background: var(--purple);
       color: #fff;
-      padding: 8px 20px;
+      padding: 8px 22px;
       border-radius: 12px;
       font-weight: 700;
       font-size: 15px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       width: fit-content;
     }
@@ -81,7 +79,7 @@
       margin: 0;
       font-size: clamp(26px, 3vw, 34px);
       font-weight: 700;
-      color: var(--purple-main);
+      color: var(--purple);
     }
 
     .subtitle {
@@ -93,125 +91,60 @@
       font-weight: 600;
     }
 
-    .controls {
+    .chart-area {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 22px;
+      margin-top: 12px;
     }
 
-    .controls label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .toggle-group {
-      display: inline-flex;
-      gap: 10px;
-      background: rgba(255,255,255,0.42);
-      border-radius: 999px;
-      padding: 6px;
-      box-shadow: inset 0 2px 6px rgba(86, 60, 176, 0.16);
-    }
-
-    .toggle-group button {
-      border: none;
-      border-radius: 999px;
-      padding: 10px 18px;
-      background: transparent;
-      color: var(--purple-main);
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .toggle-group button.is-active {
-      background: var(--purple-main);
-      color: #fff;
-      box-shadow: 0 12px 32px rgba(86, 60, 176, 0.28);
-    }
-
-    .chart-box {
-      position: relative;
-      z-index: 1;
-      background: rgba(255,255,255,0.72);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    .chart-wrapper {
-      position: relative;
-      height: 880px;
-    }
-
-    .ratio-legend {
-      margin-top: 24px;
+    .chart-headings {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .ratio-card {
-      position: relative;
-      padding: 18px 20px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(198,186,255,0.55));
-      box-shadow: 0 18px 32px rgba(86, 60, 176, 0.18);
-      overflow: hidden;
-    }
-
-    .ratio-card::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: rgba(86, 60, 176, 0.12);
-      right: -40px;
-      top: -56px;
-    }
-
-    .ratio-card h3 {
-      margin: 0;
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--purple-main);
-    }
-
-    .ratio-card span {
-      display: block;
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .ratio-card p {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .legend {
-      margin-top: 26px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
+      grid-template-columns: 1fr 220px 120px;
       align-items: center;
-      color: var(--text-muted);
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .chart-headings span:nth-child(1) {
+      text-align: left;
+      padding-left: 12px;
+    }
+
+    .chart-headings span:nth-child(2) {
+      text-align: center;
+    }
+
+    .chart-headings span:nth-child(3) {
+      text-align: right;
+      padding-right: 16px;
+    }
+
+    .canvas-wrapper {
+      background: rgba(255,255,255,0.72);
+      border-radius: 28px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+      padding: 24px 24px 24px 16px;
+    }
+
+    #wealthChart {
+      width: 100%;
+      height: 940px;
+    }
+
+    .legend-strip {
+      margin-top: 20px;
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
     .legend-item {
@@ -220,121 +153,80 @@
       gap: 10px;
     }
 
-    .legend-dot {
-      width: 16px;
-      height: 16px;
+    .legend-swatch {
+      width: 18px;
+      height: 18px;
       border-radius: 4px;
     }
 
-    .insights {
-      margin-top: 34px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
-    .insight-card {
-      background: rgba(255,255,255,0.72);
-      border-radius: 24px;
-      padding: 20px 22px;
-      box-shadow: 0 12px 32px rgba(86, 60, 176, 0.12);
-    }
-
-    .insight-card h4 {
-      margin: 0 0 10px;
-      color: var(--purple-main);
-      font-size: 15px;
-      letter-spacing: 0.12em;
+    .source-banner {
+      margin-top: 36px;
+      background: var(--yellow);
+      border-radius: 999px;
+      padding: 14px 28px;
+      color: #432a04;
+      font-size: 14px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-    }
-
-    .insight-card p {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.55;
-      color: rgba(31, 24, 64, 0.82);
-    }
-
-    .source {
-      margin-top: 38px;
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(31, 24, 64, 0.55);
+      font-weight: 600;
+      width: fit-content;
     }
 
     @media (max-width: 960px) {
       body {
         padding: 24px 12px 40px;
       }
-      main.infographic {
-        padding: 40px 24px 52px;
+      main.sheet {
+        padding: 40px 28px 52px;
         border-radius: 32px;
       }
-      .chart-wrapper {
-        height: 720px;
+      #wealthChart {
+        height: 900px;
       }
-      .ratio-card h3 {
-        font-size: 26px;
+      .chart-headings {
+        grid-template-columns: 1fr 200px 100px;
       }
     }
 
     @media (max-width: 640px) {
-      .chart-wrapper {
-        height: 640px;
+      #wealthChart {
+        height: 880px;
+      }
+      .chart-headings {
+        grid-template-columns: 1fr 160px 90px;
+        font-size: 11px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="infographic">
+  <main class="sheet">
     <header>
-      <div class="chart-tag">Gambar 10</div>
+      <div class="tag">Gambar 10.</div>
       <h1>Perbandingan Rata-Rata Kekayaan Antara Elit dan Masyarakat Umum</h1>
-      <p class="subtitle">Data dalam juta rupiah (LHKPN 2025)</p>
+      <p class="subtitle">(dalam juta rupiah)</p>
     </header>
 
-    <div class="controls">
-      <label>Urutkan berdasarkan:</label>
-      <div class="toggle-group" role="group" aria-label="Pengurutan data">
-        <button class="is-active" data-sort="ratio">Rasio Tertinggi</button>
-        <button data-sort="elite">Kekayaan Elit</button>
-        <button data-sort="difference">Selisih Elit vs Publik</button>
-        <button data-sort="province">Nama Provinsi (A-Z)</button>
+    <section class="chart-area">
+      <div class="chart-headings">
+        <span>Rata-rata Kekayaan DPR &amp; DPD RI</span>
+        <span>Provinsi</span>
+        <span>Rasio</span>
       </div>
-    </div>
-
-    <section class="chart-box">
-      <div class="chart-wrapper">
-        <canvas id="wealthChart" aria-label="Perbandingan kekayaan rata-rata elit dan masyarakat per provinsi"></canvas>
+      <div class="canvas-wrapper">
+        <canvas id="wealthChart" aria-label="Diagram batang perbandingan kekayaan elit dan masyarakat per provinsi"></canvas>
       </div>
-      <div class="legend">
-        <span class="legend-item"><span class="legend-dot" style="background: linear-gradient(135deg, #6b3bd4, #5526b5);"></span> Rata-rata Kekayaan Anggota DPR & DPD (jt)</span>
-        <span class="legend-item"><span class="legend-dot" style="background: linear-gradient(135deg, #f8d270, #f6c454);"></span> Rata-rata Kekayaan Penduduk (jt)</span>
+      <div class="legend-strip">
+        <span class="legend-item"><span class="legend-swatch" style="background:#5b28b6;"></span>Rata-rata Kekayaan DPR &amp; DPD RI (dalam juta rupiah)</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#f6c454;"></span>Rata-rata Kekayaan Penduduk (dalam juta rupiah)</span>
       </div>
-      <div class="ratio-legend" id="ratioHighlights"></div>
     </section>
 
-    <div class="insights">
-      <article class="insight-card">
-        <h4>Jurang Kekayaan Ekstrem</h4>
-        <p>Gorontalo memimpin dengan rasio 810×: legislatornya rata-rata menguasai Rp222.254 juta, sedangkan warga hanya Rp274 juta. Empat provinsi lain juga menunjukkan gap lebih dari 300×.</p>
-      </article>
-      <article class="insight-card">
-        <h4>Provinsi Besar Pun Rentan</h4>
-        <p>DKI Jakarta, Jawa Timur, dan Jawa Tengah menampilkan jurang kekayaan besar. Representasi publik di pusat ekonomi masih didominasi elite beraset ratusan miliar.</p>
-      </article>
-      <article class="insight-card">
-        <h4>Rasio Rendah Bukan Tanpa Masalah</h4>
-        <p>Wilayah dengan rasio di bawah 50× (misalnya Papua Selatan dan Sulawesi Barat) tetap memperlihatkan gap signifikan: elite memiliki kekayaan puluhan kali lipat warga di daerah masing-masing.</p>
-      </article>
-    </div>
-
-    <p class="source">Sumber: Laporan Harta Kekayaan Pejabat Negara 2025, diolah CELIOS</p>
+    <div class="source-banner">Sumber: Laporan Harta Kekayaan Pejabat Negara 2025, diolah peneliti</div>
   </main>
 
   <script defer>
-    const rawData = [
+    const rows = [
       { province: 'Gorontalo', elite: 222254, public: 274, ratio: 810 },
       { province: 'DI Yogyakarta', elite: 113120, public: 275, ratio: 412 },
       { province: 'Nusa Tenggara Timur', elite: 109157, public: 276, ratio: 395 },
@@ -369,210 +261,143 @@
       { province: 'Papua Pegunungan', elite: 16939, public: 465, ratio: 36 },
       { province: 'Kepulauan Riau', elite: 16464, public: 458, ratio: 36 },
       { province: 'Papua', elite: 12805, public: 428, ratio: 30 }
-    ].map((row) => ({
-      ...row,
-      difference: row.elite - row.public
-    }));
+    ];
 
-    const currencyFormatter = new Intl.NumberFormat('id-ID');
-    const ratioFormatter = new Intl.NumberFormat('id-ID');
+    const formatter = new Intl.NumberFormat('id-ID');
+    const labels = rows.map((row) => row.province);
+    const eliteMax = Math.max(...rows.map((row) => row.elite));
+    const publicMax = Math.max(...rows.map((row) => row.public));
+    const xMin = -eliteMax * 1.12;
+    const xMax = publicMax * 1.25;
+    const ratioGuideValue = publicMax * 1.12;
 
-    const tooltipFormatter = (value) => `Rp ${currencyFormatter.format(value)} juta`;
-
-    let activeSort = 'ratio';
-    let wealthChart;
-
-    const sorters = {
-      ratio: (a, b) => b.ratio - a.ratio,
-      elite: (a, b) => b.elite - a.elite,
-      difference: (a, b) => b.difference - a.difference,
-      province: (a, b) => a.province.localeCompare(b.province)
-    };
-
-    const getSortedData = (key) => {
-      const sorter = sorters[key] || sorters.ratio;
-      return [...rawData].sort(sorter);
-    };
-
-    const createGradient = (ctx, colorStops) => {
-      const gradient = ctx.createLinearGradient(0, 0, 600, 0);
-      colorStops.forEach(([offset, color]) => gradient.addColorStop(offset, color));
-      return gradient;
-    };
+    const ctx = document.getElementById('wealthChart').getContext('2d');
 
     const labelPlugin = {
       id: 'valueLabels',
       afterDatasetsDraw(chart) {
-        const {
-          ctx,
-          data,
-          scales: { x, y }
-        } = chart;
-
+        const eliteMeta = chart.getDatasetMeta(0);
+        const publicMeta = chart.getDatasetMeta(1);
+        const xScale = chart.scales.x;
+        const ratioX = xScale.getPixelForValue(ratioGuideValue);
+        const ctx = chart.ctx;
         ctx.save();
-        ctx.font = '600 12px "Plus Jakarta Sans"';
         ctx.textBaseline = 'middle';
 
-        data.datasets.forEach((dataset, datasetIndex) => {
-          const meta = chart.getDatasetMeta(datasetIndex);
-          if (!meta.hidden) {
-            meta.data.forEach((element, index) => {
-              const value = dataset.data[index];
-              const formatted = currencyFormatter.format(Math.round(value));
-              const padding = datasetIndex === 0 ? -12 : 12;
-              const align = datasetIndex === 0 ? 'right' : 'left';
+        rows.forEach((row, index) => {
+          const eliteElement = eliteMeta.data[index];
+          const publicElement = publicMeta.data[index];
+          if (!eliteElement || !publicElement) return;
 
-              ctx.fillStyle = datasetIndex === 0 ? 'rgba(255,255,255,0.9)' : 'rgba(86,60,176,0.9)';
-              ctx.textAlign = align;
-              ctx.fillText(`Rp ${formatted}`, element.x + padding, element.y);
-            });
-          }
+          ctx.font = '600 13px "Plus Jakarta Sans"';
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText(Rp , eliteElement.x - 14, eliteElement.y);
+
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#5526b5';
+          ctx.fillText(Rp , publicElement.x + 14, publicElement.y);
+
+          ctx.font = '700 12px "Plus Jakarta Sans"';
+          ctx.fillStyle = '#5526b5';
+          ctx.textAlign = 'left';
+          ctx.fillText(row.ratio.toLocaleString('id-ID'), ratioX, publicElement.y);
         });
+
         ctx.restore();
       }
     };
 
-    const renderHighlights = (sorted) => {
-      const container = document.getElementById('ratioHighlights');
-      const topThree = sorted.slice(0, 3);
-      container.innerHTML = topThree
-        .map((item, idx) => `
-          <article class="ratio-card">
-            <span>Rasio #${idx + 1}</span>
-            <h3>${ratioFormatter.format(item.ratio)}×</h3>
-            <p>${item.province}<br><strong>Elit:</strong> ${tooltipFormatter(item.elite)} · <strong>Publik:</strong> ${tooltipFormatter(item.public)}</p>
-          </article>
-        `)
-        .join('');
-    };
-
-    const renderChart = (sortKey = 'ratio') => {
-      const sorted = getSortedData(sortKey);
-      renderHighlights(sorted);
-
-      const ctx = document.getElementById('wealthChart').getContext('2d');
-
-      const eliteGradient = createGradient(ctx, [
-        [0, '#6b3bd4'],
-        [1, '#452199']
-      ]);
-      const publicGradient = createGradient(ctx, [
-        [0, '#f8d270'],
-        [1, '#f6c454']
-      ]);
-
-      const datasetElite = sorted.map((row) => row.elite);
-      const datasetPublic = sorted.map((row) => row.public);
-      const labels = sorted.map((row) => `${row.province}`);
-
-      if (wealthChart) {
-        wealthChart.destroy();
-      }
-
-      wealthChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Kekayaan Elite DPR & DPD',
-              data: datasetElite,
-              backgroundColor: eliteGradient,
-              borderRadius: 14,
-              barThickness: 20,
-              borderSkipped: false
-            },
-            {
-              label: 'Kekayaan Masyarakat Umum',
-              data: datasetPublic,
-              backgroundColor: publicGradient,
-              borderRadius: 14,
-              barThickness: 20,
-              borderSkipped: false
-            }
-          ]
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Rata-rata Kekayaan DPR & DPD RI',
+            data: rows.map((row) => -row.elite),
+            backgroundColor: '#5b28b6',
+            borderRadius: 12,
+            borderSkipped: false,
+            barThickness: 18,
+            hoverBackgroundColor: '#4c219b'
+          },
+          {
+            label: 'Rata-rata Kekayaan Penduduk',
+            data: rows.map((row) => row.public),
+            backgroundColor: '#f6c454',
+            borderRadius: 12,
+            borderSkipped: false,
+            barThickness: 18,
+            hoverBackgroundColor: '#e1af3f'
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        maintainAspectRatio: false,
+        responsive: true,
+        layout: {
+          padding: {
+            top: 12,
+            bottom: 12,
+            left: 16,
+            right: 150
+          }
         },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          layout: {
-            padding: {
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: 16
-            }
-          },
-          scales: {
-            x: {
-              stacked: false,
-              grid: {
-                color: 'rgba(86, 60, 176, 0.12)',
-                drawBorder: false
-              },
-              ticks: {
-                font: {
-                  family: 'Plus Jakarta Sans',
-                  weight: '600'
-                },
-                color: 'rgba(31, 24, 64, 0.62)',
-                callback: (value) => `Rp ${currencyFormatter.format(value)}`
-              }
+        scales: {
+          x: {
+            min: xMin,
+            max: xMax,
+            grid: {
+              color: 'rgba(86, 60, 176, 0.1)',
+              lineWidth: 1,
+              drawBorder: false,
+              zeroLineColor: '#5526b5'
             },
-            y: {
-              stacked: false,
-              grid: {
-                display: false
-              },
-              ticks: {
-                font: {
-                  family: 'Plus Jakarta Sans',
-                  weight: '600'
-                },
-                color: 'rgba(31, 24, 64, 0.86)'
-              }
-            }
-          },
-          plugins: {
-            legend: {
+            ticks: {
               display: false
             },
-            tooltip: {
-              backgroundColor: '#1f1840',
-              cornerRadius: 12,
-              padding: 14,
-              displayColors: true,
-              usePointStyle: true,
-              callbacks: {
-                label: (context) => {
-                  const base = tooltipFormatter(context.raw);
-                  if (context.datasetIndex === 0) {
-                    const ratio = sorted[context.dataIndex].ratio;
-                    return `${context.dataset.label}: ${base} (rasio ${ratioFormatter.format(ratio)}×)`;
-                  }
-                  return `${context.dataset.label}: ${base}`;
-                }
-              }
+            border: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              font: {
+                family: 'Plus Jakarta Sans',
+                weight: '600',
+                size: 13
+              },
+              color: 'rgba(31, 24, 64, 0.85)',
+              padding: 10
             }
           }
         },
-        plugins: [labelPlugin]
-      });
-    };
-
-    document.querySelectorAll('.toggle-group button').forEach((button) => {
-      button.addEventListener('click', () => {
-        const sortKey = button.dataset.sort;
-        if (sortKey === activeSort) return;
-        activeSort = sortKey;
-        document.querySelectorAll('.toggle-group button').forEach((btn) => btn.classList.remove('is-active'));
-        button.classList.add('is-active');
-        renderChart(sortKey);
-      });
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#1f1840',
+            borderRadius: 12,
+            padding: 14,
+            displayColors: true,
+            callbacks: {
+              label(context) {
+                const value = Math.abs(context.raw);
+                const prefix = context.datasetIndex === 0 ? 'Elit' : 'Penduduk';
+                return ${prefix}: Rp  juta;
+              }
+            }
+          }
+        }
+      },
+      plugins: [labelPlugin]
     });
-
-    renderChart('ratio');
   </script>
 </body>
 </html>

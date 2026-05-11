@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gambar 10 — Perbandingan Kekayaan Elite vs Publik (Plotly)</title>
+  <title>Gambar 10  Perbandingan Kekayaan Elite vs Publik (Plotly)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.plot.ly/plotly-2.30.0.min.js" defer></script>
   <style>
     :root {
-      --purple-main: #5526b5;
-      --purple-soft: rgba(86, 60, 176, 0.18);
-      --yellow-main: #f6c454;
-      --yellow-soft: rgba(246, 196, 84, 0.22);
-      --text-primary: #1f1840;
-      --text-muted: rgba(31, 24, 64, 0.64);
+      --purple: #5526b5;
+      --purple-soft: rgba(86, 60, 176, 0.16);
+      --yellow: #f6c454;
+      --sheet-bg: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(223,216,255,0.65));
+      --text-main: #1f1840;
+      --text-muted: rgba(31, 24, 64, 0.62);
     }
 
     * {
@@ -25,29 +25,29 @@
     body {
       margin: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #f6f4ff;
+      background: #f1efff;
+      padding: 32px 16px 48px;
       display: flex;
       justify-content: center;
-      padding: 32px 16px 48px;
-      color: var(--text-primary);
+      color: var(--text-main);
     }
 
-    main {
+    main.sheet {
       position: relative;
-      width: min(1220px, 100%);
-      background: linear-gradient(130deg, rgba(255,255,255,0.94), rgba(221,212,255,0.62));
+      width: min(1200px, 100%);
+      background: var(--sheet-bg);
       border-radius: 40px;
-      padding: 48px 54px 60px;
-      box-shadow: 0 28px 72px rgba(60, 34, 115, 0.18);
+      padding: 48px 56px 60px;
+      box-shadow: 0 32px 68px rgba(60, 34, 115, 0.18);
       overflow: hidden;
     }
 
-    main::before {
+    main.sheet::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 12% 18%, rgba(127, 105, 211, 0.3), transparent 62%),
-                  radial-gradient(circle at 88% 78%, rgba(147, 118, 224, 0.28), transparent 60%);
+      background: radial-gradient(circle at 18% 14%, rgba(129,106,214,0.28), transparent 58%),
+                  radial-gradient(circle at 84% 84%, rgba(138,110,220,0.24), transparent 60%);
       pointer-events: none;
     }
 
@@ -56,187 +56,168 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 26px;
     }
 
     .tag {
       display: inline-flex;
-      background: var(--purple-main);
+      align-items: center;
+      background: var(--purple);
       color: #fff;
-      padding: 8px 20px;
+      padding: 8px 22px;
       border-radius: 12px;
       font-weight: 700;
       font-size: 15px;
       letter-spacing: 0.1em;
-      width: fit-content;
       text-transform: uppercase;
+      width: fit-content;
     }
 
     h1 {
       margin: 0;
       font-size: clamp(26px, 3vw, 34px);
       font-weight: 700;
-      color: var(--purple-main);
+      color: var(--purple);
     }
 
     .subtitle {
       margin: 0;
       font-size: 14px;
-      text-transform: uppercase;
       letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    .controls {
+    .chart-headings {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 1fr 220px 120px;
       gap: 16px;
-      align-items: center;
-      margin-bottom: 22px;
-    }
-
-    .controls label {
-      font-size: 14px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
       font-weight: 600;
       color: var(--text-muted);
     }
 
-    .controls .toggle {
-      background: rgba(255,255,255,0.55);
-      border-radius: 999px;
-      padding: 6px;
-      display: inline-flex;
-      gap: 8px;
-      box-shadow: inset 0 2px 6px rgba(86, 60, 176, 0.16);
+    .chart-headings span:nth-child(1) {
+      text-align: left;
+      padding-left: 12px;
     }
 
-    .controls button {
-      border: none;
-      border-radius: 999px;
-      padding: 9px 18px;
-      background: transparent;
-      color: var(--purple-main);
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: all 0.22s ease;
+    .chart-headings span:nth-child(2) {
+      text-align: center;
     }
 
-    .controls button.is-active {
-      background: var(--purple-main);
-      color: #fff;
-      box-shadow: 0 12px 32px rgba(86, 60, 176, 0.28);
+    .chart-headings span:nth-child(3) {
+      text-align: right;
+      padding-right: 18px;
     }
 
     #plotlyChart {
       position: relative;
       z-index: 1;
-      height: 900px;
-      border-radius: 34px;
-      background: rgba(255,255,255,0.7);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+      height: 940px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.72);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+      padding: 12px;
     }
 
-    .detail-panel {
-      position: relative;
-      z-index: 1;
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .detail-card {
-      border-radius: 24px;
-      padding: 20px 22px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(186, 171, 255, 0.4));
-      box-shadow: 0 18px 32px rgba(86, 60, 176, 0.18);
-    }
-
-    .detail-card h3 {
-      margin: 0 0 6px;
-      font-size: 30px;
-      color: var(--purple-main);
-    }
-
-    .detail-card span {
-      display: block;
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .detail-card p {
-      margin: 0;
-      font-size: 15px;
-      color: rgba(31, 24, 64, 0.82);
-      line-height: 1.5;
-    }
-
-    .source {
-      margin-top: 34px;
-      position: relative;
-      z-index: 1;
+    .legend-strip {
+      margin-top: 20px;
+      display: flex;
+      gap: 26px;
+      align-items: center;
       font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(31,24,64,0.58);
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .legend-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+    }
+
+    .source-banner {
+      margin-top: 36px;
+      background: var(--yellow);
+      border-radius: 999px;
+      padding: 14px 28px;
+      color: #432a04;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      width: fit-content;
     }
 
     @media (max-width: 960px) {
       body {
         padding: 24px 12px 40px;
       }
-      main {
-        padding: 38px 22px 48px;
+      main.sheet {
+        padding: 40px 28px 52px;
+        border-radius: 32px;
       }
       #plotlyChart {
-        height: 720px;
+        height: 900px;
+      }
+      .chart-headings {
+        grid-template-columns: 1fr 200px 110px;
       }
     }
 
     @media (max-width: 640px) {
       #plotlyChart {
-        height: 640px;
+        height: 880px;
+      }
+      .chart-headings {
+        grid-template-columns: 1fr 160px 90px;
+        font-size: 11px;
       }
     }
   </style>
 </head>
 <body>
-  <main>
+  <main class="sheet">
     <header>
-      <div class="tag">Gambar 10</div>
+      <div class="tag">Gambar 10.</div>
       <h1>Perbandingan Rata-Rata Kekayaan Antara Elit dan Masyarakat Umum</h1>
-      <p class="subtitle">Versi Plotly · Data LHKPN 2025 (dalam juta rupiah)</p>
+      <p class="subtitle">(dalam juta rupiah)</p>
     </header>
 
-    <div class="controls">
-      <label>Urutkan:</label>
-      <div class="toggle" role="group" aria-label="Urutkan data">
-        <button class="is-active" data-sort="ratio">Rasio Terbesar</button>
-        <button data-sort="elite">Kekayaan Elit</button>
-        <button data-sort="difference">Selisih</button>
-        <button data-sort="province">Alfabetis</button>
-      </div>
+    <div class="chart-headings">
+      <span>Rata-rata Kekayaan DPR &amp; DPD RI</span>
+      <span>Provinsi</span>
+      <span>Rasio</span>
     </div>
 
-    <div id="plotlyChart" role="img" aria-label="Grafik Plotly perbandingan kekayaan elit dan masyarakat"></div>
+    <div id="plotlyChart" role="img" aria-label="Grafik Plotly perbandingan kekayaan elit dengan masyarakat per provinsi"></div>
 
-    <section class="detail-panel" id="detailCards"></section>
+    <div class="legend-strip">
+      <span class="legend-item"><span class="legend-swatch" style="background:#5b28b6;"></span>Rata-rata Kekayaan DPR &amp; DPD RI (dalam juta rupiah)</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:#f6c454;"></span>Rata-rata Kekayaan Penduduk (dalam juta rupiah)</span>
+    </div>
 
-    <p class="source">Sumber: Laporan Harta Kekayaan Pejabat Negara 2025, diolah CELIOS</p>
+    <div class="source-banner">Sumber: Laporan Harta Kekayaan Pejabat Negara 2025, diolah peneliti</div>
   </main>
 
   <script defer>
-    const baseData = [
+    const rows = [
       { province: 'Gorontalo', elite: 222254, public: 274, ratio: 810 },
       { province: 'DI Yogyakarta', elite: 113120, public: 275, ratio: 412 },
       { province: 'Nusa Tenggara Timur', elite: 109157, public: 276, ratio: 395 },
@@ -271,161 +252,113 @@
       { province: 'Papua Pegunungan', elite: 16939, public: 465, ratio: 36 },
       { province: 'Kepulauan Riau', elite: 16464, public: 458, ratio: 36 },
       { province: 'Papua', elite: 12805, public: 428, ratio: 30 }
-    ].map((row) => ({
-      ...row,
-      difference: row.elite - row.public
+    ];
+
+    const formatter = new Intl.NumberFormat('id-ID');
+    const labels = rows.map((row) => row.province);
+    const eliteMax = Math.max(...rows.map((row) => row.elite));
+    const publicMax = Math.max(...rows.map((row) => row.public));
+    const xMin = -eliteMax * 1.12;
+    const xMax = publicMax * 1.25;
+    const ratioGuideValue = publicMax * 1.12;
+
+    const eliteTrace = {
+      type: 'bar',
+      orientation: 'h',
+      name: 'Rata-rata Kekayaan DPR & DPD RI',
+      x: rows.map((row) => -row.elite),
+      y: labels,
+      marker: {
+        color: '#5b28b6'
+      },
+      text: rows.map((row) => Rp ),
+      textposition: 'inside',
+      insidetextanchor: 'end',
+      textfont: {
+        color: '#ffffff',
+        size: 12,
+        family: 'Plus Jakarta Sans'
+      },
+      hovertemplate: '<b>%{y}</b><br>Elit: Rp %{customdata:,.0f} juta<extra></extra>',
+      customdata: rows.map((row) => row.elite)
+    };
+
+    const publicTrace = {
+      type: 'bar',
+      orientation: 'h',
+      name: 'Rata-rata Kekayaan Penduduk',
+      x: rows.map((row) => row.public),
+      y: labels,
+      marker: {
+        color: '#f6c454'
+      },
+      text: rows.map((row) => Rp ),
+      textposition: 'inside',
+      insidetextanchor: 'start',
+      textfont: {
+        color: '#5526b5',
+        size: 12,
+        family: 'Plus Jakarta Sans'
+      },
+      hovertemplate: '<b>%{y}</b><br>Publik: Rp %{customdata:,.0f} juta<extra></extra>',
+      customdata: rows.map((row) => row.public)
+    };
+
+    const annotations = rows.map((row, index) => ({
+      x: ratioGuideValue,
+      y: row.province,
+      xanchor: 'left',
+      yanchor: 'middle',
+      text: row.ratio.toLocaleString('id-ID'),
+      font: {
+        family: 'Plus Jakarta Sans',
+        size: 12,
+        color: '#5526b5',
+        weight: 700
+      },
+      showarrow: false
     }));
 
-    const currency = new Intl.NumberFormat('id-ID');
-
-    const sorters = {
-      ratio: (a, b) => b.ratio - a.ratio,
-      elite: (a, b) => b.elite - a.elite,
-      difference: (a, b) => b.difference - a.difference,
-      province: (a, b) => a.province.localeCompare(b.province)
-    };
-
-    let activeSort = 'ratio';
-
-    const getSorted = (key) => [...baseData].sort(sorters[key] || sorters.ratio);
-
-    const buildTrace = (sorted) => {
-      const provinces = sorted.map((row) => row.province);
-      const eliteBar = {
-        type: 'bar',
-        orientation: 'h',
-        name: 'Kekayaan Elit DPR & DPD',
-        x: sorted.map((row) => row.elite),
-        y: provinces,
-        marker: {
-          color: '#6b3bd4',
-          line: { width: 0 },
-          opacity: 0.9
-        },
-        hovertemplate: '<b>%{y}</b><br>Elit: Rp %{x:,.0f} juta<extra></extra>'
-      };
-
-      const publicBar = {
-        type: 'bar',
-        orientation: 'h',
-        name: 'Kekayaan Masyarakat Umum',
-        x: sorted.map((row) => row.public),
-        y: provinces,
-        marker: {
-          color: '#f6c454',
-          line: { width: 0 },
-          opacity: 0.92
-        },
-        hovertemplate: '<b>%{y}</b><br>Publik: Rp %{x:,.0f} juta<extra></extra>'
-      };
-
-      return [eliteBar, publicBar];
-    };
-
-    const renderDetailCards = (sorted) => {
-      const container = document.getElementById('detailCards');
-      const top = sorted.slice(0, 3);
-      container.innerHTML = top
-        .map((item, idx) => `
-          <article class="detail-card">
-            <span>Rasio #${idx + 1}</span>
-            <h3>${item.ratio.toLocaleString('id-ID')}×</h3>
-            <p>${item.province}<br><strong>Elit:</strong> Rp ${currency.format(item.elite)} juta<br><strong>Publik:</strong> Rp ${currency.format(item.public)} juta</p>
-          </article>
-        `)
-        .join('');
-    };
-
-    const render = (sortKey = 'ratio') => {
-      const sorted = getSorted(sortKey);
-      renderDetailCards(sorted);
-
-      const traces = buildTrace(sorted);
-
-      const layout = {
-        barmode: 'group',
-        bargap: 0.18,
-        margin: { l: 220, r: 20, t: 10, b: 40 },
-        height: 900,
-        paper_bgcolor: 'rgba(0,0,0,0)',
-        plot_bgcolor: 'rgba(0,0,0,0)',
-        font: {
+    const layout = {
+      barmode: 'overlay',
+      margin: { l: 240, r: 180, t: 20, b: 40 },
+      height: 940,
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      font: {
+        family: 'Plus Jakarta Sans',
+        color: 'rgba(31, 24, 64, 0.85)'
+      },
+      xaxis: {
+        range: [xMin, xMax],
+        showgrid: true,
+        gridcolor: 'rgba(86, 60, 176, 0.1)',
+        zeroline: true,
+        zerolinecolor: '#5526b5',
+        showticklabels: false,
+        fixedrange: true
+      },
+      yaxis: {
+        showgrid: false,
+        automargin: true,
+        tickfont: {
           family: 'Plus Jakarta Sans',
-          color: 'rgba(31, 24, 64, 0.86)'
+          size: 13,
+          color: 'rgba(31,24,64,0.85)'
         },
-        xaxis: {
-          showgrid: true,
-          gridcolor: 'rgba(86, 60, 176, 0.12)',
-          zeroline: false,
-          tickprefix: 'Rp ',
-          tickformat: ',.0f',
-          title: {
-            text: 'Juta rupiah',
-            font: { size: 12, color: 'rgba(31, 24, 64, 0.6)' }
-          }
-        },
-        yaxis: {
-          automargin: true,
-          showgrid: false
-        },
-        legend: {
-          orientation: 'h',
-          y: -0.16,
-          x: 0,
-          font: { size: 12 },
-          traceorder: 'normal'
-        },
-        hoverlabel: {
-          bgcolor: '#1f1840',
-          bordercolor: '#1f1840',
-          font: { family: 'Plus Jakarta Sans', color: '#fff' }
-        },
-        shapes: sorted.map((row, idx) => ({
-          type: 'line',
-          x0: row.public,
-          y0: idx - 0.4,
-          x1: row.public,
-          y1: idx + 0.4,
-          line: {
-            dash: 'dot',
-            width: 1.2,
-            color: 'rgba(86,60,176,0.45)'
-          }
-        })),
-        annotations: sorted.map((row, idx) => ({
-          x: row.elite + 2000,
-          y: row.province,
-          text: `${row.ratio.toLocaleString('id-ID')}×`,
-          showarrow: false,
-          font: {
-            color: 'rgba(31, 24, 64, 0.72)',
-            size: 12,
-            weight: 600
-          }
-        }))
-      };
-
-      const config = {
-        responsive: true,
-        displaylogo: false,
-        modeBarButtonsToRemove: ['lasso2d', 'select2d', 'autoScale2d']
-      };
-
-      Plotly.react('plotlyChart', traces, layout, config);
+        fixedrange: true
+      },
+      showlegend: false,
+      annotations
     };
 
-    document.querySelectorAll('.controls button').forEach((button) => {
-      button.addEventListener('click', () => {
-        const sortKey = button.dataset.sort;
-        if (sortKey === activeSort) return;
-        activeSort = sortKey;
-        document.querySelectorAll('.controls button').forEach((btn) => btn.classList.remove('is-active'));
-        button.classList.add('is-active');
-        render(sortKey);
-      });
-    });
+    const config = {
+      responsive: true,
+      displaylogo: false,
+      modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'select2d', 'autoScale2d', 'resetScale2d']
+    };
 
-    render('ratio');
+    Plotly.newPlot('plotlyChart', [eliteTrace, publicTrace], layout, config);
   </script>
 </body>
 </html>
