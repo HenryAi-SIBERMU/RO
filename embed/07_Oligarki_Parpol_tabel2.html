@@ -290,16 +290,17 @@
     .richest {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 18px 26px;
+      justify-content: flex-end;
+      gap: 18px;
+      padding: 18px 30px 18px 36px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.14);
       position: relative;
       z-index: 1;
       backdrop-filter: blur(4px);
       width: 100%;
-      min-width: 240px;
-      justify-content: space-between;
+      min-width: 260px;
+      text-align: right;
     }
 
     .avatar {
@@ -320,6 +321,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      align-items: flex-end;
     }
 
     .richest-name {
