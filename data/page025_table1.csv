@@ -1,31 +1,39 @@
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
+province,avg_wealth_elite,avg_wealth_public,ratio
+Gorontalo,222254,274,810
+DI Yogyakarta,113120,275,412
+Nusa Tenggara Timur,109157,276,395
+Jawa Timur,93631,264,355
+Papua Barat Daya,111630,362,309
+Bali,97050,348,279
+Jawa Barat,89931,331,272
+Papua Tengah,127690,492,260
+Sulawesi Utara,76330,326,234
+Jawa Tengah,51698,232,222
+Sumatera Utara,55675,261,213
+DKI Jakarta,115431,548,210
+Bangka Belitung,62940,311,202
+Sulawesi Tenggara,60940,316,193
+Sulawesi Selatan,53018,302,176
+Sumatera Barat,42196,271,156
+Banten,52486,384,137
+Kalimantan Barat,38644,283,137
+Lampung,33561,254,132
+Jambi,39553,299,132
+Kalimantan Timur,54534,418,130
+Sulawesi Tengah,38093,300,127
+Maluku,37860,326,116
+Aceh,27329,270,101
+Nusa Tenggara Barat,21173,211,100
+Kalimantan Tengah,31373,330,95
+Kalimantan Selatan,27597,303,91
+Kalimantan Utara,27047,336,80
+Bengkulu,23085,289,80
+Sumatera Selatan,22386,296,76
+Maluku Utara,28581,384,74
+Papua Selatan,20452,415,49
+Sulawesi Barat,13534,287,47
+Papua Barat,14926,362,41
+Riau,11871,317,37
+Papua Pegunungan,16939,465,36
+Kepulauan Riau,16464,458,36
+Papua,12805,428,30

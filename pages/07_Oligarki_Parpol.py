@@ -11,7 +11,7 @@ apply_embed_mode()
 render_sidebar()
 
 _G9_embed = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar9.html"
-_G10_chartjs = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar10_chartjs.html"
+_G10_embed = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar10.html"
 _G10_plotly = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar10_plotly.html"
 _T2_embed = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_tabel2.html"
 
@@ -30,24 +30,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 9"):
 chart_header("Perbandingan Rata-Rata Kekayaan Elite vs Masyarakat Umum", "Gambar 10 — Hal. 25")
 tab_chartjs, tab_plotly = st.tabs(["Versi Chart.js", "Versi Plotly"])
 with tab_chartjs:
-    components.html(_G10_chartjs.read_text(encoding="utf-8"), height=1180, scrolling=True)
+    components.html(_G10_embed.read_text(encoding="utf-8"), height=1620, scrolling=True)
 with tab_plotly:
-    components.html(_G10_plotly.read_text(encoding="utf-8"), height=1200, scrolling=True)
+    components.html(_G10_plotly.read_text(encoding="utf-8"), height=1680, scrolling=True)
 chart_footer("LHKPN KPK (2025), diolah CELIOS")
 with st.expander("🔗 Kode Embed WordPress — Gambar 10 (Chart.js)"):
-    st.code("""<!-- Gambar 10: Kekayaan Elit vs Publik (Chart.js) -->
+    st.code("""<!-- Gambar 10: Kekayaan Elite vs Masyarakat — Chart.js -->
 <iframe
-  src="https://henryai-sibermu.github.io/RO/embed/07_Oligarki_Parpol_gambar10_chartjs.html"
-  width="100%" height="1180" frameborder="0"
-  style="border-radius:32px; background:#f6f4ff;"
+  src="https://henryai-sibermu.github.io/RO/embed/07_Oligarki_Parpol_gambar10.html"
+  width="100%" height="1620" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""", language="html")
 with st.expander("🔗 Kode Embed WordPress — Gambar 10 (Plotly)"):
-    st.code("""<!-- Gambar 10: Kekayaan Elit vs Publik (Plotly) -->
+    st.code("""<!-- Gambar 10: Kekayaan Elite vs Masyarakat — Plotly -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/07_Oligarki_Parpol_gambar10_plotly.html"
-  width="100%" height="1200" frameborder="0"
-  style="border-radius:32px; background:#f6f4ff;"
+  width="100%" height="1680" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""", language="html")
 
