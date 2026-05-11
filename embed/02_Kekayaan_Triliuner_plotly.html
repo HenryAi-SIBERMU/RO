@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gambar 3 — Total Kekayaan 50 Triliuner (Plotly)</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-surface: #ffffff;
+      --bg-accent: #f0ebff;
+      --purple-main: #4a2a85;
+      --purple-dark: #2f185f;
+      --purple-deep: #210f46;
+      --yellow-main: #f6c948;
+      --text-main: #241f3b;
+      --text-muted: rgba(36, 31, 59, 0.7);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8f5ff 0%, #f1edff 55%, #e7e2ff 100%);
+      color: var(--text-main);
+      padding: 48px 24px 64px;
+      display: flex;
+      justify-content: center;
+    }
+    main {
+      width: min(960px, 100%);
+      background: var(--bg-surface);
+      border-radius: 32px;
+      position: relative;
+      padding: 52px 60px 64px;
+      box-shadow: 0 32px 70px rgba(41, 19, 87, 0.12);
+      overflow: hidden;
+    }
+    main::before,
+    main::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 128px;
+      height: 320px;
+      background: var(--bg-accent);
+      border-top-right-radius: 56px;
+      border-bottom-right-radius: 56px;
+      opacity: 0.8;
+      z-index: 0;
+    }
+    main::before { top: -60px; }
+    main::after { bottom: -160px; opacity: 0.6; }
+    header { position: relative; z-index: 2; }
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .chart-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 22px;
+      border-radius: 10px;
+      background: var(--purple-main);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 800;
+      color: var(--purple-dark);
+    }
+    .subtitle {
+      margin: 20px 0 0;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .chart-wrapper {
+      position: relative;
+      z-index: 2;
+      margin-top: 36px;
+      padding-bottom: 20px;
+    }
+    #plot {
+      width: 100%;
+      height: 420px;
+      border-radius: 24px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .legend-item { display: flex; align-items: center; gap: 10px; }
+    .legend-dot { width: 16px; height: 16px; border-radius: 50%; }
+    .legend-dot.purple { background: var(--purple-main); }
+    .legend-dot.deep { background: var(--purple-deep); }
+    .legend-line { width: 32px; height: 4px; border-radius: 999px; background: var(--yellow-main); }
+    .source-badge {
+      position: relative;
+      z-index: 2;
+      margin-top: 32px;
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: rgba(246, 201, 72, 0.18);
+      color: var(--purple-dark);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 768px) {
+      body { padding: 32px 16px 48px; }
+      main { padding: 44px 32px 56px; }
+      #plot { height: 360px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="chart-header">
+        <span class="chart-tag">Gambar 3.</span>
+        <h1>Total Kekayaan 50 Triliuner di Indonesia (2019–2026)</h1>
+      </div>
+      <p class="subtitle">Bar: nominal dalam triliun rupiah — garis: proporsi sektor ekstraktif</p>
+    </header>
+
+    <section class="chart-wrapper">
+      <div id="plot" role="img" aria-label="Kekayaan total, sektor ekstraktif, dan proporsinya"></div>
+    </section>
+
+    <section class="legend">
+      <div class="legend-item">
+        <span class="legend-dot purple"></span>
+        <span>Total Kekayaan 50 Triliuner</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot deep"></span>
+        <span>Kekayaan dari Sektor Ekstraktif</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line"></span>
+        <span>Proporsi Sektor Ekstraktif</span>
+      </div>
+    </section>
+
+    <div class="source-badge">Sumber: Forbes 50 Orang Terkaya Indonesia (2026), diolah CELIOS</div>
+  </main>
+
+  <script>
+    const tahun = ["2019","2020","2021","2022","2023","2024","2025","2026"];
+    const totalKekayaan = [2508, 2479, 2746, 3016, 3501, 4571, 4405, 4651];
+    const sektorEkstraktif = [986, 1026, 1212, 1388, 1720, 2611, 2514, 2690];
+    const persenEkstraktif = [39.3, 41.4, 44.1, 46.0, 49.1, 57.1, 57.1, 57.8];
+
+    function fmtRp(v) {
+      return `Rp${v.toLocaleString('id-ID')} T`;
+    }
+
+    const traceTotal = {
+      type: 'bar',
+      name: 'Total Kekayaan 50 Triliuner',
+      x: tahun,
+      y: totalKekayaan,
+      text: totalKekayaan.map(fmtRp),
+      textposition: 'outside',
+      textfont: { family: 'Inter', size: 12, color: 'rgba(36,31,59,0.86)', weight: '600' },
+      marker: {
+        color: '#6951bf',
+        line: { width: 0 }
+      },
+      offsetgroup: 'total',
+      width: 0.45,
+      hovertemplate: '<b>%{x}</b><br>Total: <b>%{text}</b><extra></extra>'
+    };
+
+    const traceEkstraktif = {
+      type: 'bar',
+      name: 'Kekayaan Sektor Ekstraktif',
+      x: tahun,
+      y: sektorEkstraktif,
+      text: sektorEkstraktif.map(fmtRp),
+      textposition: 'inside',
+      textfont: { family: 'Inter', size: 11, color: '#ffffff', weight: '600' },
+      marker: {
+        color: '#2f185f'
+      },
+      offsetgroup: 'ekstraktif',
+      width: 0.26,
+      hovertemplate: '<b>%{x}</b><br>Sektor Ekstraktif: <b>%{text}</b><extra></extra>'
+    };
+
+    const tracePersen = {
+      type: 'scatter',
+      mode: 'lines+markers+text',
+      name: 'Proporsi Sektor Ekstraktif (%)',
+      x: tahun,
+      y: persenEkstraktif,
+      text: persenEkstraktif.map(v => `${v.toFixed(1)}%`),
+      textposition: 'top center',
+      textfont: { family: 'Inter', size: 12, color: '#b98411', weight: '700' },
+      line: { color: '#f6c948', width: 3, shape: 'spline', smoothing: 1.1 },
+      marker: { color: '#f6c948', size: 9 },
+      yaxis: 'y2',
+      hovertemplate: '<b>%{x}</b><br>Proporsi: <b>%{y:.1f}%</b><extra></extra>'
+    };
+
+    const layout = {
+      barmode: 'group',
+      bargap: 0.38,
+      bargroupgap: 0.22,
+      plot_bgcolor: '#f8f6ff',
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      margin: { t: 40, l: 42, r: 42, b: 90 },
+      xaxis: {
+        tickfont: { family: 'Inter', size: 12, color: 'rgba(36,31,59,0.75)', weight: '600' },
+        showgrid: false,
+        ticks: ''
+      },
+      yaxis: {
+        showgrid: true,
+        gridcolor: 'rgba(105,81,191,0.12)',
+        zeroline: false,
+        showticklabels: false,
+        range: [0, 5200]
+      },
+      yaxis2: {
+        overlaying: 'y',
+        side: 'right',
+        showgrid: false,
+        showticklabels: false,
+        range: [0, 70]
+      },
+      legend: { orientation: 'h', y: -0.25, font: { family: 'Inter', size: 12 } },
+      font: { family: 'Inter' }
+    };
+
+    const config = {
+      responsive: true,
+      displaylogo: false,
+      modeBarButtonsToRemove: ['lasso2d','select2d','autoScale2d']
+    };
+
+    Plotly.newPlot('plot', [traceTotal, traceEkstraktif, tracePersen], layout, config);
+    window.addEventListener('resize', () => Plotly.Plots.resize('plot'));
+  </script>
+</body>
+</html>

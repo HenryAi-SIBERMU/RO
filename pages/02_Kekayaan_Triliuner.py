@@ -1,5 +1,4 @@
 import streamlit as st
-import plotly.graph_objects as go
 import pandas as pd
 from pathlib import Path
 import streamlit.components.v1 as components
@@ -13,107 +12,39 @@ render_sidebar()
 
 chart_header("Total Kekayaan 50 Triliuner di Indonesia", "Dalam triliun rupiah | Gambar 3 — Hal. 12")
 
-# ── Warna (matching PDF) ──────────────────────────────────────────────
-COLOR_TOTAL      = "#9B8FD8"   # light purple — tall bars
-COLOR_EKSTRAKTIF = "#2B1B8F"   # dark navy   — shorter bars
-COLOR_ORANGE     = "#FFC107"   # amber/yellow — persentase line
-COLOR_BG         = "#F2EEFF"   # light lavender background
+_G3_CHART = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner.html"
+_G3_PLOTLY = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_plotly.html"
+
+tab_chart, tab_plotly = st.tabs(["Versi Chart.js", "Versi Plotly Alternatif"])
+
+with tab_chart:
+    components.html(_G3_CHART.read_text(encoding="utf-8"), height=640, scrolling=True)
+    chart_footer("Data Forbes 50 orang terkaya di Indonesia (2026), diolah oleh peneliti")
+    with st.expander("🔗 Kode Embed WordPress — Gambar 3 (Chart.js)"):
+        st.code("""<!-- Gambar 3: Total Kekayaan 50 Triliuner di Indonesia — Versi Chart.js -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner.html"
+  width="100%" height="640" frameborder="0"
+  style="border-radius:32px; background:#f3efff;"
+  loading="lazy">
+</iframe>""", language="html")
+
+with tab_plotly:
+    components.html(_G3_PLOTLY.read_text(encoding="utf-8"), height=640, scrolling=True)
+    chart_footer("Data Forbes 50 orang terkaya di Indonesia (2026), diolah oleh peneliti")
+    with st.expander("🔗 Kode Embed WordPress — Gambar 3 (Plotly)"):
+        st.code("""<!-- Gambar 3: Total Kekayaan 50 Triliuner di Indonesia — Versi Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_plotly.html"
+  width="100%" height="640" frameborder="0"
+  style="border-radius:32px; background:#f3efff;"
+  loading="lazy">
+</iframe>""", language="html")
 
 # ── Data ─────────────────────────────────────────────────────────────
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "gambar03_kekayaan_triliuner.csv"
 df = pd.read_csv(DATA_PATH)
 df["tahun"] = df["tahun"].astype(str)
-
-def fmt_rp(v):
-    return "Rp" + f"{int(v):,}".replace(",", ".")
-
-# ── Figure ────────────────────────────────────────────────────────────
-fig = go.Figure()
-
-# Bar 1 — Total Kekayaan (light purple, taller)
-fig.add_trace(go.Bar(
-    name="Total Kekayaan",
-    x=df["tahun"],
-    y=df["total_kekayaan"],
-    marker_color=COLOR_TOTAL,
-    marker_line_width=0,
-    text=[fmt_rp(v) for v in df["total_kekayaan"]],
-    textposition="outside",
-    textfont=dict(size=10, color="#4B3FA0", family="Arial"),
-    hovertemplate="<b>%{x}</b><br>Total: <b>%{text}</b> triliun<extra></extra>",
-))
-
-# Bar 2 — Kekayaan dari Sektor Ekstraktif (dark navy, shorter)
-fig.add_trace(go.Bar(
-    name="Kekayaan dari Sektor Ekstraktif",
-    x=df["tahun"],
-    y=df["sektor_ekstraktif"],
-    marker_color=COLOR_EKSTRAKTIF,
-    marker_line_width=0,
-    text=[fmt_rp(v) for v in df["sektor_ekstraktif"]],
-    textposition="inside",
-    textfont=dict(size=9, color="white", family="Arial"),
-    hovertemplate="<b>%{x}</b><br>Sektor Ekstraktif: <b>%{text}</b> triliun<extra></extra>",
-))
-
-# Scatter — Persentase Sektor Ekstraktif (orange line + labels)
-fig.add_trace(go.Scatter(
-    name="Persentase Sektor Ekstraktif",
-    x=df["tahun"],
-    y=df["persen_ekstraktif"],
-    mode="lines+markers+text",
-    line=dict(color=COLOR_ORANGE, width=2.5),
-    marker=dict(color=COLOR_ORANGE, size=9, symbol="circle"),
-    text=[f"<b>{v:.1f}%</b>" for v in df["persen_ekstraktif"]],
-    textposition="top center",
-    textfont=dict(size=10, color=COLOR_ORANGE, family="Arial Black"),
-    yaxis="y2",
-    hovertemplate="<b>%{x}</b><br>Proporsi Ekstraktif: <b>%{y:.1f}%</b><extra></extra>",
-))
-
-# ── Layout ────────────────────────────────────────────────────────────
-fig.update_layout(
-    barmode="group",
-    bargap=0.3,
-    bargroupgap=0.08,
-    plot_bgcolor=COLOR_BG,
-    paper_bgcolor="white",
-    legend=dict(
-        orientation="h",
-        y=-0.18,
-        x=0,
-        xanchor="left",
-        font=dict(size=12, family="Arial"),
-        bgcolor="rgba(0,0,0,0)",
-    ),
-    yaxis=dict(
-        showgrid=True,
-        gridcolor="#E0D8F8",
-        gridwidth=1,
-        zeroline=False,
-        showticklabels=False,
-        range=[0, 6000],
-    ),
-    yaxis2=dict(
-        overlaying="y",
-        side="right",
-        showticklabels=False,
-        showgrid=False,
-        range=[0, 100],
-        zeroline=False,
-    ),
-    xaxis=dict(
-        type="category",
-        tickfont=dict(size=12, color="#333", family="Arial"),
-        showgrid=False,
-    ),
-    margin=dict(t=100, b=100, l=20, r=60),
-    height=520,
-)
-
-st.plotly_chart(fig, use_container_width=True)
-
-chart_footer("Data Forbes 50 orang terkaya di Indonesia (2026), diolah oleh peneliti")
 
 # ── Catatan data ──────────────────────────────────────────────────────
 with st.expander("📋 Data lengkap"):

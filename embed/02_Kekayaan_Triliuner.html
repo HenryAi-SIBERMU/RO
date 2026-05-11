@@ -1,116 +1,352 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Total Kekayaan 50 Triliuner di Indonesia</title>
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; background: #fff; }
-  #chart { width: 100%; height: 100vh; min-height: 480px; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gambar 3 — Total Kekayaan 50 Triliuner</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-surface: #ffffff;
+      --bg-accent: #f0ebff;
+      --purple-main: #4a2a85;
+      --purple-dark: #2f185f;
+      --purple-deep: #210f46;
+      --yellow-main: #f6c948;
+      --text-main: #241f3b;
+      --text-muted: rgba(36, 31, 59, 0.7);
+      --grid-color: rgba(74, 42, 133, 0.12);
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8f5ff 0%, #f1edff 55%, #e7e2ff 100%);
+      color: var(--text-main);
+      padding: 48px 24px 64px;
+      display: flex;
+      justify-content: center;
+    }
+    main {
+      width: min(960px, 100%);
+      background: var(--bg-surface);
+      border-radius: 32px;
+      position: relative;
+      padding: 52px 60px 64px;
+      box-shadow: 0 32px 70px rgba(41, 19, 87, 0.12);
+      overflow: hidden;
+    }
+    main::before,
+    main::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 128px;
+      height: 320px;
+      background: var(--bg-accent);
+      border-top-right-radius: 56px;
+      border-bottom-right-radius: 56px;
+      opacity: 0.8;
+      z-index: 0;
+    }
+    main::before { top: -60px; }
+    main::after { bottom: -160px; opacity: 0.6; }
+    header {
+      position: relative;
+      z-index: 2;
+    }
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .chart-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 22px;
+      border-radius: 10px;
+      background: var(--purple-main);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 800;
+      color: var(--purple-dark);
+    }
+    .subtitle {
+      margin: 20px 0 0;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .chart-wrapper {
+      position: relative;
+      z-index: 2;
+      margin-top: 40px;
+      padding-bottom: 24px;
+    }
+    canvas {
+      width: 100%;
+      height: 420px;
+      display: block;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .legend-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+    .legend-dot.purple { background: var(--purple-main); }
+    .legend-dot.deep { background: var(--purple-deep); }
+    .legend-line {
+      width: 32px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--yellow-main);
+    }
+    .source-badge {
+      position: relative;
+      z-index: 2;
+      margin-top: 32px;
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: rgba(246, 201, 72, 0.18);
+      color: var(--purple-dark);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 768px) {
+      body { padding: 32px 16px 48px; }
+      main { padding: 44px 32px 56px; }
+      canvas { height: 360px; }
+    }
+  </style>
 </head>
 <body>
-<div id="chart"></div>
-<script>
-const tahun = ["2019","2020","2021","2022","2023","2024","2025","2026"];
-const totalKekayaan = [2508, 2479, 2746, 3016, 3501, 4571, 4405, 4651];
-const sektorEkstraktif = [986, 1026, 1212, 1388, 1720, 2611, 2514, 2690];
-const persenEkstraktif = [39.3, 41.4, 44.1, 46.0, 49.1, 57.1, 57.1, 57.8];
+  <main>
+    <header>
+      <div class="chart-header">
+        <span class="chart-tag">Gambar 3.</span>
+        <h1>Total Kekayaan 50 Triliuner di Indonesia (2019–2026)</h1>
+      </div>
+      <p class="subtitle">Bar: nominal dalam triliun rupiah — garis: proporsi sektor ekstraktif</p>
+    </header>
 
-function fmtRp(v) {
-  return "Rp" + v.toLocaleString("id-ID") + " T";
-}
+    <section class="chart-wrapper">
+      <canvas id="chartGambar3" role="img" aria-label="Kekayaan total vs sektor ekstraktif dan proporsi"></canvas>
+    </section>
 
-const traces = [
-  {
-    type: "bar",
-    name: "Total Kekayaan",
-    x: tahun,
-    y: totalKekayaan,
-    marker: { color: "#9B8FD8", line: { width: 0 } },
-    text: totalKekayaan.map(fmtRp),
-    textposition: "outside",
-    textfont: { size: 10, color: "#4B3FA0", family: "Arial" },
-    hovertemplate: "<b>%{x}</b><br>Total: <b>%{text}</b><extra></extra>",
-    offsetgroup: 1,
-  },
-  {
-    type: "bar",
-    name: "Kekayaan dari Sektor Ekstraktif",
-    x: tahun,
-    y: sektorEkstraktif,
-    marker: { color: "#2B1B8F", line: { width: 0 } },
-    text: sektorEkstraktif.map(fmtRp),
-    textposition: "inside",
-    textfont: { size: 9, color: "white", family: "Arial" },
-    hovertemplate: "<b>%{x}</b><br>Ekstraktif: <b>%{text}</b><extra></extra>",
-    offsetgroup: 2,
-  },
-  {
-    type: "scatter",
-    name: "Proporsi Sektor Ekstraktif (%)",
-    x: tahun,
-    y: persenEkstraktif,
-    mode: "lines+markers+text",
-    line: { color: "#FFC107", width: 2.5 },
-    marker: { color: "#FFC107", size: 9 },
-    text: persenEkstraktif.map(v => `<b>${v.toFixed(1)}%</b>`),
-    textposition: "top center",
-    textfont: { size: 10, color: "#FFC107", family: "Arial Black" },
-    yaxis: "y2",
-    hovertemplate: "<b>%{x}</b><br>Proporsi: <b>%{y:.1f}%</b><extra></extra>",
-  }
-];
+    <section class="legend">
+      <div class="legend-item">
+        <span class="legend-dot purple"></span>
+        <span>Total Kekayaan 50 Triliuner</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot deep"></span>
+        <span>Kekayaan dari Sektor Ekstraktif</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line"></span>
+        <span>Proporsi Sektor Ekstraktif</span>
+      </div>
+    </section>
 
-const layout = {
-  barmode: "group",
-  bargap: 0.3,
-  bargroupgap: 0.08,
-  plot_bgcolor: "#F2EEFF",
-  paper_bgcolor: "#ffffff",
-  legend: {
-    orientation: "h",
-    y: -0.18,
-    x: 0,
-    xanchor: "left",
-    font: { size: 12, family: "Arial" },
-    bgcolor: "rgba(0,0,0,0)",
-  },
-  yaxis: {
-    showgrid: true,
-    gridcolor: "#E0D8F8",
-    gridwidth: 1,
-    zeroline: false,
-    showticklabels: false,
-    range: [0, 6000],
-  },
-  yaxis2: {
-    overlaying: "y",
-    side: "right",
-    showticklabels: false,
-    showgrid: false,
-    range: [0, 100],
-    zeroline: false,
-  },
-  xaxis: {
-    type: "category",
-    tickfont: { size: 12, color: "#333", family: "Arial" },
-    showgrid: false,
-  },
-  margin: { t: 30, b: 100, l: 20, r: 60 },
-  autosize: true,
-};
+    <div class="source-badge">Sumber: Forbes 50 Orang Terkaya Indonesia (2026), diolah CELIOS</div>
+  </main>
 
-const config = {
-  responsive: true,
-  displaylogo: false,
-  modeBarButtonsToRemove: ["lasso2d", "select2d"],
-};
+  <script>
+    const ctx = document.getElementById('chartGambar3');
 
-Plotly.newPlot("chart", traces, layout, config);
-window.addEventListener("resize", () => Plotly.Plots.resize("chart"));
-</script>
+    const labels = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+    const totalValues = [2508, 2479, 2746, 3016, 3501, 4571, 4405, 4651];
+    const sektorValues = [986, 1026, 1212, 1388, 1720, 2611, 2514, 2690];
+    const persenValues = [39.3, 41.4, 44.1, 46.0, 49.1, 57.1, 57.1, 57.8];
+
+    const rupiahFormatter = new Intl.NumberFormat('id-ID');
+
+    const valueLabelsPlugin = {
+      id: 'valueLabels',
+      afterDatasetsDraw(chart) {
+        const { ctx } = chart;
+        ctx.save();
+
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+          const meta = chart.getDatasetMeta(datasetIndex);
+          if (meta.hidden) return;
+
+          meta.data.forEach((element, index) => {
+            const { x, y } = element.tooltipPosition();
+            ctx.font = dataset.type === 'line' ? '600 13px Inter' : '600 13px Inter';
+            ctx.textAlign = dataset.type === 'line' ? 'center' : 'center';
+            ctx.textBaseline = 'middle';
+
+            if (dataset.type === 'line') {
+              ctx.fillStyle = '#b98411';
+              ctx.fillText(`${dataset.data[index].toFixed(1)}%`, x, y - 18);
+            } else if (datasetIndex === 0) {
+              ctx.fillStyle = 'rgba(36,31,59,0.86)';
+              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y - 18);
+            } else if (datasetIndex === 1) {
+              ctx.fillStyle = 'rgba(255,255,255,0.9)';
+              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y);
+            }
+          });
+        });
+
+        ctx.restore();
+      }
+    };
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Total Kekayaan 50 Triliuner',
+            data: totalValues,
+            backgroundColor: '#6951bf',
+            hoverBackgroundColor: '#5b44af',
+            borderRadius: 0,
+            barPercentage: 0.72,
+            categoryPercentage: 0.62,
+            borderSkipped: false,
+            maxBarThickness: 46,
+            order: 1,
+          },
+          {
+            type: 'bar',
+            label: 'Kekayaan Sektor Ekstraktif',
+            data: sektorValues,
+            backgroundColor: '#2f185f',
+            hoverBackgroundColor: '#241249',
+            borderRadius: 0,
+            barPercentage: 0.48,
+            categoryPercentage: 0.62,
+            borderSkipped: false,
+            maxBarThickness: 32,
+            order: 1,
+          },
+          {
+            type: 'line',
+            label: 'Proporsi Sektor Ekstraktif (%)',
+            data: persenValues,
+            borderColor: '#f6c948',
+            backgroundColor: '#f6c948',
+            borderWidth: 3,
+            pointRadius: 6,
+            pointHoverRadius: 7,
+            pointBorderWidth: 0,
+            tension: 0.32,
+            yAxisID: 'yPercent',
+            spanGaps: false,
+            order: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1100,
+          easing: 'easeOutQuart'
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              font: {
+                family: 'Inter',
+                size: 13,
+                weight: '600'
+              },
+              color: 'rgba(36,31,59,0.75)'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            max: 5200,
+            grace: '5%',
+            grid: {
+              color: 'rgba(105,81,191,0.12)',
+              drawTicks: false,
+            },
+            ticks: {
+              display: false
+            },
+            border: {
+              display: false
+            }
+          },
+          yPercent: {
+            position: 'right',
+            beginAtZero: true,
+            max: 70,
+            grid: {
+              display: false
+            },
+            ticks: {
+              display: false
+            },
+            border: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#28144c',
+            titleFont: { family: 'Inter', weight: '700', size: 13 },
+            bodyFont: { family: 'Inter', weight: '600', size: 13 },
+            padding: 12,
+            displayColors: true,
+            callbacks: {
+              label(context) {
+                if (context.dataset.type === 'line') {
+                  return ` Proporsi: ${context.formattedValue}%`;
+                }
+                return ` ${context.dataset.label}: Rp${rupiahFormatter.format(context.raw)} T`;
+              }
+            }
+          }
+        }
+      },
+      plugins: [valueLabelsPlugin]
+    });
+  </script>
 </body>
 </html>
