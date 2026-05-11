@@ -182,11 +182,11 @@
       background: linear-gradient(135deg, var(--purple-main), var(--purple-soft));
       border-radius: var(--card-radius);
       color: var(--text-on-purple);
-      padding: 28px 38px 28px 34px;
+      padding: 28px 44px;
       display: grid;
-      grid-template-columns: minmax(220px, 0.35fr) minmax(280px, 0.4fr) minmax(240px, 0.25fr);
-      align-items: stretch;
-      column-gap: 32px;
+      grid-template-columns: 240px 1fr 260px;
+      align-items: center;
+      gap: 32px;
       width: 100%;
       box-shadow: 0 18px 32px rgba(54, 22, 114, 0.32);
       overflow: hidden;
@@ -257,7 +257,7 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      grid-template-columns: repeat(3, minmax(170px, 1fr));
       gap: 18px;
       position: relative;
       z-index: 1;
@@ -290,17 +290,16 @@
     .richest {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 18px;
-      padding: 18px 32px 18px 34px;
+      gap: 16px;
+      padding: 18px 26px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.14);
       position: relative;
       z-index: 1;
       backdrop-filter: blur(4px);
       width: 100%;
-      min-width: 260px;
-      text-align: right;
+      min-width: 240px;
+      justify-content: space-between;
     }
 
     .avatar {
@@ -321,7 +320,6 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      align-items: flex-end;
     }
 
     .richest-name {
@@ -351,9 +349,9 @@
 
     @media (max-width: 1100px) {
       .party-card {
-        grid-template-columns: minmax(200px, 0.38fr) minmax(240px, 0.38fr) minmax(220px, 0.24fr);
-        column-gap: 26px;
-        padding: 26px 30px 26px 28px;
+        grid-template-columns: 210px 1fr 230px;
+        gap: 20px;
+        padding: 26px 30px;
       }
       .metrics {
         grid-template-columns: repeat(3, minmax(130px, 1fr));
