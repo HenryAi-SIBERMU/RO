@@ -178,16 +178,31 @@ st.divider()
 chart_header("Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk (2050)", "Infografik — Hal. 16")
 
 _INFO = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_infografik_proyeksi.html"
-components.html(_INFO.read_text(encoding="utf-8"), height=620, scrolling=True)
+_INFO_D3 = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_infografik_proyeksi_d3race.html"
 
-chart_footer("Forbes, diolah CELIOS (2026)")
+tab_static, tab_d3 = st.tabs(["Versi Statis (Chart)", "Versi Alternatif D3 Race"])
 
-with st.expander("🔗 Kode Embed WordPress — Infografik Proyeksi 2050"):
-    st.code("""<!-- Infografik: Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk -->
+with tab_static:
+    components.html(_INFO.read_text(encoding="utf-8"), height=660, scrolling=True)
+    chart_footer("Forbes, diolah CELIOS (2026)")
+    with st.expander("🔗 Kode Embed WordPress — Proyeksi 2050 (Statis)"):
+        st.code("""<!-- Infografik: Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk — Versi Statis -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_infografik_proyeksi.html"
+  width="100%" height="660" frameborder="0"
+  style="border-radius:32px; background:#49138d;"
+  loading="lazy">
+</iframe>""", language="html")
+
+with tab_d3:
+    components.html(_INFO_D3.read_text(encoding="utf-8"), height=620, scrolling=True)
+    chart_footer("Dummy illustratif — Ganti dengan data resmi sebelum rilis")
+    with st.expander("🔗 Kode Embed WordPress — Proyeksi 2050 (D3 Race)"):
+        st.code("""<!-- Eksperimen D3.js: Bar Chart Race Kekayaan 50 Triliuner (Dummy) -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_infografik_proyeksi_d3race.html"
   width="100%" height="620" frameborder="0"
-  style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
+  style="border-radius:32px; background:#1d0d2f;"
   loading="lazy">
 </iframe>""", language="html")
 
