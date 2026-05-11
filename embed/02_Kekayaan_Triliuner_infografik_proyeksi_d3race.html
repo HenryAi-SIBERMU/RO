@@ -179,7 +179,7 @@
       'Djarum Ventures': { initial: 'DV', color: '#fb8b24' }
     };
 
-    const frames = [
+    const baseFrames = [
       { year: 2019, values: { 'Hartono Family': 2400, 'Prajogo Pangestu': 1900, 'Widjaja Family': 1700, 'Barito Group': 1450, 'Djarum Ventures': 1200 } },
       { year: 2020, values: { 'Hartono Family': 2600, 'Prajogo Pangestu': 2050, 'Widjaja Family': 1800, 'Barito Group': 1600, 'Djarum Ventures': 1360 } },
       { year: 2021, values: { 'Hartono Family': 2950, 'Prajogo Pangestu': 2400, 'Widjaja Family': 2100, 'Barito Group': 1800, 'Djarum Ventures': 1500 } },
@@ -189,9 +189,33 @@
       { year: 2025, values: { 'Hartono Family': 4900, 'Prajogo Pangestu': 4180, 'Widjaja Family': 3120, 'Barito Group': 2780, 'Djarum Ventures': 2360 } }
     ];
 
+    const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
     const names = Array.from(
-      new Set(frames.flatMap(frame => Object.keys(frame.values)))
+      new Set(baseFrames.flatMap(frame => Object.keys(frame.values)))
     );
+
+    const frames = [];
+
+    baseFrames.forEach((frame, idx) => {
+      const next = baseFrames[idx + 1] ?? frame;
+      monthLabels.forEach((month, monthIndex) => {
+        const fraction = next === frame ? 0 : monthIndex / monthLabels.length;
+        const values = {};
+        names.forEach(name => {
+          const startVal = frame.values[name] ?? 0;
+          const endVal = next.values[name] ?? startVal;
+          const interpolated = startVal + (endVal - startVal) * fraction;
+          values[name] = Math.round(interpolated);
+        });
+        frames.push({
+          label: `${month} ${frame.year}`,
+          year: frame.year,
+          monthIndex,
+          values
+        });
+      });
+    });
 
     palette.domain(names);
 
@@ -227,7 +251,7 @@
       y.domain(entries.map(d => d.name));
       x.domain([0, d3.max(entries, d => d.value)]).nice();
 
-      const t = g.transition().duration(1100).ease(d3.easeCubicOut);
+      const t = g.transition().duration(600).ease(d3.easeCubicOut);
 
       const avatars = avatarGroup.selectAll('g.avatar').data(entries, d => d.name);
 
@@ -291,20 +315,33 @@
 
       const labels = labelGroup.selectAll('text').data(entries, d => d.name);
 
-      labels.enter()
+      const labelsEnter = labels.enter()
         .append('text')
-        .attr('x', d => x(d.value) + 12)
-        .attr('y', d => y(d.name) + y.bandwidth() / 2)
         .attr('alignment-baseline', 'middle')
         .attr('font-size', 15)
         .attr('font-weight', 700)
-        .attr('fill', 'rgba(255,255,255,0.92)')
-        .text(d => `Rp${formatValue(d.value)} T`)
+        .attr('fill', 'rgba(255,255,255,0.92)');
+
+      function formatCurrency(val) {
+        return `Rp${formatValue(Math.round(val))} T`;
+      }
+
+      labelsEnter
         .merge(labels)
         .transition(t)
-        .attr('x', d => x(d.value) + 12)
-        .attr('y', d => y(d.name) + y.bandwidth() / 2)
-        .text(d => `Rp${formatValue(d.value)} T`);
+        .tween('text', function(d) {
+          const that = d3.select(this);
+          const previous = that.attr('data-prev') ? +that.attr('data-prev') : d.value;
+          const i = d3.interpolateNumber(previous, d.value);
+          return function(tick) {
+            const current = i(tick);
+            that
+              .attr('x', x(current) + 12)
+              .attr('y', y(d.name) + y.bandwidth() / 2)
+              .attr('data-prev', current)
+              .text(formatCurrency(current));
+          };
+        });
 
       labels.exit()
         .transition(t)
@@ -317,7 +354,7 @@
       yAxis.selectAll('path').attr('display', 'none');
       yAxis.selectAll('line').attr('display', 'none');
 
-      document.getElementById('ticker').textContent = frame.year;
+      document.getElementById('ticker').textContent = frame.label;
     }
 
     let frameIndex = 0;
@@ -326,7 +363,7 @@
     setInterval(() => {
       frameIndex = (frameIndex + 1) % frames.length;
       render(frames[frameIndex]);
-    }, 2200);
+    }, 850);
   </script>
 </body>
 </html>
