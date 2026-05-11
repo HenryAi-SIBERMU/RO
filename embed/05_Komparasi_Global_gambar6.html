@@ -1,381 +1,583 @@
 <!DOCTYPE html>
-
-<html lang="id"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Superkaya di Indonesia Ranking</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<style data-purpose="custom-colors">
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gambar 6 – Superkaya Indonesia vs Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
     :root {
-      --purple-bg: #572A99;
-      --purple-dark: #4A1C8B;
-      --yellow-accent: #FFD55F;
-      --text-light: #F3F4F6;
+      --bg-main-1: #7037d5;
+      --bg-main-2: #5222a6;
+      --bg-main-3: #2c0e5f;
+      --tag-gradient: linear-gradient(135deg, #ffd762 0%, #f1b423 100%);
+      --tier-highlight: linear-gradient(145deg, #ffdc7a 0%, #f2b83a 100%);
+      --tier-indonesia: linear-gradient(145deg, #a871ff 0%, #6e3bd8 100%);
+      --tier-global: linear-gradient(145deg, #6331c3 0%, #3d147a 100%);
+      --badge-gradient: linear-gradient(135deg, #fde986 0%, #f2b83a 100%);
+      --text-strong: #ffffff;
+      --text-soft: rgba(255, 255, 255, 0.76);
+      --text-muted: rgba(255, 255, 255, 0.58);
+      --shadow-card: 0 22px 46px rgba(26, 0, 70, 0.32);
+      --toggle-bg: rgba(255, 255, 255, 0.14);
+      --toggle-active: linear-gradient(135deg, rgba(255, 214, 118, 0.95) 0%, rgba(255, 180, 78, 0.95) 100%);
     }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: var(--purple-bg);
-      color: var(--text-light);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(120% 120% at 5% 0%, #7f4dff 0%, var(--bg-main-1) 35%, var(--bg-main-2) 62%, var(--bg-main-3) 100%);
+      color: var(--text-strong);
+      display: flex;
+      justify-content: center;
+      padding: clamp(24px, 5vw, 48px);
     }
-    .header-purple {
-      background-color: var(--purple-dark);
+
+    main {
+      width: min(1220px, 100%);
+      padding: clamp(36px, 5vw, 64px);
+      position: relative;
+      overflow: hidden;
     }
-    article {
-      transition: transform 0.3s ease;
+
+    main::before,
+    main::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
     }
-    article:hover {
-      transform: scale(1.05);
+
+    main::before {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 70%);
+      top: -160px;
+      left: -120px;
+    }
+
+    main::after {
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(255, 208, 115, 0.25) 0%, rgba(255, 208, 115, 0) 70%);
+      bottom: -120px;
+      right: -100px;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: var(--tag-gradient);
+      color: #4b2d00;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 20px 0 12px 0;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .toolbar {
+      margin-top: clamp(32px, 4vw, 48px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: rgba(22, 3, 70, 0.45);
+      border-radius: 18px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 1;
+    }
+
+    .toolbar__label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.68);
+      letter-spacing: 0.14em;
+      margin-right: 6px;
+    }
+
+    .toolbar__buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .toggle-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      background: var(--toggle-bg);
+      color: rgba(255, 255, 255, 0.82);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .toggle-btn.is-active {
+      background: var(--toggle-active);
+      color: #3c2400;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(34, 0, 36, 0.25);
+    }
+
+    .cards-grid {
+      margin-top: clamp(28px, 3vw, 44px);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(16px, 2vw, 22px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      position: relative;
+      padding: 28px 22px 24px;
+      border-radius: 26px;
+      min-height: 240px;
+      background: var(--tier-global);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 52px rgba(0, 0, 0, 0.32);
+    }
+
+    .card--indonesia {
+      background: var(--tier-indonesia);
+    }
+
+    .card--highlight {
+      background: var(--tier-highlight);
+      color: #3c2400;
+    }
+
+    .card--highlight .card__role,
+    .card--highlight .card__country,
+    .card--highlight .card__wealth {
+      color: rgba(48, 28, 0, 0.82);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.26), transparent 65%);
+      top: -80px;
+      right: -70px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .card__badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--badge-gradient);
+      color: #4d3200;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      box-shadow: 0 12px 20px rgba(19, 0, 45, 0.25);
+    }
+
+    .card__photo {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      margin-top: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 700;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      overflow: hidden;
+    }
+
+    .card__photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.28) 100%);
+      opacity: 0.36;
+    }
+
+    .card__photo span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card__flag {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      color: #2b145c;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      border: 2px solid rgba(118, 71, 235, 0.4);
+      box-shadow: 0 10px 18px rgba(15, 0, 38, 0.35);
+    }
+
+    .card__name {
+      margin: 18px 0 6px 0;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .card__role {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .card__country {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .card__wealth {
+      margin-top: 12px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .pill-info {
+      position: relative;
+      z-index: 1;
+      margin-top: clamp(32px, 4vw, 48px);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      color: #1b0e38;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .summary-block {
+      position: relative;
+      z-index: 1;
+      margin-top: clamp(32px, 4vw, 54px);
+      display: grid;
+      gap: 18px;
+    }
+
+    .summary-text {
+      background: rgba(18, 0, 52, 0.45);
+      border-radius: 24px;
+      padding: clamp(24px, 3vw, 32px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .summary-text em {
+      font-style: italic;
+    }
+
+    .disclaimer {
+      background: rgba(255, 214, 102, 0.2);
+      border-radius: 22px;
+      border: 1px solid rgba(254, 214, 120, 0.45);
+      padding: clamp(22px, 3vw, 28px);
+      color: rgba(57, 35, 0, 0.92);
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 600;
+      box-shadow: 0 18px 48px rgba(32, 0, 45, 0.22);
+      background-image: linear-gradient(135deg, rgba(255, 229, 150, 0.28) 0%, rgba(255, 229, 150, 0.08) 74%);
+    }
+
+    .source {
+      margin-top: clamp(18px, 2vw, 26px);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    @media (max-width: 1200px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        padding: 36px 28px 64px;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .card {
+        min-height: 230px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .card__name {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 22px;
+        min-height: 220px;
+      }
+      .card__photo {
+        width: 80px;
+        height: 80px;
+        font-size: 22px;
+      }
     }
   </style>
 </head>
-<body class="antialiased min-h-screen pb-12 relative overflow-hidden">
-<!-- BEGIN: Background Patterns -->
-<div aria-hidden="true" class="absolute inset-0 pointer-events-none z-0">
-<div class="absolute top-20 left-0 w-32 h-64 bg-purple-800/30 rounded-r-3xl"></div>
-<div class="absolute top-1/3 left-0 w-24 h-48 bg-purple-800/30 rounded-r-3xl"></div>
-<div class="absolute top-2/3 left-0 w-32 h-64 bg-purple-800/30 rounded-r-3xl"></div>
-<div class="absolute bottom-0 left-16 w-24 h-32 bg-purple-800/30 rounded-t-3xl"></div>
-</div>
-<!-- END: Background Patterns -->
-<!-- BEGIN: Header Section -->
-<header class="bg-white text-gray-800 pt-6 pb-8 px-4 md:px-12 relative z-10 flex flex-col md:flex-row items-start md:items-center gap-4">
-<div class="bg-purple-700 text-white font-bold text-xl px-6 py-2 rounded-r-full absolute left-0 top-6 shadow-md">
-      Gambar 6.
-    </div>
-<div class="ml-0 md:ml-40 mt-12 md:mt-0">
-<h1 class="text-2xl md:text-3xl font-bold text-purple-800 leading-tight">
-        Superkaya di Indonesia dibandingkan Triliuner Terkaya Berbagai Negara
-      </h1>
-<p class="text-purple-600 text-lg mt-1">(dalam triliun rupiah)<sup>18</sup></p>
-</div>
-</header>
-<!-- END: Header Section -->
-<!-- BEGIN: Main Content -->
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 relative z-10">
-<!-- BEGIN: Top 3 Section -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-<!-- Rank 1 -->
-<article class="flex items-center gap-4 relative">
-<div class="relative w-32 h-32 shrink-0">
-<div class="absolute -top-3 -left-3 bg-yellow-400 text-purple-900 font-bold w-8 h-8 rounded-full flex items-center justify-center text-lg z-20 border-2 border-white shadow-lg">1</div>
-<img alt="R, Budi &amp; Keluarga Hartono" class="w-full h-full rounded-full object-cover border-4 border-purple-400 shadow-xl relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLGx1BdzGvug-fWcLqDfkItWvCCEJxluSCj2we16Guo1cNviEZ4Jqu0epP6njxu8M1bY7n9RtYaAxE_r8H4TyP0Q6gG-yCUa3jV_5IDzSOZEIi6X2fw-d_hP4vWDMwz9W4jOMJ3ArZnrlmZbcXdwj7vh3GBbRABAkIEXqjolkL-NFwalaVkE-5QsnBT-9g7dPBnjSpiRHq82NOkPIeYYLhnE484MP2Xd039UVTXMuaMtlKStayevA10SRb1oymIRl9SBTo0tKd5xk"/>
-<div class="absolute bottom-0 right-0 w-10 h-10 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-white">
-<div class="w-full h-1/2 bg-red-600"></div>
-<div class="w-full h-1/2 bg-white"></div>
-</div>
-</div>
-<div>
-<h2 class="text-2xl font-bold text-yellow-400 leading-tight mb-1">R, Budi &amp;<br/>Keluarga<br/>Hartono</h2>
-<p class="text-sm text-purple-200">Kekayaan</p>
-<p class="text-2xl font-bold text-white">Rp650</p>
-</div>
-</article>
-<!-- Rank 2 -->
-<article class="flex items-center gap-4 relative mt-12 md:mt-0">
-<div class="relative w-32 h-32 shrink-0">
-<div class="absolute -top-3 -left-3 bg-yellow-400 text-purple-900 font-bold w-8 h-8 rounded-full flex items-center justify-center text-lg z-20 border-2 border-white shadow-lg">2</div>
-<img alt="Prajogo Pangestu" class="w-full h-full rounded-full object-cover border-4 border-purple-400 shadow-xl relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMglBXkAR3Bd_RBAPVlbdv1LukXqmUsiDcNwMBbbUwpgEDWihQOrG-e5u_G3O4f1TVlLqM0eLnsU5vnjFSn0qPxP1STHcnSkqYNh66krSL9KlJcqg_5vgoL1xifWHlWvPi4NUL8FYDIjEjrWmy4Gp9qz-onLUqYtULbUsXFwY7Y5X5kCgIx0h3FwrZoO16MBuk-jn4U0cdCu6JZHuyum8q7gpLbOsbyWY8IB2Jh_hXP7Qzt9f79aTl2Wkt6xodHPVSxL3-wHOYjbw"/>
-<div class="absolute bottom-0 right-0 w-10 h-10 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-white">
-<div class="w-full h-1/2 bg-red-600"></div>
-<div class="w-full h-1/2 bg-white"></div>
-</div>
-</div>
-<div>
-<h2 class="text-2xl font-bold text-yellow-400 leading-tight mb-1">Prajogo<br/>Pangestu</h2>
-<p class="text-sm text-purple-200">Kekayaan</p>
-<p class="text-2xl font-bold text-white">Rp483</p>
-</div>
-</article>
-<!-- Rank 3 -->
-<article class="flex items-center gap-4 relative mt-12 md:mt-0">
-<div class="relative w-32 h-32 shrink-0">
-<div class="absolute -top-3 -left-3 bg-yellow-400 text-purple-900 font-bold w-8 h-8 rounded-full flex items-center justify-center text-lg z-20 border-2 border-white shadow-lg">3</div>
-<img alt="Widjaja family" class="w-full h-full rounded-full object-cover border-4 border-purple-400 shadow-xl relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtaDw_MKF7j__waUicPx1I5UVhrGZMucsa20OawC4XbwdAlGVAzuz7Y8sPSsNsQyQwovMvOpzhN4pV4EqxrNixadqUHq-28Atfsd6Hs60L06QCb_05Awdm19Lf4TI7xlsiPC7HSCTzIuzpxOuxFFvJn35LKB3zUE-OffJ6tM0PQF75jm_V6dkxQIEuh1l9txlpgbs9v3TxdKVk2lGW4IF3Z73TrEB8RMDvjEizrnae7luV1Pf6p5Xlpwls-K_RDo_phop7uJ3d56Q"/>
-<div class="absolute bottom-0 right-0 w-10 h-10 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-white">
-<div class="w-full h-1/2 bg-red-600"></div>
-<div class="w-full h-1/2 bg-white"></div>
-</div>
-</div>
-<div>
-<h2 class="text-2xl font-bold text-yellow-400 leading-tight mb-1">Widjaja<br/>family</h2>
-<p class="text-sm text-purple-200">Kekayaan</p>
-<p class="text-2xl font-bold text-white">Rp478</p>
-</div>
-</article>
-</section>
-<!-- END: Top 3 Section -->
-<!-- BEGIN: Grid Ranks 4-20 -->
-<section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-12 mb-16">
-<!-- Rank 4 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">4</div>
-<img alt="Pham Nhat Vuong" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVO3L6EOeTFQ0faghuribPOfFxr70pI1J8YMwX7VbVpDJn4jKhD4txnHgc6g-4LAoN6ZGhrOgHtHihS8oB8F7QbrpWdBZKIO9ww9VLZzbRu2jAHJIZP70Po4zQxNGMr9HaV45oUk6o-fauWE4S_cZ88uRacWreSQ4LMKH__VDipTUDVvYTuxdcqpcoyDrakpd42vIeOcokvFWVIC52PQ34YLsv6WJjYpX9klWjfbDfanog9f9C531O5VDZEBxRlVBUksnXTn7v9Zw"/>
-<div class="absolute bottom-0 right-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-red-600 flex items-center justify-center">
-<svg class="w-4 h-4 text-yellow-400 fill-current" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Pham Nhat<br/>Vuong</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp468</p>
-</article>
-<!-- Rank 5 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">5</div>
-<img alt="Jay Y. Lee" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvUVq0Ng1Z5Hq5G_SvcjfNaMYQRTBtvJOFvbynSVrMIPSoptQD7vHrgh0vCw8ydrdGGuxt087h1Ij1aEc9qmTySt4RJvyI9Y5yeR6V6GGUDX_ZuhcUuPR4ErTfBXuxOGfaGUPKQjQ1QcA6Gqqbi6kHM-DfkXP61JLLV5iVIRYY4n3WHz8MBiVwO7wGPD4tNbIKuEtmxilz-NtiD2PvQVDZBwygABmIDsRnuXXoM3aJs7ogp8voNnE8iJpUO3cDSl3oMGvN8A9NjyQ"/>
-<div class="absolute bottom-0 right-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-white flex items-center justify-center">
-<div class="w-4 h-4 rounded-full bg-gradient-to-b from-red-500 to-blue-600"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Jay Y. Lee</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp456</p>
-</article>
-<!-- Rank 6 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">6</div>
-<img alt="Gina Rinehart" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1BQKvbOpA9GgOrWqHfD2XUgy0qZMTi-w6ztq9E2mJ6WW9jSKAhmyl_-rqIAcyUm_-JiQbFCZHQQULpKt7ZrilbsNY7-iEPTQL-eVcRUlNHizkYrQTygoYh7JtPkarmLyDCvp_XTSeMoJhylI27tlWKTI5_K0j_KkOX4upEEFu0RoIIIC0BIoE7FIgvd02n-nHMyhSOuu09bXAnLL8HRAlJ7dc5MFmHNiNFCSLlzGICJ7TuvQH_M2a_swKsgLlB-BZ4cQkaBKY4vg"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-blue-800 flex items-start justify-start p-1">
-<div class="w-2 h-2 bg-white"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Gina<br/>Rinehart</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp430</p>
-</article>
-<!-- Rank 7 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">7</div>
-<img alt="Michael Platt" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvxN_fqPr0N4f9UfA2GliomWaV0vUNlMBU1OwvCdeJO8RJNq97vK7SCiUIHCnlY43j2o-0yJE8w0UqW2eSBSqfgl3M92uYTLLboOoSI1BtIOFjmJDvZtgZtYvu3r6ateKheV4Pu3OGB1WjZF2HmA6ojvy5ZZFiVhLIHSdkGCljrbBcffD_HfX_HvTdsfIZ68xiESxCsp724CWrO97lvpdoiuD4V6RyqqQh3oJ_GunygUNAYu9cO9LKqLKzUvZTvsZ6wGyLGP5tNmo"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/3 bg-red-600"></div>
-<div class="h-1/3 bg-white"></div>
-<div class="h-1/3 bg-blue-800"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Michael<br/>Platt</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp353</p>
-</article>
-<!-- Rank 8 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">8</div>
-<img alt="Dhanin Chearavanont" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuaBs4a-iqLKYr5tmAyz_Ifrf8brRcXsHgPV4yGZf1SybAgsbr3Djqg7_RxtYtv3edvcubWXBW1JjM9e_srH53vfo0ttdDy6-zeZhkQKHPM2uQTUKBdCLb0YJLzDEBvl4Nr5NQ7Fo2PZmBGiqrDog1ktK8fZgxnwxF22n1e2mQanK8nY7FpnD0LNG4zkP7mLP_7xKbffIG6MnyxD4gb9A5wij2bJS7W_EaoJ8mv64pH1EDISA2ZfDBY48uDjMDEz1esx-2ldjoLYU"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/2 bg-blue-800 flex items-center justify-center">
-<div class="w-2 h-2 rounded-full bg-yellow-400"></div>
-</div>
-<div class="h-1/2 flex">
-<div class="w-1/2 bg-red-600"></div>
-<div class="w-1/2 bg-white"></div>
-</div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Dhanin<br/>Chearavanont</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp336</p>
-</article>
-<!-- Rank 9 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">9</div>
-<img alt="Prince Alwaleed Bin Talal Alsaud" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1w2fY8V1Okj0Y8lTIX6vCZXHPPAFrcR4XbrmbehoOwXG51ghGFDUVMOj85tZyj6GmS62BJ8qAK_wVpVns2KE7oGOtqRPYR8j9Bhy6Vtk5KbvtxPuNMkY9arxskdHsn8mMlu62OKZnI2163iH4rUGtE3H4VgFQXtryVHSV07T1yI0zvExa1QwO6xaAonxwCLDyaSfMaY-_6R-bv4Sv0A5Oea5euV9i3GFbRkUA6SGC5JvRH_E29UZPbBI3yplH_RPHV_IKxoPYcGk"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-green-600 flex items-center justify-center">
-<div class="w-4 h-1 bg-white"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Prince Alwaleed<br/>Bin Talal Alsaud</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp336</p>
-</article>
-<!-- Rank 10 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">10</div>
-<img alt="Enrique Razon Jr." class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ0HxEOYt4aOirmn-cWXAaBgwpC6gRg23WGwcaO_flAXDpKzuaXRgwBsKfSXuiHrsxqjkgctD2iwadjaBxswnU25MgZHgdsMY6V-enhhex5mCDziNBR1-r7xU2DsUgtJEZiJ4QMoTaS03S_ocnLikLjLt6TOF4BmisoHYTDorQ-MR94ok6hq5Re3O_git-na0UNRt3jmIXpcqtaogkJrGcJdYHZlfoY691OCS0Ed2mrss61JbjZZngqIcLFMaK8AvXDSAIuHgnEow"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex">
-<div class="w-1/3 bg-blue-600 h-full"></div>
-<div class="w-2/3 h-full flex flex-col">
-<div class="h-1/2 bg-red-600"></div>
-<div class="h-1/2 bg-white"></div>
-</div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Enrique Razon Jr.</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp279</p>
-</article>
-<!-- Rank 11 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">11</div>
-<img alt="Johann Rupert &amp; family" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFl29plA2pE9bWx_sWqxyYFs3UrMp_Rf4NJ7MYksKOTs7sc5WBwy1IP-6l_RhLWMNcZYaMPcKUBDXT8FjF3eEkf9YuripDYH62XU13KGvVwPCjIEjDvaY1fLY_4Xk1DOgqHYRQc6Si5Fyt-ygY8g-EnTTAhv7uh01Ryyi9RzxoRr_UsRhM5R4-zV83yN3wlIq7DAvy7CaclpZ2Wb1i-ns20WndxjPej3XiPgd9hfUiqg5-51GXTRpDvTkCShHJGgj3aa8kyVvUndE"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/3 bg-red-600"></div>
-<div class="h-1/3 bg-white"></div>
-<div class="h-1/3 bg-blue-800"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Johann Rupert<br/>&amp; family</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp272</p>
-</article>
-<!-- Rank 12 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">12</div>
-<img alt="Terry Gou" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSKwSiVu4lLoJog3U0EmEO3w_5e8KZlj31FUwbaFSqyZV6nqjml_vR_KB2ekGwgcrPy5VT1nxrlxomF_pLKHKYTOng-B1P_imgP3-M5CB4UXzUJMVaU0p8LkT5gsRkE4zLcVOjsKwHBeoOwjsNplEmzFcJfXTJRczxSs1lADOfUAeG4jiEUqAVMbqtAGUbR7OYRspnftIKzNnc_SzcNdevUHT42q2JWYNMvuN0Di6AlOyuVZO4Irw4q7a86ute3zOL38x0s2QFClA"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-red-600 flex">
-<div class="w-1/2 h-1/2 bg-blue-800 flex items-center justify-center">
-<div class="w-2 h-2 rounded-full bg-white"></div>
-</div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Terry Gou</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp258</p>
-</article>
-<!-- Rank 13 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">13</div>
-<img alt="Hussain Sajwani" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlO2JfmNSKi4yZQC-AF5vWTP65Bq4ixZ2QfA9UHxzgKsPS372xYd9V8Zpot0vE8f2FI-opFFrtHKfvPKQI8zwDrlc8OJJXsPvATBkUuifQ3lellst7pFlDPw6Z8RntV0mgI5JSv9P0RzKwAbJcwCT3oDyfFkwycSrRqSokP2P5mxsEtyKjsscl7zrDWHdHJkDUoSfu_4OUQknIX1YR05ZCzFp6rsavJc50362Dra2LzPIaFn14wtzdosQ99vXKZUaeVjijsL1Ytng"/>
-<div class="absolute bottom-0 right-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/3 bg-green-600"></div>
-<div class="h-1/3 bg-white"></div>
-<div class="h-1/3 bg-black"></div>
-<div class="absolute top-0 left-0 w-1/4 h-full bg-red-600"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Hussain Sajwani</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp258</p>
-</article>
-<!-- Rank 14 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">14</div>
-<img alt="Jason Chang" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV4p6FvYe6O4F23Q70HzSru-3NUXZ6ngfbUczAJwkHM6-AN34jF8IvBzAYpjJd-7ooxAG7oBh5a8NEgJg8jHdDisEYA_0jlnmgGZQKuIlXH4Y_HLUUtYgCZo4Z0aA31sAyi2_6yIcxqX4wmoXPbrpeelYkYNoxgjsElTi1aWj_Ids2mM17dC1kU9z0a-LUzgA9Qe2f8GSSWF5eQz7x3PKErjpf_BJKWNr370jyDMn64U6DGZ46QPwIA8iRRmKSsWBC28TL--7TAP8"/>
-<div class="absolute bottom-0 right-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col bg-red-600">
-<div class="h-1/2 w-full flex items-center justify-center">
-<div class="text-white text-[10px] leading-none mt-1">★</div>
-</div>
-<div class="h-1/2 w-full bg-white"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Jason Chang</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp240</p>
-</article>
-<!-- Rank 15 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">15</div>
-<img alt="Robert Kuok" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRqHtiIH01zbkIhJfaTD7lRzU4EOSxlcG65tpZZuq7-vSffAKTCPmkM6e3TG-62h1nbCT9UG6TILQ-yARNOFKAzooqvzMVQRABF9B6mCDzhgvgN0TCQZfuXbREK2vf0NvrodgMtohesiN9ZyfpOeOM2NkQHaeO8kuY7QdbIxYHQPgq75dtAa4LtCMkMIJd7cR5fBpVuW8WNZrqplJcEby6AeAsIxih6lCuX_tSjuOzf1GFNT8AMQRD919OHyPGHny1a_UQjn_FmIM"/>
-<div class="absolute bottom-0 right-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/2 bg-blue-800 flex items-center justify-center">
-<div class="w-2 h-2 rounded-full bg-yellow-400"></div>
-</div>
-<div class="h-1/2 flex">
-<div class="w-1/2 bg-red-600"></div>
-<div class="w-1/2 bg-white"></div>
-</div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Robert Kuok</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp240</p>
-</article>
-<!-- Rank 16 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">16</div>
-<img alt="Hamdi Ulukaya" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7dg9a2ZZzDBbR6u9gnl_Y65m0NO-ClycZDd5FaPUF7hrop1DLKf4XiYK_8DW6VF6zXKnF6EAhradrPX9dlRhWllGD-DQE4rUcH6B3Qa-xxQ85aGhYxwjilIIHJTbHD-9DQN3QpARHt9r4uWgFiFx7lquWYuoeqX5sSwlbjVysnso9sDCoFXT8kTrI9eYw3UKc0kXK9zz9WEEAexvxmbkR9KG59WX51iIl88FvCD8sbuqI476eQTguMruqm5TyarJzDPm2H6m19iY"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-red-600 flex items-center justify-center">
-<div class="w-4 h-4 rounded-full border-[3px] border-white ml-2 flex items-center">
-<div class="w-1 h-1 bg-white rounded-full -ml-1"></div>
-</div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Hamdi<br/>Ulukaya</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp228</p>
-</article>
-<!-- Rank 17 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">17</div>
-<img alt="Nassef Sawiris" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGKkkKG03u4pehwSe9baM4j9MDuQsFx1vnLPnjh2XnB-lNRBKMUwLhzd-cykE2Ww7S1aHjTohAdwXTQ7z3Zs17l3wm2H0_xbxkh5ANe3sGqUKeqJbABIr0KM3krIh1Kj0939Yf-nJkvqiTyHXt-QvYVN-0hIsS7LwbIf9X9-eefwVMhBaxZcy27HCCiBbFI9AsUBLSXJHxIVe6vYF_jFNU6WXToRaq4bbLZzqUMcaBI1wBiEw_fxdZkKyjsirRwoFOX_N1anMyvt0"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/3 bg-red-600"></div>
-<div class="h-1/3 bg-white flex items-center justify-center">
-<div class="w-2 h-2 bg-yellow-400"></div>
-</div>
-<div class="h-1/3 bg-black"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Nassef<br/>Sawiris</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp162</p>
-</article>
-<!-- Rank 18 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">18</div>
-<img alt="Vyacheslav Kim" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa-Q6NXNGpRjp4AOboTDUlI5NjLyzm5wSe3O-ZhFfITW16Af_DeM3Yed9bMLWhTt2XbkXk857LTkPZo7AQqkStmHsDDYgImdL7t9arjgayWXyElyPOevzGm2CXNe5flRyJfyA5uEUa-aEA74I52w7C3VShpkAxt0JLCCKSsBxC3KX9uozdtzl65fmo5fYBdg7Zz3M5afNRYSWecl6b49gSc0Yct7URt6_8NTB3GPq45RK9QjJ6NR8JYegxmlMJTNGIo1TWT-pvr6w"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md bg-cyan-400 flex items-center justify-center">
-<div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Vyacheslav<br/>Kim</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp132</p>
-</article>
-<!-- Rank 19 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">19</div>
-<img alt="Marcos Galperin" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWi6u6fEe6IOxANqaIopuwtZ1mhIEBMpZKGsxNJ4KrVUMJDioWgnvyBnxT8IUY4e8vxLdmHooR73QQPWdsyrQ0OAxM1BiZAQ6avXWkQAHgRKTYKkltTjAzUjMEdoONBqsYrJjlJG9C5lgsUnI7y394N-pAXd00VICJjMmqq8Fs6ijECTFdV4VmGu9mWs-Yi61Aq0k2x18Iw3Vv_iDUhIF52jDx9WO1HgElFlnZ2aCwgGVpgg2hXETFLHBU_SeO5Ez6KDmdYMReIho"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/3 bg-sky-400"></div>
-<div class="h-1/3 bg-white flex items-center justify-center">
-<div class="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
-</div>
-<div class="h-1/3 bg-sky-400"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Marcos<br/>Galperin</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp122</p>
-</article>
-<!-- Rank 20 -->
-<article class="flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-3">
-<div class="absolute -top-2 -left-2 bg-yellow-400 text-purple-900 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xs z-20 border border-white">20</div>
-<img alt="Lorinc Meszaros" class="w-full h-full rounded-full object-cover shadow-lg relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCexQupF6avXskHyYahoBum515ZyGuPQIHNdNQo7MZMSYkV1293eg4UOX8ERQJmelHP32D-XrozHwnlLaebYcanho0EKyrSpHARJd4k8gL1CJiwvTcn06uw2T2v-dT_ahNJOCO72RHfJZ-8eks1jR-Uf5uj1c4Ljf200L1QNxm1TSRxnMy3O6UTCpsjWq4Q56G8dLprGbFdkqdH5PIr0fLK-lMexmmgz5arGCch7BRyXffLmuk-4sJ6eHw6e2uy9028-liJZmr4ees"/>
-<div class="absolute bottom-0 left-0 w-8 h-8 rounded-full border-2 border-white overflow-hidden z-20 shadow-md flex flex-col">
-<div class="h-1/3 bg-red-600"></div>
-<div class="h-1/3 bg-white"></div>
-<div class="h-1/3 bg-green-600"></div>
-</div>
-</div>
-<h3 class="text-lg font-bold text-yellow-400 leading-tight mb-1 h-10 flex items-center justify-center">Lorinc<br/>Meszaros</h3>
-<p class="text-xs text-purple-200">Kekayaan</p>
-<p class="text-xl font-bold text-white">Rp88</p>
-</article>
-</section>
-<!-- END: Grid Ranks 4-20 -->
-</main>
-<!-- END: Main Content -->
-<!-- BEGIN: Footer -->
-<footer class="w-full max-w-4xl mx-auto px-4 mt-8 relative z-10">
-<div class="bg-[#FFD55F] text-purple-900 text-center py-2 px-4 rounded-full text-sm font-semibold shadow-md">
-      Sumber: Data FORBES (2026), diolah oleh peneliti
-    </div>
-</footer>
-<!-- END: Footer -->
-</body></html>
+<body>
+  <main>
+    <header>
+      <span class="tag">Gambar 6.</span>
+      <h1>Superkaya Indonesia vs Triliuner Global</h1>
+      <p class="subtitle">Dalam triliun rupiah</p>
+    </header>
+
+    <section class="toolbar" aria-label="Filter klasemen superkaya">
+      <span class="toolbar__label">Filter</span>
+      <div class="toolbar__buttons">
+        <button class="toggle-btn is-active" data-filter="all">Semua (20)</button>
+        <button class="toggle-btn" data-filter="indonesia">Indonesia</button>
+        <button class="toggle-btn" data-filter="asia_pasifik">Asia Pasifik</button>
+        <button class="toggle-btn" data-filter="timur_afrika">Timur Tengah &amp; Afrika</button>
+        <button class="toggle-btn" data-filter="amerika_eropa">Amerika &amp; Eropa</button>
+      </div>
+    </section>
+
+    <section class="cards-grid" id="cardsGrid" aria-live="polite"></section>
+
+    <div class="pill-info" id="resultCounter">Menampilkan 20 individu</div>
+
+    <section class="summary-block" aria-labelledby="ringkasan-gambar6">
+      <article class="summary-text" id="ringkasan-gambar6">
+        Tiga keluarga superkaya Indonesia—R. Budi &amp; Keluarga Hartono, Prajogo Pangestu, dan Widjaja family—mendominasi papan atas
+        dengan kekayaan yang menandingi bahkan melampaui nama-nama besar dari Vietnam, Korea Selatan, hingga Australia. Sementara itu,
+        para miliarder dari Timur Tengah, Afrika, dan Amerika Latin menutup daftar ini dengan kekayaan yang jauh lebih kecil, menegaskan
+        jurang konsentrasi kekayaan antara pusat ekonomi baru di Asia dan wilayah lain di dunia.
+      </article>
+      <article class="disclaimer">
+        Angka kekayaan bersih bersumber dari <em>Forbes Billionaires List</em> 2026 dan dikonversi ke rupiah. Fluktuasi nilai mata uang dan
+        perubahan portofolio dapat membuat nilai riil berbeda dalam hitungan hari. Daftar ini mencerminkan kondisi yang tercatat pada saat
+        publikasi dan belum memperhitungkan kekayaan yang mungkin tidak terlapor secara publik.
+      </article>
+      <p class="source">Sumber: Forbes (2026), diolah CELIOS</p>
+    </section>
+  </main>
+
+  <script>
+    const formatter = new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+    const officials = [
+      { rank: 1, name: "R. Budi & Keluarga Hartono", role: "Grup Djarum, Bank BCA", country: "Indonesia", flag: "🇮🇩", wealth: 650, region: "indonesia", tier: "highlight", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLGx1BdzGvug-fWcLqDfkItWvCCEJxluSCj2we16Guo1cNviEZ4Jqu0epP6njxu8M1bY7n9RtYaAxE_r8H4TyP0Q6gG-yCUa3jV_5IDzSOZEIi6X2fw-d_hP4vWDMwz9W4jOMJ3ArZnrlmZbcXdwj7vh3GBbRABAkIEXqjolkL-NFwalaVkE-5QsnBT-9g7dPBnjSpiRHq82NOkPIeYYLhnE484MP2Xd039UVTXMuaMtlKStayevA10SRb1oymIRl9SBTo0tKd5xk" },
+      { rank: 2, name: "Prajogo Pangestu", role: "Barito Pacific", country: "Indonesia", flag: "🇮🇩", wealth: 483, region: "indonesia", tier: "highlight", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuAMglBXkAR3Bd_RBAPVlbdv1LukXqmUsiDcNwMBbbUwpgEDWihQOrG-e5u_G3O4f1TVlLqM0eLnsU5vnjFSn0qPxP1STHcnSkqYNh66krSL9KlJcqg_5vgoL1xifWHlWvPi4NUL8FYDIjEjrWmy4Gp9qz-onLUqYtULbUsXFwY7Y5X5kCgIx0h3FwrZoO16MBuk-jn4U0cdCu6JZHuyum8q7gpLbOsbyWY8IB2Jh_hXP7Qzt9f79aTl2Wkt6xodHPVSxL3-wHOYjbw" },
+      { rank: 3, name: "Widjaja family", role: "Sinar Mas Group", country: "Indonesia", flag: "🇮🇩", wealth: 478, region: "indonesia", tier: "highlight", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuDtaDw_MKF7j__waUicPx1I5UVhrGZMucsa20OawC4XbwdAlGVAzuz7Y8sPSsNsQyQwovMvOpzhN4pV4EqxrNixadqUHq-28Atfsd6Hs60L06QCb_05Awdm19Lf4TI7xlsiPC7HSCTzIuzpxOuxFFvJn35LKB3zUE-OffJ6tM0PQF75jm_V6dkxQIEuh1l9txlpgbs9v3TxdKVk2lGW4IF3Z73TrEB8RMDvjEizrnae7luV1Pf6p5Xlpwls-K_RDo_phop7uJ3d56Q" },
+      { rank: 4, name: "Pham Nhat Vuong", role: "Vingroup", country: "Vietnam", flag: "🇻🇳", wealth: 468, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCVO3L6EOeTFQ0faghuribPOfFxr70pI1J8YMwX7VbVpDJn4jKhD4txnHgc6g-4LAoN6ZGhrOgHtHihS8oB8F7QbrpWdBZKIO9ww9VLZzbRu2jAHJIZP70Po4zQxNGMr9HaV45oUk6o-fauWE4S_cZ88uRacWreSQ4LMKH__VDipTUDVvYTuxdcqpcoyDrakpd42vIeOcokvFWVIC52PQ34YLsv6WJjYpX9klWjfbDfanog9f9C531O5VDZEBxRlVBUksnXTn7v9Zw" },
+      { rank: 5, name: "Jay Y. Lee", role: "Samsung Group", country: "Korea Selatan", flag: "🇰🇷", wealth: 456, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvUVq0Ng1Z5Hq5G_SvcjfNaMYQRTBtvJOFvbynSVrMIPSoptQD7vHrgh0vCw8ydrdGGuxt087h1Ij1aEc9qmTySt4RJvyI9Y5yeR6V6GGUDX_ZuhcUuPR4ErTfBXuxOGfaGUPKQjQ1QcA6Gqqbi6kHM-DfkXP61JLLV5iVIRYY4n3WHz8MBiVwO7wGPD4tNbIKuEtmxilz-NtiD2PvQVDZBwygABmIDsRnuXXoM3aJs7ogp8voNnE8iJpUO3cDSl3oMGvN8A9NjyQ" },
+      { rank: 6, name: "Gina Rinehart", role: "Hancock Prospecting", country: "Australia", flag: "🇦🇺", wealth: 430, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuC1BQKvbOpA9GgOrWqHfD2XUgy0qZMTi-w6ztq9E2mJ6WW9jSKAhmyl_-rqIAcyUm_-JiQbFCZHQQULpKt7ZrilbsNY7-iEPTQL-eVcRUlNHizkYrQTygoYh7JtPkarmLyDCvp_XTSeMoJhylI27tlWKTI5_K0j_KkOX4upEEFu0RoIIIC0BIoE7FIgvd02n-nHMyhSOuu09bXAnLL8HRAlJ7dc5MFmHNiNFCSLlzGICJ7TuvQH_M2a_swKsgLlB-BZ4cQkaBKY4vg" },
+      { rank: 7, name: "Michael Platt", role: "BlueCrest Capital", country: "Inggris", flag: "🇬🇧", wealth: 353, region: "amerika_eropa", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCvxN_fqPr0N4f9UfA2GliomWaV0vUNlMBU1OwvCdeJO8RJNq97vK7SCiUIHCnlY43j2o-0yJE8w0UqW2eSBSqfgl3M92uYTLLboOoSI1BtIOFjmJDvZtgZtYvu3r6ateKheV4Pu3OGB1WjZF2HmA6ojvy5ZZFiVhLIHSdkGCljrbBcffD_HfX_HvTdsfIZ68xiESxCsp724CWrO97lvpdoiuD4V6RyqqQh3oJ_GunygUNAYu9cO9LKqLKzUvZTvsZ6wGyLGP5tNmo" },
+      { rank: 8, name: "Dhanin Chearavanont", role: "Charoen Pokphand Group", country: "Thailand", flag: "🇹🇭", wealth: 336, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBuaBs4a-iqLKYr5tmAyz_Ifrf8brRcXsHgPV4yGZf1SybAgsbr3Djqg7_RxtYtv3edvcubWXBW1JjM9e_srH53vfo0ttdDy6-zeZhkQKHPM2uQTUKBdCLb0YJLzDEBvl4Nr5NQ7Fo2PZmBGiqrDog1ktK8fZgxnwxF22n1e2mQanK8nY7FpnD0LNG4zkP7mLP_7xKbffIG6MnyxD4gb9A5wij2bJS7W_EaoJ8mv64pH1EDISA2ZfDBY48uDjMDEz1esx-2ldjoLYU" },
+      { rank: 9, name: "Prince Alwaleed Bin Talal", role: "Kingdom Holding", country: "Arab Saudi", flag: "🇸🇦", wealth: 336, region: "timur_afrika", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1w2fY8V1Okj0Y8lTIX6vCZXHPPAFrcR4XbrmbehoOwXG51ghGFDUVMOj85tZyj6GmS62BJ8qAK_wVpVns2KE7oGOtqRPYR8j9Bhy6Vtk5KbvtxPuNMkY9arxskdHsn8mMlu62OKZnI2163iH4rUGtE3H4VgFQXtryVHSV07T1yI0zvExa1QwO6xaAonxwCLDyaSfMaY-_6R-bv4Sv0A5Oea5euV9i3GFbRkUA6SGC5JvRH_E29UZPbBI3yplH_RPHV_IKxoPYcGk" },
+      { rank: 10, name: "Enrique Razon Jr.", role: "International Container Terminal", country: "Filipina", flag: "🇵🇭", wealth: 279, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ0HxEOYt4aOirmn-cWXAaBgwpC6gRg23WGwcaO_flAXDpKzuaXRgwBsKfSXuiHrsxqjkgctD2iwadjaBxswnU25MgZHgdsMY6V-enhhex5mCDziNBR1-r7xU2DsUgtJEZiJ4QMoTaS03S_ocnLikLjLt6TOF4BmisoHYTDorQ-MR94ok6hq5Re3O_git-na0UNRt3jmIXpcqtaogkJrGcJdYHZlfoY691OCS0Ed2mrss61JbjZZngqIcLFMaK8AvXDSAIuHgnEow" },
+      { rank: 11, name: "Johann Rupert & family", role: "Richemont", country: "Afrika Selatan", flag: "🇿🇦", wealth: 272, region: "timur_afrika", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuAFl29plA2pE9bWx_sWqxyYFs3UrMp_Rf4NJ7MYksKOTs7sc5WBwy1IP-6l_RhLWMNcZYaMPcKUBDXT8FjF3eEkf9YuripDYH62XU13KGvVwPCjIEjDvaY1fLY_4Xk1DOgqHYRQc6Si5Fyt-ygY8g-EnTTAhv7uh01Ryyi9RzxoRr_UsRhM5R4-zV83yN3wlIq7DAvy7CaclpZ2Wb1i-ns20WndxjPej3XiPgd9hfUiqg5-51GXTRpDvTkCShHJGgj3aa8kyVvUndE" },
+      { rank: 12, name: "Terry Gou", role: "Foxconn", country: "Taiwan", flag: "🇹🇼", wealth: 258, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBSKwSiVu4lLoJog3U0EmEO3w_5e8KZlj31FUwbaFSqyZV6nqjml_vR_KB2ekGwgcrPy5VT1nxrlxomF_pLKHKYTOng-B1P_imgP3-M5CB4UXzUJMVaU0p8LkT5gsRkE4zLcVOjsKwHBeoOwjsNplEmzFcJfXTJRczxSs1lADOfUAeG4jiEUqAVMbqtAGUbR7OYRspnftIKzNnc_SzcNdevUHT42q2JWYNMvuN0Di6AlOyuVZO4Irw4q7a86ute3zOL38x0s2QFClA" },
+      { rank: 13, name: "Hussain Sajwani", role: "DAMAC Properties", country: "Uni Emirat Arab", flag: "🇦🇪", wealth: 258, region: "timur_afrika", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuDlO2JfmNSKi4yZQC-AF5vWTP65Bq4ixZ2QfA9UHxzgKsPS372xYd9V8Zpot0vE8f2FI-opFFrtHKfvPKQI8zwDrlc8OJJXsPvATBkUuifQ3lellst7pFlDPw6Z8RntV0mgI5JSv9P0RzKwAbJcwCT3oDyfFkwycSrRqSokP2P5mxsEtyKjsscl7zrDWHdHJkDUoSfu_4OUQknIX1YR05ZCzFp6rsavJc50362Dra2LzPIaFn14wtzdosQ99vXKZUaeVjijsL1Ytng" },
+      { rank: 14, name: "Jason Chang", role: "Advanced Semiconductor Eng.", country: "Taiwan", flag: "🇹🇼", wealth: 240, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCV4p6FvYe6O4F23Q70HzSru-3NUXZ6ngfbUczAJwkHM6-AN34jF8IvBzAYpjJd-7ooxAG7oBh5a8NEgJg8jHdDisEYA_0jlnmgGZQKuIlXH4Y_HLUUtYgCZo4Z0aA31sAyi2_6yIcxqX4wmoXPbrpeelYkYNoxgjsElTi1aWj_Ids2mM17dC1kU9z0a-LUzgA9Qe2f8GSSWF5eQz7x3PKErjpf_BJKWNr370jyDMn64U6DGZ46QPwIA8iRRmKSsWBC28TL--7TAP8" },
+      { rank: 15, name: "Robert Kuok", role: "Kerry Group", country: "Malaysia", flag: "🇲🇾", wealth: 240, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuDRqHtiIH01zbkIhJfaTD7lRzU4EOSxlcG65tpZZuq7-vSffAKTCPmkM6e3TG-62h1nbCT9UG6TILQ-yARNOFKAzooqvzMVQRABF9B6mCDzhgvgN0TCQZfuXbREK2vf0NvrodgMtohesiN9ZyfpOeOM2NkQHaeO8kuY7QdbIxYHQPgq75dtAa4LtCMkMIJd7cR5fBpVuW8WNZrqplJcEby6AeAsIxih6lCuX_tSjuOzf1GFNT8AMQRD919OHyPGHny1a_UQjn_FmIM" },
+      { rank: 16, name: "Hamdi Ulukaya", role: "Chobani", country: "Turki", flag: "🇹🇷", wealth: 228, region: "timur_afrika", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuA7dg9a2ZZzDBbR6u9gnl_Y65m0NO-ClycZDd5FaPUF7hrop1DLKf4XiYK_8DW6VF6zXKnF6EAhradrPX9dlRhWllGD-DQE4rUcH6B3Qa-xxQ85aGhYxwjilIIHJTbHD-9DQN3QpARHt9r4uWgFiFx7lquWYuoeqX5sSwlbjVysnso9sDCoFXT8kTrI9eYw3UKc0kXK9zz9WEEAexvxmbkR9KG59WX51iIl88FvCD8sbuqI476eQTguMruqm5TyarJzDPm2H6m19iY" },
+      { rank: 17, name: "Nassef Sawiris", role: "OCI NV & Aston Villa", country: "Mesir", flag: "🇪🇬", wealth: 162, region: "timur_afrika", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCGKkkKG03u4pehwSe9baM4j9MDuQsFx1vnLPnjh2XnB-lNRBKMUwLhzd-cykE2Ww7S1aHjTohAdwXTQ7z3Zs17l3wm2H0_xbxkh5ANe3sGqUKeqJbABIr0KM3krIh1Kj0939Yf-nJkvqiTyHXt-QvYVN-0hIsS7LwbIf9X9-eefwVMhBaxZcy27HCCiBbFI9AsUBLSXJHxIVe6vYF_jFNU6WXToRaq4bbLZzqUMcaBI1wBiEw_fxdZkKyjsirRwoFOX_N1anMyvt0" },
+      { rank: 18, name: "Vyacheslav Kim", role: "Kaspi.kz", country: "Kazakhstan", flag: "🇰🇿", wealth: 132, region: "asia_pasifik", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCa-Q6NXNGpRjp4AOboTDUlI5NjLyzm5wSe3O-ZhFfITW16Af_DeM3Yed9bMLWhTt2XbkXk857LTkPZo7AQqkStmHsDDYgImdL7t9arjgayWXyElyPOevzGm2CXNe5flRyJfyA5uEUa-aEA74I52w7C3VShpkAxt0JLCCKSsBxC3KX9uozdtzl65fmo5fYBdg7Zz3M5afNRYSWecl6b49gSc0Yct7URt6_8NTB3GPq45RK9QjJ6NR8JYegxmlMJTNGIo1TWT-pvr6w" },
+      { rank: 19, name: "Marcos Galperin", role: "MercadoLibre", country: "Argentina", flag: "🇦🇷", wealth: 122, region: "amerika_eropa", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuBWi6u6fEe6IOxANqaIopuwtZ1mhIEBMpZKGsxNJ4KrVUMJDioWgnvyBnxT8IUY4e8vxLdmHooR73QQPWdsyrQ0OAxM1BiZAQ6avXWkQAHgRKTYKkltTjAzUjMEdoONBqsYrJjlJG9C5lgsUnI7y394N-pAXd00VICJjMmqq8Fs6ijECTFdV4VmGu9mWs-Yi61Aq0k2x18Iw3Vv_iDUhIF52jDx9WO1HgElFlnZ2aCwgGVpgg2hXETFLHBU_SeO5Ez6KDmdYMReIho" },
+      { rank: 20, name: "Lorinc Meszaros", role: "Mészáros Group", country: "Hungaria", flag: "🇭🇺", wealth: 88, region: "amerika_eropa", photo: "https://lh3.googleusercontent.com/aida-public/AB6AXuCexQupF6avXskHyYahoBum515ZyGuPQIHNdNQo7MZMSYkV1293eg4UOX8ERQJmelHP32D-XrozHwnlLaebYcanho0EKyrSpHARJd4k8gL1CJiwvTcn06uw2T2v-dT_ahNJOCO72RHfJZ-8eks1jR-Uf5uj1c4Ljf200L1QNxm1TSRxnMy3O6UTCpsjWq4Q56G8dLprGbFdkqdH5PIr0fLK-lMexmmgz5arGCch7BRyXffLmuk-4sJ6eHw6e2uy9028-liJZmr4ees" }
+    ];
+
+    const grid = document.getElementById('cardsGrid');
+    const buttons = document.querySelectorAll('.toggle-btn');
+    const counter = document.getElementById('resultCounter');
+
+    const initials = (name) => {
+      const parts = name.split(/\s+/).filter(Boolean);
+      if (!parts.length) return '';
+      const letters = parts.slice(0, 2).map((part) => part[0]);
+      return letters.join('').toUpperCase();
+    };
+
+    const createPhoto = (item) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'card__photo';
+      if (item.photo) {
+        wrapper.style.backgroundImage = `url('${item.photo}')`;
+      }
+
+      const label = document.createElement('span');
+      label.textContent = initials(item.name);
+      wrapper.appendChild(label);
+
+      const flag = document.createElement('span');
+      flag.className = 'card__flag';
+      flag.textContent = item.flag;
+      wrapper.appendChild(flag);
+
+      return wrapper;
+    };
+
+    const createCard = (item) => {
+      const card = document.createElement('article');
+      const cardClasses = ['card', `card--${item.region}`];
+      if (item.tier === 'highlight') {
+        cardClasses.push('card--highlight');
+      }
+      card.className = cardClasses.join(' ');
+
+      const badge = document.createElement('span');
+      badge.className = 'card__badge';
+      badge.textContent = item.rank;
+
+      const photo = createPhoto(item);
+
+      const name = document.createElement('h3');
+      name.className = 'card__name';
+      name.textContent = item.name;
+
+      const role = document.createElement('p');
+      role.className = 'card__role';
+      role.textContent = item.role;
+
+      const country = document.createElement('p');
+      country.className = 'card__country';
+      country.textContent = item.country;
+
+      const wealth = document.createElement('p');
+      wealth.className = 'card__wealth';
+      wealth.textContent = `Rp${formatter.format(item.wealth)} T`;
+
+      card.append(badge, photo, name, role, country, wealth);
+      return card;
+    };
+
+    const renderCards = (list) => {
+      grid.innerHTML = '';
+      list.forEach((item) => {
+        grid.appendChild(createCard(item));
+      });
+      counter.textContent = `Menampilkan ${list.length} individu`;
+    };
+
+    let activeFilter = 'all';
+    renderCards(officials);
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        if (filter === activeFilter) return;
+
+        activeFilter = filter;
+        buttons.forEach((btn) => btn.classList.toggle('is-active', btn === button));
+
+        if (filter === 'all') {
+          renderCards(officials);
+          return;
+        }
+
+        const filtered = officials.filter((item) => item.region === filter);
+        renderCards(filtered);
+      });
+    });
+  </script>
+</body>
+</html>

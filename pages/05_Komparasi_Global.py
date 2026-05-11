@@ -15,7 +15,7 @@ render_sidebar()
 
 # ── Sisipan: Perbandingan Kekayaan ────────────────────────────────────
 st.divider()
-st.markdown("### 📊 Perbandingan Kekayaan: Superkaya vs Buruh")
+st.markdown("### Perbandingan Kekayaan: Superkaya vs Buruh")
 
 _SISIPAN = Path(__file__).resolve().parent.parent / "embed" / "05_Komparasi_Global_sisipan.html"
 components.html(_SISIPAN.read_text(encoding="utf-8"), height=900, scrolling=True)
@@ -33,10 +33,10 @@ with st.expander("🔗 Kode Embed WordPress — Sisipan Perbandingan"):
 
 # ── Load HTML Infografik ──────────────────────────────────────────────
 st.divider()
-st.markdown("### 🌍 Gambar 6: Superkaya Indonesia vs Global")
+st.markdown("### Gambar 6: Superkaya Indonesia vs Global")
 
 HTML_PATH = Path(__file__).resolve().parent.parent / "embed" / "05_Komparasi_Global_gambar6.html"
-components.html(HTML_PATH.read_text(encoding="utf-8"), height=2400, scrolling=True)
+components.html(HTML_PATH.read_text(encoding="utf-8"), height=2320, scrolling=True)
 
 chart_footer("Data Forbes (2026), diolah oleh peneliti")
 
@@ -88,7 +88,7 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 6"):
     st.code("""<!-- Gambar 6: Superkaya Indonesia vs Triliuner Global -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/05_Komparasi_Global_gambar6.html"
-  width="100%" height="2400" frameborder="0"
-  style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
+  width="100%" height="2320" frameborder="0"
+  style="border-radius:32px; background:#5a26b6;"
   loading="lazy">
 </iframe>""", language="html")
