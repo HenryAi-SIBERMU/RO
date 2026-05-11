@@ -427,49 +427,47 @@
     const rowHeight = 32;
     canvas.height = chartData.labels.length * rowHeight + 40;
 
+    const maxElite = Math.max(...chartData.elites);
+    const maxCitizen = Math.max(...chartData.citizens);
+    // Scale citizen bars so max citizen (548) = 42% of max elite bar width
+    const citizenScale = (maxElite * 0.42) / maxCitizen;
+    const citizenVisual = chartData.citizens.map(v => v * citizenScale);
+
     const ratioPlugin = {
       id: 'ratioLabels',
-      afterDatasetsDraw(chart, args, opts) {
-        const { ctx, chartArea: { right, left }, data } = chart;
+      afterDatasetsDraw(chart) {
+        const { ctx, chartArea: { right }, data } = chart;
         ctx.save();
         ctx.font = '700 13px "Plus Jakarta Sans"';
         ctx.textBaseline = 'middle';
 
         const metaElites = chart.getDatasetMeta(0);
-        const metaCitizens = chart.getDatasetMeta(1);
-
         metaElites.data.forEach((bar, idx) => {
           if (!bar) return;
           const raw = chartData.elites[idx];
           const value = formatter.format(raw);
-          const x = bar.x - 12;
-          const y = bar.y;
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'right';
-          ctx.fillText(`Rp${value}`, Math.min(x, left + 180), y);
+          ctx.fillText(`Rp${value}`, bar.x - 12, bar.y);
         });
 
+        const metaCitizens = chart.getDatasetMeta(1);
         metaCitizens.data.forEach((bar, idx) => {
           if (!bar) return;
-          const value = formatter.format(data.datasets[1].data[idx]);
+          const value = formatter.format(chartData.citizens[idx]);
           ctx.fillStyle = '#3d1a7c';
           ctx.textAlign = 'left';
           ctx.fillText(`Rp${value}`, bar.x + 10, bar.y);
 
-          // ratio pill on the far right
           const ratio = data.ratios[idx];
-          const pillX = right - 12;
           ctx.textAlign = 'right';
           ctx.fillStyle = '#3d1a7c';
-          ctx.fillText(`${ratio}×`, pillX, bar.y);
+          ctx.fillText(`${ratio}×`, right - 12, bar.y);
         });
 
         ctx.restore();
       }
     };
-
-    const maxElite = Math.max(...chartData.elites);
-    const maxCitizen = Math.max(...chartData.citizens);
 
     new Chart(canvas, {
       type: 'bar',
@@ -487,7 +485,7 @@
           },
           {
             label: 'Kekayaan masyarakat',
-            data: chartData.citizens,
+            data: citizenVisual,
             backgroundColor: '#f3c64f',
             borderRadius: 8,
             borderSkipped: false,
@@ -515,18 +513,10 @@
             grid: {
               color: 'rgba(92, 38, 181, 0.08)'
             },
-            min: -(maxElite * 1.05),
-            max: maxCitizen * 1.15,
+            min: -(maxElite * 1.08),
+            max: maxElite * 0.46,
             ticks: {
-              color: 'rgba(35, 27, 71, 0.65)',
-              font: {
-                family: 'Plus Jakarta Sans',
-                weight: '600'
-              },
-              callback: (value) => {
-                if (value === 0) return '0';
-                return `Rp${formatter.format(Math.abs(value))}`;
-              }
+              display: false
             }
           },
           y: {
@@ -561,8 +551,10 @@
             callbacks: {
               label: (context) => {
                 const label = context.dataset.label;
-                const value = formatter.format(Math.abs(context.parsed.x));
-                return `${label}: Rp${value}`;
+                const actualValue = context.datasetIndex === 0
+                  ? chartData.elites[context.dataIndex]
+                  : chartData.citizens[context.dataIndex];
+                return `${label}: Rp${formatter.format(actualValue)}`;
               },
               afterBody: (items) => {
                 const idx = items[0].dataIndex;

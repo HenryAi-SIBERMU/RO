@@ -475,7 +475,7 @@
     const layout = {
       barmode: 'overlay',
       bargap: 0.18,
-      margin: { l: 180, r: 140, t: 12, b: 20 },
+      margin: { l: 180, r: 140, t: 86, b: 20 },
       paper_bgcolor: 'rgba(255,255,255,0)',
       plot_bgcolor: 'rgba(255,255,255,0)',
       xaxis: {
@@ -504,9 +504,13 @@
       },
       legend: {
         orientation: 'h',
-        xanchor: 'center',
-        x: 0.5,
-        y: 1.08,
+        xanchor: 'left',
+        yanchor: 'bottom',
+        x: 0,
+        y: 1.16,
+        bgcolor: 'rgba(255, 255, 255, 0.92)',
+        bordercolor: 'rgba(92, 38, 181, 0.22)',
+        borderwidth: 1,
         font: {
           family: 'Plus Jakarta Sans',
           color: '#3d1a7c',
