@@ -11,6 +11,7 @@ apply_embed_mode()
 render_sidebar()
 
 _G9_embed = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar9.html"
+_T2_embed = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_tabel2.html"
 
 chart_header("Peta Partai Politik: Jumlah Kursi vs Konsentrasi Kekayaan", "Gambar 9 — Hal. 23")
 components.html(_G9_embed.read_text(encoding="utf-8"), height=880, scrolling=True)
@@ -30,6 +31,16 @@ st.info("⏳ Data belum diinput. Lihat PDF hal. 25.")
 chart_header("Distribusi Kekayaan Seluruh Pejabat Publik per Dapil", "Gambar X — Hal. 25")
 st.info("⏳ Data belum diinput. Lihat PDF hal. 25.")
 
-chart_header("Kekayaan Anggota DPR RI berdasarkan Fraksi Partai", "Tabel 2 — Hal. 24")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 24.")
+chart_header("Kekayaan Anggota DPR RI berdasarkan Fraksi Partai Politik", "Tabel 2 — Hal. 24")
+components.html(_T2_embed.read_text(encoding="utf-8"), height=1580, scrolling=True)
+chart_footer("LHKPN KPK (2026), diolah CELIOS")
+with st.expander("🔗 Kode Embed WordPress — Tabel 2"):
+    st.code("""<!-- Tabel 2: Kekayaan Anggota DPR RI berdasarkan Fraksi Partai Politik -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/07_Oligarki_Parpol_tabel2.html"
+  width="100%" height="1580" frameborder="0"
+  style="border-radius:32px; background:#5526b5;"
+  loading="lazy">
+</iframe>""", language="html")
+
 chart_footer("LHKPN KPK, diolah CELIOS (2026)")

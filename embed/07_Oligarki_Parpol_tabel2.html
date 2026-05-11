@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabel 2 - Kekayaan Fraksi DPR RI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-main: #5526b5;
+      --purple-deep: #37187c;
+      --purple-soft: #6b3bd4;
+      --purple-bg: rgba(104, 70, 197, 0.12);
+      --yellow-badge: #f5d66d;
+      --text-on-purple: #ffffff;
+      --text-dark: #221849;
+      --card-radius: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #f6f4ff;
+      color: var(--text-dark);
+      padding: 48px 24px 64px;
+    }
+
+    .infographic {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(217,209,255,0.64));
+      border-radius: 40px;
+      padding: 48px 60px 72px;
+      overflow: hidden;
+      box-shadow: 0 26px 62px rgba(60, 34, 115, 0.16);
+    }
+
+    .infographic::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 12% 18%, rgba(126, 96, 214, 0.25), transparent 55%),
+                  radial-gradient(circle at 92% 72%, rgba(111, 83, 210, 0.28), transparent 60%);
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chart-title {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .chart-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      background: var(--purple-main);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .chart-heading {
+      margin: 0;
+      font-size: clamp(22px, 3.1vw, 32px);
+      font-weight: 700;
+      color: var(--purple-deep);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(55, 24, 124, 0.7);
+      font-weight: 600;
+    }
+
+    .controls {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .filters {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(86, 60, 176, 0.35) transparent;
+    }
+
+    .filters::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .filters::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .filters::-webkit-scrollbar-thumb {
+      background: rgba(86, 60, 176, 0.35);
+      border-radius: 999px;
+    }
+
+    .filter-button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--purple-deep);
+      background: rgba(86, 60, 176, 0.12);
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      white-space: nowrap;
+    }
+
+    .filter-button:hover {
+      background: rgba(86, 60, 176, 0.18);
+    }
+
+    .filter-button.is-active {
+      background: var(--purple-main);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(86, 60, 176, 0.32);
+    }
+
+    .legend-band {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(34, 24, 73, 0.78);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple-main);
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .cards-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .party-card {
+      position: relative;
+      background: linear-gradient(135deg, var(--purple-main), var(--purple-soft));
+      border-radius: var(--card-radius);
+      color: var(--text-on-purple);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      box-shadow: 0 20px 36px rgba(54, 22, 114, 0.35);
+      overflow: hidden;
+    }
+
+    .party-card::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: calc(var(--card-radius) - 14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .party-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-wrapper {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+      overflow: hidden;
+    }
+
+    .logo-wrapper svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .party-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .party-short {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .party-full {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.72;
+      font-weight: 600;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 88px;
+    }
+
+    .metric span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.72;
+    }
+
+    .metric strong {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .richest {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.14);
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(4px);
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(185,167,252,0.65));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple-deep);
+    }
+
+    .richest-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .richest-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .richest-amount {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .source-badge {
+      margin-top: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: var(--yellow-badge);
+      border-radius: 999px;
+      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 960px) {
+      body {
+        padding: 32px 16px 48px;
+      }
+      .infographic {
+        padding: 40px 32px 64px;
+      }
+      .metrics {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .infographic {
+        border-radius: 30px;
+      }
+      .party-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="infographic">
+    <header>
+      <div class="chart-title">
+        <span class="chart-tag">Tabel 2.</span>
+        <h1 class="chart-heading">Kekayaan Anggota DPR RI berdasarkan Fraksi Partai Politik</h1>
+      </div>
+      <p class="subtitle">Rangking fraksi DPR RI berdasarkan total, rata-rata, dan kursi legislatif</p>
+    </header>
+
+    <section class="controls">
+      <div class="filters" aria-label="Urutkan berdasarkan">
+        <button class="filter-button is-active" data-sort="total">Total Kekayaan Legislator</button>
+        <button class="filter-button" data-sort="average">Rata-rata Kekayaan</button>
+        <button class="filter-button" data-sort="seats">Jumlah Kursi</button>
+        <button class="filter-button" data-sort="richest">Kekayaan Individu Tertinggi</button>
+      </div>
+      <div class="legend-band">
+        <span><span class="legend-dot"></span>Data dalam rupiah (Rp) dan kursi DPR RI periode 2024–2029</span>
+      </div>
+    </section>
+
+    <section class="cards-grid" id="cardsGrid" aria-live="polite"></section>
+
+    <div class="source-badge">
+      Sumber: Laporan Harta Kekayaan Penyelenggara Negara (2026), diolah peneliti
+    </div>
+  </main>
+
+  <script>
+    const parties = [
+      {
+        short: 'Golkar',
+        full: 'Partai Golongan Karya',
+        total: 5884397902323,
+        average: 57130076722,
+        seats: 101,
+        richestName: 'Hj. Haeny Relawati R.W.',
+        richestAmount: 470566738515,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 4 48 15v20l-20 17-20-17V15z" fill="#f4c300" stroke="#e0b800" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M28 16c5 0 9 3.4 9 7.6 0 3.2-3.8 6-9 9.8-5.2-3.8-9-6.6-9-9.8 0-4.2 4-7.6 9-7.6z" fill="#0c7b45"/>
+            <path d="M28 26c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z" fill="#f4f7f0"/>
+          </svg>
+        `
+      },
+      {
+        short: 'PDI Perjuangan',
+        full: 'Partai Demokrasi Indonesia Perjuangan',
+        total: 5104144416030,
+        average: 47260596445,
+        seats: 110,
+        richestName: 'Sihar P.H. Sitorus',
+        richestAmount: 871188628449,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="26" fill="#d4231b" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="28" cy="28" r="18" fill="#0b0b0b"/>
+            <path d="M18.5 30.5c0-5.8 4.8-10.6 9.5-10.6s9.5 4.8 9.5 10.6c0 4.9-3.8 8.6-9.5 8.6s-9.5-3.7-9.5-8.6z" fill="#d4231b"/>
+            <path d="M22.4 30.2c0-3.4 3.1-6.2 6.6-6.2s6.6 2.8 6.6 6.2c0 3.1-2.9 5.3-6.6 5.3s-6.6-2.2-6.6-5.3z" fill="#0b0b0b"/>
+            <path d="M25.6 30.1c0-1.6 1.4-2.8 3.4-2.8s3.4 1.2 3.4 2.8-1.5 2.7-3.4 2.7-3.4-1.1-3.4-2.7z" fill="#d4231b"/>
+          </svg>
+        `
+      },
+      {
+        short: 'PKB',
+        full: 'Partai Kebangkitan Bangsa',
+        total: 4177373698914,
+        average: 564267287676,
+        seats: 68,
+        richestName: 'Rusdi Kirana',
+        richestAmount: 2603426732731,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="9" width="44" height="38" rx="6" fill="#0c7b45" stroke="#ffffff" stroke-width="2"/>
+            <rect x="12" y="15" width="32" height="26" fill="#063d24" rx="4"/>
+            <g fill="#f7d24f">
+              <circle cx="28" cy="28" r="6"/>
+              <circle cx="28" cy="18" r="2"/>
+              <circle cx="28" cy="38" r="2"/>
+              <circle cx="18" cy="28" r="2"/>
+              <circle cx="38" cy="28" r="2"/>
+            </g>
+          </svg>
+        `
+      },
+      {
+        short: 'Demokrat',
+        full: 'Partai Demokrat',
+        total: 3124236656352,
+        average: 71005378553,
+        seats: 44,
+        richestName: 'H. Fadli Zon',
+        richestAmount: 1729450074142,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="24" fill="#1c81d9" stroke="#ffffff" stroke-width="2"/>
+            <path d="M28 14 37 40l-9-6-9 6z" fill="#f04f3e"/>
+            <path d="M28 14v20l-9 6z" fill="#f7f0d0" opacity="0.85"/>
+            <path d="M28 14l9 32-9-6z" fill="#0e3c99" opacity="0.85"/>
+          </svg>
+        `
+      },
+      {
+        short: 'NasDem',
+        full: 'Partai NasDem',
+        total: 3058526596624,
+        average: 44978332303,
+        seats: 69,
+        richestName: 'Rachmat Gobel',
+        richestAmount: 451555266195,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="24" fill="#182978" stroke="#ffffff" stroke-width="2"/>
+            <path d="M38 20c-2.2 5.6-8.2 10.6-17 12.8 2.2 2.2 5.4 3.6 8.9 3.6 6.6 0 12-5 12-11.2 0-1.8-.4-3.4-1.2-5.2z" fill="#f5a023"/>
+            <path d="M36 16c-6-2.2-13 0.4-16.8 5.8-2.8 4-3.2 9-1.2 12.8 2.4-1.2 4.6-3.2 6.4-5.8 3.4-4.8 5.2-9.6 11.6-12.8z" fill="#1f3c9c"/>
+          </svg>
+        `
+      },
+      {
+        short: 'Gerindra',
+        full: 'Partai Gerakan Indonesia Raya',
+        total: 2902273741524,
+        average: 33747369087,
+        seats: 86,
+        richestName: 'Siti Hediati Soeharto',
+        richestAmount: 709567168702,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 6 47 17v20l-19 13-19-13V17z" fill="#e53c2d" stroke="#c93124" stroke-width="2"/>
+            <path d="M28 18c5.5 0 10 4.5 10 10s-4.5 10-10 10-10-4.5-10-10 4.5-10 10-10z" fill="#f5c24c"/>
+            <path d="M23 28c0-2.8 2.3-5 5-5s5 2.2 5 5-2.3 5-5 5-5-2.2-5-5z" fill="#d75b27"/>
+            <path d="M24 24h3l1-2 1 2h3l-2.4 1.6.9 2.8L28 27l-2.5 1.4.9-2.8z" fill="#963516"/>
+          </svg>
+        `
+      },
+      {
+        short: 'PKS',
+        full: 'Partai Keadilan Sejahtera',
+        total: 930570268834,
+        average: 17557929601,
+        seats: 53,
+        richestName: 'Hj. Ledia Hanifa A.',
+        richestAmount: 139040533516,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="40" height="36" rx="8" fill="#ed6f24"/>
+            <path d="M12 14h32v28H12z" fill="#fff"/>
+            <path d="M28 18c4.4 0 8 3.6 8 8s-3.6 8-8 8-8-3.6-8-8 3.6-8 8-8z" fill="#ed6f24"/>
+            <path d="M23 26c1.4-1.6 3.3-2.6 5-2.6s3.6 1 5 2.6c-1.4 1.6-3.3 2.6-5 2.6s-3.6-1-5-2.6z" fill="#fff"/>
+            <rect x="18" y="34" width="20" height="2.6" rx="1.3" fill="#ed6f24"/>
+          </svg>
+        `
+      },
+      {
+        short: 'PAN',
+        full: 'Partai Amanat Nasional',
+        total: 1475844455183,
+        average: 30746759483,
+        seats: 48,
+        richestName: 'H. Eddy Soeparno',
+        richestAmount: 249312085502,
+        logo: `
+          <svg width="60" height="60" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="40" height="36" rx="6" fill="#256fce"/>
+            <rect x="14" y="16" width="28" height="24" fill="#0e3b8c" rx="4"/>
+            <path d="M28 20 30.8 29.2H40l-7.6 5.6 2.8 9.2L28 38.8 20.8 44l2.8-9.2L16 29.2h9.2z" fill="#ffffff"/>
+          </svg>
+        `
+      }
+    ];
+
+    const numberFormat = new Intl.NumberFormat('id-ID');
+
+    const sorters = {
+      total: (a, b) => b.total - a.total,
+      average: (a, b) => b.average - a.average,
+      seats: (a, b) => b.seats - a.seats,
+      richest: (a, b) => b.richestAmount - a.richestAmount
+    };
+
+    const cardsGrid = document.getElementById('cardsGrid');
+
+    function renderCards(data) {
+      const fragments = data.map((party) => {
+        const initials = party.richestName
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 2)
+          .map((name) => name.charAt(0))
+          .join('').toUpperCase();
+
+        return `
+          <article class="party-card">
+            <div class="party-header">
+              <div class="logo-wrapper">${party.logo}</div>
+              <div class="party-title">
+                <span class="party-short">${party.short}</span>
+                <span class="party-full">${party.full}</span>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <span>Total Kekayaan Legislator</span>
+                <strong>Rp${numberFormat.format(party.total)}</strong>
+              </div>
+              <div class="metric">
+                <span>Rata-rata Kekayaan</span>
+                <strong>Rp${numberFormat.format(party.average)}</strong>
+              </div>
+              <div class="metric">
+                <span>Jumlah Kursi</span>
+                <strong>${numberFormat.format(party.seats)}</strong>
+              </div>
+            </div>
+            <div class="richest">
+              <div class="avatar" aria-hidden="true">${initials}</div>
+              <div class="richest-text">
+                <span class="richest-name">${party.richestName}</span>
+                <span class="richest-amount">Rp${numberFormat.format(party.richestAmount)}</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      cardsGrid.innerHTML = fragments;
+    }
+
+    function setActiveButton(key) {
+      document.querySelectorAll('.filter-button').forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.sort === key);
+      });
+    }
+
+    function sortAndRender(key) {
+      const sorted = [...parties].sort(sorters[key] || sorters.total);
+      renderCards(sorted);
+      setActiveButton(key);
+    }
+
+    document.querySelectorAll('.filter-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.sort;
+        sortAndRender(key);
+      });
+    });
+
+    // Initial render
+    sortAndRender('total');
+  </script>
+</body>
+</html>
