@@ -14,6 +14,8 @@ chart_header("Total Harta Pejabat Publik Kabinet (2019–2025)", "Gambar 7 — H
 
 _G7_chartjs = Path(__file__).resolve().parent.parent / "embed" / "06_Harta_Pejabat_gambar7.html"
 _G7_plotly = Path(__file__).resolve().parent.parent / "embed" / "06_Harta_Pejabat_gambar7_plotly.html"
+_G8_chartjs = Path(__file__).resolve().parent.parent / "embed" / "06_Harta_Pejabat_gambar8.html"
+_G8_plotly = Path(__file__).resolve().parent.parent / "embed" / "06_Harta_Pejabat_gambar8_plotly.html"
 
 tab_chartjs, tab_plotly = st.tabs(["Versi Chart.js", "Versi Plotly"])
 
@@ -43,5 +45,29 @@ with tab_plotly:
 
 st.divider()
 chart_header("Klasemen Pejabat Terkaya Kabinet Merah Putih 2025", "Gambar 8 — Hal. 21")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 21.")
-chart_footer("LHKPN KPK, diolah CELIOS (2026)")
+
+tab_g8_chartjs, tab_g8_plotly = st.tabs(["Versi Chart.js", "Versi Plotly Alternatif"])
+
+with tab_g8_chartjs:
+    components.html(_G8_chartjs.read_text(encoding="utf-8"), height=1080, scrolling=True)
+    chart_footer("LHKPN (2025), diolah CELIOS")
+    with st.expander("🔗 Kode Embed WordPress — Gambar 8 (Chart.js)"):
+        st.code("""<!-- Gambar 8: Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025 — Versi Chart.js -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/06_Harta_Pejabat_gambar8.html"
+  width="100%" height="1080" frameborder="0"
+  style="border-radius:32px; background:#3b1b6b;"
+  loading="lazy">
+</iframe>""", language="html")
+
+with tab_g8_plotly:
+    components.html(_G8_plotly.read_text(encoding="utf-8"), height=1080, scrolling=True)
+    chart_footer("LHKPN (2025), diolah CELIOS")
+    with st.expander("🔗 Kode Embed WordPress — Gambar 8 (Plotly)"):
+        st.code("""<!-- Gambar 8: Klasemen Pejabat Publik Terkaya Kabinet Merah Putih 2025 — Versi Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/06_Harta_Pejabat_gambar8_plotly.html"
+  width="100%" height="1080" frameborder="0"
+  style="border-radius:32px; background:#3b1b6b;"
+  loading="lazy">
+</iframe>""", language="html")
