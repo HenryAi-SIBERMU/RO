@@ -180,19 +180,7 @@ chart_header("Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk (2050)", "Info
 _INFO = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_infografik_proyeksi.html"
 _INFO_D3 = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_infografik_proyeksi_d3race.html"
 
-tab_static, tab_d3 = st.tabs(["Versi Statis (Chart)", "Versi Alternatif D3 Race"])
-
-with tab_static:
-    components.html(_INFO.read_text(encoding="utf-8"), height=660, scrolling=True)
-    chart_footer("Forbes, diolah CELIOS (2026)")
-    with st.expander("🔗 Kode Embed WordPress — Proyeksi 2050 (Statis)"):
-        st.code("""<!-- Infografik: Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk — Versi Statis -->
-<iframe
-  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_infografik_proyeksi.html"
-  width="100%" height="660" frameborder="0"
-  style="border-radius:32px; background:#49138d;"
-  loading="lazy">
-</iframe>""", language="html")
+tab_d3, tab_static = st.tabs(["Versi Alternatif D3 Race", "Versi Statis (Chart)"])
 
 with tab_d3:
     components.html(_INFO_D3.read_text(encoding="utf-8"), height=620, scrolling=True)
@@ -203,6 +191,18 @@ with tab_d3:
   src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_infografik_proyeksi_d3race.html"
   width="100%" height="620" frameborder="0"
   style="border-radius:32px; background:#1d0d2f;"
+  loading="lazy">
+</iframe>""", language="html")
+
+with tab_static:
+    components.html(_INFO.read_text(encoding="utf-8"), height=660, scrolling=True)
+    chart_footer("Forbes, diolah CELIOS (2026)")
+    with st.expander("🔗 Kode Embed WordPress — Proyeksi 2050 (Statis)"):
+        st.code("""<!-- Infografik: Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk — Versi Statis -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_infografik_proyeksi.html"
+  width="100%" height="660" frameborder="0"
+  style="border-radius:32px; background:#49138d;"
   loading="lazy">
 </iframe>""", language="html")
 

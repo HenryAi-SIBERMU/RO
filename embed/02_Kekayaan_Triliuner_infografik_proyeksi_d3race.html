@@ -150,6 +150,7 @@
 
   <script>
     const svg = d3.select('svg');
+    const FRAME_DURATION = 520;
     const bounds = svg.node().getBoundingClientRect();
     const width = bounds.width || 820;
     const height = bounds.height || 420;
@@ -251,7 +252,7 @@
       y.domain(entries.map(d => d.name));
       x.domain([0, d3.max(entries, d => d.value)]).nice();
 
-      const t = g.transition().duration(600).ease(d3.easeCubicOut);
+      const t = g.transition().duration(FRAME_DURATION).ease(d3.easeCubicOut);
 
       const avatars = avatarGroup.selectAll('g.avatar').data(entries, d => d.name);
 
@@ -360,10 +361,10 @@
     let frameIndex = 0;
     render(frames[frameIndex]);
 
-    setInterval(() => {
+    d3.interval(() => {
       frameIndex = (frameIndex + 1) % frames.length;
       render(frames[frameIndex]);
-    }, 850);
+    }, FRAME_DURATION);
   </script>
 </body>
 </html>
