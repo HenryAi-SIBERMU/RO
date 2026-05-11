@@ -14,6 +14,8 @@ _G12_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar12_chartjs.ht
 _G12_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar12_plotly.html"
 _G13_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar13_chartjs.html"
 _G13_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar13_plotly.html"
+_G14_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar14_chartjs.html"
+_G14_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar14_plotly.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -128,6 +130,38 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 13 (Plotly)"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar13_plotly.html"
   width="100%" height="740" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Simpanan Bank Umum Berdasarkan Jumlah Nominal", "Gambar 14 — Hal. 29"
+)
+tab_g14_chartjs, tab_g14_plotly = st.tabs(["Versi Chart.js", "Versi Plotly"])
+with tab_g14_chartjs:
+    components.html(_G14_chartjs.read_text(encoding="utf-8"), height=760, scrolling=True)
+with tab_g14_plotly:
+    components.html(_G14_plotly.read_text(encoding="utf-8"), height=760, scrolling=True)
+chart_footer("Data Distribusi Simpanan Bank Umum 2014-2025, estimasi dummy oleh CELIOS")
+with st.expander("🔗 Kode Embed WordPress — Gambar 14 (Chart.js)"):
+    st.code(
+        """<!-- Gambar 14: Simpanan Bank Umum — Chart.js -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar14_chartjs.html"
+  width="100%" height="760" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+with st.expander("🔗 Kode Embed WordPress — Gambar 14 (Plotly)"):
+    st.code(
+        """<!-- Gambar 14: Simpanan Bank Umum — Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar14_plotly.html"
+  width="100%" height="760" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",
