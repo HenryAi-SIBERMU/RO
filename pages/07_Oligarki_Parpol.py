@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as st_components
 from pathlib import Path
 from components.embed_layout import apply_embed_mode
 from components.sidebar import render_sidebar
@@ -11,7 +12,7 @@ render_sidebar()
 chart_header("Peta Partai Politik: Jumlah Kursi vs Konsentrasi Kekayaan", "Gambar 9 — Hal. 23")
 
 _G9_interaktif = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar9.html"
-components.html(_G9_interaktif.read_text(encoding="utf-8"), height=780, scrolling=True)
+st_components.html(_G9_interaktif.read_text(encoding="utf-8"), height=780, scrolling=True)
 
 chart_footer("Laporan Harta Kekayaan Pejabat Negara (2025), diolah CELIOS")
 
