@@ -194,6 +194,18 @@ with tab_d3:
   loading="lazy">
 </iframe>""", language="html")
 
+with tab_static:
+    components.html(_INFO.read_text(encoding="utf-8"), height=660, scrolling=True)
+    chart_footer("Forbes, diolah CELIOS (2026)")
+    with st.expander("🔗 Kode Embed WordPress — Proyeksi 2050 (Statis)"):
+        st.code("""<!-- Infografik: Proyeksi Kekayaan 50 Superkaya vs 111 Juta Penduduk — Versi Statis -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_infografik_proyeksi.html"
+  width="100%" height="660" frameborder="0"
+  style="border-radius:32px; background:#49138d;"
+  loading="lazy">
+</iframe>""", language="html")
+
 # ── Gambar 2 — Hal. 16 ────────────────────────────────────────────────
 st.divider()
 chart_header("Proyeksi Kekayaan 50 Superkaya hingga 2050", "Gambar 2 — Hal. 16")
