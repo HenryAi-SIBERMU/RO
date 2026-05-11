@@ -213,8 +213,12 @@
               ctx.fillText(`${dataset.data[index].toFixed(1)}%`, x, y + 20);
             } else if (datasetIndex === 0) {
               ctx.fillStyle = 'rgba(36,31,59,0.86)';
-              ctx.textAlign = 'right';
-              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x - 12, y - 12);
+              ctx.save();
+              ctx.translate(x - 28, y - 6);
+              ctx.rotate(-Math.PI / 2);
+              ctx.textAlign = 'center';
+              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, 0, 0);
+              ctx.restore();
             } else if (datasetIndex === 1) {
               ctx.fillStyle = 'rgba(26, 20, 48, 0.88)';
               ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y - 24);
