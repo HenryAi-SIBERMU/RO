@@ -182,11 +182,11 @@
       background: linear-gradient(135deg, var(--purple-main), var(--purple-soft));
       border-radius: var(--card-radius);
       color: var(--text-on-purple);
-      padding: 28px 40px;
+      padding: 28px 36px;
       display: grid;
-      grid-template-columns: minmax(240px, 0.32fr) minmax(360px, 1fr) minmax(240px, 0.28fr);
+      grid-template-columns: minmax(220px, 0.32fr) minmax(320px, 0.48fr) minmax(220px, 0.2fr);
       align-items: center;
-      gap: 28px;
+      gap: 24px;
       width: 100%;
       box-shadow: 0 18px 32px rgba(54, 22, 114, 0.32);
       overflow: hidden;
@@ -257,8 +257,8 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(3, minmax(160px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      gap: 16px;
       position: relative;
       z-index: 1;
     }
@@ -284,9 +284,7 @@
       font-size: 17px;
       font-weight: 700;
       letter-spacing: 0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      word-break: break-word;
     }
 
     .richest {
@@ -300,6 +298,7 @@
       z-index: 1;
       backdrop-filter: blur(4px);
       width: 100%;
+      justify-content: space-between;
     }
 
     .avatar {
@@ -349,12 +348,12 @@
 
     @media (max-width: 1100px) {
       .party-card {
-        grid-template-columns: minmax(220px, 0.4fr) minmax(280px, 1fr) minmax(220px, 0.4fr);
-        gap: 22px;
-        padding: 26px 32px;
+        grid-template-columns: minmax(200px, 0.36fr) minmax(260px, 0.48fr) minmax(200px, 0.24fr);
+        gap: 20px;
+        padding: 26px 30px;
       }
       .metrics {
-        grid-template-columns: repeat(3, minmax(140px, 1fr));
+        grid-template-columns: repeat(3, minmax(130px, 1fr));
       }
     }
 
