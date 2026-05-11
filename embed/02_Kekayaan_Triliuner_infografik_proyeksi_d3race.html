@@ -140,8 +140,14 @@
   <script>
     const svg = d3.select('svg');
     const bounds = svg.node().getBoundingClientRect();
-    const width = bounds.width;
-    const height = bounds.height;
+    const width = bounds.width || 820;
+    const height = bounds.height || 420;
+
+    svg
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
 
     const margin = { top: 24, right: 160, bottom: 30, left: 200 };
     const chartWidth = width - margin.left - margin.right;
@@ -176,8 +182,8 @@
       .padding(0.22);
 
     const x = d3.scaleLinear()
-      .domain([0, d3.max(frames, frame => d3.max(Object.values(frame.values)))]).
-      nice()
+      .domain([0, d3.max(frames, frame => d3.max(Object.values(frame.values)))])
+      .nice()
       .range([0, chartWidth]);
 
     const yAxis = g.append('g')
