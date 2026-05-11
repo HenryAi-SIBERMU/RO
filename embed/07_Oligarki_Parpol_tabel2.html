@@ -28,7 +28,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: #f6f4ff;
       color: var(--text-dark);
-      padding: 48px 24px 64px;
+      padding: 32px 12px 48px;
     }
 
     .infographic {
@@ -37,7 +37,7 @@
       margin: 0 auto;
       background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(217,209,255,0.64));
       border-radius: 36px;
-      padding: 48px 60px 72px;
+      padding: 44px 32px 60px;
       overflow: hidden;
       box-shadow: 0 24px 56px rgba(60, 34, 115, 0.16);
     }
@@ -182,11 +182,11 @@
       background: linear-gradient(135deg, var(--purple-main), var(--purple-soft));
       border-radius: var(--card-radius);
       color: var(--text-on-purple);
-      padding: 28px 44px;
+      padding: 24px 28px;
       display: grid;
-      grid-template-columns: 240px 1fr 260px;
+      grid-template-columns: 200px 1fr 220px;
       align-items: center;
-      gap: 32px;
+      gap: 20px;
       width: 100%;
       box-shadow: 0 18px 32px rgba(54, 22, 114, 0.32);
       overflow: hidden;
@@ -257,8 +257,8 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(3, minmax(170px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
       position: relative;
       z-index: 1;
     }
@@ -349,12 +349,9 @@
 
     @media (max-width: 1100px) {
       .party-card {
-        grid-template-columns: 210px 1fr 230px;
-        gap: 20px;
-        padding: 26px 30px;
-      }
-      .metrics {
-        grid-template-columns: repeat(3, minmax(130px, 1fr));
+        grid-template-columns: 180px 1fr 200px;
+        gap: 16px;
+        padding: 22px 24px;
       }
     }
 
@@ -363,7 +360,7 @@
         padding: 32px 16px 48px;
       }
       .infographic {
-        padding: 36px 28px 56px;
+        padding: 32px 20px 48px;
       }
       .party-card {
         grid-template-columns: 1fr;
