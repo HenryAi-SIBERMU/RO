@@ -98,37 +98,22 @@
       width: 100%;
       height: 480px;
     }
-    .change-callout {
+    .growth-overlay {
       position: absolute;
-      top: 32%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-weight: 700;
-      font-size: 18px;
-      color: #d04646;
-      letter-spacing: 0.02em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 2;
+      inset: 0;
       pointer-events: none;
+      z-index: 3;
     }
-    .change-arrow {
-      width: 130px;
-      height: 16px;
-      border-bottom: 2px dotted rgba(208,70,70,0.6);
-      position: relative;
-    }
-    .change-arrow::after {
-      content: '';
+    .growth-overlay svg { width: 100%; height: 100%; display: block; }
+    .growth-label {
       position: absolute;
-      right: -4px;
-      top: -5px;
-      width: 0;
-      height: 0;
-      border-left: 10px solid rgba(208,70,70,0.8);
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
+      top: 14%;
+      left: 58%;
+      transform: translate(-50%, -100%);
+      font-weight: 800;
+      font-size: 18px;
+      color: #e16060;
+      letter-spacing: 0.02em;
     }
     .source {
       margin-top: 36px;
@@ -172,9 +157,24 @@
 
     <section class="chart-wrapper">
       <span class="y-axis-label">Rupiah</span>
-      <div class="change-callout">
-        <span id="changePercent">0%</span>
-        <span class="change-arrow"></span>
+      <div class="growth-overlay">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <marker id="g13pArrowHead" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+              <polygon points="0 0, 10 5, 0 10" fill="#e16060" />
+            </marker>
+          </defs>
+          <path d="M 30 58 H 56 V 18 H 70"
+                stroke="#e16060"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-dasharray="3 3"
+                fill="none"
+                vector-effect="non-scaling-stroke"
+                marker-end="url(#g13pArrowHead)" />
+        </svg>
+        <span class="growth-label" id="changePercent">1,94%</span>
       </div>
       <div id="plotly-g13"></div>
     </section>
@@ -189,7 +189,7 @@
 
     const formatter = new Intl.NumberFormat('id-ID');
     const changePercent = ((wages[1] - wages[0]) / wages[0] * 100).toFixed(2);
-    document.getElementById('changePercent').textContent = `${changePercent}%`;
+    document.getElementById('changePercent').textContent = `${changePercent.replace('.', ',')}%`;
 
     const wageTrace = {
       x: labels,
