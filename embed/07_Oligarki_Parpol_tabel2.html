@@ -33,11 +33,11 @@
 
     .infographic {
       position: relative;
-      max-width: 960px;
+      max-width: min(1180px, 100%);
       margin: 0 auto;
       background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(217,209,255,0.64));
       border-radius: 36px;
-      padding: 44px 48px 66px;
+      padding: 48px 60px 72px;
       overflow: hidden;
       box-shadow: 0 24px 56px rgba(60, 34, 115, 0.16);
     }
@@ -182,10 +182,10 @@
       background: linear-gradient(135deg, var(--purple-main), var(--purple-soft));
       border-radius: var(--card-radius);
       color: var(--text-on-purple);
-      padding: 24px 36px;
+      padding: 28px 42px;
       display: flex;
       align-items: stretch;
-      gap: 28px;
+      gap: 32px;
       width: 100%;
       box-shadow: 0 18px 32px rgba(54, 22, 114, 0.32);
       overflow: hidden;
@@ -206,6 +206,7 @@
       gap: 18px;
       position: relative;
       z-index: 1;
+      flex: 0 0 260px;
     }
 
     .logo-wrapper {
@@ -255,10 +256,10 @@
     }
 
     .metrics {
-      flex: 1;
+      flex: 1 1 540px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 18px;
       position: relative;
       z-index: 1;
     }
@@ -266,11 +267,11 @@
     .metric {
       background: rgba(255, 255, 255, 0.12);
       border-radius: 18px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      min-height: 88px;
+      min-height: 92px;
     }
 
     .metric span {
@@ -291,14 +292,14 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 16px 18px;
+      padding: 18px 22px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.14);
       position: relative;
       z-index: 1;
       backdrop-filter: blur(4px);
-      width: 230px;
-      flex-shrink: 0;
+      width: 260px;
+      flex: 0 0 260px;
     }
 
     .avatar {
@@ -356,11 +357,11 @@
       .party-card {
         flex-direction: column;
         gap: 20px;
-        padding: 22px 28px;
+        padding: 24px 32px;
       }
       .metrics {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
       }
       .richest {
         width: 100%;
