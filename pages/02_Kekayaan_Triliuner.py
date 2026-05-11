@@ -141,16 +141,31 @@ with tab_static:
 st.divider()
 chart_header("Proyeksi Kekayaan 50 Superkaya hingga 2050", "Gambar 2 — Hal. 16")
 
-_G2 = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_gambar2.html"
-components.html(_G2.read_text(encoding="utf-8"), height=560, scrolling=True)
+_G2_STATIC = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_gambar2.html"
+_G2_ANIM = Path(__file__).resolve().parent.parent / "embed" / "02_Kekayaan_Triliuner_gambar2_anim.html"
 
-chart_footer("Forbes, diolah CELIOS (2026)")
+tab_g2_anim, tab_g2_static = st.tabs(["Versi Animasi (Loop)", "Versi Statis"])
 
-with st.expander("🔗 Kode Embed WordPress — Gambar 2"):
-    st.code("""<!-- Gambar 2: Proyeksi Kekayaan 50 Superkaya hingga 2050 -->
+with tab_g2_anim:
+    components.html(_G2_ANIM.read_text(encoding="utf-8"), height=560, scrolling=True)
+    chart_footer("Forbes & Global Wealth Report, diolah CELIOS (2026)")
+    with st.expander("🔗 Kode Embed WordPress — Gambar 2 (Animasi)"):
+        st.code("""<!-- Gambar 2: Proyeksi Kekayaan 50 Superkaya hingga 2050 — Versi Animasi -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_gambar2_anim.html"
+  width="100%" height="560" frameborder="0"
+  style="border-radius:20px; background:#f7f7f7;"
+  loading="lazy">
+</iframe>""", language="html")
+
+with tab_g2_static:
+    components.html(_G2_STATIC.read_text(encoding="utf-8"), height=560, scrolling=True)
+    chart_footer("Forbes & Global Wealth Report, diolah CELIOS (2026)")
+    with st.expander("🔗 Kode Embed WordPress — Gambar 2 (Statis)"):
+        st.code("""<!-- Gambar 2: Proyeksi Kekayaan 50 Superkaya hingga 2050 -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/02_Kekayaan_Triliuner_gambar2.html"
   width="100%" height="560" frameborder="0"
-  style="border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"
+  style="border-radius:20px; background:#f7f7f7;"
   loading="lazy">
 </iframe>""", language="html")

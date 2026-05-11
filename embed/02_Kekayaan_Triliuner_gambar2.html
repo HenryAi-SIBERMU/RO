@@ -45,9 +45,6 @@
   .tooltip-left::after  { bottom:-10px; left:20px; border-width:15px 0 0 15px; border-color:transparent transparent transparent transparent; }
   .tooltip-light.tooltip-left::after { border-top-color:#8A41DB; }
   .tooltip-dark.tooltip-left::after  { border-top-color:#5B2B9A; }
-  .travel-dot {
-    filter: drop-shadow(0 0 12px rgba(255, 204, 51, 0.45));
-  }
 </style>
 </head>
 <body>
@@ -86,16 +83,16 @@
         </linearGradient>
       </defs>
       <!-- Superkaya area fill (smooth bezier) -->
-      <path id="area-superkaya" d="M 10 350 C 100 348, 180 330, 260 265 C 440 192, 660 90, 850 22 L 850 400 L 10 400 Z"
+      <path d="M 10 350 C 100 348, 180 330, 260 265 C 440 192, 660 90, 850 22 L 850 400 L 10 400 Z"
             fill="url(#grad-top)"/>
       <!-- Penduduk area fill -->
-      <path id="area-penduduk" d="M 10 380 L 260 373 L 440 369 L 850 353 L 850 400 L 10 400 Z"
+      <path d="M 10 380 L 260 373 L 440 369 L 850 353 L 850 400 L 10 400 Z"
             fill="url(#grad-bottom)"/>
       <!-- Superkaya line (smooth bezier  less steep) -->
-      <path id="line-superkaya" d="M 10 350 C 100 348, 180 330, 260 265 C 440 192, 660 90, 850 22"
+      <path d="M 10 350 C 100 348, 180 330, 260 265 C 440 192, 660 90, 850 22"
             fill="none" stroke="#5B2B9A" stroke-width="4" stroke-linecap="round"/>
       <!-- Penduduk line (very flat) -->
-      <path id="line-penduduk" d="M 10 380 L 260 373 L 440 369 L 850 353"
+      <path d="M 10 380 L 260 373 L 440 369 L 850 353"
             fill="none" stroke="#8A41DB" stroke-width="4" stroke-linecap="round"/>
       <!-- Data points superkaya -->
       <circle cx="10"  cy="350" r="6" fill="#5B2B9A"/>
@@ -103,17 +100,6 @@
       <circle cx="850" cy="22"  r="6" fill="#5B2B9A"/>
       <!-- Data points penduduk -->
       <circle cx="10"  cy="380" r="6" fill="#8A41DB"/>
-      <!-- Animated travel dots -->
-      <circle class="travel-dot" r="7" fill="#FFCC33">
-        <animateMotion dur="7s" repeatCount="indefinite">
-          <mpath xlink:href="#line-superkaya" />
-        </animateMotion>
-      </circle>
-      <circle class="travel-dot" r="6" fill="#8A41DB">
-        <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1">
-          <mpath xlink:href="#line-penduduk" />
-        </animateMotion>
-      </circle>
       <circle cx="440" cy="369" r="6" fill="#8A41DB"/>
       <circle cx="850" cy="353" r="6" fill="#8A41DB"/>
     </svg>
