@@ -104,14 +104,12 @@
     }
     .ticker {
       position: absolute;
-      bottom: 26px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 24px;
+      right: 32px;
       font-size: 54px;
       font-weight: 800;
-      color: rgba(255,255,255,0.92);
+      color: rgba(255,255,255,0.95);
       letter-spacing: 0.04em;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
     .source {
       margin-top: 28px;
@@ -162,7 +160,7 @@
       .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    const margin = { top: 24, right: 160, bottom: 30, left: 200 };
+    const margin = { top: 24, right: 160, bottom: 30, left: 240 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
@@ -216,6 +214,7 @@
     const barsGroup = g.append('g');
     const labelGroup = g.append('g').attr('fill', '#fff');
     const avatarGroup = g.append('g').attr('class', 'avatars');
+    const AVATAR_OFFSET_X = -180;
 
     const formatValue = d3.format(',');
 
@@ -235,7 +234,7 @@
       const avatarEnter = avatars.enter()
         .append('g')
         .attr('class', 'avatar')
-        .attr('transform', d => `translate(${-120}, ${y(d.name) + y.bandwidth() / 2})`)
+        .attr('transform', d => `translate(${AVATAR_OFFSET_X}, ${y(d.name) + y.bandwidth() / 2})`)
         .attr('opacity', 0);
 
       avatarEnter.append('circle')
@@ -263,7 +262,7 @@
       avatars.merge(avatarEnter)
         .transition(t)
         .attr('opacity', 1)
-        .attr('transform', d => `translate(${-120}, ${y(d.name) + y.bandwidth() / 2})`);
+        .attr('transform', d => `translate(${AVATAR_OFFSET_X}, ${y(d.name) + y.bandwidth() / 2})`);
 
       avatars.exit()
         .transition(t)
