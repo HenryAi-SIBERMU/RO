@@ -263,10 +263,15 @@
     .filters {
       margin-top: 28px;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 12px;
       z-index: 2;
       position: relative;
+      max-width: 100%;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(86, 60, 176, 0.35) transparent;
     }
 
     .filter-button {
@@ -280,6 +285,7 @@
       background: rgba(86, 60, 176, 0.12);
       cursor: pointer;
       transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      white-space: nowrap;
     }
 
     .filter-button:hover {
@@ -290,6 +296,19 @@
       background: var(--purple-main);
       color: #fff;
       box-shadow: 0 10px 20px rgba(86, 60, 176, 0.32);
+    }
+
+    .filters::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .filters::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .filters::-webkit-scrollbar-thumb {
+      background: rgba(86, 60, 176, 0.35);
+      border-radius: 999px;
     }
 
     .insight-grid {
@@ -424,7 +443,15 @@
         wealth: 3.9,
         color: '#d4231b',
         coalition: 'Pemerintahan',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Logo_PDI-P.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="26" fill="#d4231b" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="28" cy="28" r="18" fill="#0b0b0b"/>
+            <path d="M18.5 30.5c0-5.8 4.8-10.6 9.5-10.6s9.5 4.8 9.5 10.6c0 4.9-3.8 8.6-9.5 8.6s-9.5-3.7-9.5-8.6z" fill="#d4231b"/>
+            <path d="M22.4 30.2c0-3.4 3.1-6.2 6.6-6.2s6.6 2.8 6.6 6.2c0 3.1-2.9 5.3-6.6 5.3s-6.6-2.2-6.6-5.3z" fill="#0b0b0b"/>
+            <path d="M25.6 30.1c0-1.6 1.4-2.8 3.4-2.8s3.4 1.2 3.4 2.8-1.5 2.7-3.4 2.7-3.4-1.1-3.4-2.7z" fill="#d4231b"/>
+          </svg>
+        `
       },
       {
         name: 'Partai Golongan Karya',
@@ -433,7 +460,13 @@
         wealth: 4.6,
         color: '#f4c300',
         coalition: 'Pemerintahan',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Lambang_Partai_Golkar.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 4 48 15v20l-20 17-20-17V15z" fill="#f4c300" stroke="#e0b800" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M28 16c5 0 9 3.4 9 7.6 0 3.2-3.8 6-9 9.8-5.2-3.8-9-6.6-9-9.8 0-4.2 4-7.6 9-7.6z" fill="#0c7b45"/>
+            <path d="M28 26c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z" fill="#f4f7f0"/>
+          </svg>
+        `
       },
       {
         name: 'Partai Kebangkitan Bangsa',
@@ -442,7 +475,19 @@
         wealth: 3.5,
         color: '#0c7b45',
         coalition: 'Pemerintahan',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_PKB.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="9" width="44" height="38" rx="6" fill="#0c7b45" stroke="#ffffff" stroke-width="2"/>
+            <rect x="12" y="15" width="32" height="26" fill="#063d24" rx="4"/>
+            <g fill="#f7d24f">
+              <circle cx="28" cy="28" r="6"/>
+              <circle cx="28" cy="18" r="2"/>
+              <circle cx="28" cy="38" r="2"/>
+              <circle cx="18" cy="28" r="2"/>
+              <circle cx="38" cy="28" r="2"/>
+            </g>
+          </svg>
+        `
       },
       {
         name: 'Partai Gerakan Indonesia Raya',
@@ -451,7 +496,14 @@
         wealth: 2.7,
         color: '#e53c2d',
         coalition: 'Pemerintahan',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Gerindra_logo.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 6 47 17v20l-19 13-19-13V17z" fill="#e53c2d" stroke="#c93124" stroke-width="2"/>
+            <path d="M28 18c5.5 0 10 4.5 10 10s-4.5 10-10 10-10-4.5-10-10 4.5-10 10-10z" fill="#f5c24c"/>
+            <path d="M23 28c0-2.8 2.3-5 5-5s5 2.2 5 5-2.3 5-5 5-5-2.2-5-5z" fill="#d75b27"/>
+            <path d="M24 24h3l1-2 1 2h3l-2.4 1.6.9 2.8L28 27l-2.5 1.4.9-2.8z" fill="#963516"/>
+          </svg>
+        `
       },
       {
         name: 'Partai NasDem',
@@ -460,7 +512,13 @@
         wealth: 2.8,
         color: '#182978',
         coalition: 'Oposisi',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Logo_Partai_Nasdem.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="24" fill="#15245d" stroke="#ffffff" stroke-width="2"/>
+            <path d="M38 20c-2.2 5.6-8.2 10.6-17 12.8 2.2 2.2 5.4 3.6 8.9 3.6 6.6 0 12-5 12-11.2 0-1.8-.4-3.4-1.2-5.2z" fill="#f5a023"/>
+            <path d="M36 16c-6-2.2-13 0.4-16.8 5.8-2.8 4-3.2 9-1.2 12.8 2.4-1.2 4.6-3.2 6.4-5.8 3.4-4.8 5.2-9.6 11.6-12.8z" fill="#1f3c9c"/>
+          </svg>
+        `
       },
       {
         name: 'Partai Keadilan Sejahtera',
@@ -469,7 +527,15 @@
         wealth: 1.6,
         color: '#ed6f24',
         coalition: 'Oposisi',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Logo_Partai_Keadilan_Sejahtera_%282020%29.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="40" height="36" rx="8" fill="#ed6f24"/>
+            <path d="M12 14h32v28H12z" fill="#fff"/>
+            <path d="M28 18c4.4 0 8 3.6 8 8s-3.6 8-8 8-8-3.6-8-8 3.6-8 8-8z" fill="#ed6f24"/>
+            <path d="M23 26c1.4-1.6 3.3-2.6 5-2.6s3.6 1 5 2.6c-1.4 1.6-3.3 2.6-5 2.6s-3.6-1-5-2.6z" fill="#fff"/>
+            <rect x="18" y="34" width="20" height="2.6" rx="1.3" fill="#ed6f24"/>
+          </svg>
+        `
       },
       {
         name: 'Partai Amanat Nasional',
@@ -478,7 +544,13 @@
         wealth: 1.8,
         color: '#256fce',
         coalition: 'Pemerintahan',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Logo_Partai_Amanat_Nasional.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="40" height="36" rx="6" fill="#256fce"/>
+            <rect x="14" y="16" width="28" height="24" fill="#0e3b8c" rx="4"/>
+            <path d="M28 20 30.8 29.2H40l-7.6 5.6 2.8 9.2L28 38.8 20.8 44l2.8-9.2L16 29.2h9.2z" fill="#ffffff"/>
+          </svg>
+        `
       },
       {
         name: 'Partai Demokrat',
@@ -487,7 +559,14 @@
         wealth: 3.1,
         color: '#1c81d9',
         coalition: 'Oposisi',
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Logo_partai_demokrat.svg'
+        logo: `
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="24" fill="#1c81d9" stroke="#ffffff" stroke-width="2"/>
+            <path d="M28 14 37 40l-9-6-9 6z" fill="#f04f3e"/>
+            <path d="M28 14v20l-9 6z" fill="#f7f0d0" opacity="0.85"/>
+            <path d="M28 14l9 32-9-6z" fill="#0e3c99" opacity="0.85"/>
+          </svg>
+        `
       }
     ];
 
@@ -639,15 +718,16 @@
         const badge = document.createElement('div');
         badge.className = 'party-badge';
         badge.dataset.short = party.short;
+        badge.setAttribute('role', 'img');
+        badge.setAttribute('aria-label', party.name);
 
-        const img = document.createElement('img');
-        img.alt = party.name;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.crossOrigin = 'anonymous';
-        img.src = party.logo;
+        badge.innerHTML = party.logo;
+        const svg = badge.querySelector('svg');
+        if (svg) {
+          svg.setAttribute('aria-hidden', 'true');
+          svg.setAttribute('focusable', 'false');
+        }
 
-        badge.appendChild(img);
         badgeElements.push(badge);
         logoLayer.appendChild(badge);
 
