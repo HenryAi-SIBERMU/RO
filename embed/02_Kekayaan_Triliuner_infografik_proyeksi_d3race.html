@@ -251,7 +251,7 @@
       y.domain(entries.map(d => d.name));
       x.domain([0, d3.max(entries, d => d.value)]).nice();
 
-      const t = g.transition().duration(600).ease(d3.easeCubicOut);
+      const t = g.transition().duration(500).ease(d3.easeCubicOut);
 
       const avatars = avatarGroup.selectAll('g.avatar').data(entries, d => d.name);
 
@@ -363,7 +363,7 @@
     setInterval(() => {
       frameIndex = (frameIndex + 1) % frames.length;
       render(frames[frameIndex]);
-    }, 850);
+    }, 500);
   </script>
 </body>
 </html>
