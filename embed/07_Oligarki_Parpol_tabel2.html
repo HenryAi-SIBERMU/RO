@@ -182,10 +182,11 @@
       background: linear-gradient(135deg, var(--purple-main), var(--purple-soft));
       border-radius: var(--card-radius);
       color: var(--text-on-purple);
-      padding: 28px 42px;
-      display: flex;
-      align-items: stretch;
-      gap: 32px;
+      padding: 28px 40px;
+      display: grid;
+      grid-template-columns: minmax(240px, 0.32fr) minmax(360px, 1fr) minmax(240px, 0.28fr);
+      align-items: center;
+      gap: 28px;
       width: 100%;
       box-shadow: 0 18px 32px rgba(54, 22, 114, 0.32);
       overflow: hidden;
@@ -206,7 +207,6 @@
       gap: 18px;
       position: relative;
       z-index: 1;
-      flex: 0 0 260px;
     }
 
     .logo-wrapper {
@@ -256,9 +256,8 @@
     }
 
     .metrics {
-      flex: 1 1 540px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      grid-template-columns: repeat(3, minmax(160px, 1fr));
       gap: 18px;
       position: relative;
       z-index: 1;
@@ -285,7 +284,9 @@
       font-size: 17px;
       font-weight: 700;
       letter-spacing: 0.01em;
-      word-break: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .richest {
@@ -298,8 +299,7 @@
       position: relative;
       z-index: 1;
       backdrop-filter: blur(4px);
-      width: 260px;
-      flex: 0 0 260px;
+      width: 100%;
     }
 
     .avatar {
@@ -347,6 +347,17 @@
       z-index: 1;
     }
 
+    @media (max-width: 1100px) {
+      .party-card {
+        grid-template-columns: minmax(220px, 0.4fr) minmax(280px, 1fr) minmax(220px, 0.4fr);
+        gap: 22px;
+        padding: 26px 32px;
+      }
+      .metrics {
+        grid-template-columns: repeat(3, minmax(140px, 1fr));
+      }
+    }
+
     @media (max-width: 960px) {
       body {
         padding: 32px 16px 48px;
@@ -355,16 +366,13 @@
         padding: 36px 28px 56px;
       }
       .party-card {
-        flex-direction: column;
-        gap: 20px;
-        padding: 24px 32px;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 24px 28px;
       }
       .metrics {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 16px;
-      }
-      .richest {
-        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 14px;
       }
     }
 
@@ -374,6 +382,10 @@
       }
       .party-card {
         padding: 20px;
+      }
+      .legend-band {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
