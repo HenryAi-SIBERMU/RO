@@ -4,68 +4,182 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gambar 7 - Total Harta Pejabat Publik Kabinet</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --purple-bg: #561f8b;
-      --purple-accent: #6d28d9;
-      --yellow-accent: #f3d24f;
-      --text-dark: #1f2937;
+      --purple-main: #4b2c8b;
+      --purple-dark: #352065;
+      --yellow-main: #f3d24f;
+      --text-dark: #231f3f;
+      --gray-bg: #f2f1f6;
+    }
+    * {
+      box-sizing: border-box;
     }
     body {
-      font-family: 'Inter', 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at top left, rgba(111,66,193,0.14), transparent 45%),
-                  radial-gradient(circle at bottom right, rgba(236,233,252,0.6), transparent 55%),
-                  #f9fafb;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
       color: var(--text-dark);
+      padding: 48px 24px 64px;
     }
-    .chart-card {
-      backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.92);
-      border-radius: 28px;
-      box-shadow: 0 25px 55px rgba(86,31,139,0.12);
+    .infographic {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 48px 56px 60px;
+      overflow: hidden;
+    }
+    .infographic::before,
+    .infographic::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 118px;
+      height: 280px;
+      background: var(--gray-bg);
+      border-top-right-radius: 48px;
+      border-bottom-right-radius: 48px;
+      opacity: 0.9;
+      z-index: 0;
+    }
+    .infographic::before {
+      top: 0;
+    }
+    .infographic::after {
+      bottom: -120px;
+      opacity: 0.7;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+    }
+    .chart-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .chart-tag {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--purple-main);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+    }
+    .chart-heading {
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 700;
+      margin: 0;
+      color: var(--purple-dark);
+    }
+    .subtitle {
+      margin: 20px 0 0;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(35, 31, 63, 0.7);
+    }
+    .chart-wrapper {
+      position: relative;
+      margin-top: 36px;
+      padding-bottom: 32px;
+      z-index: 1;
     }
     canvas {
+      display: block;
       width: 100%;
-      height: 100%;
+      height: 420px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+    .legend-dot--purple {
+      background: var(--purple-main);
+    }
+    .legend-dot--yellow {
+      background: var(--yellow-main);
+    }
+    .source-badge {
+      margin-top: 28px;
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: #f7d96a;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 32px 16px 48px;
+      }
+      .infographic {
+        padding: 40px 32px 52px;
+      }
+      .chart-wrapper {
+        margin-top: 28px;
+      }
+      canvas {
+        height: 360px;
+      }
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center py-12 px-4">
-  <main class="w-full max-w-5xl chart-card p-10 relative overflow-hidden">
-    <div class="absolute -top-24 -left-16 w-48 h-48 bg-purple-100/40 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-32 right-10 w-56 h-56 bg-yellow-200/30 rounded-full blur-3xl"></div>
-
-    <header class="relative z-10 flex flex-col gap-4">
-      <div class="flex items-center gap-4">
-        <span class="px-5 py-2 bg-[var(--purple-accent)] text-white font-semibold rounded-full shadow-lg shadow-purple-500/30">Gambar 7.</span>
-        <h1 class="text-2xl md:text-3xl font-bold text-[var(--text-dark)] leading-snug">Total Harta Pejabat Publik Kabinet (2019&ndash;2025)</h1>
+<body>
+  <main class="infographic">
+    <header>
+      <div class="chart-title">
+        <span class="chart-tag">Gambar 7.</span>
+        <h1 class="chart-heading">Total Harta Pejabat Publik Kabinet (2019–2025)</h1>
       </div>
-      <p class="text-sm md:text-base text-[var(--text-dark)]/70 uppercase tracking-[0.2em]">Dalam miliar rupiah</p>
+      <p class="subtitle">Dalam miliar rupiah</p>
     </header>
 
-    <section class="relative z-10 mt-10">
-      <div class="h-[460px] md:h-[420px]">
-        <canvas id="chartGambar7" aria-label="Total harta pejabat publik dan jumlah pejabat per tahun" role="img"></canvas>
+    <section class="chart-wrapper">
+      <canvas id="chartGambar7" aria-label="Total harta pejabat publik dan jumlah pejabat per tahun" role="img"></canvas>
+    </section>
+
+    <section class="legend">
+      <div class="legend-item">
+        <span class="legend-dot legend-dot--purple"></span>
+        <span>Total Harta Pejabat Kabinet</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot legend-dot--yellow"></span>
+        <span>Jumlah Pejabat Publik</span>
       </div>
     </section>
 
-    <footer class="relative z-10 mt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-      <div class="flex items-center gap-6">
-        <div class="flex items-center gap-2">
-          <span class="w-3.5 h-3.5 rounded-full bg-[var(--purple-accent)]"></span>
-          <span class="text-sm md:text-base font-semibold text-[var(--text-dark)]">Total Harta Pejabat Kabinet</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="w-3.5 h-3.5 rounded-full bg-[var(--yellow-accent)]"></span>
-          <span class="text-sm md:text-base font-semibold text-[var(--text-dark)]">Jumlah Pejabat Publik</span>
-        </div>
-      </div>
-      <div class="bg-[var(--yellow-accent)]/80 text-[var(--text-dark)] text-xs md:text-sm font-medium px-4 py-2 rounded-full shadow-md shadow-yellow-400/30">
-        Sumber: Data Laporan Harta Kekayaan Penyelenggara Negara (2026), diolah oleh peneliti
-      </div>
-    </footer>
+    <div class="source-badge">
+      Sumber: Data Laporan Harta Kekayaan Penyelenggara Negara (2026), diolah oleh peneliti
+    </div>
   </main>
 
   <script>
@@ -79,35 +193,35 @@
 
     const labelPlugin = {
       id: 'valueLabels',
-      afterDatasetsDraw(chart, args, pluginOptions) {
+      afterDatasetsDraw(chart) {
         const { ctx } = chart;
         ctx.save();
 
         const barMeta = chart.getDatasetMeta(0);
         barMeta.data.forEach((bar, index) => {
-          if (!bar || !bar.x || !Number.isFinite(totalHarta[index])) return;
+          if (!bar || !Number.isFinite(totalHarta[index])) return;
           const value = `Rp${formatterRupiah.format(totalHarta[index])}`;
           ctx.font = '600 13px "Inter"';
-          ctx.fillStyle = '#1f2937';
+          ctx.fillStyle = '#352065';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
-          ctx.fillText(value, bar.x, bar.y - 8);
+          ctx.fillText(value, bar.x, bar.y - 10);
         });
 
         const lineMeta = chart.getDatasetMeta(1);
         lineMeta.data.forEach((point, index) => {
-          if (!point || !point.x) return;
+          if (!point) return;
           const value = formatterRupiah.format(jumlahPejabat[index]);
           ctx.font = '600 12px "Inter"';
-          ctx.fillStyle = '#f59e0b';
+          ctx.fillStyle = '#b58800';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
-          ctx.fillText(value, point.x, point.y - 14);
+          ctx.fillText(value, point.x, point.y - 18);
         });
       }
     };
 
-    const chart = new Chart(ctx, {
+    new Chart(ctx, {
       type: 'bar',
       data: {
         labels: tahun,
@@ -116,11 +230,14 @@
             type: 'bar',
             label: 'Total Harta Pejabat Kabinet',
             data: totalHarta,
-            backgroundColor: '#6d28d9',
-            hoverBackgroundColor: '#7c3aed',
-            borderRadius: 12,
-            barPercentage: 0.55,
-            categoryPercentage: 0.72,
+            backgroundColor: '#4b2c8b',
+            hoverBackgroundColor: '#5d36ab',
+            borderColor: '#4b2c8b',
+            borderWidth: 1,
+            borderRadius: 0,
+            borderSkipped: false,
+            barPercentage: 0.48,
+            categoryPercentage: 0.68,
             order: 1,
             yAxisID: 'y'
           },
@@ -131,10 +248,11 @@
             borderColor: '#f3d24f',
             backgroundColor: '#f3d24f',
             pointBackgroundColor: '#f3d24f',
-            pointBorderColor: '#f3d24f',
-            pointRadius: 7,
+            pointBorderColor: '#dbae1c',
+            pointRadius: 8,
             pointHoverRadius: 9,
-            tension: 0.35,
+            pointBorderWidth: 2,
+            tension: 0.3,
             borderWidth: 3,
             yAxisID: 'y1',
             order: 0
@@ -146,10 +264,10 @@
         maintainAspectRatio: false,
         layout: {
           padding: {
-            top: 40,
-            right: 30,
-            left: 10,
-            bottom: 20
+            top: 32,
+            right: 48,
+            bottom: 20,
+            left: 16
           }
         },
         scales: {
@@ -157,8 +275,13 @@
             grid: {
               display: false
             },
+            border: {
+              display: true,
+              color: '#231f3f',
+              width: 1
+            },
             ticks: {
-              color: '#4b5563',
+              color: '#3b335a',
               font: {
                 family: 'Inter',
                 weight: '600'
@@ -168,11 +291,17 @@
           y: {
             position: 'left',
             beginAtZero: true,
+            suggestedMax: 32000,
             grid: {
-              color: '#e5e7eb'
+              color: '#e3e3ed',
+              lineWidth: 1
+            },
+            border: {
+              display: false
             },
             ticks: {
-              color: '#4b5563',
+              padding: 10,
+              color: '#615a7f',
               font: {
                 family: 'Inter',
                 weight: '600'
@@ -183,12 +312,17 @@
           y1: {
             position: 'right',
             beginAtZero: true,
+            suggestedMax: 150,
             grid: {
-              drawBorder: false,
-              drawOnChartArea: false
+              drawOnChartArea: false,
+              drawTicks: true
+            },
+            border: {
+              display: false
             },
             ticks: {
-              color: '#d97706',
+              padding: 10,
+              color: '#b58800',
               font: {
                 family: 'Inter',
                 weight: '600'
@@ -201,17 +335,18 @@
             display: false
           },
           tooltip: {
-            backgroundColor: '#111827',
+            backgroundColor: '#1f1b33',
             padding: 12,
+            cornerRadius: 8,
             titleFont: {
               family: 'Inter',
-              weight: '700',
-              size: 13
+              size: 13,
+              weight: '700'
             },
             bodyFont: {
               family: 'Inter',
-              weight: '500',
-              size: 12
+              size: 12,
+              weight: '500'
             },
             callbacks: {
               label: (context) => {
