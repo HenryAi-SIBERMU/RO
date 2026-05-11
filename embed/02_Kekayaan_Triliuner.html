@@ -210,13 +210,13 @@
 
             if (dataset.type === 'line') {
               ctx.fillStyle = '#b98411';
-              ctx.fillText(`${dataset.data[index].toFixed(1)}%`, x, y + 18);
+              ctx.fillText(`${dataset.data[index].toFixed(1)}%`, x, y + 28);
             } else if (datasetIndex === 0) {
               ctx.fillStyle = 'rgba(36,31,59,0.86)';
-              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y - 18);
+              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y - 24);
             } else if (datasetIndex === 1) {
               ctx.fillStyle = 'rgba(26, 20, 48, 0.88)';
-              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y + 4);
+              ctx.fillText(`Rp${rupiahFormatter.format(dataset.data[index])} T`, x, y + 14);
             }
           });
         });
