@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gambar 9 – Peta Partai Politik</title>
+  <title>Gambar 9 - Peta Partai Politik</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
   <style>
     :root {
-      --purple-brand: #6c2fbc;
-      --axis-color: #403f55;
-      --grid-color: rgba(0, 0, 0, 0.08);
-      --line-divider: #b2407d;
-      --text-soft: #706f82;
-      --text-strong: #2f2e45;
-      --sidebar-gray: #f1f1f6;
-      --bg-page: #f8f8fc;
-      --source-yellow: #f7d96a;
+      --purple-main: #5526b5;
+      --purple-deep: #37187c;
+      --pink-line: #ba3a94;
+      --yellow-badge: #f5d66d;
+      --text-dark: #1f1936;
+      --gray-soft: #f1eff8;
+      --grid-color: rgba(83, 41, 128, 0.16);
+      --badge-size: 64px;
     }
 
     * {
@@ -27,434 +27,500 @@
 
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-page);
-      color: var(--text-strong);
-      display: flex;
-      justify-content: center;
-      padding: clamp(24px, 5vw, 48px);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 48px 24px 64px;
     }
 
-    main {
-      width: min(1100px, 100%);
-      background: #ffffff;
-      border-radius: 28px;
-      padding: clamp(32px, 4vw, 54px);
+    .infographic {
       position: relative;
-      box-shadow: 0 32px 64px rgba(34, 37, 80, 0.16);
+      max-width: 1080px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 36px;
+      padding: 48px 56px 72px 96px;
+      overflow: hidden;
+      box-shadow: 0 24px 56px rgba(46, 22, 90, 0.08);
+    }
+
+    .infographic::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(111, 76, 204, 0.07), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .infographic::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 48px;
+      width: 120px;
+      height: calc(100% - 96px);
+      background: var(--gray-soft);
+      border-top-right-radius: 48px;
+      border-bottom-right-radius: 48px;
+      opacity: 0.9;
+      pointer-events: none;
     }
 
     header {
       position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 12px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .tag {
+    .chart-title {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .chart-tag {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 24px;
-      border-radius: 999px;
-      background: var(--purple-brand);
-      color: #ffffff;
-      font-weight: 800;
+      justify-content: center;
+      padding: 10px 22px;
+      background: var(--purple-main);
+      color: #fff;
+      font-weight: 700;
       font-size: 16px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      border-radius: 10px;
+      letter-spacing: 0.02em;
     }
 
-    h1 {
+    .chart-heading {
       margin: 0;
-      font-size: clamp(26px, 4vw, 36px);
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      color: var(--purple-brand);
+      font-size: clamp(22px, 3.2vw, 32px);
+      font-weight: 700;
+      color: var(--purple-deep);
     }
 
     .subtitle {
-      font-size: 14px;
-      letter-spacing: 0.38em;
+      font-size: 13px;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--text-soft);
+      color: rgba(31, 25, 54, 0.72);
+      font-weight: 600;
     }
 
-    .diagram-wrapper {
-      position: relative;
-      margin-top: clamp(32px, 4vw, 48px);
-      border-radius: 24px;
-      padding: clamp(18px, 3vw, 28px);
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 18px 42px rgba(24, 26, 54, 0.12);
-    }
-
-    .diagram-wrapper::after {
-      content: "";
+    .left-label {
       position: absolute;
-      top: clamp(18px, 3vw, 28px);
-      bottom: clamp(18px, 3vw, 28px);
-      left: clamp(18px, 3vw, 28px);
-      width: clamp(86px, 15vw, 124px);
-      background: var(--sidebar-gray);
-      border-radius: 16px 0 0 16px;
-      opacity: 1;
-      pointer-events: none;
+      top: 50%;
+      left: 32px;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      color: rgba(55, 24, 124, 0.7);
+    }
+
+    .chart-shell {
+      position: relative;
+      margin-top: 40px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.86);
+      padding: 24px 24px 32px;
+      box-shadow: inset 0 0 0 1px rgba(92, 71, 182, 0.08);
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 520px;
     }
 
     canvas {
       width: 100% !important;
-      height: clamp(420px, 58vw, 540px) !important;
+      height: 100% !important;
     }
 
-    .axes-labels {
+    .logo-layer {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--axis-color);
+      z-index: 4;
     }
 
-    .axis-y-label {
+    .party-badge {
+      --badge-translate-x: 0px;
+      --badge-translate-y: -6px;
       position: absolute;
-      top: 50%;
-      left: clamp(-22px, -3vw, -28px);
-      writing-mode: vertical-rl;
-      transform: translateY(-50%);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      width: var(--badge-size);
+      height: var(--badge-size);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(240,236,255,0.92));
+      box-shadow: 0 10px 18px rgba(44, 23, 83, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      pointer-events: auto;
+      transition: transform 220ms ease, opacity 220ms ease, filter 220ms ease;
     }
 
-    .axis-x-label {
+    .party-badge img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(40, 25, 70, 0.16));
+    }
+
+    .party-badge::after {
+      content: attr(data-short);
       position: absolute;
-      bottom: clamp(-28px, -2vw, -36px);
-      left: 50%;
+      inset: auto auto -26px auto;
       transform: translateX(-50%);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .axis-caption {
-      position: absolute;
-      font-size: 12px;
+      left: 50%;
+      min-width: 72px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(47, 27, 88, 0.9);
+      color: #fff;
+      font-size: 11px;
       font-weight: 600;
-      color: rgba(64, 63, 85, 0.68);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease, transform 200ms ease;
     }
 
-    .axis-caption--y-top {
-      top: clamp(32px, 9vw, 64px);
-      left: clamp(-18px, -2vw, -12px);
-      transform: rotate(-90deg);
+    .party-badge:hover::after {
+      opacity: 1;
+      transform: translate(-50%, -4px);
     }
 
-    .axis-caption--y-bottom {
-      bottom: clamp(32px, 9vw, 64px);
-      left: clamp(-18px, -2vw, -12px);
-      transform: rotate(-90deg);
+    .party-badge:hover {
+      transform: translate(var(--badge-translate-x), var(--badge-translate-y)) scale(1.05);
+      z-index: 10;
     }
 
-    .axis-caption--x-left {
-      bottom: clamp(-12px, -1vw, -8px);
-      left: clamp(12px, 8vw, 80px);
+    .party-badge.is-dimmed {
+      opacity: 0.18;
+      filter: grayscale(100%);
+      transform: scale(0.92);
     }
 
-    .axis-caption--x-right {
-      bottom: clamp(-12px, -1vw, -8px);
-      right: clamp(12px, 8vw, 80px);
+    .tooltip {
+      position: absolute;
+      min-width: 220px;
+      background: #20163f;
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 16px;
+      box-shadow: 0 16px 36px rgba(22, 8, 51, 0.4);
+      pointer-events: none;
+      z-index: 15;
+      opacity: 0;
+      transform: translate(-50%, -8px);
+      transition: opacity 140ms ease;
+      font-size: 13px;
+    }
+
+    .tooltip strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
     }
 
     .quadrant-label {
       position: absolute;
       font-size: 12px;
       font-weight: 600;
-      color: rgba(64, 63, 85, 0.68);
-      text-transform: uppercase;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(31, 25, 54, 0.62);
+      z-index: 3;
     }
 
-    .quadrant-label--low {
-      bottom: clamp(92px, 22vw, 130px);
-      left: clamp(88px, 16vw, 170px);
+    .quadrant-label--bottom {
+      bottom: 4px;
+      left: 24px;
     }
 
-    .quadrant-label--high {
-      top: clamp(88px, 16vw, 170px);
-      right: clamp(88px, 16vw, 170px);
-      text-align: right;
+    .quadrant-label--bottom.quadrant-label--right {
+      left: auto;
+      right: 24px;
     }
 
-    .legend-note {
-      margin-top: clamp(22px, 4vw, 36px);
-      padding: clamp(18px, 3vw, 22px);
-      border-radius: 16px;
-      background: rgba(239, 239, 245, 0.65);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--text-strong);
+    .quadrant-label--top {
+      top: 8px;
+      right: 24px;
+    }
+
+    .quadrant-label--top.quadrant-label--left {
+      left: 24px;
+      right: auto;
+    }
+
+    .filters {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .filter-button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--purple-deep);
+      background: rgba(86, 60, 176, 0.12);
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .filter-button:hover {
+      background: rgba(86, 60, 176, 0.18);
+    }
+
+    .filter-button.is-active {
+      background: var(--purple-main);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(86, 60, 176, 0.32);
+    }
+
+    .insight-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .insight-card {
+      background: rgba(255, 255, 255, 0.86);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: inset 0 0 0 1px rgba(86, 60, 176, 0.08);
+    }
+
+    .insight-card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      color: var(--purple-deep);
+    }
+
+    .insight-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(31, 25, 54, 0.78);
     }
 
     .source-badge {
-      margin-top: clamp(18px, 3vw, 28px);
+      margin-top: 40px;
       display: inline-flex;
       align-items: center;
-      padding: 14px 20px;
-      background: var(--source-yellow);
-      border-radius: 16px;
+      gap: 10px;
+      padding: 12px 18px;
+      background: var(--yellow-badge);
+      border-radius: 999px;
+      color: var(--text-dark);
       font-size: 13px;
-      font-weight: 700;
-      color: #5a3b00;
-      letter-spacing: 0.05em;
-      box-shadow: 0 14px 34px rgba(70, 56, 0, 0.18);
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
     }
 
-    @media (max-width: 768px) {
-      .axis-y-label {
-        font-size: 12px;
+    @media (max-width: 900px) {
+      body {
+        padding: 32px 16px 48px;
       }
-      .axis-x-label {
-        font-size: 12px;
+      .infographic {
+        padding: 40px 32px 64px 48px;
+        border-radius: 28px;
       }
-      .quadrant-label--low {
-        left: clamp(56px, 24vw, 120px);
+      .left-label {
+        display: none;
       }
-      .quadrant-label--high {
-        right: clamp(56px, 24vw, 120px);
+    }
+
+    @media (max-width: 640px) {
+      .chart-wrapper {
+        height: 440px;
+      }
+      .party-badge {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+      }
+      .party-badge::after {
+        inset: auto auto -22px auto;
       }
     }
   </style>
 </head>
 <body>
-  <main>
+  <main class="infographic">
+    <span class="left-label">Akumulasi Kekayaan Legislator</span>
     <header>
-      <span class="tag">Gambar 9.</span>
-      <h1>Peta Partai Politik Berbasis Jumlah Kursi dan Konsentrasi Kekayaan</h1>
-      <p class="subtitle">Dalam triliun rupiah</p>
+      <div class="chart-title">
+        <span class="chart-tag">Gambar 9.</span>
+        <h1 class="chart-heading">Peta Partai Politik Berbasis Jumlah Kursi dan Konsentrasi Kekayaan</h1>
+      </div>
+      <p class="subtitle">Setiap titik merepresentasikan partai politik besar di DPR RI</p>
     </header>
 
-    <section class="diagram-wrapper">
-      <canvas id="chartG9" role="img" aria-label="Sebaran partai politik berdasarkan jumlah kursi dan kekayaan legislatif" style="position:relative; z-index:1;"></canvas>
-      <div class="axes-labels">
-        <span class="axis-y-label">Akumulasi Kekayaan Legislator</span>
-        <span class="axis-x-label">Penguasaan Jumlah Kursi</span>
-        <span class="axis-caption axis-caption--y-top">Tinggi</span>
-        <span class="axis-caption axis-caption--y-bottom">Rendah</span>
-        <span class="axis-caption axis-caption--x-left">Rendah</span>
-        <span class="axis-caption axis-caption--x-right">Tinggi</span>
-        <span class="quadrant-label quadrant-label--low">Rendah</span>
-        <span class="quadrant-label quadrant-label--high">Tinggi</span>
+    <section class="chart-shell">
+      <div class="chart-wrapper">
+        <canvas id="scatterChart" role="img" aria-label="Peta sebaran partai politik menurut jumlah kursi dan total kekayaan"></canvas>
+        <div class="logo-layer" id="logoLayer"></div>
+        <div class="tooltip" id="partyTooltip"></div>
+        <span class="quadrant-label quadrant-label--bottom quadrant-label--left">Rendah</span>
+        <span class="quadrant-label quadrant-label--bottom quadrant-label--right">Tinggi</span>
+        <span class="quadrant-label quadrant-label--top quadrant-label--left">Tinggi</span>
+        <span class="quadrant-label quadrant-label--top quadrant-label--right">Rendah</span>
       </div>
     </section>
 
-    <div class="legend-note">
-      Titik menggambarkan posisi masing-masing partai di DPR berdasarkan dua indikator utama: jumlah kursi yang dikuasai (sumbu X) dan akumulasi kekayaan legislator (sumbu Y). Garis tengah menandai batas rata-rata Rp3 triliun dan 60 kursi. Kuadran kanan-atas menunjukkan partai dengan dominasi politik sekaligus konsentrasi kekayaan yang tinggi.
-    </div>
+    <nav class="filters" aria-label="Filter kuadran">
+      <button class="filter-button is-active" data-filter="all">Semua</button>
+      <button class="filter-button" data-filter="double-high">Kursi & Kekayaan Tinggi</button>
+      <button class="filter-button" data-filter="seat-high">Kursi Tinggi, Kekayaan Rendah</button>
+      <button class="filter-button" data-filter="wealth-high">Kekayaan Tinggi, Kursi Rendah</button>
+      <button class="filter-button" data-filter="double-low">Keduanya Rendah</button>
+    </nav>
 
-    <span class="source-badge">Sumber: Laporan Harta Kekayaan Pejabat Negara (2025), diolah oleh peneliti</span>
+    <section class="insight-grid">
+      <article class="insight-card">
+        <h3>Golkar memimpin kekayaan</h3>
+        <p>Fraksi Golkar mengonsolidasikan kekayaan legislator terbesar dengan lebih dari Rp4,5 triliun, sekaligus berada pada kuadran dominan kursi.</p>
+      </article>
+      <article class="insight-card">
+        <h3>PDIP mendominasi kursi</h3>
+        <p>PDI Perjuangan mengamankan kursi terbanyak (sekitar 120), menempatkannya di posisi pengaruh tertinggi dengan basis kekayaan besar.</p>
+      </article>
+      <article class="insight-card">
+        <h3>Partai reformis masih terbatas</h3>
+        <p>PKS dan PAN berada pada kuadran kursi & kekayaan lebih rendah, menandakan ruang untuk memperluas jaringan donor dan kekuatan legislasi.</p>
+      </article>
+    </section>
+
+    <div class="source-badge">
+      Sumber: Laporan Harta Kekayaan Pejabat Negara 2025, diolah peneliti
+    </div>
   </main>
 
   <script>
-    const ctx = document.getElementById('chartG9');
-
     const parties = [
       {
-        name: 'Partai Demokrasi Indonesia Perjuangan (PDI-P)',
-        short: 'PDI-P',
-        seats: 110,
-        wealth: 4.6,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Logo_PDI_Perjuangan.svg/512px-Logo_PDI_Perjuangan.svg.png'
+        name: 'Partai Demokrasi Indonesia Perjuangan',
+        short: 'PDI Perjuangan',
+        seats: 118,
+        wealth: 3.9,
+        color: '#d4231b',
+        coalition: 'Pemerintahan',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Logo_PDI-P.svg'
       },
       {
-        name: 'Partai Golongan Karya (Golkar)',
+        name: 'Partai Golongan Karya',
         short: 'Golkar',
         seats: 92,
-        wealth: 4.4,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Logo_Partai_Golkar.svg/512px-Logo_Partai_Golkar.svg.png'
+        wealth: 4.6,
+        color: '#f4c300',
+        coalition: 'Pemerintahan',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Lambang_Partai_Golkar.svg'
       },
       {
-        name: 'Partai Kebangkitan Bangsa (PKB)',
+        name: 'Partai Kebangkitan Bangsa',
         short: 'PKB',
-        seats: 78,
-        wealth: 4.0,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Logo_PKB.svg/512px-Logo_PKB.svg.png'
+        seats: 72,
+        wealth: 3.5,
+        color: '#0c7b45',
+        coalition: 'Pemerintahan',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_PKB.svg'
       },
       {
-        name: 'Partai Gerakan Indonesia Raya (Gerindra)',
+        name: 'Partai Gerakan Indonesia Raya',
         short: 'Gerindra',
-        seats: 58,
-        wealth: 2.6,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Logo_Partai_Gerindra.svg/512px-Logo_Partai_Gerindra.svg.png'
+        seats: 78,
+        wealth: 2.7,
+        color: '#e53c2d',
+        coalition: 'Pemerintahan',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Gerindra_logo.svg'
       },
       {
         name: 'Partai NasDem',
         short: 'NasDem',
-        seats: 48,
-        wealth: 3.1,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_Partai_NasDem.svg/512px-Logo_Partai_NasDem.svg.png'
+        seats: 59,
+        wealth: 2.8,
+        color: '#182978',
+        coalition: 'Oposisi',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Logo_Partai_Nasdem.svg'
+      },
+      {
+        name: 'Partai Keadilan Sejahtera',
+        short: 'PKS',
+        seats: 44,
+        wealth: 1.6,
+        color: '#ed6f24',
+        coalition: 'Oposisi',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Logo_Partai_Keadilan_Sejahtera_%282020%29.svg'
+      },
+      {
+        name: 'Partai Amanat Nasional',
+        short: 'PAN',
+        seats: 31,
+        wealth: 1.8,
+        color: '#256fce',
+        coalition: 'Pemerintahan',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Logo_Partai_Amanat_Nasional.svg'
       },
       {
         name: 'Partai Demokrat',
         short: 'Demokrat',
-        seats: 36,
-        wealth: 3.2,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Partai_Demokrat_logo.svg/512px-Partai_Demokrat_logo.svg.png'
-      },
-      {
-        name: 'Partai Keadilan Sejahtera (PKS)',
-        short: 'PKS',
-        seats: 40,
-        wealth: 2.0,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Logo_PKS.svg/512px-Logo_PKS.svg.png'
-      },
-      {
-        name: 'Partai Amanat Nasional (PAN)',
-        short: 'PAN',
-        seats: 24,
-        wealth: 2.4,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Logo_Partai_Amanat_Nasional.svg/512px-Logo_Partai_Amanat_Nasional.svg.png'
+        seats: 28,
+        wealth: 3.1,
+        color: '#1c81d9',
+        coalition: 'Oposisi',
+        logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Logo_partai_demokrat.svg'
       }
     ];
 
-    const imageCache = new Map();
+    const seatPivot = 60;
+    const wealthPivot = 3.0;
 
-    const loadLogo = (url) => {
-      if (imageCache.has(url)) return imageCache.get(url);
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = url || PLACEHOLDER_LOGO;
-      imageCache.set(url, img);
-      return img;
+    const ctx = document.getElementById('scatterChart').getContext('2d');
+    const logoLayer = document.getElementById('logoLayer');
+    const tooltip = document.getElementById('partyTooltip');
+    const badgeElements = [];
+
+    const filters = {
+      all: () => true,
+      'double-high': (party) => party.seats >= seatPivot && party.wealth >= wealthPivot,
+      'seat-high': (party) => party.seats >= seatPivot && party.wealth < wealthPivot,
+      'wealth-high': (party) => party.seats < seatPivot && party.wealth >= wealthPivot,
+      'double-low': (party) => party.seats < seatPivot && party.wealth < wealthPivot
     };
 
-    const scatterData = parties.map((party) => ({ x: party.seats, y: party.wealth, r: 24, party }));
-
-    const formatter = new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-    const USE_PLACEHOLDER_PHOTO = false;
     const styles = getComputedStyle(document.documentElement);
-    const COLOR_AXIS = styles.getPropertyValue('--axis-color').trim() || '#403f55';
-    const COLOR_GRID = styles.getPropertyValue('--grid-color').trim() || 'rgba(0,0,0,0.08)';
-    const COLOR_DIVIDER = styles.getPropertyValue('--line-divider').trim() || '#b03a7e';
+    const gridColor = styles.getPropertyValue('--grid-color').trim() || 'rgba(83, 41, 128, 0.16)';
+    const dividerColor = styles.getPropertyValue('--pink-line').trim() || '#ba3a94';
 
-    const logoPlugin = {
-      id: 'partyLogos',
-      afterDatasetsDraw(chart) {
-        const { ctx, scales: { x, y } } = chart;
-        const points = chart.getDatasetMeta(0).data;
-        points.forEach((point, index) => {
-          const { party } = scatterData[index];
-          const img = loadLogo(party.logo);
-          const size = 58;
-          const half = size / 2;
-          const xPos = point.x - half;
-          const yPos = point.y - half;
-
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(point.x, point.y, half, 0, Math.PI * 2);
-          ctx.closePath();
-          ctx.clip();
-          if (img.complete) {
-            ctx.drawImage(img, xPos, yPos, size, size);
-          } else {
-            img.onload = () => {
-              chart.draw();
-            };
-          }
-          ctx.restore();
-
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(point.x, point.y, half, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-          ctx.lineWidth = 3;
-          ctx.stroke();
-          ctx.restore();
-        });
-      }
-    };
-
-    const quadrantPlugin = {
-      id: 'quadrantLines',
-      beforeDatasetsDraw(chart) {
-        const { ctx, chartArea: { top, bottom, left, right } } = chart;
-        const xScale = chart.scales.x;
-        const yScale = chart.scales.y;
-
-        const verticalX = xScale.getPixelForValue(60);
-        const horizontalY = yScale.getPixelForValue(3);
-
-        ctx.save();
-        ctx.fillStyle = 'rgba(244, 230, 239, 0.35)';
-        ctx.fillRect(verticalX, top, right - verticalX, horizontalY - top);
-        ctx.fillStyle = 'rgba(237, 248, 255, 0.4)';
-        ctx.fillRect(left, horizontalY, verticalX - left, bottom - horizontalY);
-
-        ctx.strokeStyle = COLOR_DIVIDER || 'rgba(178, 64, 125, 0.85)';
-        ctx.lineWidth = 2.4;
-        ctx.setLineDash([]);
-        ctx.beginPath();
-        ctx.moveTo(verticalX, top);
-        ctx.lineTo(verticalX, bottom);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(left, horizontalY);
-        ctx.lineTo(right, horizontalY);
-        ctx.stroke();
-        ctx.restore();
-      }
-    };
-
-    const axisArrowPlugin = {
-      id: 'axisArrows',
-      afterDatasetsDraw(chart) {
-        const { ctx, chartArea: { left, right, top, bottom } } = chart;
-        ctx.save();
-        ctx.strokeStyle = '#1f1f25';
-        ctx.lineWidth = 2.2;
-        ctx.fillStyle = '#1f1f25';
-
-        // Y axis
-        ctx.beginPath();
-        ctx.moveTo(left + 0.5, bottom + 4);
-        ctx.lineTo(left + 0.5, top - 18);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(left - 4, top - 14);
-        ctx.lineTo(left + 0.5, top - 22);
-        ctx.lineTo(left + 5, top - 14);
-        ctx.fill();
-
-        // X axis
-        ctx.beginPath();
-        ctx.moveTo(left - 4, bottom - 0.5);
-        ctx.lineTo(right + 18, bottom - 0.5);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(right + 14, bottom - 4);
-        ctx.lineTo(right + 22, bottom - 0.5);
-        ctx.lineTo(right + 14, bottom + 3);
-        ctx.fill();
-
-        ctx.restore();
-      }
-    };
-
-    const chart = new Chart(ctx, {
+    const scatterChart = new Chart(ctx, {
       type: 'scatter',
       data: {
         datasets: [
           {
-            label: 'Peta Partai Politik',
-            data: scatterData,
-            backgroundColor: 'rgba(255, 255, 255, 0)',
-            pointRadius: 33,
-            pointHoverRadius: 35,
-            pointBorderWidth: 0
+            label: 'Partai Politik',
+            data: parties.map((party) => ({ x: party.seats, y: party.wealth })),
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            showLine: false
           }
         ]
       },
@@ -463,88 +529,190 @@
         maintainAspectRatio: false,
         animation: {
           duration: 900,
-          easing: 'easeOutQuad'
-        },
-        scales: {
-          x: {
-            min: 0,
-            max: 120,
-            grid: {
-              color: COLOR_GRID || 'rgba(0,0,0,0.08)',
-              lineWidth: 1,
-              drawTicks: false
-            },
-            ticks: {
-              color: COLOR_AXIS || '#333',
-              callback: (value) => value === 0 ? '0' : `${value}`,
-              font: {
-                family: 'Inter',
-                weight: '600'
-              }
-            },
-            border: {
-              color: 'rgba(120, 80, 180, 0.6)',
-              width: 1.6
-            }
-          },
-          y: {
-            min: 1,
-            max: 5,
-            grid: {
-              color: COLOR_GRID || 'rgba(0,0,0,0.08)',
-              lineWidth: 1
-            },
-            ticks: {
-              color: COLOR_AXIS || '#333',
-              callback: (value) => `Rp${value} T`,
-              font: {
-                family: 'Inter',
-                weight: '600'
-              }
-            },
-            border: {
-              color: 'rgba(120, 80, 180, 0.6)',
-              width: 1.6
-            }
-          }
+          easing: 'easeOutQuart'
         },
         plugins: {
           legend: {
             display: false
           },
           tooltip: {
-            backgroundColor: 'rgba(255, 255, 255, 0.96)',
-            borderColor: 'rgba(178, 64, 125, 0.6)',
-            borderWidth: 1,
-            padding: 12,
-            cornerRadius: 12,
-            titleColor: '#2f2e45',
-            bodyColor: '#2f2e45',
-            titleFont: {
-              family: 'Inter',
-              size: 13,
-              weight: '700'
-            },
-            bodyFont: {
-              family: 'Inter',
-              size: 12,
-              weight: '500'
-            },
-            callbacks: {
-              label: (context) => {
-                const party = context.raw.party;
-                return [
-                  party.name,
-                  `Jumlah kursi: ${party.seats} kursi`,
-                  `Akumulasi kekayaan: Rp${formatter.format(party.wealth)} triliun`
-                ];
+            enabled: false
+          },
+          annotation: {
+            clip: false,
+            annotations: {
+              wealthDivider: {
+                type: 'line',
+                yMin: wealthPivot,
+                yMax: wealthPivot,
+                borderColor: dividerColor,
+                borderWidth: 2
+              },
+              seatDivider: {
+                type: 'line',
+                xMin: seatPivot,
+                xMax: seatPivot,
+                borderColor: dividerColor,
+                borderWidth: 2
               }
+            }
+          }
+        },
+        layout: {
+          padding: {
+            left: 12,
+            right: 12,
+            top: 12,
+            bottom: 16
+          }
+        },
+        scales: {
+          x: {
+            min: 0,
+            max: 120,
+            grid: {
+              color: gridColor
+            },
+            ticks: {
+              font: {
+                family: 'Plus Jakarta Sans',
+                size: 12
+              }
+            },
+            title: {
+              display: true,
+              text: 'Penguasaan Jumlah Kursi',
+              font: {
+                family: 'Plus Jakarta Sans',
+                size: 14,
+                weight: 600
+              },
+              color: 'rgba(31, 25, 54, 0.76)'
+            }
+          },
+          y: {
+            min: 0,
+            max: 5.2,
+            grid: {
+              color: gridColor
+            },
+            ticks: {
+              stepSize: 1,
+              callback: (value) => `Rp${value} Triliun`,
+              font: {
+                family: 'Plus Jakarta Sans',
+                size: 12
+              }
+            },
+            title: {
+              display: false
             }
           }
         }
       },
-      plugins: [quadrantPlugin, logoPlugin, axisArrowPlugin]
+      plugins: [{
+        id: 'badgesReposition',
+        afterRender(chart) {
+          window.requestAnimationFrame(() => updateBadges(chart));
+        }
+      }]
     });
+
+    const numberFormatter = new Intl.NumberFormat('id-ID', {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
+    });
+
+    function updateBadges(chart) {
+      const meta = chart.getDatasetMeta(0);
+      if (!meta || !meta.data) return;
+      meta.data.forEach((point, index) => {
+        const badge = badgeElements[index];
+        if (!badge) return;
+        const { x, y } = point.getProps(['x', 'y'], true);
+        badge.style.transform = `translate(${x - badge.offsetWidth / 2}px, ${y - badge.offsetHeight / 2}px)`;
+      });
+    }
+
+    function setupBadges() {
+      parties.forEach((party, index) => {
+        const badge = document.createElement('div');
+        badge.className = 'party-badge';
+        badge.dataset.short = party.short;
+
+        const img = document.createElement('img');
+        img.alt = party.name;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.crossOrigin = 'anonymous';
+        img.src = party.logo;
+
+        badge.appendChild(img);
+        badgeElements.push(badge);
+        logoLayer.appendChild(badge);
+
+        badge.addEventListener('mouseenter', (event) => {
+          tooltip.innerHTML = `
+            <strong>${party.name}</strong>
+            <span>Kursi: ${party.seats}</span><br>
+            <span>Kekayaan legislator: Rp${numberFormatter.format(party.wealth)} triliun</span><br>
+            <span>Posisi: ${describeQuadrant(party)}</span>
+          `;
+          positionTooltip(event);
+          tooltip.style.opacity = 1;
+        });
+
+        badge.addEventListener('mousemove', positionTooltip);
+        badge.addEventListener('mouseleave', () => {
+          tooltip.style.opacity = 0;
+        });
+      });
+    }
+
+    function positionTooltip(event) {
+      const rect = logoLayer.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const offsetY = event.clientY - rect.top;
+      tooltip.style.left = `${offsetX}px`;
+      tooltip.style.top = `${offsetY - 32}px`;
+    }
+
+    function describeQuadrant(party) {
+      if (party.seats >= seatPivot && party.wealth >= wealthPivot) {
+        return 'Dominasi kursi & kekayaan';
+      }
+      if (party.seats >= seatPivot && party.wealth < wealthPivot) {
+        return 'Dominasi kursi';
+      }
+      if (party.seats < seatPivot && party.wealth >= wealthPivot) {
+        return 'Dominasi modal';
+      }
+      return 'Basis kursi & modal terbatas';
+    }
+
+    function applyFilter(filterKey) {
+      badgeElements.forEach((badge, index) => {
+        const isVisible = filters[filterKey](parties[index]);
+        badge.classList.toggle('is-dimmed', !isVisible);
+      });
+    }
+
+    document.querySelectorAll('.filter-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.filter-button').forEach((btn) => btn.classList.remove('is-active'));
+        button.classList.add('is-active');
+        applyFilter(button.dataset.filter);
+      });
+    });
+
+    setupBadges();
+    applyFilter('all');
+    updateBadges(scatterChart);
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateBadges(scatterChart);
+    });
+    resizeObserver.observe(document.querySelector('.chart-wrapper'));
   </script>
 </body>
 </html>

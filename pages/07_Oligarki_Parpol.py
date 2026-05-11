@@ -1,6 +1,7 @@
 import streamlit as st
-import streamlit.components.v1 as st_components
+import streamlit.components.v1 as components
 from pathlib import Path
+
 from components.embed_layout import apply_embed_mode
 from components.sidebar import render_sidebar
 from components.chart_wrapper import chart_header, chart_footer
@@ -9,19 +10,17 @@ st.set_page_config(page_title="Oligarki & Parpol", layout="wide", page_icon="c:/
 apply_embed_mode()
 render_sidebar()
 
+_G9_embed = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar9.html"
+
 chart_header("Peta Partai Politik: Jumlah Kursi vs Konsentrasi Kekayaan", "Gambar 9 — Hal. 23")
-
-_G9_interaktif = Path(__file__).resolve().parent.parent / "embed" / "07_Oligarki_Parpol_gambar9.html"
-st_components.html(_G9_interaktif.read_text(encoding="utf-8"), height=780, scrolling=True)
-
-chart_footer("Laporan Harta Kekayaan Pejabat Negara (2025), diolah CELIOS")
-
-with st.expander("🔗 Kode Embed WordPress — Gambar 9 (Interaktif)"):
-    st.code("""<!-- Gambar 9: Peta Partai Politik (Jumlah Kursi vs Konsentrasi Kekayaan) -->
+components.html(_G9_embed.read_text(encoding="utf-8"), height=880, scrolling=True)
+chart_footer("LHKPN KPK (2025), diolah CELIOS")
+with st.expander("🔗 Kode Embed WordPress — Gambar 9"):
+    st.code("""<!-- Gambar 9: Peta Partai Politik Berbasis Jumlah Kursi dan Konsentrasi Kekayaan -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/07_Oligarki_Parpol_gambar9.html"
-  width="100%" height="780" frameborder="0"
-  style="border-radius:32px; background:#4b1b9a;"
+  width="100%" height="880" frameborder="0"
+  style="border-radius:32px; background:#fff;"
   loading="lazy">
 </iframe>""", language="html")
 
