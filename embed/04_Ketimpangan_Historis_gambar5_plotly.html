@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Gambar 5 — Ketimpangan Pendapatan dan Kekayaan</title>
+<title>Gambar 5 — Ketimpangan Pendapatan dan Kekayaan (Plotly)</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
   :root {
     --purple: #7B3CBA;
@@ -14,9 +14,7 @@
     --bg: #F4F1FA;
     --border: #E5DFF5;
   }
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
   body {
     margin: 0;
     padding: 24px;
@@ -100,9 +98,9 @@
     letter-spacing: 0.4px;
     color: rgba(61, 40, 104, 0.7);
   }
-  canvas {
-    width: 100% !important;
-    height: 420px !important;
+  #chart {
+    width: 100%;
+    height: 420px;
   }
   .legend {
     display: flex;
@@ -161,17 +159,13 @@
     z-index: 1;
   }
   @media (max-width: 900px) {
-    .content {
-      grid-template-columns: 1fr;
-    }
+    .content { grid-template-columns: 1fr; }
     .chart-wrap::after {
       left: 16px;
       top: -16px;
       transform: rotate(0deg);
     }
-    canvas {
-      height: 360px !important;
-    }
+    #chart { height: 360px; }
   }
 </style>
 </head>
@@ -185,7 +179,7 @@
 
   <div class="content">
     <div class="chart-wrap">
-      <canvas id="inequalityChart"></canvas>
+      <div id="chart"></div>
     </div>
     <div class="legend">
       <h2>Proporsi 1% Teratas</h2>
@@ -201,9 +195,9 @@
       </ul>
       <p>
         Kelompok 1% teratas menguasai sekitar <strong>20–21%</strong> total kekayaan
-        dan sekitar <strong>17–18%</strong> pendapatan nasional sebelum pajak. Artinya,
-        segelintir orang super kaya menikmati hampir seperlima dari kekayaan dan pendapatan
-        yang dihasilkan sebelum redistribusi melalui pajak.
+        dan sekitar <strong>17–18%</strong> pendapatan nasional sebelum pajak.
+        Segelintir orang super kaya menikmati hampir seperlima dari kekayaan
+        dan pendapatan sebelum redistribusi melalui pajak.
       </p>
     </div>
   </div>
@@ -216,104 +210,62 @@ const years = [1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975,
 const pendapatan = [14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9, 15.0, 15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.8, 16.0, 16.1, 16.0, 16.1, 16.2, 16.3, 16.5, 16.8, 17.5, 19.4, 18.9, 18.5, 18.2, 18.6, 18.8, 18.9, 18.5, 15.8, 16.2, 16.5, 16.8, 17.0, 17.1, 17.2, 17.2, 17.3, 17.4, 17.5, 17.4, 17.5, 17.6, 17.7, 17.8, 17.8, 17.9, 17.9, 18.0, 18.0, 18.0, 17.8, 17.9, 18.0, 18.0, 18.0];
 const kekayaan = [20.5, 20.4, 20.5, 20.6, 20.7, 20.8, 20.9, 21.0, 21.1, 21.2, 21.0, 20.9, 20.8, 20.9, 21.0, 21.5, 21.6, 21.4, 21.2, 21.1, 20.8, 20.7, 21.0, 21.4, 21.8, 22.1, 21.8, 21.5, 21.2, 21.4, 21.0, 20.8, 20.0, 18.5, 18.2, 18.5, 18.3, 18.2, 18.0, 18.1, 18.2, 18.5, 18.8, 19.0, 19.2, 19.4, 19.5, 19.6, 19.7, 19.8, 20.0, 20.2, 20.4, 20.5, 20.6, 20.3, 20.5, 20.7, 20.8, 20.8];
 
-const ctx = document.getElementById('inequalityChart').getContext('2d');
+const cutoffIndex = years.indexOf(1980);
 
-const formatTooltip = (ctx) => `${ctx.raw.y.toFixed(1)}%`;
+const tracePendapatanDash = {
+  name: 'Pendapatan Nasional sebelum pajak | Proporsi 1% teratas',
+  x: years.slice(0, cutoffIndex + 1),
+  y: pendapatan.slice(0, cutoffIndex + 1),
+  mode: 'lines',
+  line: { color: 'var(--maroon)', width: 3, dash: 'dash' },
+  hovertemplate: '<b>%{x}</b><br>Pendapatan 1% teratas: <b>%{y:.1f}%</b><extra></extra>'
+};
 
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    datasets: [
-      {
-        label: 'Pendapatan Nasional sebelum pajak | Proporsi 1% teratas',
-        data: years.map((year, idx) => ({ x: year, y: pendapatan[idx] })),
-        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--maroon').trim(),
-        pointBackgroundColor: '#fff',
-        pointBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--maroon').trim(),
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        tension: 0.35,
-        borderWidth: 3,
-        fill: false,
-        segment: {
-          borderDash: ctx => ctx.p0.parsed.x <= 1980 ? [6, 5] : undefined
-        }
-      },
-      {
-        label: 'Kekayaan bersih pribadi | Proporsi 1% teratas',
-        data: years.map((year, idx) => ({ x: year, y: kekayaan[idx] })),
-        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--purple').trim(),
-        pointBackgroundColor: '#fff',
-        pointBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--purple').trim(),
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        tension: 0.35,
-        borderWidth: 3,
-        fill: false
-      }
-    ]
+const tracePendapatanSolid = {
+  name: 'Pendapatan Nasional sebelum pajak | Proporsi 1% teratas',
+  showlegend: false,
+  x: years.slice(cutoffIndex),
+  y: pendapatan.slice(cutoffIndex),
+  mode: 'lines',
+  line: { color: 'var(--maroon)', width: 3 },
+  hovertemplate: '<b>%{x}</b><br>Pendapatan 1% teratas: <b>%{y:.1f}%</b><extra></extra>'
+};
+
+const traceKekayaan = {
+  name: 'Kekayaan bersih pribadi | Proporsi 1% teratas',
+  x: years,
+  y: kekayaan,
+  mode: 'lines',
+  line: { color: 'var(--purple)', width: 3 },
+  hovertemplate: '<b>%{x}</b><br>Kekayaan 1% teratas: <b>%{y:.1f}%</b><extra></extra>'
+};
+
+const layout = {
+  plot_bgcolor: 'rgba(255,255,255,0.6)',
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  margin: { t: 10, l: 60, r: 20, b: 60 },
+  hovermode: 'x unified',
+  xaxis: {
+    range: [1965, 2024],
+    tickfont: { family: 'Inter', size: 12, color: '#3d2a6e' },
+    gridcolor: 'rgba(70, 53, 111, 0.12)',
+    zeroline: false,
+    dtick: 10
   },
-  options: {
-    maintainAspectRatio: false,
-    responsive: true,
-    interaction: {
-      mode: 'index',
-      intersect: false
-    },
-    plugins: {
-      legend: {
-        display: false
-      },
-      tooltip: {
-        backgroundColor: '#2f244d',
-        titleFont: { family: 'Inter', weight: '700' },
-        bodyFont: { family: 'Inter', weight: '600' },
-        padding: 12,
-        callbacks: {
-          label: (context) => `${context.dataset.label.split(' | ')[0]}: ${formatTooltip(context)}`
-        }
-      }
-    },
-    scales: {
-      x: {
-        type: 'linear',
-        min: 1965,
-        max: 2024,
-        grid: {
-          color: 'rgba(70, 53, 111, 0.12)',
-          lineWidth: 1,
-          drawTicks: false
-        },
-        border: {
-          color: 'rgba(70, 53, 111, 0.35)'
-        },
-        ticks: {
-          font: { family: 'Inter', weight: '600', size: 12 },
-          color: '#3d2a6e',
-          callback: (value) => (value % 10 === 0 ? value : '')
-        }
-      },
-      y: {
-        suggestedMin: 12,
-        suggestedMax: 24,
-        grid: {
-          color: 'rgba(70, 53, 111, 0.18)',
-          lineWidth: 1,
-          drawTicks: false
-        },
-        border: {
-          color: 'rgba(70, 53, 111, 0.35)'
-        },
-        ticks: {
-          stepSize: 2,
-          font: { family: 'Inter', weight: '600', size: 12 },
-          color: '#3d2a6e',
-          callback: (value) => `${value}%`
-        }
-      }
-    }
-  }
-});
+  yaxis: {
+    range: [12, 24],
+    tickfont: { family: 'Inter', size: 12, color: '#3d2a6e' },
+    gridcolor: 'rgba(70, 53, 111, 0.18)',
+    zeroline: false,
+    ticksuffix: '%'
+  },
+  legend: { display: false },
+  font: { family: 'Inter', color: '#3d2a6e' }
+};
+
+const config = { responsive: true, displayModeBar: false };
+
+Plotly.newPlot('chart', [tracePendapatanDash, tracePendapatanSolid, traceKekayaan], layout, config);
 </script>
 
 </body>
