@@ -35,8 +35,6 @@
     color: white; font-weight: 700; text-align: center;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    opacity: 0;
-    animation: fade-in 6s ease-in-out infinite;
   }
   .tooltip-dark  { background-color: var(--purple-dark); }
   .tooltip-light { background-color: var(--purple-light); }
@@ -52,64 +50,32 @@
   .tooltip-left::after  { bottom:-10px; left:20px; border-width:15px 0 0 15px; border-color:transparent transparent transparent transparent; }
   .tooltip-light.tooltip-left::after { border-top-color:var(--purple-light); }
   .tooltip-dark.tooltip-left::after  { border-top-color:var(--purple-dark); }
-  .tooltip--0 { animation-delay: .8s; }
-  .tooltip--1 { animation-delay: 1.4s; }
-  .tooltip--2 { animation-delay: 2.4s; }
-  .tooltip--3 { animation-delay: 3.4s; }
-  .tooltip--4 { animation-delay: 4s; }
-  .tooltip--5 { animation-delay: 4.4s; }
-
   svg path.area {
     transform-box: fill-box;
     transform-origin: bottom center;
-    animation: rise-area 6s ease-in-out infinite;
+    animation: rise-area 2.8s ease-out forwards;
   }
   svg path.area--delay {
-    animation-delay: .6s;
+    animation-delay: .2s;
   }
   svg path.line {
     stroke-dasharray: var(--dash, 1200);
     stroke-dashoffset: var(--dash, 1200);
-    animation: draw-line 6s ease-in-out infinite;
+    animation: draw-line 2.8s ease-out forwards;
   }
   svg path.line.line--penduduk {
-    animation-delay: .6s;
+    animation-delay: .2s;
   }
-
-  .point {
-    opacity: 0;
-    animation: pulse-point 6s ease-in-out infinite;
-  }
-  .point--1 { animation-delay: 0.8s; }
-  .point--2 { animation-delay: 1.5s; }
-  .point--3 { animation-delay: 2.4s; }
-  .point--4 { animation-delay: 0.8s; }
-  .point--5 { animation-delay: 2.1s; }
-  .point--6 { animation-delay: 3.3s; }
 
   @keyframes draw-line {
     0%   { stroke-dashoffset: var(--dash, 1200); }
-    15%  { stroke-dashoffset: var(--dash, 1200); }
-    55%  { stroke-dashoffset: 0; }
-    75%  { stroke-dashoffset: 0; }
-    100% { stroke-dashoffset: var(--dash, 1200); }
+    10%  { stroke-dashoffset: var(--dash, 1200); }
+    100% { stroke-dashoffset: 0; }
   }
   @keyframes rise-area {
     0%   { transform: scaleY(0.02); opacity: 0; }
-    10%  { transform: scaleY(0.02); opacity: 0; }
-    55%  { transform: scaleY(1); opacity: 1; }
-    80%  { transform: scaleY(1); opacity: 1; }
-    100% { transform: scaleY(0.02); opacity: 0; }
-  }
-  @keyframes pulse-point {
-    0%, 35% { opacity: 0; transform: scale(0.6); }
-    45%,70% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.6); }
-  }
-  @keyframes fade-in {
-    0%, 45% { opacity: 0; transform: translateY(10px); }
-    55%,75% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(10px); }
+    15%  { transform: scaleY(0.02); opacity: 0; }
+    100% { transform: scaleY(1); opacity: 1; }
   }
 </style>
 </head>
@@ -161,35 +127,35 @@
       <path data-animate-line class="line line--penduduk" d="M 10 380 L 260 373 L 440 369 L 850 353"
             fill="none" stroke="var(--purple-light)" stroke-width="4" stroke-linecap="round"/>
       <!-- Data points superkaya -->
-      <circle class="point point--1" cx="10"  cy="350" r="6" fill="var(--purple-dark)"/>
-      <circle class="point point--2" cx="260" cy="265" r="6" fill="var(--purple-dark)"/>
-      <circle class="point point--3" cx="850" cy="22"  r="6" fill="var(--purple-dark)"/>
+      <circle cx="10"  cy="350" r="6" fill="var(--purple-dark)"/>
+      <circle cx="260" cy="265" r="6" fill="var(--purple-dark)"/>
+      <circle cx="850" cy="22"  r="6" fill="var(--purple-dark)"/>
       <!-- Data points penduduk -->
-      <circle class="point point--4" cx="10"  cy="380" r="6" fill="var(--purple-light)"/>
-      <circle class="point point--5" cx="440" cy="369" r="6" fill="var(--purple-light)"/>
-      <circle class="point point--6" cx="850" cy="353" r="6" fill="var(--purple-light)"/>
+      <circle cx="10"  cy="380" r="6" fill="var(--purple-light)"/>
+      <circle cx="440" cy="369" r="6" fill="var(--purple-light)"/>
+      <circle cx="850" cy="353" r="6" fill="var(--purple-light)"/>
     </svg>
     <!-- Tooltips -->
-    <div class="tooltip tooltip-light tooltip-down tooltip--0" style="bottom:26px; left:10px; transform:translateX(-50%);">
+    <div class="tooltip tooltip-light tooltip-down" style="bottom:26px; left:10px; transform:translateX(-50%);">
       <span class="text-gold text-lg">Rp53 Juta</span>
     </div>
-    <div class="tooltip tooltip-light tooltip-down tooltip--1" style="bottom:35px; left:105px; transform:translateX(-50%);">
+    <div class="tooltip tooltip-light tooltip-down" style="bottom:35px; left:105px; transform:translateX(-50%);">
       <span class="text-gold text-lg">Rp88 Juta</span>
     </div>
-    <div class="tooltip tooltip-dark tooltip-down tooltip--2" style="top:70px; left:260px; transform:translateX(-50%);">
+    <div class="tooltip tooltip-dark tooltip-down" style="top:70px; left:260px; transform:translateX(-50%);">
       <span class="text-white text-base">2026</span>
       <span class="text-gold text-xl">Rp4,651</span>
       <span class="text-gray-300 text-sm font-normal">Triliun</span>
     </div>
-    <div class="tooltip tooltip-light tooltip-down tooltip--3" style="bottom:42px; left:440px; transform:translateX(-50%);">
+    <div class="tooltip tooltip-light tooltip-down" style="bottom:42px; left:440px; transform:translateX(-50%);">
       <span class="text-gold text-lg">Rp88 Juta</span>
     </div>
-    <div class="tooltip tooltip-dark tooltip-right tooltip--4" style="top:-95px; left:850px; transform:translateX(-100%);">
+    <div class="tooltip tooltip-dark tooltip-right" style="top:-95px; left:850px; transform:translateX(-100%);">
       <span class="text-white text-base">2050</span>
       <span class="text-gold text-2xl">Rp11,323</span>
       <span class="text-gray-300 text-sm font-normal">Triliun</span>
     </div>
-    <div class="tooltip tooltip-light tooltip-left tooltip--5" style="bottom:62px; left:850px; transform:translateX(-100%);">
+    <div class="tooltip tooltip-light tooltip-left" style="bottom:62px; left:850px; transform:translateX(-100%);">
       <span class="text-white text-base">2050</span>
       <span class="text-gold text-xl">Rp133 Juta</span>
     </div>
