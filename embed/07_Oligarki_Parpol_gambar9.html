@@ -10,15 +10,15 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg-main: linear-gradient(135deg, #6b2ecc 0%, #491c90 55%, #2f115d 100%);
-      --card-surface: rgba(255, 255, 255, 0.14);
-      --tag-purple: #6220c5;
-      --tag-text: #ffffff;
-      --axis-color: rgba(255, 255, 255, 0.82);
-      --grid-color: rgba(255, 255, 255, 0.18);
-      --label-color: rgba(255, 255, 255, 0.88);
-      --line-divider: #b03a7e;
-      --text-soft: rgba(255, 255, 255, 0.7);
+      --purple-brand: #6c2fbc;
+      --axis-color: #403f55;
+      --grid-color: rgba(0, 0, 0, 0.08);
+      --line-divider: #b2407d;
+      --text-soft: #706f82;
+      --text-strong: #2f2e45;
+      --sidebar-gray: #f1f1f6;
+      --bg-page: #f8f8fc;
+      --source-yellow: #f7d96a;
     }
 
     * {
@@ -28,46 +28,20 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: var(--bg-main);
-      color: var(--label-color);
+      background: var(--bg-page);
+      color: var(--text-strong);
       display: flex;
       justify-content: center;
       padding: clamp(24px, 5vw, 48px);
     }
 
     main {
-      width: min(1180px, 100%);
-      background: rgba(14, 6, 43, 0.28);
+      width: min(1100px, 100%);
+      background: #ffffff;
       border-radius: 28px;
       padding: clamp(32px, 4vw, 54px);
       position: relative;
-      overflow: hidden;
-    }
-
-    main::before,
-    main::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(0px);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    main::before {
-      width: 320px;
-      height: 320px;
-      top: -160px;
-      left: -120px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.23) 0%, rgba(255, 255, 255, 0) 70%);
-    }
-
-    main::after {
-      width: 280px;
-      height: 280px;
-      bottom: -120px;
-      right: -100px;
-      background: radial-gradient(circle, rgba(255, 214, 116, 0.25) 0%, rgba(255, 214, 116, 0) 70%);
+      box-shadow: 0 32px 64px rgba(34, 37, 80, 0.16);
     }
 
     header {
@@ -83,13 +57,12 @@
       gap: 10px;
       padding: 10px 24px;
       border-radius: 999px;
-      background: #f8b92a;
-      color: #4e2d00;
+      background: var(--purple-brand);
+      color: #ffffff;
       font-weight: 800;
       font-size: 16px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      box-shadow: 0 12px 22px rgba(27, 0, 70, 0.25);
     }
 
     h1 {
@@ -97,6 +70,7 @@
       font-size: clamp(26px, 4vw, 36px);
       font-weight: 800;
       letter-spacing: -0.01em;
+      color: var(--purple-brand);
     }
 
     .subtitle {
@@ -111,18 +85,9 @@
       margin-top: clamp(32px, 4vw, 48px);
       border-radius: 24px;
       padding: clamp(18px, 3vw, 28px);
-      background: rgba(24, 7, 60, 0.58);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 28px 58px rgba(8, 0, 40, 0.32);
-    }
-
-    .diagram-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: 18px clamp(18px, 3vw, 28px) 18px clamp(18px, 3vw, 28px);
       background: #ffffff;
-      border-radius: 18px;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 18px 42px rgba(24, 26, 54, 0.12);
     }
 
     .diagram-wrapper::after {
@@ -131,10 +96,10 @@
       top: clamp(18px, 3vw, 28px);
       bottom: clamp(18px, 3vw, 28px);
       left: clamp(18px, 3vw, 28px);
-      width: clamp(82px, 14vw, 120px);
-      background: linear-gradient(180deg, rgba(240, 240, 245, 0.92) 0%, rgba(240, 240, 245, 0.55) 70%, rgba(240, 240, 245, 0) 100%);
-      border-radius: 14px 0 0 14px;
-      opacity: 0.7;
+      width: clamp(86px, 15vw, 124px);
+      background: var(--sidebar-gray);
+      border-radius: 16px 0 0 16px;
+      opacity: 1;
       pointer-events: none;
     }
 
@@ -149,7 +114,7 @@
       pointer-events: none;
       font-size: 14px;
       font-weight: 600;
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--axis-color);
     }
 
     .axis-y-label {
@@ -175,7 +140,7 @@
       position: absolute;
       font-size: 12px;
       font-weight: 600;
-      color: rgba(255, 255, 255, 0.68);
+      color: rgba(64, 63, 85, 0.68);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -206,7 +171,7 @@
       position: absolute;
       font-size: 12px;
       font-weight: 600;
-      color: rgba(255, 255, 255, 0.68);
+      color: rgba(64, 63, 85, 0.68);
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
@@ -223,14 +188,14 @@
     }
 
     .legend-note {
-      margin-top: clamp(28px, 4vw, 44px);
-      padding: clamp(18px, 3vw, 24px);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-top: clamp(22px, 4vw, 36px);
+      padding: clamp(18px, 3vw, 22px);
+      border-radius: 16px;
+      background: rgba(239, 239, 245, 0.65);
+      border: 1px solid rgba(0, 0, 0, 0.05);
       font-size: 14px;
       line-height: 1.7;
-      color: rgba(255, 255, 255, 0.86);
+      color: var(--text-strong);
     }
 
     .source-badge {
@@ -238,13 +203,13 @@
       display: inline-flex;
       align-items: center;
       padding: 14px 20px;
-      background: rgba(255, 202, 86, 0.9);
-      border-radius: 18px;
+      background: var(--source-yellow);
+      border-radius: 16px;
       font-size: 13px;
       font-weight: 700;
-      color: #402400;
+      color: #5a3b00;
       letter-spacing: 0.05em;
-      box-shadow: 0 18px 38px rgba(33, 0, 38, 0.24);
+      box-shadow: 0 14px 34px rgba(70, 56, 0, 0.18);
     }
 
     @media (max-width: 768px) {
@@ -300,55 +265,55 @@
         name: 'Partai Demokrasi Indonesia Perjuangan (PDI-P)',
         short: 'PDI-P',
         seats: 110,
-        wealth: 4.8,
+        wealth: 4.6,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Logo_PDI_Perjuangan.svg/512px-Logo_PDI_Perjuangan.svg.png'
       },
       {
         name: 'Partai Golongan Karya (Golkar)',
         short: 'Golkar',
-        seats: 98,
+        seats: 92,
         wealth: 4.4,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Logo_Partai_Golkar.svg/512px-Logo_Partai_Golkar.svg.png'
       },
       {
         name: 'Partai Kebangkitan Bangsa (PKB)',
         short: 'PKB',
-        seats: 82,
-        wealth: 4.1,
+        seats: 78,
+        wealth: 4.0,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Logo_PKB.svg/512px-Logo_PKB.svg.png'
       },
       {
         name: 'Partai Gerakan Indonesia Raya (Gerindra)',
         short: 'Gerindra',
-        seats: 68,
-        wealth: 3.0,
+        seats: 58,
+        wealth: 2.6,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Logo_Partai_Gerindra.svg/512px-Logo_Partai_Gerindra.svg.png'
       },
       {
         name: 'Partai NasDem',
         short: 'NasDem',
-        seats: 52,
+        seats: 48,
         wealth: 3.1,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_Partai_NasDem.svg/512px-Logo_Partai_NasDem.svg.png'
       },
       {
         name: 'Partai Demokrat',
         short: 'Demokrat',
-        seats: 39,
+        seats: 36,
         wealth: 3.2,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Partai_Demokrat_logo.svg/512px-Partai_Demokrat_logo.svg.png'
       },
       {
         name: 'Partai Keadilan Sejahtera (PKS)',
         short: 'PKS',
-        seats: 44,
-        wealth: 2.1,
+        seats: 40,
+        wealth: 2.0,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Logo_PKS.svg/512px-Logo_PKS.svg.png'
       },
       {
         name: 'Partai Amanat Nasional (PAN)',
         short: 'PAN',
-        seats: 38,
+        seats: 24,
         wealth: 2.4,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Logo_Partai_Amanat_Nasional.svg/512px-Logo_Partai_Amanat_Nasional.svg.png'
       }
@@ -360,7 +325,7 @@
       if (imageCache.has(url)) return imageCache.get(url);
       const img = new Image();
       img.crossOrigin = 'anonymous';
-      img.src = url;
+      img.src = url || PLACEHOLDER_LOGO;
       imageCache.set(url, img);
       return img;
     };
@@ -370,8 +335,8 @@
     const formatter = new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     const USE_PLACEHOLDER_PHOTO = false;
     const styles = getComputedStyle(document.documentElement);
-    const COLOR_AXIS = styles.getPropertyValue('--axis-color').trim() || 'rgba(255,255,255,0.82)';
-    const COLOR_GRID = styles.getPropertyValue('--grid-color').trim() || 'rgba(255,255,255,0.18)';
+    const COLOR_AXIS = styles.getPropertyValue('--axis-color').trim() || '#403f55';
+    const COLOR_GRID = styles.getPropertyValue('--grid-color').trim() || 'rgba(0,0,0,0.08)';
     const COLOR_DIVIDER = styles.getPropertyValue('--line-divider').trim() || '#b03a7e';
 
     const logoPlugin = {
@@ -423,14 +388,14 @@
         const horizontalY = yScale.getPixelForValue(3);
 
         ctx.save();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
-        ctx.fillRect(left, top, right - left, bottom - top);
-        ctx.restore();
+        ctx.fillStyle = 'rgba(244, 230, 239, 0.35)';
+        ctx.fillRect(verticalX, top, right - verticalX, horizontalY - top);
+        ctx.fillStyle = 'rgba(237, 248, 255, 0.4)';
+        ctx.fillRect(left, horizontalY, verticalX - left, bottom - horizontalY);
 
-        ctx.save();
-        ctx.strokeStyle = COLOR_DIVIDER || 'rgba(214, 96, 148, 0.6)';
-        ctx.lineWidth = 2;
-        ctx.setLineDash([10, 8]);
+        ctx.strokeStyle = COLOR_DIVIDER || 'rgba(178, 64, 125, 0.85)';
+        ctx.lineWidth = 2.4;
+        ctx.setLineDash([]);
         ctx.beginPath();
         ctx.moveTo(verticalX, top);
         ctx.lineTo(verticalX, bottom);
@@ -449,30 +414,30 @@
       afterDatasetsDraw(chart) {
         const { ctx, chartArea: { left, right, top, bottom } } = chart;
         ctx.save();
-        ctx.strokeStyle = '#1f1140';
-        ctx.lineWidth = 2;
-        ctx.fillStyle = '#1f1140';
+        ctx.strokeStyle = '#1f1f25';
+        ctx.lineWidth = 2.2;
+        ctx.fillStyle = '#1f1f25';
 
         // Y axis
         ctx.beginPath();
-        ctx.moveTo(left, bottom + 2);
-        ctx.lineTo(left, top - 18);
+        ctx.moveTo(left + 0.5, bottom + 4);
+        ctx.lineTo(left + 0.5, top - 18);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(left - 5, top - 14);
-        ctx.lineTo(left, top - 22);
+        ctx.moveTo(left - 4, top - 14);
+        ctx.lineTo(left + 0.5, top - 22);
         ctx.lineTo(left + 5, top - 14);
         ctx.fill();
 
         // X axis
         ctx.beginPath();
-        ctx.moveTo(left - 2, bottom);
-        ctx.lineTo(right + 18, bottom);
+        ctx.moveTo(left - 4, bottom - 0.5);
+        ctx.lineTo(right + 18, bottom - 0.5);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(right + 14, bottom - 5);
-        ctx.lineTo(right + 22, bottom);
-        ctx.lineTo(right + 14, bottom + 5);
+        ctx.moveTo(right + 14, bottom - 4);
+        ctx.lineTo(right + 22, bottom - 0.5);
+        ctx.lineTo(right + 14, bottom + 3);
         ctx.fill();
 
         ctx.restore();
@@ -487,8 +452,8 @@
             label: 'Peta Partai Politik',
             data: scatterData,
             backgroundColor: 'rgba(255, 255, 255, 0)',
-            pointRadius: 32,
-            pointHoverRadius: 34,
+            pointRadius: 33,
+            pointHoverRadius: 35,
             pointBorderWidth: 0
           }
         ]
@@ -506,7 +471,8 @@
             max: 120,
             grid: {
               color: COLOR_GRID || 'rgba(0,0,0,0.08)',
-              lineWidth: 1
+              lineWidth: 1,
+              drawTicks: false
             },
             ticks: {
               color: COLOR_AXIS || '#333',
@@ -547,11 +513,13 @@
             display: false
           },
           tooltip: {
-            backgroundColor: 'rgba(25, 10, 50, 0.92)',
-            borderColor: 'rgba(255, 255, 255, 0.25)',
+            backgroundColor: 'rgba(255, 255, 255, 0.96)',
+            borderColor: 'rgba(178, 64, 125, 0.6)',
             borderWidth: 1,
             padding: 12,
             cornerRadius: 12,
+            titleColor: '#2f2e45',
+            bodyColor: '#2f2e45',
             titleFont: {
               family: 'Inter',
               size: 13,
