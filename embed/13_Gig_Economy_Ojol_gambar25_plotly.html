@@ -12,364 +12,283 @@
     font-family: 'Manrope', sans-serif;
     background: radial-gradient(ellipse at top left, #2d1b69 0%, #1a0a3c 55%, #0f0520 100%);
     min-height: 100vh;
-    padding: 28px 24px 24px;
+    padding: 32px 28px 28px;
     color: #fff;
   }
 
-  .wrapper { max-width: 920px; margin: 0 auto; }
+  .wrapper { max-width: 960px; margin: 0 auto; }
 
+  /* Header label */
   .tag {
     color: #a78bfa;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 800;
-    line-height: 1.35;
-    margin-bottom: 24px;
-    max-width: 680px;
+    line-height: 1.3;
+    margin-bottom: 28px;
+    max-width: 740px;
+    color: #fff;
   }
 
-  /* ── Grid layout ── */
-  .grid {
+  /* ── Two-column layout: phone | text ── */
+  .layout {
     display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 28px;
+    grid-template-columns: 240px 1fr;
+    gap: 36px;
     align-items: start;
   }
 
   /* ── Phone shell ── */
-  .phone-wrap { display: flex; justify-content: center; }
-
   .phone {
-    width: 240px;
-    background: linear-gradient(160deg, #1e1b4b, #0f0a1e);
-    border-radius: 36px;
+    background: linear-gradient(160deg, #1e1040, #0a0618);
+    border-radius: 38px;
     padding: 12px;
     box-shadow:
-      0 0 0 2px rgba(124,58,237,0.5),
-      0 0 0 4px rgba(124,58,237,0.15),
-      0 24px 64px rgba(0,0,0,0.55);
+      0 0 0 2px rgba(124,58,237,0.55),
+      0 0 0 5px rgba(124,58,237,0.12),
+      0 28px 70px rgba(0,0,0,0.6);
     position: relative;
+    transition: transform 0.3s;
   }
+  .phone:hover { transform: scale(1.015); }
 
+  /* notch bar */
   .phone::before {
     content: '';
     display: block;
-    width: 56px; height: 6px;
-    background: rgba(124,58,237,0.5);
+    width: 52px; height: 5px;
+    background: rgba(124,58,237,0.4);
     border-radius: 3px;
     margin: 0 auto 10px;
   }
 
   .screen {
-    background: #f5f3ff;
-    border-radius: 24px;
+    background: #f5f2ff;
+    border-radius: 26px;
     overflow: hidden;
-    color: #1e1b4b;
-    font-size: 10px;
+    color: #1a1040;
+    font-size: 9.5px;
   }
 
-  /* App top bar */
+  /* App bar */
   .app-bar {
-    background: #7c3aed;
+    background: #6d28d9;
     color: #fff;
-    padding: 9px 12px;
+    padding: 8px 12px;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
-  .back-arrow { font-size: 13px; }
 
-  /* Journey timeline */
-  .timeline {
+  /* Journey dots */
+  .journey {
     background: #ede9fe;
-    padding: 8px 10px;
+    padding: 7px 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #ddd6fe;
   }
-  .tl-col { text-align: center; min-width: 52px; }
-  .tl-dot {
-    width: 9px; height: 9px;
+  .j-col { text-align: center; min-width: 50px; }
+  .j-dot {
+    width: 8px; height: 8px;
     border-radius: 50%;
-    background: #9ca3af;
+    background: #c4b5fd;
     margin: 0 auto 2px;
-    transition: background 0.3s;
   }
-  .tl-dot.done { background: #10b981; }
-  .tl-line { flex: 1; height: 1px; background: #c4b5fd; margin: 0 3px; }
-  .tl-name { font-size: 8px; color: #6b7280; font-weight: 600; }
-  .tl-time { font-size: 8px; color: #9ca3af; }
+  .j-dot.green { background: #10b981; }
+  .j-line { flex: 1; height: 1px; background: #c4b5fd; margin: 0 2px; }
+  .j-name { font-size: 7.5px; color: #6b7280; font-weight: 600; }
+  .j-time { font-size: 7px; color: #9ca3af; }
 
   /* Receipt sections */
-  .section {
+  .sec {
     border-bottom: 1px solid #e5e7eb;
-    padding: 8px 11px;
+    padding: 7px 11px;
     cursor: default;
     transition: background 0.25s;
   }
-  .section:last-child { border-bottom: none; }
-  .section:hover { background: rgba(124,58,237,0.05); }
-  .section.driver:hover  { background: rgba(251,191,36,0.1); }
-  .section.platform:hover { background: rgba(239,68,68,0.07); }
+  .sec:last-child { border-bottom: none; }
+  .sec:hover { background: rgba(109,40,217,0.06); }
+  .sec.dr:hover { background: rgba(251,191,36,0.12); }
+  .sec.pl:hover { background: rgba(220,38,38,0.07); }
 
-  .sec-title {
-    font-size: 8.5px;
-    font-weight: 800;
-    color: #6b21a8;
-    text-transform: uppercase;
+  .sec-lbl {
+    font-size: 8px; font-weight: 800;
+    color: #5b21b6; text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    display: flex; align-items: center; gap: 4px;
+    margin-bottom: 4px;
   }
-  .gopay-badge {
-    background: #1a56db;
-    color: #fff;
-    font-size: 7px;
+  .gp {
+    background: #1d4ed8; color: #fff;
+    font-size: 7px; font-weight: 700;
+    padding: 1px 4px; border-radius: 3px;
+  }
+
+  .row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; }
+  .row.main { font-weight: 800; font-size: 10px; }
+  .row.sub  { font-size: 8px; color: #6b7280; padding-left: 6px; }
+  .row.head { font-size: 7.5px; color: #9ca3af; padding: 3px 0 1px; font-style: italic; }
+
+  .v.purple { color: #5b21b6; font-weight: 800; }
+  .v.black  { color: #111827; font-weight: 800; font-size: 10.5px; }
+  .v.red    { color: #dc2626; font-weight: 800; }
+
+  /* ── Right: text explanation ── */
+  .text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 4px;
+  }
+
+  .explain-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.88);
+    font-weight: 400;
+    text-align: justify;
+  }
+
+  .explain-body .hi-yellow {
+    color: #FBBF24;
     font-weight: 700;
-    padding: 1px 5px;
-    border-radius: 3px;
-    letter-spacing: 0.03em;
+  }
+  .explain-body .hi-red {
+    color: #FCA5A5;
+    font-weight: 700;
   }
 
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2px 0;
-  }
-  .row.main-row { font-weight: 700; font-size: 10.5px; }
-  .row.sub-row  { font-size: 8.5px; color: #6b7280; padding-left: 6px; }
-  .row.sub-head { font-size: 8px; color: #9ca3af; padding: 3px 0 1px; font-style: italic; }
-
-  .amt { font-weight: 700; }
-  .amt.green  { color: #6b21a8; }
-  .amt.total  { color: #111827; font-size: 11px; }
-  .amt.red    { color: #dc2626; }
-
-  /* ── Right panel ── */
-  .panel { display: flex; flex-direction: column; gap: 12px; }
-
-  .card {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px;
-    padding: 14px 18px;
-    transition: transform 0.2s, border-color 0.2s;
-    cursor: default;
-  }
-  .card:hover { transform: translateX(5px); }
-  .card.yellow { background: rgba(251,191,36,0.1);  border-color: rgba(251,191,36,0.35); }
-  .card.red    { background: rgba(239,68,68,0.08);  border-color: rgba(239,68,68,0.3); }
-  .card.yellow:hover { border-color: rgba(251,191,36,0.7); }
-  .card.red:hover    { border-color: rgba(239,68,68,0.7); }
-
-  .card-num  { display: block; font-size: 26px; font-weight: 800; line-height: 1; }
-  .card.yellow .card-num { color: #FBBF24; }
-  .card.red    .card-num { color: #FCA5A5; }
-  .card:not(.yellow):not(.red) .card-num { color: #c4b5fd; }
-
-  .card-label { display: block; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); margin-top: 5px; }
-  .card-sub   { display: block; font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px; line-height: 1.4; }
-
-  /* Distribution bar */
-  .dist-bar-wrap {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px;
-    padding: 14px 18px;
-  }
-  .dist-title {
-    font-size: 10px; font-weight: 700;
-    color: rgba(255,255,255,0.55);
-    text-transform: uppercase; letter-spacing: 0.06em;
-    margin-bottom: 10px;
-  }
-  .bar-track {
-    height: 26px; border-radius: 13px;
-    overflow: hidden; display: flex;
-    margin-bottom: 10px;
-  }
-  .seg {
-    height: 100%; display: flex;
-    align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800;
-    color: rgba(0,0,0,0.65);
-    transition: filter 0.2s;
-    cursor: default;
-  }
-  .seg:hover { filter: brightness(1.15); }
-  .seg.s1 { background: #FBBF24; flex: 75.6; }
-  .seg.s2 { background: #F87171; flex: 18.9; }
-  .seg.s3 { background: #9F7AEA; flex: 4.1; }
-  .seg.s4 { background: #C4B5FD; flex: 1.4; }
-
-  .legend {
-    display: flex; flex-wrap: wrap; gap: 7px;
-    font-size: 10px; color: rgba(255,255,255,0.6);
-  }
-  .leg { display: flex; align-items: center; gap: 5px; }
-  .leg-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
-
-  .source {
+  /* ── Source box (yellow like PDF) ── */
+  .source-box {
+    background: #fef9c3;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-top: 28px;
     text-align: center;
-    color: rgba(255,255,255,0.35);
-    font-size: 11px;
-    margin-top: 20px;
+    color: #713f12;
+    font-size: 12px;
+    font-weight: 600;
   }
 
-  @media (max-width: 620px) {
-    .grid { grid-template-columns: 1fr; }
-    .phone-wrap { margin-bottom: 16px; }
+  @media (max-width: 640px) {
+    .layout { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="wrapper">
 
-  <div class="tag">Gambar 25 — Hal. 46 &nbsp;·&nbsp; Gig Economy &amp; Ojol</div>
+  <div class="tag">Gambar 25 &nbsp;·&nbsp; Hal. 46</div>
   <h1>Mekanisme Pembagian Komisi antara Platform dan Pengemudi Ojek Online</h1>
 
-  <div class="grid">
+  <div class="layout">
 
-    <!-- Phone mockup -->
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="screen">
+    <!-- ── Phone mockup ── -->
+    <div class="phone">
+      <div class="screen">
 
-          <div class="app-bar">
-            <span class="back-arrow">←</span> Detail
+        <div class="app-bar">← Detail</div>
+
+        <div class="journey">
+          <div class="j-col">
+            <div class="j-dot"></div>
+            <div class="j-name">Ditugaskan</div>
+            <div class="j-time">15:16</div>
           </div>
-
-          <!-- Journey timeline -->
-          <div class="timeline">
-            <div class="tl-col">
-              <div class="tl-dot"></div>
-              <div class="tl-name">Ditugaskan</div>
-              <div class="tl-time">15:16</div>
-            </div>
-            <div class="tl-line"></div>
-            <div class="tl-col">
-              <div class="tl-dot done"></div>
-              <div class="tl-name">Jemput</div>
-              <div class="tl-time">15:21</div>
-            </div>
-            <div class="tl-line"></div>
-            <div class="tl-col">
-              <div class="tl-dot done"></div>
-              <div class="tl-name">Selesai</div>
-              <div class="tl-time">16:09</div>
-            </div>
+          <div class="j-line"></div>
+          <div class="j-col">
+            <div class="j-dot green"></div>
+            <div class="j-name">Jemput</div>
+            <div class="j-time">15:21</div>
           </div>
-
-          <!-- Driver earnings -->
-          <div class="section driver">
-            <div class="sec-title">
-              Pendapatan mitra
-              <span class="gopay-badge">GoPay</span>
-            </div>
-            <div class="row main-row">
-              <span>Total pendapatan</span>
-              <span class="amt green">Rp55.600</span>
-            </div>
-            <div class="row sub-head"><span>Rincian pendapatan</span></div>
-            <div class="row sub-row">
-              <span>80% dari Biaya perjalanan</span>
-              <span style="font-weight:600">Rp55.600</span>
-            </div>
-            <div class="row sub-row">
-              <span>Poin</span>
-              <span style="font-weight:600">&#127885; 150</span>
-            </div>
+          <div class="j-line"></div>
+          <div class="j-col">
+            <div class="j-dot green"></div>
+            <div class="j-name">Selesai</div>
+            <div class="j-time">16:09</div>
           </div>
-
-          <!-- Customer payment -->
-          <div class="section">
-            <div class="sec-title">
-              Dibayar pelanggan
-              <span class="gopay-badge">GoPay</span>
-            </div>
-            <div class="row main-row">
-              <span>Total pembayaran</span>
-              <span class="amt total">Rp73.500</span>
-            </div>
-            <div class="row sub-head"><span>Biaya perjalanan (80% untuk Mitra)</span></div>
-            <div class="row sub-row">
-              <span>Biaya perjalanan</span>
-              <span style="font-weight:600">Rp69.500</span>
-            </div>
-            <div class="row sub-head"><span>Biaya tambahan pilihan pelanggan ke pihak ketiga</span></div>
-            <div class="row sub-row">
-              <span>Biaya asuransi PerjalananAman+</span>
-              <span style="font-weight:600">Rp1.000</span>
-            </div>
-          </div>
-
-          <!-- Platform fee -->
-          <div class="section platform">
-            <div class="sec-title" style="color:#dc2626">Dibayarkan ke Gojek</div>
-            <div class="row main-row">
-              <span>Biaya jasa aplikasi</span>
-              <span class="amt red">Rp3.000</span>
-            </div>
-          </div>
-
         </div>
+
+        <!-- Pendapatan mitra -->
+        <div class="sec dr">
+          <div class="sec-lbl">Pendapatan mitra <span class="gp">GOPAY</span></div>
+          <div class="row main">
+            <span>Total pendapatan</span>
+            <span class="v purple">Rp55.600</span>
+          </div>
+          <div class="row head"><span>Rincian pendapatan</span></div>
+          <div class="row sub">
+            <span>80% dari Biaya perjalanan</span>
+            <span style="font-weight:700">Rp55.600</span>
+          </div>
+          <div class="row sub">
+            <span>Poin</span>
+            <span style="font-weight:700">&#127885; 150</span>
+          </div>
+        </div>
+
+        <!-- Dibayar pelanggan -->
+        <div class="sec">
+          <div class="sec-lbl">Dibayar pelanggan <span class="gp">GOPAY</span></div>
+          <div class="row main">
+            <span>Total pembayaran</span>
+            <span class="v black">Rp73.500</span>
+          </div>
+          <div class="row head"><span>Biaya perjalanan (80% untuk Mitra)</span></div>
+          <div class="row sub">
+            <span>Biaya perjalanan</span>
+            <span style="font-weight:700">Rp69.500</span>
+          </div>
+          <div class="row head"><span>Biaya tambahan pilihan pelanggan yang dibayar ke pihak ketiga</span></div>
+          <div class="row sub">
+            <span>Biaya asuransi PerjalananAman+</span>
+            <span style="font-weight:700">Rp1.000</span>
+          </div>
+        </div>
+
+        <!-- Dibayarkan ke Gojek -->
+        <div class="sec pl">
+          <div class="sec-lbl" style="color:#b91c1c">Dibayarkan ke Gojek</div>
+          <div class="row main">
+            <span>Biaya jasa aplikasi</span>
+            <span class="v red">Rp3.000</span>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- Right panel -->
-    <div class="panel">
-
-      <div class="card">
-        <span class="card-num">Rp73.500</span>
-        <span class="card-label">Total Dibayar Pelanggan</span>
-        <span class="card-sub">Biaya perjalanan + asuransi + biaya jasa aplikasi</span>
-      </div>
-
-      <div class="card yellow">
-        <span class="card-num">Rp55.600</span>
-        <span class="card-label">Diterima Pengemudi (Mitra)</span>
-        <span class="card-sub">80% dari biaya perjalanan Rp69.500 — dibayar via GoPay</span>
-      </div>
-
-      <div class="card red">
-        <span class="card-num">Rp16.900</span>
-        <span class="card-label">Dipotong Platform &amp; Biaya Lain</span>
-        <span class="card-sub">Komisi 20% (Rp13.900) + Jasa aplikasi (Rp3.000) + Asuransi (Rp1.000)</span>
-      </div>
-
-      <div class="dist-bar-wrap">
-        <div class="dist-title">Distribusi Nilai Transaksi per Pesanan</div>
-        <div class="bar-track">
-          <div class="seg s1" title="Pengemudi 75,6%">75,6%</div>
-          <div class="seg s2" title="Komisi Platform 18,9%">18,9%</div>
-          <div class="seg s3" title="Jasa App 4,1%"></div>
-          <div class="seg s4" title="Asuransi 1,4%"></div>
-        </div>
-        <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:#FBBF24"></div>Pengemudi (80% biaya perj.)</div>
-          <div class="leg"><div class="leg-dot" style="background:#F87171"></div>Komisi Platform (20%)</div>
-          <div class="leg"><div class="leg-dot" style="background:#9F7AEA"></div>Biaya Jasa Aplikasi</div>
-          <div class="leg"><div class="leg-dot" style="background:#C4B5FD"></div>Asuransi PerjalananAman+</div>
-        </div>
-      </div>
-
+    <!-- ── Explanatory text ── -->
+    <div class="text-col">
+      <p class="explain-body">
+        Gambar 25 menunjukkan pembagian nilai transaksi ojek online yang timpang, di mana
+        pengemudi hanya menerima sekitar <span class="hi-yellow">Rp55.600 atau 80%</span>
+        dari "biaya perjalanan", sementara <span class="hi-red">20% diambil platform sebagai komisi</span>.
+        Ketimpangan ini diperkuat oleh narasi fleksibilitas kerja, padahal pengemudi tetap berada
+        di bawah kontrol algoritma yang mendorong mereka bekerja lebih lama, terutama saat sepi
+        orderan. Banyak pengemudi bahkan harus menggunakan lebih dari satu aplikasi untuk menjaga
+        pendapatan, menandakan ketidakstabilan penghasilan dari satu platform saja.
+      </p>
     </div>
+
   </div>
 
-  <div class="source">Sumber: Wawancara kualitatif dengan Pengemudi Ojek Online, 2026</div>
+  <!-- Source box -->
+  <div class="source-box">
+    Sumber: Wawancara kualitatif dengan Pengemudi Ojek Online, 2026
+  </div>
+
 </div>
 </body>
 </html>
