@@ -182,12 +182,15 @@
     }
     .tb.active h3 { color: var(--purple); }
 
-    /* Positions of text blocks — anchored near each dot */
-    .tb-kekayaan  { top: 9%;  left: 4%;   text-align: left; }
-    .tb-kontrol   { top: 9%;  right: 4%;  text-align: left; }
-    .tb-pemilu    { top: 39%; right: 4%;  text-align: left; }
-    .tb-dampak    { top: 39%; left: 4%;   text-align: left; }
-    .tb-kebijakan { top: 80%; left: 50%; transform: translateX(-50%); text-align: left; max-width: 28%; }
+    /* Positions aligned to each segment's radial endpoint Y
+       kekayaan/kontrol radial.y ≈ 129 → top=(129-16)/700=16%
+       pemilu/dampak   radial.y ≈ 379 → top=(379-16)/700=52%
+       kebijakan dot   y ≈ 534  → text top at 534+12px → top=78% */
+    .tb-kekayaan  { top: 16%; left: 4%;  text-align: left; }
+    .tb-kontrol   { top: 16%; right: 4%; text-align: left; }
+    .tb-pemilu    { top: 52%; right: 4%; text-align: left; }
+    .tb-dampak    { top: 52%; left: 4%;  text-align: left; }
+    .tb-kebijakan { top: 78%; left: 50%; transform: translateX(-50%); text-align: left; max-width: 28%; }
     .tb-kebijakan.active { transform: translateX(-50%) translateY(-2px); }
 
     /* Source */
@@ -372,39 +375,35 @@
       const diag = document.getElementById('diagram');
       const diagRect = diag.getBoundingClientRect();
       if (diagRect.width === 0) return;
-      const sx = 1000 / diagRect.width;   // viewBox units per px
+      const sx = 1000 / diagRect.width;
       const sy = 700  / diagRect.height;
 
       SEGMENTS.forEach(s => {
         const tb = document.querySelector(`.tb-${s.id}`);
         if (!tb) return;
         const r = tb.getBoundingClientRect();
-        // Heading center Y in viewBox units (top of block + padding 6 + half h3 ~10px)
-        const headCY = (r.top - diagRect.top + 16) * sy;
+
+        const ang    = midAngle(s);
+        const edge   = polar(ang, OUTER + 4);
+        const radial = polar(ang, OUTER + 28);  // corner of the L
 
         let dX, dY;
         if (s.id === 'kekayaan' || s.id === 'dampak') {
-          // Left-side block → dot at right edge of block, heading height
+          // L-shape: radial extension → horizontal to right edge of block
           dX = (r.right - diagRect.left) * sx;
-          dY = headCY;
+          dY = radial.y;          // ← dot Y locked to radial endpoint
         } else if (s.id === 'kontrol' || s.id === 'pemilu') {
-          // Right-side block → dot at left edge of block, heading height
+          // L-shape: radial extension → horizontal to left edge of block
           dX = (r.left - diagRect.left) * sx;
-          dY = headCY;
+          dY = radial.y;
         } else {
-          // Bottom block (kebijakan) → dot at top-center, 12px above block
+          // Kebijakan: straight down, dot 12px above block top
           dX = (r.left + r.width / 2 - diagRect.left) * sx;
-          dY = (r.top - diagRect.top) * sy - 12;
+          dY = (r.top - diagRect.top) * sy - 14;
         }
 
-        // Update dot
         s._dot.setAttribute('cx', dX);
         s._dot.setAttribute('cy', dY);
-
-        // Update connector line: donut edge → small radial step → dot
-        const ang = midAngle(s);
-        const edge    = polar(ang, OUTER + 4);
-        const radial  = polar(ang, OUTER + 24);
         s._line.setAttribute('d',
           `M ${edge.x} ${edge.y} L ${radial.x} ${radial.y} L ${dX} ${dY}`);
       });
