@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 27 — Kurva Akumulasi Beban Ganda &amp; Nilai Ekonomi Ibu Bekerja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    :root {
+      --purple: #5d3fd3;
+      --deep-purple: #37206d;
+      --card-border: rgba(70, 48, 138, 0.2);
+      --lavender: rgba(248, 246, 255, 0.96);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: "Manrope", system-ui, sans-serif;
+      background: radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+                  radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+                  #f7f4ff;
+    }
+    .card {
+      width: min(980px, 96vw);
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(93,63,211,0.06), transparent 45%),
+                  linear-gradient(315deg, rgba(242,181,68,0.05), transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: var(--purple);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 0 18px 18px 0;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(18px, 2.2vw, 26px);
+      color: var(--deep-purple);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .plot-wrap {
+      background: var(--lavender);
+      border-radius: 22px;
+      padding: 24px 28px 32px;
+      border: 1px solid rgba(93,63,211,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    #plotly-g27 { width: 100%; height: 480px; }
+    .legend-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--deep-purple);
+    }
+    .legend-line {
+      width: 32px;
+      height: 3px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .legend-line-dashed {
+      width: 32px;
+      height: 3px;
+      flex-shrink: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        #f3c15a 0px, #f3c15a 6px,
+        transparent 6px, transparent 10px
+      );
+    }
+    .source {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #513c86;
+      background: #fcefd5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 900px) {
+      .card { padding: 32px 20px 36px; }
+      .badge { margin-left: -20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 27.</div>
+      <h1>Kurva Akumulasi Beban Ganda &amp; Nilai Ekonomi Ibu Bekerja</h1>
+    </header>
+
+    <div class="plot-wrap">
+      <div id="plotly-g27"></div>
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-line" style="background:#8b2fc9;"></div>
+          Akumulasi Jam Kerja (Jam)
+        </div>
+        <div class="legend-item">
+          <div class="legend-line-dashed"></div>
+          Akumulasi Nilai Ekonomi (Rp)
+        </div>
+      </div>
+    </div>
+
+    <div class="source">Sumber: Perhitungan peneliti berdasarkan data BPS dan Sakernas, 2025</div>
+  </div>
+
+  <script>
+    const cats = ["Persiapan Pagi", "Transportasi", "Pekerjaan Formal", "Domestik Malam", "Manajerial"];
+    const jamData    = [2, 4, 12, 15, 16];
+    const ekoData    = [52630, 52630, 205958, 265446, 311218];
+    const jamLabels  = ["2 jam", "4 jam", "12 jam", "15 jam", "16 jam"];
+    const ekoLabels  = ["Rp 52,630", "Rp 52,630", "Rp 205,958", "Rp 265,446", "Rp 311,218"];
+
+    /* ── Trace 1: Purple filled line (left y) ── */
+    const traceJam = {
+      type: "scatter",
+      mode: "lines+markers",
+      x: cats,
+      y: jamData,
+      yaxis: "y",
+      line: { color: "#8b2fc9", width: 3 },
+      marker: { color: "#8b2fc9", size: 9, line: { color: "#fff", width: 2 } },
+      fill: "tozeroy",
+      fillcolor: "rgba(219,188,255,0.28)",
+      hovertemplate: "%{x}<br><b>%{y} jam</b><extra></extra>",
+      showlegend: false
+    };
+
+    /* ── Trace 2: Gold dashed filled line (right y) ── */
+    const traceEko = {
+      type: "scatter",
+      mode: "lines+markers",
+      x: cats,
+      y: ekoData,
+      yaxis: "y2",
+      line: { color: "#f3c15a", width: 2.5, dash: "dash" },
+      marker: { color: "#f3c15a", size: 8, line: { color: "#fff", width: 2 } },
+      fill: "tozeroy",
+      fillcolor: "rgba(243,193,90,0.18)",
+      hovertemplate: "%{x}<br><b>Rp %{y:,.0f}</b><extra></extra>",
+      showlegend: false
+    };
+
+    /* ── Trace 3: Standar Kerja 8 Jam reference line ── */
+    const traceRef = {
+      type: "scatter",
+      mode: "lines",
+      x: ["Persiapan Pagi", "Manajerial"],
+      y: [8, 8],
+      yaxis: "y",
+      line: { color: "rgba(139,47,201,0.5)", width: 1.5, dash: "dot" },
+      hoverinfo: "skip",
+      showlegend: false
+    };
+
+    /* ── Annotations ── */
+    const annotations = [
+      /* Standar Kerja label */
+      {
+        x: "Persiapan Pagi", y: 8, yref: "y",
+        text: "<i>Standar Kerja 8 Jam</i>",
+        showarrow: false,
+        font: { color: "rgba(139,47,201,0.7)", size: 11.5, family: "Manrope" },
+        xanchor: "left",
+        yanchor: "bottom",
+        yshift: 5,
+        xshift: 4
+      }
+    ];
+
+    /* Jam labels — above each point */
+    jamData.forEach((v, i) => {
+      annotations.push({
+        x: cats[i], y: v, yref: "y",
+        text: `<b>${jamLabels[i]}</b>`,
+        showarrow: false,
+        font: { color: "#7a24b5", size: 12, family: "Manrope" },
+        xanchor: "center",
+        yanchor: "bottom",
+        yshift: 9
+      });
+    });
+
+    /* Ekonomi labels — below each gold point */
+    ekoData.forEach((v, i) => {
+      annotations.push({
+        x: cats[i], y: v, yref: "y2",
+        text: ekoLabels[i],
+        showarrow: false,
+        font: { color: "#b07c00", size: 11, family: "Manrope" },
+        xanchor: "center",
+        yanchor: "top",
+        yshift: -9
+      });
+    });
+
+    /* ── Layout ── */
+    const layout = {
+      margin: { t: 30, r: 100, b: 80, l: 70, pad: 4 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor:  "rgba(0,0,0,0)",
+      font: { family: "Manrope" },
+      showlegend: false,
+      xaxis: {
+        tickfont: { size: 12, color: "rgba(47,36,95,0.8)" },
+        gridcolor: "rgba(55,32,109,0.09)",
+        title: {
+          text: "Urutan Aktivitas Sepanjang Hari",
+          font: { size: 12, color: "rgba(47,36,95,0.65)" },
+          standoff: 16
+        }
+      },
+      yaxis: {
+        range: [0, 18],
+        dtick: 2,
+        tickfont: { size: 12, color: "#8b2fc9" },
+        gridcolor: "rgba(139,47,201,0.1)",
+        title: {
+          text: "Akumulasi Jam Kerja (Jam)",
+          font: { size: 12, color: "#8b2fc9" },
+          standoff: 12
+        },
+        zeroline: false
+      },
+      yaxis2: {
+        overlaying: "y",
+        side: "right",
+        range: [0, 330000],
+        tickvals: [0, 50000, 100000, 150000, 200000, 250000, 300000],
+        ticktext: ["Rp 0k", "Rp 50k", "Rp 100k", "Rp 150k", "Rp 200k", "Rp 250k", "Rp 300k"],
+        tickfont: { size: 12, color: "#c8960a" },
+        gridcolor: "rgba(0,0,0,0)",
+        title: {
+          text: "Akumulasi Nilai Ekonomi (Rp)",
+          font: { size: 12, color: "#c8960a" },
+          standoff: 12
+        },
+        zeroline: false
+      },
+      annotations: annotations,
+      hoverlabel: {
+        font: { family: "Manrope", size: 12, color: "#fff" },
+        bgcolor: "rgba(47,33,92,0.92)",
+        bordercolor: "transparent"
+      }
+    };
+
+    Plotly.newPlot("plotly-g27", [traceJam, traceEko, traceRef], layout,
+      { displayModeBar: false, responsive: true });
+  </script>
+</body>
+</html>
