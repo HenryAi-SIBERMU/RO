@@ -4,241 +4,223 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gambar 26 — Siklus Kehidupan Pengemudi Ojol</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Manrope', sans-serif;
     background: transparent;
-    color: #1f2937;
-    padding: 28px 30px 24px;
+    padding: 28px 24px 24px;
+    color: #fff;
   }
 
-  .wrapper {
-    max-width: 960px;
-    margin: 0 auto;
-    background: rgba(255,255,255,0.95);
-    border-radius: 28px;
-    padding: 26px 34px 32px;
-    box-shadow: 0 30px 80px rgba(91,33,182,0.18);
+  .wrapper { max-width: 900px; margin: 0 auto; }
+
+  .tag {
+    color: #a78bfa;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
   }
 
-  .header-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  h1 {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.3;
     margin-bottom: 28px;
   }
-  .badge {
-    background: #6d28d9;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 800;
-    padding: 10px 20px;
-    border-radius: 18px;
-    letter-spacing: 0.02em;
-  }
-  h1 {
-    font-size: 22px;
-    font-weight: 800;
-    color: #4c1d95;
-  }
 
-  .flow-top,
-  .flow-bottom {
-    display: flex;
+  /* ──────────────────────────────────
+     7-column cycle grid
+     cols: card | arr | card | arr | card | arr | card
+     rows: top-row | connector | bottom-row
+  ────────────────────────────────── */
+  .cycle {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr 40px 1fr;
+    grid-template-rows: auto 56px auto;
     align-items: center;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: nowrap;
   }
-  .flow-bottom { margin-top: 18px; }
 
-  .arrow-circle {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #fbbf24;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 800;
-    color: #5b21b6;
-    box-shadow: inset 0 0 0 2px rgba(249,168,37,0.28);
-  }
-  .arrow-circle.down,
-  .arrow-circle.up { margin: 16px auto 4px; }
-
+  /* Cards */
   .card {
-    width: 180px;
-    height: 190px;
-    background: linear-gradient(160deg, #6d28d9, #4c1d95);
-    border-radius: 26px;
-    padding: 18px 16px;
-    color: #fff;
+    background: rgba(109, 40, 217, 0.35);
+    border: 2px solid rgba(124, 58, 237, 0.5);
+    border-radius: 20px;
+    padding: 20px 12px 16px;
+    text-align: center;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 35px rgba(76,29,149,0.28);
-  }
-  .card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 20% 15%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 45%);
-    pointer-events: none;
+    align-items: center;
+    gap: 10px;
+    min-height: 152px;
+    justify-content: flex-start;
+    cursor: default;
+    transition: transform 0.25s, background 0.25s, border-color 0.25s, box-shadow 0.25s;
   }
 
-  .illustration {
-    width: 100%;
-    height: 96px;
+  .card:hover {
+    transform: scale(1.05) translateY(-4px);
+    background: rgba(109, 40, 217, 0.65);
+    border-color: #FBBF24;
+    box-shadow: 0 10px 36px rgba(109, 40, 217, 0.5), 0 0 0 1px rgba(251, 191, 36, 0.25);
+    z-index: 5;
+  }
+
+  /* Step badge */
+  .badge {
+    position: absolute;
+    top: 9px; left: 10px;
+    background: #FBBF24;
+    color: #1a0a3c;
+    font-size: 10px;
+    font-weight: 800;
+    width: 20px; height: 20px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
+  .icon { font-size: 44px; line-height: 1; }
+
   .label {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 800;
-    line-height: 1.25;
+    line-height: 1.35;
+    color: #fff;
   }
 
-  svg { width: 100%; height: 100%; }
+  /* Yellow circle arrows */
+  .arr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-  .flow-bottom .arrow-circle { transform: rotate(180deg); }
+  .arr-circle {
+    width: 34px; height: 34px;
+    background: #FBBF24;
+    color: #1a0a3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    flex-shrink: 0;
+  }
 
-  @media (max-width: 860px) {
-    .wrapper { padding: 24px; }
-    .card { width: 150px; height: 170px; }
-    .label { font-size: 14px; }
-    .flow-top, .flow-bottom { flex-wrap: wrap; }
-    .arrow-circle { width: 36px; height: 36px; font-size: 18px; }
+  .arr-circle:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 22px rgba(251, 191, 36, 0.65);
+  }
+
+  /* Source */
+  .source-box {
+    background: #fef9c3;
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin-top: 24px;
+    text-align: center;
+    color: #713f12;
+    font-size: 12px;
+    font-weight: 600;
   }
 </style>
 </head>
 <body>
 <div class="wrapper">
-  <div class="header-row">
-    <div class="badge">Gambar 26.</div>
-    <h1>Siklus Kehidupan Pengemudi Ojol</h1>
+
+  <div class="tag">Gambar 26 — Hal. 47 &nbsp;·&nbsp; Gig Economy &amp; Ojol</div>
+  <h1>Siklus Kehidupan Pengemudi Ojol</h1>
+
+  <div class="cycle">
+
+    <!-- ═══ ROW 1: 4 cards + 3 right arrows ═══ -->
+
+    <div class="card">
+      <span class="badge">1</span>
+      <span class="icon">🛵</span>
+      <span class="label">Kerja Panjang</span>
+    </div>
+
+    <div class="arr"><div class="arr-circle">&#10148;</div></div>
+
+    <div class="card">
+      <span class="badge">2</span>
+      <span class="icon">📉</span>
+      <span class="label">Pendapatan Rendah</span>
+    </div>
+
+    <div class="arr"><div class="arr-circle">&#10148;</div></div>
+
+    <div class="card">
+      <span class="badge">3</span>
+      <span class="icon">🐷</span>
+      <span class="label">Tidak Bisa Menabung</span>
+    </div>
+
+    <div class="arr"><div class="arr-circle">&#10148;</div></div>
+
+    <div class="card">
+      <span class="badge">4</span>
+      <span class="icon">👴</span>
+      <span class="label">Tidak Ada Pensiun</span>
+    </div>
+
+    <!-- ═══ ROW 2: connector (down arrow at col 7) ═══ -->
+
+    <div></div><!-- col 1 -->
+    <div></div><!-- col 2 -->
+    <div></div><!-- col 3 -->
+    <div></div><!-- col 4 -->
+    <div></div><!-- col 5 -->
+    <div></div><!-- col 6 -->
+    <div class="arr"><div class="arr-circle">&#11015;</div></div><!-- col 7 -->
+
+    <!-- ═══ ROW 3: right-to-left flow (step5 → step6 → step7) ═══
+         Layout order left-to-right: 7 | ← | 6 | ← | 5 | empty | empty
+         Arrows point LEFT because flow travels from col-5 toward col-1 -->
+
+    <div class="card">
+      <span class="badge">7</span>
+      <span class="icon">🧓</span>
+      <span class="label">Kemiskinan Lansia</span>
+    </div>
+
+    <div class="arr"><div class="arr-circle" style="transform:scaleX(-1)">&#10148;</div></div>
+
+    <div class="card">
+      <span class="badge">6</span>
+      <span class="icon">💸</span>
+      <span class="label">Pendapatan Nol</span>
+    </div>
+
+    <div class="arr"><div class="arr-circle" style="transform:scaleX(-1)">&#10148;</div></div>
+
+    <div class="card">
+      <span class="badge">5</span>
+      <span class="icon">🧥</span>
+      <span class="label">Berhenti Kerja</span>
+    </div>
+
+    <div></div><!-- col 6 -->
+    <div></div><!-- col 7 -->
+
   </div>
 
-  <div class="flow-top">
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="52" width="86" height="12" rx="6" fill="#342176"/>
-          <rect x="14" y="44" width="64" height="10" rx="5" fill="#ede9fe"/>
-          <circle cx="30" cy="64" r="12" fill="#fbbf24"/>
-          <circle cx="30" cy="64" r="6.5" fill="#fff"/>
-          <circle cx="82" cy="64" r="10" fill="#f59e0b"/>
-          <circle cx="82" cy="64" r="5.5" fill="#fff"/>
-          <path d="M42 23h24c5 0 8 5 6 9l-6 12H46l-6-21Z" fill="#16a34a"/>
-          <rect x="48" y="11" width="15" height="16" rx="7" fill="#0ea5e9"/>
-          <path d="M38 46h34l-2 6H40l-2-6Z" fill="#e5e7eb"/>
-          <path d="M54 11c0-4 2-7 5-7 5 0 8 5 6 11-1 3-4 6-7 6h-4V11Z" fill="#fde68a"/>
-          <path d="M44 33c3-5 9-7 18-7" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="label">Kerja Panjang</div>
-    </div>
-    <div class="arrow-circle">➜</div>
-
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <rect x="12" y="38" width="16" height="24" rx="6" fill="#fde68a"/>
-          <rect x="34" y="34" width="16" height="28" rx="6" fill="#fcd34d"/>
-          <rect x="56" y="30" width="16" height="32" rx="6" fill="#fbbf24"/>
-          <rect x="78" y="26" width="16" height="36" rx="6" fill="#f59e0b"/>
-          <path d="M10 20 48 32l30-18 22 10" stroke="#fde68a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 18c8-8 18-12 30-12 14 0 28 6 42 18" stroke="#111827" stroke-opacity=".25" stroke-width="4" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="label">Pendapatan Rendah</div>
-    </div>
-    <div class="arrow-circle">➜</div>
-
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 44c0-13 11-24 24-24h20c13 0 24 11 24 24v6H24v-6Z" fill="#f9739a"/>
-          <path d="M40 24c0-8 6-14 14-14s14 6 14 14" stroke="#fb7185" stroke-width="6" stroke-linecap="round"/>
-          <rect x="56" y="18" width="10" height="6" rx="3" fill="#111827"/>
-          <ellipse cx="34" cy="46" rx="3" ry="4" fill="#111827"/>
-          <ellipse cx="86" cy="46" rx="3" ry="4" fill="#111827"/>
-          <path d="M50 60c6 6 14 6 20 0" stroke="#111827" stroke-width="6" stroke-linecap="round"/>
-          <path d="M26 50c-6 8-8 14-6 18 1 4 10 6 26 6h28c16 0 25-2 26-6 2-4 0-10-6-18" stroke="#111827" stroke-opacity=".1" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="label">Tidak Bisa Menabung</div>
-    </div>
-    <div class="arrow-circle">➜</div>
-
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <rect x="46" y="14" width="28" height="40" rx="14" fill="#fcd34d"/>
-          <circle cx="60" cy="18" r="18" fill="#f97316"/>
-          <path d="M52 20c0-6 3-10 8-10 6 0 10 6 8 12-1 4-4 6-8 6h-8v-8Z" fill="#ffedd5"/>
-          <path d="M54 48h12l8 14H46l8-14Z" fill="#22c55e"/>
-          <path d="M38 44c8 4 18 6 28 6 10 0 20-2 28-6" stroke="#111827" stroke-width="6" stroke-linecap="round" opacity=".2"/>
-          <path d="M72 20c3 0 5 3 5 6" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="79" cy="14" r="5" fill="#fef3c7"/>
-        </svg>
-      </div>
-      <div class="label">Tidak Ada Pensiun</div>
-    </div>
+  <div class="source-box">
+    Sumber: Ilustrasi CELIOS berdasarkan temuan lapangan, 2026
   </div>
 
-  <div class="arrow-circle down">⇩</div>
-
-  <div class="flow-bottom">
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <path d="M52 28c0-10 8-18 18-18s18 8 18 18c0 8-4 14-10 17v13H62V45c-6-3-10-9-10-17Z" fill="#f97316"/>
-          <path d="M62 22c0-6 4-10 8-10 5 0 8 4 8 10 0 4-2 7-5 9h-6c-3-2-5-5-5-9Z" fill="#fde68a"/>
-          <path d="M70 46h8l6 18H64l6-18Z" fill="#10b981"/>
-          <path d="M44 38c-4 4-6 8-6 10 0 4 3 6 10 8l12 2" stroke="#fde68a" stroke-width="8" stroke-linecap="round" opacity=".2"/>
-        </svg>
-      </div>
-      <div class="label">Kemiskinan Lansia</div>
-    </div>
-    <div class="arrow-circle">➜</div>
-
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <rect x="18" y="28" width="84" height="36" rx="12" fill="#b91c1c"/>
-          <rect x="14" y="33" width="92" height="24" rx="12" fill="#ef4444"/>
-          <path d="M50 26h20l8-12H42l8 12Z" fill="#7f1d1d"/>
-          <path d="M40 58 30 72" stroke="#fef2f2" stroke-width="6" stroke-linecap="round"/>
-          <path d="m84 58 12 14" stroke="#fee2e2" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="32" cy="24" r="6" fill="#fcd34d"/>
-          <circle cx="88" cy="24" r="6" fill="#fcd34d"/>
-        </svg>
-      </div>
-      <div class="label">Pendapatan Nol</div>
-    </div>
-    <div class="arrow-circle">➜</div>
-
-    <div class="card">
-      <div class="illustration">
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <rect x="34" y="12" width="52" height="60" rx="12" fill="#047857"/>
-          <path d="M34 34h52v26c0 6-4 12-12 12H46c-8 0-12-6-12-12V34Z" fill="#111827"/>
-          <path d="M34 34h52L70 58H50L34 34Z" fill="#10b981"/>
-          <rect x="56" y="18" width="8" height="24" fill="#fef3c7" rx="4"/>
-          <path d="M38 22h44" stroke="#fef3c7" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="label">Berhenti Kerja</div>
-    </div>
-  </div>
 </div>
 </body>
 </html>
