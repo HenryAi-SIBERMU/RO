@@ -349,14 +349,12 @@
       iconText.textContent = s.iconUC;
       iconG.appendChild(iconText);
 
-      // Connector: from outer edge of donut to dot
-      const edge = polar(ang, OUTER + 4);
+      // Connector: placeholder — will be updated dynamically after render
       const line = document.createElementNS('http://www.w3.org/2000/svg','path');
-      // L-shape: out radially, then to dot
-      const radialEnd = polar(ang, OUTER + 22);
-      line.setAttribute('d', `M ${edge.x} ${edge.y} L ${radialEnd.x} ${radialEnd.y} L ${s.dotX} ${s.dotY}`);
+      line.setAttribute('d', '');
       line.setAttribute('class','conn-line');
       line.dataset.id = s.id;
+      s._line = line;
       connG.appendChild(line);
 
       const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -365,8 +363,58 @@
       dot.setAttribute('r', 6);
       dot.setAttribute('class','conn-dot');
       dot.dataset.id = s.id;
+      s._dot = dot;
       connG.appendChild(dot);
     });
+
+    /* ── Dynamic connector positioning ── */
+    function updateConnectors() {
+      const diag = document.getElementById('diagram');
+      const diagRect = diag.getBoundingClientRect();
+      if (diagRect.width === 0) return;
+      const sx = 1000 / diagRect.width;   // viewBox units per px
+      const sy = 700  / diagRect.height;
+
+      SEGMENTS.forEach(s => {
+        const tb = document.querySelector(`.tb-${s.id}`);
+        if (!tb) return;
+        const r = tb.getBoundingClientRect();
+        // Heading center Y in viewBox units (top of block + padding 6 + half h3 ~10px)
+        const headCY = (r.top - diagRect.top + 16) * sy;
+
+        let dX, dY;
+        if (s.id === 'kekayaan' || s.id === 'dampak') {
+          // Left-side block → dot at right edge of block, heading height
+          dX = (r.right - diagRect.left) * sx;
+          dY = headCY;
+        } else if (s.id === 'kontrol' || s.id === 'pemilu') {
+          // Right-side block → dot at left edge of block, heading height
+          dX = (r.left - diagRect.left) * sx;
+          dY = headCY;
+        } else {
+          // Bottom block (kebijakan) → dot at top-center, 12px above block
+          dX = (r.left + r.width / 2 - diagRect.left) * sx;
+          dY = (r.top - diagRect.top) * sy - 12;
+        }
+
+        // Update dot
+        s._dot.setAttribute('cx', dX);
+        s._dot.setAttribute('cy', dY);
+
+        // Update connector line: donut edge → small radial step → dot
+        const ang = midAngle(s);
+        const edge    = polar(ang, OUTER + 4);
+        const radial  = polar(ang, OUTER + 24);
+        s._line.setAttribute('d',
+          `M ${edge.x} ${edge.y} L ${radial.x} ${radial.y} L ${dX} ${dY}`);
+      });
+    }
+
+    let _rt;
+    window.addEventListener('load',   updateConnectors);
+    window.addEventListener('resize', () => { clearTimeout(_rt); _rt = setTimeout(updateConnectors, 80); });
+    // also run after fonts settle
+    setTimeout(updateConnectors, 150);
 
     /* ── Interactivity ── */
     function setActive(id, on) {
