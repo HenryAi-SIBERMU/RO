@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 31 (3) — Profil Upah Berdasarkan Usia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    :root {
+      --purple: #5d3fd3;
+      --deep-purple: #37206d;
+      --card-border: rgba(70, 48, 138, 0.2);
+      --lavender: rgba(248, 246, 255, 0.96);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: "Manrope", system-ui, sans-serif;
+      background: radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+                  radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+                  #f7f4ff;
+    }
+    .card {
+      width: min(980px, 96vw);
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(93,63,211,0.06), transparent 45%),
+                  linear-gradient(315deg, rgba(242,181,68,0.05), transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: var(--purple);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 0 18px 18px 0;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(17px, 2.1vw, 25px);
+      color: var(--deep-purple);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .plot-wrap {
+      background: var(--lavender);
+      border-radius: 22px;
+      padding: 24px 28px 32px;
+      border: 1px solid rgba(93,63,211,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    .plot-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--deep-purple);
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    .plot-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(55,32,109,0.55);
+      text-align: center;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    #plotly-g31-3 { width: 100%; height: 420px; }
+    .legend-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--deep-purple);
+    }
+    .legend-swatch {
+      width: 28px;
+      height: 14px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .source {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #513c86;
+      background: #fcefd5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 900px) {
+      .card { padding: 32px 20px 36px; }
+      .badge { margin-left: -20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 31.</div>
+      <h1>Kesenjangan Upah Berdasarkan Gender</h1>
+    </header>
+
+    <div class="plot-wrap">
+      <div class="plot-title">Profil Upah Berdasarkan Usia</div>
+      <div class="plot-sub">Smoothed relationship between age and earnings (Lowess)</div>
+      <div id="plotly-g31-3"></div>
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:#7c3fd3;"></div>
+          Perempuan
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:#f0ab00;"></div>
+          Laki-laki
+        </div>
+      </div>
+    </div>
+
+    <div class="source">Sumber: Sakernas Agustus 2025, diolah peneliti</div>
+  </div>
+
+  <script>
+    /* ── LOWESS-approximated wage-age profiles ── */
+    /* Control points estimated from reference chart */
+    const ageCtrl = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
+
+    const lakiCtrl = [
+      11200, 14800, 17500, 20000, 22200, 24400, 26500, 28200,
+      30000, 31500, 32800, 34000, 35200, 36200, 37000, 37800, 38500
+    ];
+
+    const perempuanCtrl = [
+      10000, 12800, 14800, 16500, 18000, 18900, 19600, 20200,
+      20800, 21300, 21900, 22600, 23300, 23900, 24300, 24700, 25000
+    ];
+
+    /* Catmull-Rom spline interpolation for smooth LOWESS look */
+    function catmullRom(p0, p1, p2, p3, t) {
+      return 0.5 * (
+        (2 * p1) +
+        (-p0 + p2) * t +
+        (2*p0 - 5*p1 + 4*p2 - p3) * t*t +
+        (-p0 + 3*p1 - 3*p2 + p3) * t*t*t
+      );
+    }
+
+    function interpolate(xCtrl, yCtrl, steps) {
+      const xs = [], ys = [];
+      for (let i = 0; i < xCtrl.length - 1; i++) {
+        const p0y = yCtrl[Math.max(0, i-1)];
+        const p1y = yCtrl[i];
+        const p2y = yCtrl[i+1];
+        const p3y = yCtrl[Math.min(yCtrl.length-1, i+2)];
+        const p0x = xCtrl[Math.max(0, i-1)];
+        const p1x = xCtrl[i];
+        const p2x = xCtrl[i+1];
+        const p3x = xCtrl[Math.min(xCtrl.length-1, i+2)];
+        for (let s = 0; s < steps; s++) {
+          const t = s / steps;
+          xs.push(parseFloat(catmullRom(p0x, p1x, p2x, p3x, t).toFixed(1)));
+          ys.push(Math.round(catmullRom(p0y, p1y, p2y, p3y, t)));
+        }
+      }
+      xs.push(xCtrl[xCtrl.length-1]);
+      ys.push(yCtrl[yCtrl.length-1]);
+      return { xs, ys };
+    }
+
+    const laki = interpolate(ageCtrl, lakiCtrl, 20);
+    const perempuan = interpolate(ageCtrl, perempuanCtrl, 20);
+
+    /* ── Traces ── */
+    const traceLaki = {
+      type: "scatter",
+      mode: "lines",
+      x: laki.xs,
+      y: laki.ys,
+      line: { color: "#f0ab00", width: 2.5, shape: "spline", smoothing: 1.1 },
+      fill: "tozeroy",
+      fillcolor: "rgba(240,171,0,0.10)",
+      name: "Laki-laki",
+      hovertemplate: "Usia: <b>%{x} thn</b><br>Upah: <b>Rp %{y:,.0f}</b><extra>Laki-laki</extra>",
+      showlegend: false
+    };
+
+    const tracePerempuan = {
+      type: "scatter",
+      mode: "lines",
+      x: perempuan.xs,
+      y: perempuan.ys,
+      line: { color: "#7c3fd3", width: 2.5, shape: "spline", smoothing: 1.1 },
+      fill: "tozeroy",
+      fillcolor: "rgba(124,63,211,0.10)",
+      name: "Perempuan",
+      hovertemplate: "Usia: <b>%{x} thn</b><br>Upah: <b>Rp %{y:,.0f}</b><extra>Perempuan</extra>",
+      showlegend: false
+    };
+
+    /* ── Layout ── */
+    const layout = {
+      margin: { t: 20, r: 30, b: 70, l: 85, pad: 4 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor:  "rgba(0,0,0,0)",
+      font: { family: "Manrope" },
+      showlegend: false,
+      xaxis: {
+        range: [15, 102],
+        dtick: 20,
+        tickfont: { size: 12, color: "rgba(47,36,95,0.75)" },
+        gridcolor: "rgba(93,63,211,0.10)",
+        zeroline: false,
+        title: {
+          text: "Usia (tahun)",
+          font: { size: 12, color: "rgba(47,36,95,0.65)" },
+          standoff: 14
+        }
+      },
+      yaxis: {
+        range: [8000, 42000],
+        dtick: 10000,
+        tickformat: ",d",
+        tickfont: { size: 12, color: "rgba(47,36,95,0.75)" },
+        gridcolor: "rgba(93,63,211,0.10)",
+        zeroline: false,
+        title: {
+          text: "Upah (Rp)",
+          font: { size: 12, color: "rgba(47,36,95,0.65)" },
+          standoff: 12
+        }
+      },
+      hoverlabel: {
+        font: { family: "Manrope", size: 12, color: "#fff" },
+        bgcolor: "rgba(47,33,92,0.92)",
+        bordercolor: "transparent"
+      }
+    };
+
+    Plotly.newPlot("plotly-g31-3", [traceLaki, tracePerempuan], layout,
+      { displayModeBar: false, responsive: true });
+  </script>
+</body>
+</html>
