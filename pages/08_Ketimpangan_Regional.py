@@ -33,6 +33,7 @@ _G21e_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21e_plotly.ht
 _G21f_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21f_plotly.html"
 _G22_plotly  = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar22_plotly.html"
 _G23         = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar23.html"
+_G23b        = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar23b.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -472,6 +473,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 23"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar23.html"
   width="100%" height="720" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Apakah Meritokrasi Masih Dianggap Penting di Indonesia?",
+    "Gambar 23b — Hal. 38",
+)
+components.html(_G23b.read_text(encoding="utf-8"), height=860, scrolling=True)
+chart_footer("Diolah oleh peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 23b"):
+    st.code(
+        """<!-- Gambar 23b: Meritokrasi vs Nepotisme Struktural -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar23b.html"
+  width="100%" height="860" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",

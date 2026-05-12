@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 23b — Meritokrasi vs Nepotisme Struktural</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #5d3fd3; --deep: #37206d; --gold: #f3c15a;
+      --left-bg: #ede8fc; --right-bg: #37206d;
+      --mid-bg: #6b3fd4; --border: rgba(70,48,138,0.2);
+      --lavender: rgba(248,246,255,0.96);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+        radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+        #f7f4ff;
+    }
+    .outer-card {
+      width: min(980px, 96vw); background: #fff;
+      border-radius: 26px; border: 1px solid var(--border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px; position: relative; overflow: hidden;
+    }
+    .outer-card::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(140deg,rgba(93,63,211,0.06),transparent 45%),
+                  linear-gradient(315deg,rgba(242,181,68,0.05),transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative; z-index: 1;
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 20px; margin-bottom: 10px;
+    }
+    .badge {
+      background: var(--purple); color: #fff;
+      padding: 11px 30px; border-radius: 0 18px 18px 0;
+      font-weight: 800; letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px; white-space: nowrap;
+    }
+    h1 { font-size: clamp(18px, 2vw, 24px); color: var(--deep); font-weight: 800; line-height: 1.3; }
+    .intro-row {
+      display: flex; gap: 20px; margin: 16px 0 24px;
+      position: relative; z-index: 1;
+    }
+    .intro-label {
+      background: var(--purple); color: #fff;
+      padding: 10px 18px; border-radius: 12px;
+      font-size: 14px; font-weight: 800; line-height: 1.3;
+      flex: 0 0 auto; max-width: 200px;
+    }
+    .intro-desc {
+      font-size: 13.5px; font-weight: 500; color: #555;
+      line-height: 1.6; flex: 1;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .table-wrap { position: relative; z-index: 1; }
+
+    /* header row */
+    .col-headers {
+      display: grid;
+      grid-template-columns: 1fr 140px 1fr;
+      gap: 0;
+      margin-bottom: 4px;
+    }
+    .col-header {
+      padding: 12px 16px;
+      font-size: 13px; font-weight: 800; line-height: 1.3;
+      border-radius: 14px 14px 0 0;
+      text-align: center;
+    }
+    .col-header.left  { background: #6c3fcc; color: #fff; }
+    .col-header.mid   { background: transparent; }
+    .col-header.right { background: var(--deep); color: #fff; }
+
+    /* rows */
+    .rows { display: flex; flex-direction: column; gap: 3px; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 140px 1fr;
+      gap: 0;
+      transition: transform 0.22s cubic-bezier(.22,.68,0,1.2), box-shadow 0.22s ease;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: default;
+      animation: fadeRow 0.4s ease both;
+    }
+    .row:hover {
+      transform: scaleY(1.025) translateY(-1px);
+      box-shadow: 0 6px 22px -8px rgba(55,32,109,0.35);
+      z-index: 2;
+    }
+    @keyframes fadeRow {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .rows .row:nth-child(1)  { animation-delay: 0.02s; }
+    .rows .row:nth-child(2)  { animation-delay: 0.05s; }
+    .rows .row:nth-child(3)  { animation-delay: 0.08s; }
+    .rows .row:nth-child(4)  { animation-delay: 0.11s; }
+    .rows .row:nth-child(5)  { animation-delay: 0.14s; }
+    .rows .row:nth-child(6)  { animation-delay: 0.17s; }
+    .rows .row:nth-child(7)  { animation-delay: 0.20s; }
+    .rows .row:nth-child(8)  { animation-delay: 0.23s; }
+    .rows .row:nth-child(9)  { animation-delay: 0.26s; }
+    .rows .row:nth-child(10) { animation-delay: 0.29s; }
+    .rows .row:nth-child(11) { animation-delay: 0.32s; }
+    .rows .row:nth-child(12) { animation-delay: 0.35s; }
+    .rows .row:nth-child(13) { animation-delay: 0.38s; }
+    .rows .row:nth-child(14) { animation-delay: 0.41s; }
+    .rows .row:nth-child(15) { animation-delay: 0.44s; }
+    .rows .row:nth-child(16) { animation-delay: 0.47s; }
+    .rows .row:nth-child(17) { animation-delay: 0.50s; }
+
+    .cell {
+      padding: 10px 14px;
+      font-size: 12.5px; line-height: 1.5;
+      transition: background 0.2s;
+    }
+    .cell.left  { background: #ede8fc; color: #2e1e60; font-weight: 500; text-align: right; }
+    .cell.mid   {
+      background: var(--mid-bg); color: #fff;
+      font-size: 12px; font-weight: 700; text-align: center;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1.3;
+    }
+    .cell.right { background: #f3f0fe; color: #2e1e60; font-weight: 500; }
+
+    .row:hover .cell.left  { background: #ddd4fc; }
+    .row:hover .cell.mid   { background: #7c52e8; }
+    .row:hover .cell.right { background: #e8e2ff; }
+
+    /* alternate rows */
+    .row:nth-child(even) .cell.left  { background: #e5ddfb; }
+    .row:nth-child(even) .cell.right { background: #ebe6ff; }
+    .row:nth-child(even):hover .cell.left  { background: #d4c9fb; }
+    .row:nth-child(even):hover .cell.right { background: #ddd5ff; }
+
+    .source {
+      margin-top: 24px; text-align: center;
+      font-size: 13px; font-weight: 600; color: #513c86;
+      background: #fcefd5; border-radius: 16px; padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative; z-index: 1;
+    }
+
+    @media (max-width: 680px) {
+      .outer-card { padding: 32px 16px 36px; }
+      .badge { margin-left: -16px; }
+      .col-header, .cell { font-size: 11px; padding: 8px 8px; }
+      .cell.mid { font-size: 10px; }
+      .col-headers { grid-template-columns: 1fr 100px 1fr; }
+      .row { grid-template-columns: 1fr 100px 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="outer-card">
+    <header>
+      <div class="badge">Gambar 23b.</div>
+      <h1>Apakah Meritokrasi Masih Dianggap Penting di Indonesia?</h1>
+    </header>
+
+    <div class="intro-row">
+      <div class="intro-label">Meritokrasi vs Nepotisme Struktural</div>
+      <div class="intro-desc">Fakta yang dekat dengan kehidupan kita sehari-hari, bahwa privilese dan nepotisme struktural itu hal yang riil.</div>
+    </div>
+
+    <div class="table-wrap">
+      <div class="col-headers">
+        <div class="col-header left">Generasi Muda dari Keluarga Biasa</div>
+        <div class="col-header mid"></div>
+        <div class="col-header right">Generasi Muda dalam Lingkar Oligarki</div>
+      </div>
+
+      <div class="rows" id="rows"></div>
+    </div>
+
+    <div class="source">Sumber: Diolah oleh peneliti</div>
+  </div>
+
+  <script>
+    const data = [
+      ["Mulai dari nol, tanpa koneksi kuat", "Titik Awal", "Sudah punya jaringan elite sejak lahir"],
+      ["Apply lewat platform seperti JobStreet, LinkedIn, Kalibrr, Glints", "Cara Cari Kerja", "Dapat info dari orang tua, relasi bisnis, atau langsung ditawari"],
+      ["Kirim puluhan–ratusan CV, ikut tes online, psikotes, interview berlapis", "Proses Masuk Kerja", "Tidak perlu seleksi formal, langsung masuk lewat rekomendasi"],
+      ["Magang tidak dibayar / kerja kontrak pendek", "Pengalaman Awal", "Langsung dapat posisi strategis atau proyek penting"],
+      ["Staff junior, admin, sales, atau kerja informal", "Posisi Awal Karier", "Komisaris muda, project manager, advisor, atau posisi \"strategic role\""],
+      ["Bergantung pada info publik (lowongan online, job fair)", "Akses Informasi", "Akses info internal; proyek, investasi, peluang bisnis"],
+      ["Sangat tinggi (ribuan pelamar untuk satu posisi)", "Tekanan Kompetisi", "Rendah, karena akses terbatas pada jaringan tertentu"],
+      ["UMR atau di bawah UMR, kadang freelance tidak stabil", "Pendapatan Awal", "Jauh di atas rata-rata, bahkan tanpa pengalaman panjang"],
+      ["Kerja serabutan, freelance, atau jadi ojol", "Strategi Bertahan", "Fokus membangun portofolio bisnis/jaringan"],
+      ["Tinggi; mudah di-PHK, kontrak habis, tidak diperpanjang", "Risiko Karier", "Rendah: dilindungi jaringan dan aset keluarga"],
+      ["Lambat, butuh waktu lama untuk naik kelas", "Mobilitas Sosial", "Cepat, karena akses modal dan peluang besar"],
+      ["Sulit dapat modal usaha atau kredit", "Akses Modal", "Mudah akses investor, bank, atau modal keluarga"],
+      ["Bangun dari nol, ikut seminar/job fair", "Jaringan (Networking)", "Sudah terhubung dengan pejabat, CEO, politisi"],
+      ["Harus kerja lebih keras untuk hasil yang belum pasti", "Makna \"Kerja Keras\"", "Kerja keras mempercepat, tapi bukan penentu utama"],
+      ["Apply 100+ lowongan, sering tidak dipanggil", "Realita Lapangan", "Tidak pernah \"apply kerja\" dalam arti formal"],
+      ["Sulit beli rumah, menabung, atau investasi", "Dampak Jangka Panjang", "Bisa akumulasi aset sejak muda"],
+      ["Terdorong ke bawah oleh ketimpangan", "Struktur Sistem", "Diuntungkan oleh sistem oligarkis"]
+    ];
+
+    const container = document.getElementById("rows");
+    data.forEach(([left, mid, right]) => {
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `
+        <div class="cell left">${left}</div>
+        <div class="cell mid">${mid}</div>
+        <div class="cell right">${right}</div>
+      `;
+      container.appendChild(row);
+    });
+  </script>
+</body>
+</html>
