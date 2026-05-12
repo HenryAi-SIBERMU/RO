@@ -88,21 +88,21 @@
       position: relative;
       background: var(--lilac);
       border-radius: 22px;
-      padding: 28px 30px 36px;
+      padding: 28px 30px 36px 82px;
       border: 1px solid rgba(93, 63, 211, 0.14);
       overflow: hidden;
     }
-    .canvas-wrap::before {
-      content: "Nilai Simpanan (Triliun Rupiah)";
+    .axis-label-y {
       position: absolute;
-      left: 18px;
-      top: 55px;
-      transform: rotate(-90deg) translate(-50%, -50%);
-      transform-origin: left top;
+      top: 50%;
+      left: 36px;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.3px;
-      color: rgba(43, 35, 89, 0.55);
+      color: rgba(43, 35, 89, 0.58);
+      text-align: center;
     }
     canvas {
       width: 100% !important;
@@ -170,10 +170,14 @@
       .badge {
         margin-left: -26px;
       }
-      .canvas-wrap::before {
+      .canvas-wrap {
+        padding: 60px 26px 34px;
+      }
+      .axis-label-y {
+        writing-mode: initial;
+        transform: none;
+        left: 26px;
         top: 26px;
-        left: 28px;
-        transform: rotate(0deg);
       }
       canvas {
         height: 360px !important;
@@ -190,6 +194,7 @@
     </header>
 
     <div class="canvas-wrap">
+      <span class="axis-label-y">Nilai Simpanan (Triliun Rupiah)</span>
       <canvas id="depositChart"></canvas>
     </div>
 
