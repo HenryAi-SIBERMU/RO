@@ -8,6 +8,7 @@ from components.chart_wrapper import chart_header, chart_footer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 _G27 = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar27_plotly.html"
+_G28 = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar28_plotly.html"
 
 st.set_page_config(page_title="Ketimpangan Gender", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -22,8 +23,14 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 27"):
   width="100%" height="660" frameborder="0"
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
 
-chart_header("Simulasi Nilai Ekonomi Kerja Ibu WFH", "Gambar 28 — Hal. 52")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 52.")
+chart_header("Simulasi 2: Simulasi Nilai Ekonomi Kerja Ibu WFH", "Gambar 28 — Hal. 52")
+components.html(_G28.read_text(encoding="utf-8"), height=660, scrolling=True)
+chart_footer("Diolah oleh penulis (2026)")
+with st.expander("🔗 Kode Embed WordPress — Gambar 28"):
+    st.code("""<!-- Gambar 28: Kurva Produktivitas & Nilai Ekonomi Ibu WFH -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/14_Ketimpangan_Gender_gambar28_plotly.html"
+  width="100%" height="660" frameborder="0"
+  style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Lebih Banyak Perempuan Bekerja di Sektor Informal", "Gambar 30 — Hal. 54")
 st.info("⏳ Data belum diinput. Lihat PDF hal. 54.")
