@@ -32,6 +32,7 @@ _G21d_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21d_plotly.ht
 _G21e_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21e_plotly.html"
 _G21f_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21f_plotly.html"
 _G22_plotly  = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar22_plotly.html"
+_G23         = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar23.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -453,6 +454,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 22 (Plotly)"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar22_plotly.html"
   width="100%" height="500" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Generasi Muda Menanggung Beban Ekonomi yang Timpang",
+    "Gambar 23 — Hal. 38",
+)
+components.html(_G23.read_text(encoding="utf-8"), height=720, scrolling=True)
+chart_footer("Diolah oleh peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 23"):
+    st.code(
+        """<!-- Gambar 23: Generasi Muda Menanggung Beban Ekonomi yang Timpang -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar23.html"
+  width="100%" height="720" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",
