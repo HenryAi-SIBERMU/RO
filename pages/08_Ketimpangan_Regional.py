@@ -31,6 +31,7 @@ _G21c_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21c_plotly.ht
 _G21d_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21d_plotly.html"
 _G21e_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21e_plotly.html"
 _G21f_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21f_plotly.html"
+_G22_plotly  = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar22_plotly.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -434,6 +435,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 21f (Plotly)"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar21f_plotly.html"
   width="100%" height="620" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Cuti Tidak Berbayar Generasi Muda",
+    "Gambar 22 — Hal. 37",
+)
+components.html(_G22_plotly.read_text(encoding="utf-8"), height=500, scrolling=True)
+chart_footer("Sakernas Agustus 2025; diolah peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 22 (Plotly)"):
+    st.code(
+        """<!-- Gambar 22: Cuti Tidak Berbayar Generasi Muda — Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar22_plotly.html"
+  width="100%" height="500" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",
