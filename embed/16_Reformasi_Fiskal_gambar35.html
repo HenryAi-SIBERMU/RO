@@ -3,22 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gambar 35 — Oligarki dalam Pakaian Demokrasi</title>
+  <title>Gambar 35 — Zoomable Sunburst: Lingkaran Setan Oligarki</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <style>
     :root {
       --purple: #5d3fd3;
       --deep-purple: #37206d;
       --card-border: rgba(70,48,138,0.2);
       --lavender: rgba(248,246,255,0.96);
-      --orange: #f59e0b;
-      --seg-a: #f59e0b;
-      --seg-b: #8b5cf6;
-      --seg-c: #3b0764;
-      --seg-d: #6d28d9;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -33,7 +28,7 @@
                   #f7f4ff;
     }
     .card {
-      width: min(1020px, 96vw);
+      width: min(980px, 96vw);
       background: #fff;
       border-radius: 26px;
       border: 1px solid var(--card-border);
@@ -80,147 +75,42 @@
     .plot-wrap {
       background: var(--lavender);
       border-radius: 22px;
-      padding: 32px 28px 36px;
+      padding: 24px 16px 28px;
       border: 1px solid rgba(93,63,211,0.15);
       position: relative;
       z-index: 1;
-    }
-
-    /* ── Main diagram grid ── */
-    .diagram {
-      display: grid;
-      grid-template-columns: 1fr 280px 1fr;
-      grid-template-rows: 1fr 1fr auto;
-      gap: 0 24px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      min-height: 380px;
     }
-
-    /* ── Text blocks ── */
-    .tb {
-      padding: 10px 12px;
-      border-radius: 12px;
+    .hint {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(55,32,109,0.5);
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
     }
-    .tb h3 {
-      font-size: 14px;
+    #sunburst-svg { width: 100%; max-width: 620px; cursor: pointer; }
+    /* D3 sunburst labels */
+    text.sb-label {
+      font-family: "Manrope", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      fill: #fff;
+      pointer-events: none;
+      dominant-baseline: middle;
+      text-anchor: middle;
+    }
+    text.sb-label.dark { fill: #37206d; }
+    .center-label {
+      font-family: "Manrope", sans-serif;
       font-weight: 800;
-      color: var(--deep-purple);
-      margin-bottom: 6px;
-    }
-    .tb ul {
-      list-style: none;
-      padding: 0;
-    }
-    .tb ul li {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: #4a3272;
-      line-height: 1.8;
-      padding-left: 12px;
-      position: relative;
-    }
-    .tb ul li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--purple);
-    }
-
-    /* Grid positions */
-    .kekayaan       { grid-column: 1; grid-row: 1; text-align: right; }
-    .kontrol        { grid-column: 3; grid-row: 1; text-align: left; }
-    .donut-wrap     { grid-column: 2; grid-row: 1 / 3; display: flex; align-items: center; justify-content: center; }
-    .dampak         { grid-column: 1; grid-row: 2; text-align: right; }
-    .pemilu         { grid-column: 3; grid-row: 2; text-align: left; }
-    .kebijakan      { grid-column: 2; grid-row: 3; text-align: center; margin-top: 20px; }
-    .kebijakan .tb  { display: inline-block; text-align: left; }
-
-    /* Connector dots */
-    .kekayaan .tb,
-    .kontrol .tb,
-    .dampak .tb,
-    .pemilu .tb {
-      position: relative;
-    }
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--purple);
-      display: inline-block;
-      flex-shrink: 0;
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 2px var(--purple);
-    }
-    .connector-row {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .kekayaan .connector-row  { justify-content: flex-end; margin-bottom: 6px; }
-    .kontrol .connector-row   { justify-content: flex-start; margin-bottom: 6px; }
-    .dampak .connector-row    { justify-content: flex-end; margin-bottom: 6px; }
-    .pemilu .connector-row    { justify-content: flex-start; margin-bottom: 6px; }
-    .line {
-      height: 2px;
-      background: var(--purple);
-      flex: 1;
-      min-width: 16px;
-      max-width: 32px;
-    }
-
-    /* ── Donut ── */
-    .donut-ring {
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: conic-gradient(
-        var(--seg-a) 0deg 108deg,
-        var(--seg-b) 108deg 198deg,
-        var(--seg-c) 198deg 270deg,
-        var(--seg-d) 270deg 360deg
-      );
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 40px -10px rgba(93,63,211,0.4);
-    }
-    .donut-center {
-      width: 132px;
-      height: 132px;
-      border-radius: 50%;
-      background: #f3eefc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       font-size: 13px;
-      font-weight: 800;
-      color: var(--deep-purple);
-      line-height: 1.35;
-      padding: 12px;
-      box-shadow: inset 0 2px 8px rgba(93,63,211,0.12);
+      fill: #37206d;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
     }
-    /* Icons inside segments */
-    .seg-icon {
-      position: absolute;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 16px;
-    }
-    .seg-icon.top    { top: 22px;  left: 50%; transform: translateX(-50%); }
-    .seg-icon.right  { right: 22px; top: 50%; transform: translateY(-50%); }
-    .seg-icon.bottom { bottom: 22px; left: 50%; transform: translateX(-50%); }
-    .seg-icon.left   { left: 22px; top: 50%; transform: translateY(-50%); }
-
-    /* ── Source ── */
     .source {
       margin-top: 26px;
       text-align: center;
@@ -234,11 +124,7 @@
       position: relative;
       z-index: 1;
     }
-
     @media (max-width: 700px) {
-      .diagram { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .kekayaan, .kontrol, .dampak, .pemilu, .kebijakan { grid-column: 1; grid-row: auto; text-align: left; }
-      .donut-wrap { grid-column: 1; grid-row: auto; margin: 20px 0; }
       .card { padding: 28px 16px 32px; }
       .badge { margin-left: -16px; }
     }
@@ -252,103 +138,191 @@
     </header>
 
     <div class="plot-wrap">
-      <div class="diagram">
-
-        <!-- Kekayaan (top-left) -->
-        <div class="kekayaan">
-          <div class="tb">
-            <div class="connector-row">
-              <h3>Kekayaan</h3>
-              <div class="line"></div>
-              <div class="dot"></div>
-            </div>
-            <ul>
-              <li>Korporasi</li>
-              <li>Konsensi tambang</li>
-              <li>Konsensi hutan</li>
-              <li><em>Data center</em></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Donut center -->
-        <div class="donut-wrap">
-          <div class="donut-ring">
-            <div class="donut-center">Lingkaran<br>Setan<br>Oligarki</div>
-            <div class="seg-icon top"><i class="fas fa-database"></i></div>
-            <div class="seg-icon right"><i class="fas fa-check-to-slot"></i></div>
-            <div class="seg-icon bottom"><i class="fas fa-file-shield"></i></div>
-            <div class="seg-icon left"><i class="fas fa-coins"></i></div>
-          </div>
-        </div>
-
-        <!-- Kontrol Politik (top-right) -->
-        <div class="kontrol">
-          <div class="tb">
-            <div class="connector-row">
-              <div class="dot"></div>
-              <div class="line"></div>
-              <h3>Kontrol Politik</h3>
-            </div>
-            <ul>
-              <li>Mendanai Partai</li>
-              <li>Sponsor Politik</li>
-              <li>Mahar Politik</li>
-              <li>Punya Partai</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Dampak Kebijakan (bottom-left) -->
-        <div class="dampak">
-          <div class="tb">
-            <div class="connector-row">
-              <h3>Dampak Kebijakan</h3>
-              <div class="line"></div>
-              <div class="dot"></div>
-            </div>
-            <ul>
-              <li>Insentif korporasi</li>
-              <li>Tender konvensi</li>
-              <li>Pajak regresif</li>
-              <li><em>Tax amnesty</em></li>
-              <li>Proyek PSN</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Pemilu (middle-right) -->
-        <div class="pemilu">
-          <div class="tb">
-            <div class="connector-row">
-              <div class="dot"></div>
-              <div class="line"></div>
-              <h3>Pemilu</h3>
-            </div>
-            <ul>
-              <li><em>High cost politics</em></li>
-              <li>Media</li>
-              <li><em>Money Politics</em></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Kebijakan (bottom-center) -->
-        <div class="kebijakan">
-          <div class="tb">
-            <h3>Kebijakan</h3>
-            <ul>
-              <li>Menguasai parlemen</li>
-              <li><em>Bypass</em> Birokrasi</li>
-              <li>Mempengaruhi Kebijakan</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
+      <div class="hint">🔍 Klik segmen untuk zoom masuk · Klik pusat untuk zoom keluar</div>
+      <svg id="sunburst-svg" viewBox="-310 -310 620 620"></svg>
     </div>
 
     <div class="source">Sumber: Analisis Peneliti</div>
   </div>
+
+  <script>
+    /* ── Data ── */
+    const data = {
+      name: "Lingkaran\nSetan\nOligarki",
+      children: [
+        {
+          name: "Kekayaan", color: "#f59e0b",
+          children: [
+            {name: "Korporasi",        value: 1},
+            {name: "Konsensi tambang", value: 1},
+            {name: "Konsensi hutan",   value: 1},
+            {name: "Data center",      value: 1}
+          ]
+        },
+        {
+          name: "Kontrol Politik", color: "#7c3aed",
+          children: [
+            {name: "Mendanai Partai",  value: 1},
+            {name: "Sponsor Politik",  value: 1},
+            {name: "Mahar Politik",    value: 1},
+            {name: "Punya Partai",     value: 1}
+          ]
+        },
+        {
+          name: "Pemilu", color: "#6d28d9",
+          children: [
+            {name: "High cost politics", value: 1},
+            {name: "Media",              value: 1},
+            {name: "Money Politics",     value: 1}
+          ]
+        },
+        {
+          name: "Kebijakan", color: "#3b0764",
+          children: [
+            {name: "Menguasai parlemen",       value: 1},
+            {name: "Bypass Birokrasi",          value: 1},
+            {name: "Pengaruhi Kebijakan",       value: 1}
+          ]
+        },
+        {
+          name: "Dampak Kebijakan", color: "#8b5cf6",
+          children: [
+            {name: "Insentif korporasi", value: 1},
+            {name: "Tender konvensi",    value: 1},
+            {name: "Pajak regresif",     value: 1},
+            {name: "Tax amnesty",        value: 1},
+            {name: "Proyek PSN",         value: 1}
+          ]
+        }
+      ]
+    };
+
+    /* ── D3 Zoomable Sunburst ── */
+    const radius = 280;
+    const svg = d3.select("#sunburst-svg");
+
+    const arc = d3.arc()
+      .startAngle(d => d.x0)
+      .endAngle(d => d.x1)
+      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.015))
+      .padRadius(radius / 2)
+      .innerRadius(d => d.y0 === 0 ? 0 : d.y0 * radius / 3 + 60)
+      .outerRadius(d => d.y0 === 0 ? 58 : Math.max(d.y0 * radius / 3 + 60, d.y1 * radius / 3 + 54));
+
+    function colorOf(d) {
+      if (d.depth === 0) return "#f0eaff";
+      let n = d; while (n.depth > 1) n = n.parent;
+      const base = d3.color(n.data.color);
+      if (d.depth === 1) return base.toString();
+      return base.brighter(0.55).toString();
+    }
+
+    const root = d3.hierarchy(data)
+      .sum(d => d.value || 0)
+      .sort((a, b) => b.value - a.value);
+
+    d3.partition().size([2 * Math.PI, 3])(root);
+    root.each(d => { d.current = { x0: d.x0, x1: d.x1, y0: d.y0, y1: d.y1 }; });
+
+    /* Arcs */
+    const path = svg.append("g").selectAll("path")
+      .data(root.descendants())
+      .join("path")
+        .attr("fill", d => colorOf(d))
+        .attr("fill-opacity", d => d.depth === 0 ? 1 : arcVisible(d.current) ? (d.children ? 0.88 : 0.72) : 0)
+        .attr("d", d => arc(d.current))
+        .style("cursor", d => d.children ? "pointer" : "default")
+        .on("click", clicked);
+
+    path.append("title").text(d => `${d.ancestors().map(d => d.data.name?.replace("\n", " ")).reverse().join(" › ")}`);
+
+    /* Labels */
+    const label = svg.append("g")
+        .attr("pointer-events", "none")
+        .attr("text-anchor", "middle")
+      .selectAll("text")
+      .data(root.descendants())
+      .join("text")
+        .attr("class", d => {
+          const c = d3.color(colorOf(d));
+          return "sb-label" + (c && c.l > 0.75 ? " dark" : "");
+        })
+        .attr("fill-opacity", d => +labelVisible(d.current))
+        .attr("transform", d => labelTransform(d.current))
+        .each(function(d) {
+          const name = d.data.name?.replace("\n", " ") || "";
+          const words = name.split(" ");
+          if (words.length <= 2 || d.depth === 2) {
+            d3.select(this).text(name);
+          } else {
+            const mid = Math.ceil(words.length / 2);
+            d3.select(this)
+              .append("tspan").attr("x", 0).attr("dy", "-0.55em").text(words.slice(0, mid).join(" "));
+            d3.select(this)
+              .append("tspan").attr("x", 0).attr("dy", "1.15em").text(words.slice(mid).join(" "));
+          }
+        });
+
+    /* Center circle with label */
+    svg.append("circle")
+      .datum(root)
+      .attr("r", 58)
+      .attr("fill", "#f0eaff")
+      .attr("stroke", "rgba(93,63,211,0.2)")
+      .attr("stroke-width", 1.5)
+      .style("cursor", "pointer")
+      .on("click", (event, p) => clicked(event, p));
+
+    const centerLines = ["Lingkaran", "Setan", "Oligarki"];
+    centerLines.forEach((line, i) => {
+      svg.append("text")
+        .attr("class", "center-label")
+        .attr("y", (i - 1) * 17)
+        .text(line);
+    });
+
+    /* ── Zoom interaction ── */
+    function clicked(event, p) {
+      if (!p.children) return;
+      const zoomTarget = p.parent && p.depth > 0 ? p : root;
+
+      root.each(d => {
+        d.target = {
+          x0: Math.max(0, Math.min(1, (d.x0 - zoomTarget.x0) / (zoomTarget.x1 - zoomTarget.x0))) * 2 * Math.PI,
+          x1: Math.max(0, Math.min(1, (d.x1 - zoomTarget.x0) / (zoomTarget.x1 - zoomTarget.x0))) * 2 * Math.PI,
+          y0: Math.max(0, d.y0 - zoomTarget.depth),
+          y1: Math.max(0, d.y1 - zoomTarget.depth)
+        };
+      });
+
+      const t = svg.transition().duration(700).ease(d3.easeCubicInOut);
+
+      path.transition(t)
+        .tween("data", d => {
+          const i = d3.interpolate(d.current, d.target);
+          return tt => { d.current = i(tt); };
+        })
+        .filter(function(d) { return +this.getAttribute("fill-opacity") || arcVisible(d.target); })
+        .attr("fill-opacity", d => d.depth === 0 ? 1 : arcVisible(d.target) ? (d.children ? 0.88 : 0.72) : 0)
+        .attrTween("d", d => () => arc(d.current));
+
+      label.filter(function(d) { return +this.getAttribute("fill-opacity") || labelVisible(d.target); })
+        .transition(t)
+        .attr("fill-opacity", d => +labelVisible(d.target))
+        .attrTween("transform", d => () => labelTransform(d.current));
+    }
+
+    function arcVisible(d) {
+      return d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
+    }
+    function labelVisible(d) {
+      return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.04;
+    }
+    function labelTransform(d) {
+      const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+      const r = d.y0 === 0 ? 0 : ((d.y0 * radius / 3 + 60) + (d.y1 * radius / 3 + 54)) / 2;
+      return `rotate(${x - 90}) translate(${r},0) rotate(${x < 180 ? 0 : 180})`;
+    }
+  </script>
 </body>
 </html>
