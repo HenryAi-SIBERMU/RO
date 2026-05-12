@@ -246,10 +246,10 @@
               return gradient;
             },
             borderRadius: { topLeft: 10, topRight: 10 },
-            stack: "savings",
             borderSkipped: false,
-            barThickness: "flex",
-            maxBarThickness: 28
+            barThickness: 18,
+            categoryPercentage: 0.62,
+            barPercentage: 0.84
           },
           {
             type: "bar",
@@ -262,10 +262,10 @@
               return gradient;
             },
             borderRadius: { topLeft: 10, topRight: 10 },
-            stack: "savings",
             borderSkipped: false,
-            barThickness: "flex",
-            maxBarThickness: 28
+            barThickness: 18,
+            categoryPercentage: 0.62,
+            barPercentage: 0.84
           },
           {
             type: "line",
@@ -334,7 +334,7 @@
           },
           y: {
             beginAtZero: true,
-            stacked: true,
+            stacked: false,
             grid: {
               color: "rgba(55, 32, 109, 0.14)",
               drawTicks: false
