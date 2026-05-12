@@ -103,10 +103,14 @@
       letter-spacing: 0.3px;
       color: rgba(43, 35, 89, 0.58);
       text-align: center;
+      z-index: 1;
+      pointer-events: none;
     }
     canvas {
       width: 100% !important;
       height: 430px !important;
+      position: relative;
+      z-index: 2;
     }
     .legend-grid {
       margin-top: 26px;
@@ -302,6 +306,12 @@
       },
       options: {
         maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 16,
+            right: 18
+          }
+        },
         interaction: {
           mode: "index",
           intersect: false
