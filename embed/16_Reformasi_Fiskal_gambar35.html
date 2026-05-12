@@ -86,7 +86,7 @@
       width: 100%;
       max-width: 1000px;
       margin: 0 auto;
-      aspect-ratio: 1000/620;
+      aspect-ratio: 1000/700;
     }
     .d-svg {
       position: absolute; inset: 0;
@@ -152,8 +152,8 @@
     /* HTML Text Blocks */
     .tb {
       position: absolute;
-      max-width: 22%;
-      padding: 8px 12px;
+      max-width: 19%;
+      padding: 6px 10px;
       border-radius: 12px;
       transition: background 200ms ease, transform 220ms ease;
       cursor: pointer;
@@ -182,14 +182,12 @@
     }
     .tb.active h3 { color: var(--purple); }
 
-    /* Positions of text blocks */
-    .tb-kekayaan  { top: 2%;  left: 1%;   text-align: left; }
-    .tb-kontrol   { top: 2%;  right: 1%;  text-align: left; }
-    .tb-pemilu    { top: 50%; right: 1%;  transform: translateY(-50%); text-align: left; }
-    .tb-dampak    { top: 50%; left: 1%;   transform: translateY(-50%); text-align: left; }
-    .tb-kebijakan { bottom: 2%; left: 50%; transform: translateX(-50%); text-align: left; max-width: 28%; }
-    .tb-pemilu.active   { transform: translateY(calc(-50% - 2px)); }
-    .tb-dampak.active   { transform: translateY(calc(-50% - 2px)); }
+    /* Positions of text blocks — anchored near each dot */
+    .tb-kekayaan  { top: 9%;  left: 4%;   text-align: left; }
+    .tb-kontrol   { top: 9%;  right: 4%;  text-align: left; }
+    .tb-pemilu    { top: 39%; right: 4%;  text-align: left; }
+    .tb-dampak    { top: 39%; left: 4%;   text-align: left; }
+    .tb-kebijakan { top: 80%; left: 50%; transform: translateX(-50%); text-align: left; max-width: 28%; }
     .tb-kebijakan.active { transform: translateX(-50%) translateY(-2px); }
 
     /* Source */
@@ -206,7 +204,7 @@
     }
 
     @media (max-width: 760px) {
-      .diagram { aspect-ratio: 1000/900; }
+      .diagram { aspect-ratio: 1000/980; }
       .tb { max-width: 30%; }
       .card { padding: 28px 16px 32px; }
       .badge { margin-left: -16px; }
@@ -224,7 +222,7 @@
       <div class="hint">🖱️ Hover atau klik segmen / kategori untuk highlight</div>
 
       <div class="diagram" id="diagram">
-        <svg class="d-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
+        <svg class="d-svg" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet">
           <g id="segments"></g>
           <g id="connectors"></g>
           <g id="icons"></g>
@@ -298,7 +296,7 @@
       { id:'kekayaan',  start: 288, end: 360, color:'var(--c-kekayaan)',  iconUC:'\uf1c0', dotX: 248, dotY:  92 }, // database
       { id:'kontrol',   start:   0, end:  72, color:'var(--c-kontrol)',   iconUC:'\uf1de', dotX: 752, dotY:  92 }, // sliders
       { id:'pemilu',    start:  72, end: 144, color:'var(--c-pemilu)',    iconUC:'\uf058', dotX: 752, dotY: 310 }, // circle-check
-      { id:'kebijakan', start: 144, end: 216, color:'var(--c-kebijakan)', iconUC:'\uf3ed', dotX: 500, dotY: 552 }, // shield
+      { id:'kebijakan', start: 144, end: 216, color:'var(--c-kebijakan)', iconUC:'\uf3ed', dotX: 500, dotY: 535 }, // shield
       { id:'dampak',    start: 216, end: 288, color:'var(--c-dampak)',    iconUC:'\uf51e', dotX: 248, dotY: 310 }, // coins
     ];
 
