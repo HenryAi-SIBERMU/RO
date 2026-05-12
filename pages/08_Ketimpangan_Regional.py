@@ -27,6 +27,7 @@ _G19_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar19_plotly.html
 _G20_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar20_plotly.html"
 _G21a_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21a_plotly.html"
 _G21b_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21b_plotly.html"
+_G21c_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar21c_plotly.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -357,6 +358,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 21b (Plotly)"):
         """<!-- Gambar 21b: Ketersediaan Jaminan Kecelakaan di Tempat Kerja — Plotly -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar21b_plotly.html"
+  width="100%" height="620" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Ketersediaan Jaminan Kematian di Tempat Kerja",
+    "Gambar 21c — Hal. 35",
+)
+components.html(_G21c_plotly.read_text(encoding="utf-8"), height=620, scrolling=True)
+chart_footer("Sakernas Agustus 2025; diolah peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 21c (Plotly)"):
+    st.code(
+        """<!-- Gambar 21c: Ketersediaan Jaminan Kematian di Tempat Kerja — Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar21c_plotly.html"
   width="100%" height="620" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
