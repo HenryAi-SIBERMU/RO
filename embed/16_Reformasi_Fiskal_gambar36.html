@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Gambar 36 — Peta Parpol Dikuasai Oligarki Politik</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#5D3FD3;--gold:#F4A535;--conn:#C8B0E8;--sub:#6b5e8e;--bg:#faf8ff;--border:#EDE9FC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Manrope',sans-serif;background:#f0ecfb;padding:12px}
+
+.card{background:#fff;border-radius:20px;padding:24px 20px 28px;box-shadow:0 4px 24px rgba(93,63,211,.1);max-width:960px;margin:0 auto}
+
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid var(--border)}
+.badge{background:var(--purple);color:#fff;font-size:13px;font-weight:700;padding:5px 14px;border-radius:8px;white-space:nowrap}
+.card-header h1{font-size:17px;font-weight:800;color:var(--purple)}
+
+.dynasties{display:flex;flex-direction:column;gap:18px}
+.dy-row{display:grid;gap:14px}
+.dy-row-jm{grid-template-columns:58% 1fr}
+.dy-row-ps{grid-template-columns:56% 1fr}
+.dy-row-3 {grid-template-columns:1fr 1fr 1fr}
+
+.dynasty{background:var(--bg);border:1.5px solid var(--border);border-radius:14px;padding:14px 12px 18px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.dynasty:hover,.dynasty.active{border-color:var(--purple);box-shadow:0 0 0 3px rgba(93,63,211,.1)}
+
+.dy-title{font-size:13px;font-weight:800;color:var(--purple);margin-bottom:2px}
+.dy-sub  {font-size:10.5px;color:var(--sub);margin-bottom:14px;line-height:1.4}
+
+/* Tree */
+.tree{display:flex;flex-direction:column;align-items:center}
+
+/* Node */
+.node{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 4px}
+.av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.av-sm{width:40px;height:40px;font-size:10px}
+.av-gold  {background:var(--gold)}
+.av-purple{background:var(--purple)}
+.av-lav   {background:#9B7FC8}
+.av-light {background:#C4AAE6;color:#4a2d9c}
+.nm{font-size:10px;font-weight:700;margin-top:4px;max-width:88px;line-height:1.3}
+.rl{font-size:8.5px;color:var(--sub);max-width:88px;line-height:1.3;font-style:italic;margin-top:2px}
+
+/* Vertical stem */
+.stem{border-left:2px dashed var(--conn);height:20px;margin:0 auto}
+
+/* Peer row (horizontal siblings) */
+.peer-row{display:flex;align-items:flex-start;justify-content:center;width:100%}
+.peer-conn{flex:1;border-bottom:2px dashed var(--conn);margin-top:25px}
+
+/* Branch children */
+.hbar{display:flex;width:100%}
+.hbar>.bi{flex:1;position:relative;padding-top:20px;display:flex;flex-direction:column;align-items:center}
+.hbar>.bi::before{content:'';position:absolute;top:0;left:50%;width:0;height:20px;border-left:2px dashed var(--conn)}
+.hbar>.bi::after {content:'';position:absolute;top:0;left:0;right:0;border-top:2px dashed var(--conn)}
+.hbar>.bi:first-child::after{left:50%}
+.hbar>.bi:last-child::after {right:50%}
+.hbar>.bi:only-child::after {display:none}
+.hbar>.bi:only-child::before{display:none}
+
+/* Source */
+.source-wrap{text-align:center;margin-top:18px}
+.source{background:#fcefd5;color:#513c86;font-size:12px;font-weight:600;border-radius:16px;padding:7px 20px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="card-header">
+  <span class="badge">Gambar 36.</span>
+  <h1>Peta Parpol Dikuasai Oligarki Politik</h1>
+</div>
+
+<div class="dynasties">
+
+  <!-- ── Row 1: Jokowi + Megawati ── -->
+  <div class="dy-row dy-row-jm">
+
+    <div class="dynasty" data-dyn="jokowi">
+      <div class="dy-title">Dinasti Joko Widodo</div>
+      <div class="dy-sub">Presiden 2014-2019 dan 2019-2024</div>
+      <div class="tree">
+        <!-- Peer level: Anwar – JW – Joko Priyambodo -->
+        <div class="peer-row">
+          <div class="node">
+            <div class="av av-sm av-lav">AU</div>
+            <div class="nm">Anwar Usman</div>
+            <div class="rl">Hakim MK (kakak ipar)</div>
+          </div>
+          <div class="peer-conn"></div>
+          <div class="node">
+            <div class="av av-gold">JW</div>
+            <div class="nm">Joko Widodo</div>
+            <div class="rl">Presiden 2014-2024</div>
+          </div>
+          <div class="peer-conn"></div>
+          <div class="node">
+            <div class="av av-sm av-lav">JP</div>
+            <div class="nm">Joko Priyambodo</div>
+            <div class="rl">Direktur PT Patra Logistik (iuaran &amp; keponakan)</div>
+          </div>
+        </div>
+        <!-- Stem down to children -->
+        <div class="stem"></div>
+        <!-- Children: Gibran, Kaesang, Bobby -->
+        <div class="hbar">
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">GB</div>
+              <div class="nm">Gibran</div>
+              <div class="rl">Wakil Presiden (anak kandung)</div>
+            </div>
+            <div class="stem" style="height:14px"></div>
+            <div class="node">
+              <div class="av av-sm av-light">SW</div>
+              <div class="nm">Sigit Widyawan</div>
+              <div class="rl">Komisaris Ind. BNI (Keponakan)</div>
+            </div>
+          </div>
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">KP</div>
+              <div class="nm">Kaesang</div>
+              <div class="rl">Ketua PSI (anak kandung)</div>
+            </div>
+            <div class="stem" style="height:14px"></div>
+            <div class="node">
+              <div class="av av-sm av-light">BI</div>
+              <div class="nm">Bagaskara Ikhlasulla</div>
+              <div class="rl">Manager Pertamina (Keponakan)</div>
+            </div>
+          </div>
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">BN</div>
+              <div class="nm">Bobby Nasution</div>
+              <div class="rl">Gubernur Sumut (menantu)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dynasty" data-dyn="megawati">
+      <div class="dy-title">Dinasti Megawati</div>
+      <div class="dy-sub">Presiden 2001-2004 dan Ketua Umum PDIP</div>
+      <div class="tree">
+        <div class="node">
+          <div class="av av-gold">MW</div>
+          <div class="nm">Megawati</div>
+          <div class="rl">Presiden 2001-2004</div>
+        </div>
+        <div class="stem"></div>
+        <div class="hbar">
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">PM</div>
+              <div class="nm">Puan Maharani</div>
+              <div class="rl">Ketua DPR RI (anak kandung)</div>
+            </div>
+            <div class="stem" style="height:14px"></div>
+            <div class="node">
+              <div class="av av-sm av-light">PH</div>
+              <div class="nm">Pinka Haprani</div>
+              <div class="rl">Anggota DPR RI (cucu)</div>
+            </div>
+          </div>
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">PP</div>
+              <div class="nm">Prananda Prabowo</div>
+              <div class="rl">Ketua DPP PDIP (anak kandung)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end row 1 -->
+
+  <!-- ── Row 2: Prabowo + SBY ── -->
+  <div class="dy-row dy-row-ps">
+
+    <div class="dynasty" data-dyn="prabowo">
+      <div class="dy-title">Dinasti Prabowo</div>
+      <div class="dy-sub">Presiden 2024-2029 dan Ketua Umum Partai Gerindra</div>
+      <div class="tree">
+        <div class="node">
+          <div class="av av-gold">PB</div>
+          <div class="nm">Prabowo Subianto</div>
+          <div class="rl">Presiden 2024-2029</div>
+        </div>
+        <div class="stem"></div>
+        <div class="hbar">
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">BD</div>
+              <div class="nm">Budisatrio Djiwandono</div>
+              <div class="rl">Anggota DPR RI (Keponakan)</div>
+            </div>
+          </div>
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">HJ</div>
+              <div class="nm">Hashim Joyohadikusumo</div>
+              <div class="rl">Wakil Ketua Dewan Pembina Gerindra (kakak kandung)</div>
+            </div>
+            <div class="stem" style="height:14px"></div>
+            <!-- Nested: Rahayu + Arya -->
+            <div class="hbar">
+              <div class="bi">
+                <div class="node">
+                  <div class="av av-sm av-light">RS</div>
+                  <div class="nm">Rahayu Saraswati</div>
+                  <div class="rl">Anggota DPR RI (Keponakan)</div>
+                </div>
+              </div>
+              <div class="bi">
+                <div class="node">
+                  <div class="av av-sm av-light">AD</div>
+                  <div class="nm">Arya Djoyohadikusumo</div>
+                  <div class="rl">Anggota DPR RI 2014-2019 (keponakan)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">TD</div>
+              <div class="nm">Thomas Djiwandono</div>
+              <div class="rl">Deputi Gub. Bank Indonesia (keponakan)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dynasty" data-dyn="sby">
+      <div class="dy-title">Dinasti Soesilo Bambang Yudhoyono/SBY</div>
+      <div class="dy-sub">Presiden 2004-2009 dan 2009-2014</div>
+      <div class="tree">
+        <div class="node">
+          <div class="av av-gold">SBY</div>
+          <div class="nm">S.B. Yudhoyono</div>
+          <div class="rl">Presiden 2004-2014</div>
+        </div>
+        <div class="stem"></div>
+        <div class="hbar">
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">AHY</div>
+              <div class="nm">Agus Harimurti Yudhoyono</div>
+              <div class="rl">Menko Infrastruktur (anak kandung)</div>
+            </div>
+          </div>
+          <div class="bi">
+            <div class="node">
+              <div class="av av-sm av-purple">EB</div>
+              <div class="nm">Edhie Baskoro</div>
+              <div class="rl">Anggota DPR RI (anak kandung)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end row 2 -->
+
+  <!-- ── Row 3: Zulkifli + Surya + Hary ── -->
+  <div class="dy-row dy-row-3">
+
+    <div class="dynasty" data-dyn="zulkifli">
+      <div class="dy-title">Dinasti Zulkifli Hasan</div>
+      <div class="dy-sub">Menteri Koordinator Bidang Pangan</div>
+      <div class="tree">
+        <div class="node">
+          <div class="av av-gold">ZH</div>
+          <div class="nm">Zulkifli Hasan</div>
+          <div class="rl">Menko Bidang Pangan</div>
+        </div>
+        <div class="stem"></div>
+        <div class="node">
+          <div class="av av-sm av-purple">ZA</div>
+          <div class="nm">Zita Anjani</div>
+          <div class="rl">Utusan Khusus Presiden Bidang Pemuda (anak kandung)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dynasty" data-dyn="surya">
+      <div class="dy-title">Dinasti Surya Paloh</div>
+      <div class="dy-sub">Ketua Partai NasDem</div>
+      <div class="tree">
+        <div class="node">
+          <div class="av av-gold">SP</div>
+          <div class="nm">Surya Paloh</div>
+          <div class="rl">Ketua Partai NasDem</div>
+        </div>
+        <div class="stem"></div>
+        <div class="node">
+          <div class="av av-sm av-purple">PPl</div>
+          <div class="nm">Prananda Paloh</div>
+          <div class="rl">Anggota DPR RI dan NasDem</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dynasty" data-dyn="hary">
+      <div class="dy-title">Dinasti Hary Tanoesoedibjo</div>
+      <div class="dy-sub">Ketua Partai Perindo</div>
+      <div class="tree">
+        <div class="node">
+          <div class="av av-gold">HT</div>
+          <div class="nm">Hary Tanoesoedibjo</div>
+          <div class="rl">Ketua Partai Perindo</div>
+        </div>
+        <div class="stem"></div>
+        <div class="node">
+          <div class="av av-sm av-purple">AT</div>
+          <div class="nm">Angela Tanoesoedibjo</div>
+          <div class="rl">Wakil Menteri 2019-2024 (anak kandung)</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end row 3 -->
+
+</div><!-- dynasties -->
+
+<div class="source-wrap">
+  <div class="source">Sumber: CELIOS (2025)</div>
+</div>
+</div><!-- card -->
+
+<script>
+document.querySelectorAll('.dynasty').forEach(dy => {
+  dy.addEventListener('mouseenter', () => dy.classList.add('active'));
+  dy.addEventListener('mouseleave', () => dy.classList.remove('active'));
+  dy.addEventListener('click', () => {
+    const on = dy.classList.contains('active');
+    document.querySelectorAll('.dynasty.active').forEach(a => a.classList.remove('active'));
+    if (!on) dy.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

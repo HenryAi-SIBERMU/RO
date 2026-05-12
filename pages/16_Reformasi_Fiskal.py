@@ -8,6 +8,7 @@ from components.chart_wrapper import chart_header, chart_footer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 _G35 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar35.html"
+_G36 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar36.html"
 
 st.set_page_config(page_title="Reformasi Fiskal", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -23,7 +24,13 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 35"):
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Peta Parpol Dikuasai Oligarki Politik", "Gambar 36 — Hal. 64")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 64.")
+components.html(_G36.read_text(encoding="utf-8"), height=1050, scrolling=False)
+chart_footer("CELIOS (2025)")
+with st.expander("🔗 Kode Embed WordPress — Gambar 36"):
+    st.code("""<!-- Gambar 36: Peta Parpol Dikuasai Oligarki Politik -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar36.html"
+  width="100%" height="1050" frameborder="0"
+  style="border-radius:32px; background:#f0ecfb;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Rekomendasi: Mengurangi Ketimpangan & Pengaruh Oligarki", "Gambar 37 — Hal. 68")
 st.info("⏳ Data belum diinput. Lihat PDF hal. 68.")
