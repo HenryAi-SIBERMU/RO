@@ -4,17 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gambar 25 — Mekanisme Pembagian Komisi Ojek Online</title>
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
     font-family: 'Manrope', sans-serif;
     background: radial-gradient(ellipse at top left, #2d1b69 0%, #1a0a3c 55%, #0f0520 100%);
     min-height: 100vh;
-    padding: 28px 24px 20px;
+    padding: 28px 24px 24px;
+    color: #fff;
   }
-  .wrapper { max-width: 960px; margin: 0 auto; }
+
+  .wrapper { max-width: 920px; margin: 0 auto; }
+
   .tag {
     color: #a78bfa;
     font-size: 12px;
@@ -23,173 +26,350 @@
     text-transform: uppercase;
     margin-bottom: 8px;
   }
+
   h1 {
-    color: #fff;
     font-size: 18px;
     font-weight: 800;
     line-height: 1.35;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    max-width: 680px;
   }
-  .kpi-row {
+
+  /* ── Grid layout ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* ── Phone shell ── */
+  .phone-wrap { display: flex; justify-content: center; }
+
+  .phone {
+    width: 240px;
+    background: linear-gradient(160deg, #1e1b4b, #0f0a1e);
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow:
+      0 0 0 2px rgba(124,58,237,0.5),
+      0 0 0 4px rgba(124,58,237,0.15),
+      0 24px 64px rgba(0,0,0,0.55);
+    position: relative;
+  }
+
+  .phone::before {
+    content: '';
+    display: block;
+    width: 56px; height: 6px;
+    background: rgba(124,58,237,0.5);
+    border-radius: 3px;
+    margin: 0 auto 10px;
+  }
+
+  .screen {
+    background: #f5f3ff;
+    border-radius: 24px;
+    overflow: hidden;
+    color: #1e1b4b;
+    font-size: 10px;
+  }
+
+  /* App top bar */
+  .app-bar {
+    background: #7c3aed;
+    color: #fff;
+    padding: 9px 12px;
+    font-size: 11px;
+    font-weight: 700;
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
   }
-  .kpi {
-    flex: 1 1 140px;
+  .back-arrow { font-size: 13px; }
+
+  /* Journey timeline */
+  .timeline {
+    background: #ede9fe;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd6fe;
+  }
+  .tl-col { text-align: center; min-width: 52px; }
+  .tl-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: #9ca3af;
+    margin: 0 auto 2px;
+    transition: background 0.3s;
+  }
+  .tl-dot.done { background: #10b981; }
+  .tl-line { flex: 1; height: 1px; background: #c4b5fd; margin: 0 3px; }
+  .tl-name { font-size: 8px; color: #6b7280; font-weight: 600; }
+  .tl-time { font-size: 8px; color: #9ca3af; }
+
+  /* Receipt sections */
+  .section {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 8px 11px;
+    cursor: default;
+    transition: background 0.25s;
+  }
+  .section:last-child { border-bottom: none; }
+  .section:hover { background: rgba(124,58,237,0.05); }
+  .section.driver:hover  { background: rgba(251,191,36,0.1); }
+  .section.platform:hover { background: rgba(239,68,68,0.07); }
+
+  .sec-title {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #6b21a8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .gopay-badge {
+    background: #1a56db;
+    color: #fff;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+  }
+  .row.main-row { font-weight: 700; font-size: 10.5px; }
+  .row.sub-row  { font-size: 8.5px; color: #6b7280; padding-left: 6px; }
+  .row.sub-head { font-size: 8px; color: #9ca3af; padding: 3px 0 1px; font-style: italic; }
+
+  .amt { font-weight: 700; }
+  .amt.green  { color: #6b21a8; }
+  .amt.total  { color: #111827; font-size: 11px; }
+  .amt.red    { color: #dc2626; }
+
+  /* ── Right panel ── */
+  .panel { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 16px;
-    padding: 14px 16px;
+    padding: 14px 18px;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .card:hover { transform: translateX(5px); }
+  .card.yellow { background: rgba(251,191,36,0.1);  border-color: rgba(251,191,36,0.35); }
+  .card.red    { background: rgba(239,68,68,0.08);  border-color: rgba(239,68,68,0.3); }
+  .card.yellow:hover { border-color: rgba(251,191,36,0.7); }
+  .card.red:hover    { border-color: rgba(239,68,68,0.7); }
+
+  .card-num  { display: block; font-size: 26px; font-weight: 800; line-height: 1; }
+  .card.yellow .card-num { color: #FBBF24; }
+  .card.red    .card-num { color: #FCA5A5; }
+  .card:not(.yellow):not(.red) .card-num { color: #c4b5fd; }
+
+  .card-label { display: block; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); margin-top: 5px; }
+  .card-sub   { display: block; font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px; line-height: 1.4; }
+
+  /* Distribution bar */
+  .dist-bar-wrap {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 14px 18px;
+  }
+  .dist-title {
+    font-size: 10px; font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .bar-track {
+    height: 26px; border-radius: 13px;
+    overflow: hidden; display: flex;
+    margin-bottom: 10px;
+  }
+  .seg {
+    height: 100%; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800;
+    color: rgba(0,0,0,0.65);
+    transition: filter 0.2s;
+    cursor: default;
+  }
+  .seg:hover { filter: brightness(1.15); }
+  .seg.s1 { background: #FBBF24; flex: 75.6; }
+  .seg.s2 { background: #F87171; flex: 18.9; }
+  .seg.s3 { background: #9F7AEA; flex: 4.1; }
+  .seg.s4 { background: #C4B5FD; flex: 1.4; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    font-size: 10px; color: rgba(255,255,255,0.6);
+  }
+  .leg { display: flex; align-items: center; gap: 5px; }
+  .leg-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+
+  .source {
     text-align: center;
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+    margin-top: 20px;
   }
-  .kpi.yellow { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.35); }
-  .kpi.red    { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.30);  }
-  .kpi-val { display: block; font-size: 22px; font-weight: 800; }
-  .kpi.yellow .kpi-val { color: #FBBF24; }
-  .kpi.red    .kpi-val { color: #FCA5A5; }
-  .kpi:not(.yellow):not(.red) .kpi-val { color: #c4b5fd; }
-  .kpi-desc {
-    display: block;
-    font-size: 10px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.5);
-    margin-top: 5px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+
+  @media (max-width: 620px) {
+    .grid { grid-template-columns: 1fr; }
+    .phone-wrap { margin-bottom: 16px; }
   }
-  #chart { width: 100%; }
-  .source { text-align: center; color: rgba(255,255,255,0.38); font-size: 11px; margin-top: 6px; }
 </style>
 </head>
 <body>
 <div class="wrapper">
+
   <div class="tag">Gambar 25 — Hal. 46 &nbsp;·&nbsp; Gig Economy &amp; Ojol</div>
   <h1>Mekanisme Pembagian Komisi antara Platform dan Pengemudi Ojek Online</h1>
 
-  <div class="kpi-row">
-    <div class="kpi">
-      <span class="kpi-val">Rp73.500</span>
-      <span class="kpi-desc">Dibayar Pelanggan</span>
+  <div class="grid">
+
+    <!-- Phone mockup -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+
+          <div class="app-bar">
+            <span class="back-arrow">←</span> Detail
+          </div>
+
+          <!-- Journey timeline -->
+          <div class="timeline">
+            <div class="tl-col">
+              <div class="tl-dot"></div>
+              <div class="tl-name">Ditugaskan</div>
+              <div class="tl-time">15:16</div>
+            </div>
+            <div class="tl-line"></div>
+            <div class="tl-col">
+              <div class="tl-dot done"></div>
+              <div class="tl-name">Jemput</div>
+              <div class="tl-time">15:21</div>
+            </div>
+            <div class="tl-line"></div>
+            <div class="tl-col">
+              <div class="tl-dot done"></div>
+              <div class="tl-name">Selesai</div>
+              <div class="tl-time">16:09</div>
+            </div>
+          </div>
+
+          <!-- Driver earnings -->
+          <div class="section driver">
+            <div class="sec-title">
+              Pendapatan mitra
+              <span class="gopay-badge">GoPay</span>
+            </div>
+            <div class="row main-row">
+              <span>Total pendapatan</span>
+              <span class="amt green">Rp55.600</span>
+            </div>
+            <div class="row sub-head"><span>Rincian pendapatan</span></div>
+            <div class="row sub-row">
+              <span>80% dari Biaya perjalanan</span>
+              <span style="font-weight:600">Rp55.600</span>
+            </div>
+            <div class="row sub-row">
+              <span>Poin</span>
+              <span style="font-weight:600">&#127885; 150</span>
+            </div>
+          </div>
+
+          <!-- Customer payment -->
+          <div class="section">
+            <div class="sec-title">
+              Dibayar pelanggan
+              <span class="gopay-badge">GoPay</span>
+            </div>
+            <div class="row main-row">
+              <span>Total pembayaran</span>
+              <span class="amt total">Rp73.500</span>
+            </div>
+            <div class="row sub-head"><span>Biaya perjalanan (80% untuk Mitra)</span></div>
+            <div class="row sub-row">
+              <span>Biaya perjalanan</span>
+              <span style="font-weight:600">Rp69.500</span>
+            </div>
+            <div class="row sub-head"><span>Biaya tambahan pilihan pelanggan ke pihak ketiga</span></div>
+            <div class="row sub-row">
+              <span>Biaya asuransi PerjalananAman+</span>
+              <span style="font-weight:600">Rp1.000</span>
+            </div>
+          </div>
+
+          <!-- Platform fee -->
+          <div class="section platform">
+            <div class="sec-title" style="color:#dc2626">Dibayarkan ke Gojek</div>
+            <div class="row main-row">
+              <span>Biaya jasa aplikasi</span>
+              <span class="amt red">Rp3.000</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <div class="kpi yellow">
-      <span class="kpi-val">Rp55.600</span>
-      <span class="kpi-desc">Diterima Pengemudi (80%)</span>
-    </div>
-    <div class="kpi red">
-      <span class="kpi-val">Rp16.900</span>
-      <span class="kpi-desc">Dipotong Platform &amp; Biaya</span>
-    </div>
-    <div class="kpi yellow">
-      <span class="kpi-val">75,6%</span>
-      <span class="kpi-desc">Porsi Pengemudi</span>
+
+    <!-- Right panel -->
+    <div class="panel">
+
+      <div class="card">
+        <span class="card-num">Rp73.500</span>
+        <span class="card-label">Total Dibayar Pelanggan</span>
+        <span class="card-sub">Biaya perjalanan + asuransi + biaya jasa aplikasi</span>
+      </div>
+
+      <div class="card yellow">
+        <span class="card-num">Rp55.600</span>
+        <span class="card-label">Diterima Pengemudi (Mitra)</span>
+        <span class="card-sub">80% dari biaya perjalanan Rp69.500 — dibayar via GoPay</span>
+      </div>
+
+      <div class="card red">
+        <span class="card-num">Rp16.900</span>
+        <span class="card-label">Dipotong Platform &amp; Biaya Lain</span>
+        <span class="card-sub">Komisi 20% (Rp13.900) + Jasa aplikasi (Rp3.000) + Asuransi (Rp1.000)</span>
+      </div>
+
+      <div class="dist-bar-wrap">
+        <div class="dist-title">Distribusi Nilai Transaksi per Pesanan</div>
+        <div class="bar-track">
+          <div class="seg s1" title="Pengemudi 75,6%">75,6%</div>
+          <div class="seg s2" title="Komisi Platform 18,9%">18,9%</div>
+          <div class="seg s3" title="Jasa App 4,1%"></div>
+          <div class="seg s4" title="Asuransi 1,4%"></div>
+        </div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:#FBBF24"></div>Pengemudi (80% biaya perj.)</div>
+          <div class="leg"><div class="leg-dot" style="background:#F87171"></div>Komisi Platform (20%)</div>
+          <div class="leg"><div class="leg-dot" style="background:#9F7AEA"></div>Biaya Jasa Aplikasi</div>
+          <div class="leg"><div class="leg-dot" style="background:#C4B5FD"></div>Asuransi PerjalananAman+</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div id="chart"></div>
   <div class="source">Sumber: Wawancara kualitatif dengan Pengemudi Ojek Online, 2026</div>
 </div>
-
-<script>
-const YELLOW  = '#FBBF24';
-const RED     = '#F87171';
-const PURPLE  = '#7C3AED';
-const LPURPLE = '#9F7AEA';
-const VLPURPLE= '#C4B5FD';
-const TRANS   = 'rgba(0,0,0,0)';
-
-/* ── Waterfall: alur dana ── */
-const wf = {
-  type: 'waterfall',
-  orientation: 'v',
-  measure: ['absolute','relative','relative','relative','total'],
-  x: [
-    'Dibayar<br>Pelanggan',
-    'Biaya<br>Asuransi',
-    'Biaya Jasa<br>Aplikasi',
-    'Komisi Platform<br>(20% biaya perj.)',
-    'Diterima<br>Pengemudi'
-  ],
-  y: [73500, -1000, -3000, -13900, 55600],
-  text: ['Rp73.500', '−Rp1.000', '−Rp3.000', '−Rp13.900', 'Rp55.600'],
-  textposition: 'outside',
-  textfont: { family:'Manrope', size:12, color:'white' },
-  connector: {
-    line: { color:'rgba(167,139,250,0.35)', width:1.5, dash:'dot' }
-  },
-  increasing: { marker: { color: YELLOW,  line: { color: TRANS, width: 0 } } },
-  decreasing: { marker: { color: RED,     line: { color: TRANS, width: 0 } } },
-  totals:     { marker: { color: PURPLE,  line: { color: YELLOW, width: 2 } } },
-  hovertemplate: '<b>%{x}</b><br>%{text}<extra></extra>',
-  xaxis: 'x', yaxis: 'y',
-  showlegend: false
-};
-
-/* ── Donut: distribusi ── */
-const donut = {
-  type: 'pie',
-  hole: 0.56,
-  values: [55600, 13900, 3000, 1000],
-  labels: ['Pengemudi (80%)', 'Komisi Platform (20%)', 'Biaya Jasa Aplikasi', 'Asuransi PerjalananAman+'],
-  marker: {
-    colors: [YELLOW, RED, LPURPLE, VLPURPLE],
-    line: { color:'rgba(0,0,0,0.25)', width:1 }
-  },
-  textinfo: 'percent',
-  textfont: { family:'Manrope', size:12, color:'white' },
-  hovertemplate: '<b>%{label}</b><br>Rp%{value:,.0f} (%{percent})<extra></extra>',
-  domain: { x:[0.56, 1.0], y:[0.04, 0.96] },
-  showlegend: true
-};
-
-const layout = {
-  paper_bgcolor: TRANS,
-  plot_bgcolor:  TRANS,
-  font: { family:'Manrope', color:'white' },
-  height: 400,
-  margin: { t:44, b:90, l:80, r:10 },
-  showlegend: true,
-  legend: {
-    font: { family:'Manrope', size:10, color:'rgba(255,255,255,0.75)' },
-    bgcolor: TRANS,
-    orientation: 'h',
-    x: 0.5, xanchor: 'center', y: -0.26
-  },
-  xaxis: {
-    domain: [0, 0.50],
-    tickfont: { family:'Manrope', size:10, color:'rgba(255,255,255,0.8)' },
-    showgrid: false, showline: false, zeroline: false
-  },
-  yaxis: {
-    tickfont: { family:'Manrope', size:10, color:'rgba(255,255,255,0.5)' },
-    tickformat: ',.0f', tickprefix: 'Rp',
-    showgrid: true, gridcolor:'rgba(255,255,255,0.07)', gridwidth:1,
-    zeroline: false
-  },
-  annotations: [
-    {
-      text: '<b>Alur Dana per Transaksi</b>',
-      xref:'paper', yref:'paper', x:0.22, y:1.07, showarrow:false,
-      font:{ family:'Manrope', size:12, color:'rgba(255,255,255,0.65)' }
-    },
-    {
-      text: '<b>Distribusi Nilai Transaksi</b>',
-      xref:'paper', yref:'paper', x:0.78, y:1.07, showarrow:false,
-      font:{ family:'Manrope', size:12, color:'rgba(255,255,255,0.65)' }
-    },
-    {
-      text: '<b>75,6%</b><br><span style="font-size:11px;color:rgba(255,255,255,0.75)">untuk<br>pengemudi</span>',
-      xref:'paper', yref:'paper', x:0.778, y:0.50, showarrow:false,
-      font:{ family:'Manrope', size:15, color: YELLOW }, align:'center'
-    }
-  ]
-};
-
-Plotly.newPlot('chart', [wf, donut], layout, {
-  responsive: true,
-  displayModeBar: false
-});
-</script>
 </body>
 </html>
