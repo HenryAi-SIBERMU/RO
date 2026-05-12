@@ -15,99 +15,260 @@ h1{margin:0;font-size:clamp(22px,2.8vw,32px);color:#37206d;font-weight:800;line-
 .dw{background:rgba(248,246,255,.95);border-radius:22px;border:1px solid rgba(93,63,211,.14);padding:16px 10px;position:relative;z-index:1;overflow-x:auto}
 .dw svg{width:100%;height:auto;display:block}
 .source{margin-top:28px;text-align:center;font-size:13px;font-weight:600;color:#513c86;background:#fcefd5;border-radius:16px;padding:14px 18px;border:1px solid rgba(240,193,95,.45);position:relative;z-index:1}
+.legend-item{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.node{cursor:pointer;transition:transform 0.25s ease-out;transform-origin:center}
+.node rect{transition:filter 0.28s ease,stroke-width 0.28s ease,fill 0.28s ease}
+.node text{transition:fill 0.24s ease,letter-spacing 0.24s ease}
+.node.active{transform:translateY(-6px)}
+.node.active rect{filter:drop-shadow(0 14px 26px rgba(70,49,145,.26));stroke-width:2.4}
+.node:not(.node-light).active text{fill:#2e1d63;letter-spacing:0.22px}
+.node-light text{fill:#fff}
+.node-light.active rect{fill:#6f51f5}
+.flow-link{transition:stroke 0.24s ease,stroke-width 0.24s ease,opacity 0.24s ease;opacity:0.86}
+.flow-link.active{stroke:#472abc;stroke-width:2.3;opacity:1}
+.arrow-label{pointer-events:auto;cursor:pointer;transition:fill 0.24s ease,font-weight 0.24s ease,opacity 0.24s ease;opacity:0.88}
+.arrow-label.active{fill:#2f1d63;font-weight:600;opacity:1}
+.tooltip-bubble{position:absolute;min-width:120px;max-width:220px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,0.95);border:1px solid rgba(93,63,211,0.18);color:#3b2d78;font-size:12px;font-weight:700;box-shadow:0 16px 32px rgba(47,31,92,0.25);transform:translate(-50%,-32px) scale(0.94);opacity:0;pointer-events:none;transition:opacity 0.22s ease,transform 0.22s ease;z-index:5}
+.tooltip-bubble.visible{opacity:1;transform:translate(-50%,-46px) scale(1)}
+@media (max-width:900px){.card{padding:32px 26px 40px}}
 </style>
 </head>
 <body>
 <div class="card">
 <header><div class="badge">Gambar 17.</div><h1>Generasi Muda yang Terhimpit Sistem Oligarki</h1></header>
 <div class="dw">
-<svg viewBox="0 0 970 510" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+  <div class="tooltip-bubble" id="tooltip"></div>
+<svg viewBox="0 0 970 510" xmlns="http://www.w3.org/2000/svg" overflow="visible" aria-labelledby="chartTitle">
 <defs>
   <marker id="ah" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#6b5a99"/></marker>
   <marker id="ahp" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#5d3fd3"/></marker>
 </defs>
 
 <!-- ARROWS -->
-<line x1="175" y1="80" x2="268" y2="80" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="457" y1="80" x2="668" y2="80" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="762" y1="107" x2="762" y2="151" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="668" y1="178" x2="466" y2="178" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="360" y1="209" x2="360" y2="258" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="485" y1="285" x2="668" y2="285" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="762" y1="312" x2="762" y2="358" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="665" y1="385" x2="457" y2="385" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<line x1="357" y1="412" x2="357" y2="443" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
-<path d="M 20 116 L 8 116 L 8 472 L 244 472" fill="none" stroke="#5d3fd3" stroke-width="2.2" marker-end="url(#ahp)"/>
+<line class="flow-link" data-flow="A-B" data-tip="Akses dikuasai elite" data-from="A" data-to="B" x1="175" y1="80" x2="268" y2="80" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="B-C" data-tip="Peluang ekonomi terbatas" data-from="B" data-to="C" x1="457" y1="80" x2="668" y2="80" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="C-E" data-tip="Lowongan pekerjaan tidak sebanding dengan jumlah lulusan" data-from="C" data-to="E" x1="762" y1="107" x2="762" y2="151" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="E-D" data-tip="Oversupply tenaga kerja" data-from="E" data-to="D" x1="668" y1="178" x2="466" y2="178" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="D-F" data-tip="Pendapatan stagnan dan biaya hidup meningkat" data-from="D" data-to="F" x1="360" y1="209" x2="360" y2="258" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="F-G" data-tip="Aset dan pendidikan sulit dijangkau" data-from="F" data-to="G" x1="485" y1="285" x2="668" y2="285" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="G-I" data-tip="Sulit naik kelas, masa depan tidak pasti" data-from="G" data-to="I" x1="762" y1="312" x2="762" y2="358" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="I-H" data-tip="Tidak bisa akumulasi aset" data-from="I" data-to="H" x1="665" y1="385" x2="457" y2="385" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<line class="flow-link" data-flow="H-J" data-tip="Ketimpangan berulang" data-from="H" data-to="J" x1="357" y1="412" x2="357" y2="443" stroke="#6b5a99" stroke-width="1.8" marker-end="url(#ah)"/>
+<path class="flow-link" data-flow="A-J" data-tip="Oligarki makin kuat" data-from="A" data-to="J" d="M 20 116 L 8 116 L 8 472 L 244 472" fill="none" stroke="#5d3fd3" stroke-width="2.2" marker-end="url(#ahp)"/>
 
 <!-- NODES -->
-<rect x="20" y="44" width="155" height="72" rx="24" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="12.5" fill="#3d2800" text-anchor="middle">
-  <tspan x="97" y="65">Konsentrasi</tspan><tspan x="97" dy="15">Kekayaan dan</tspan><tspan x="97" dy="15">Kekuasaan</tspan>
-</text>
+<g class="node" data-id="A" data-tip="Konsentrasi kekayaan dan kekuasaan dikuasai elite" tabindex="0">
+  <rect x="20" y="44" width="155" height="72" rx="24" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="12.5" fill="#3d2800" text-anchor="middle">
+    <tspan x="97" y="65">Konsentrasi</tspan><tspan x="97" dy="15">Kekayaan dan</tspan><tspan x="97" dy="15">Kekuasaan</tspan>
+  </text>
+</g>
 
-<rect x="270" y="53" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
-  <tspan x="363" y="72">Akses Ekonomi</tspan><tspan x="363" dy="16">Tertutup</tspan>
-</text>
+<g class="node" data-id="B" data-tip="Akses ekonomi tertutup bagi publik" tabindex="0">
+  <rect x="270" y="53" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
+    <tspan x="363" y="72">Akses Ekonomi</tspan><tspan x="363" dy="16">Tertutup</tspan>
+  </text>
+</g>
 
-<rect x="668" y="53" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
-  <tspan x="761" y="72">Akses Ekonomi</tspan><tspan x="761" dy="16">Tertutup</tspan>
-</text>
+<g class="node" data-id="C" data-tip="Akses ekonomi tertutup berlanjut" tabindex="0">
+  <rect x="668" y="53" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
+    <tspan x="761" y="72">Akses Ekonomi</tspan><tspan x="761" dy="16">Tertutup</tspan>
+  </text>
+</g>
 
-<rect x="254" y="151" width="212" height="58" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="12.5" fill="#3d2800" text-anchor="middle">
-  <tspan x="360" y="165">Upah Ditekan dan</tspan><tspan x="360" dy="15">Daya Tawar</tspan><tspan x="360" dy="15">Melemah</tspan>
-</text>
+<g class="node" data-id="D" data-tip="Upah ditekan dan daya tawar pekerja melemah" tabindex="0">
+  <rect x="254" y="151" width="212" height="58" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="12.5" fill="#3d2800" text-anchor="middle">
+    <tspan x="360" y="165">Upah Ditekan dan</tspan><tspan x="360" dy="15">Daya Tawar</tspan><tspan x="360" dy="15">Melemah</tspan>
+  </text>
+</g>
 
-<rect x="668" y="151" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
-  <tspan x="761" y="170">Pasar Kerja</tspan><tspan x="761" dy="16">Sangat Kompetitif</tspan>
-</text>
+<g class="node" data-id="E" data-tip="Pasar kerja sangat kompetitif" tabindex="0">
+  <rect x="668" y="151" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
+    <tspan x="761" y="170">Pasar Kerja</tspan><tspan x="761" dy="16">Sangat Kompetitif</tspan>
+  </text>
+</g>
 
-<rect x="235" y="258" width="250" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="12.5" fill="#3d2800" text-anchor="middle">
-  <tspan x="360" y="272">Biaya Hidup Naik</tspan><tspan x="360" dy="15">dan Aset Sulit</tspan><tspan x="360" dy="15">Dijangkau</tspan>
-</text>
+<g class="node" data-id="F" data-tip="Biaya hidup naik dan aset semakin sulit dijangkau" tabindex="0">
+  <rect x="235" y="258" width="250" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="12.5" fill="#3d2800" text-anchor="middle">
+    <tspan x="360" y="272">Biaya Hidup Naik</tspan><tspan x="360" dy="15">dan Aset Sulit</tspan><tspan x="360" dy="15">Dijangkau</tspan>
+  </text>
+</g>
 
-<rect x="668" y="258" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
-  <tspan x="761" y="277">Mobilitas Sosial</tspan><tspan x="761" dy="16">Macet</tspan>
-</text>
+<g class="node" data-id="G" data-tip="Mobilitas sosial macet" tabindex="0">
+  <rect x="668" y="258" width="187" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
+    <tspan x="761" y="277">Mobilitas Sosial</tspan><tspan x="761" dy="16">Macet</tspan>
+  </text>
+</g>
 
-<rect x="257" y="358" width="200" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
-  <tspan x="357" y="377">Reproduksi</tspan><tspan x="357" dy="16">Ketimpangan</tspan>
-</text>
+<g class="node" data-id="H" data-tip="Reproduksi ketimpangan generasi ke generasi" tabindex="0">
+  <rect x="257" y="358" width="200" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
+    <tspan x="357" y="377">Reproduksi</tspan><tspan x="357" dy="16">Ketimpangan</tspan>
+  </text>
+</g>
 
-<rect x="665" y="358" width="197" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
-<text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
-  <tspan x="763" y="377">Ketidakpastian</tspan><tspan x="763" dy="16">Permanen</tspan>
-</text>
+<g class="node" data-id="I" data-tip="Ketidakpastian permanen" tabindex="0">
+  <rect x="665" y="358" width="197" height="54" rx="20" fill="#f2b544" stroke="#d9961c" stroke-width="2"/>
+  <text font-family="Manrope,sans-serif" font-weight="700" font-size="13" fill="#3d2800" text-anchor="middle">
+    <tspan x="763" y="377">Ketidakpastian</tspan><tspan x="763" dy="16">Permanen</tspan>
+  </text>
+</g>
 
-<rect x="244" y="445" width="225" height="54" rx="28" fill="#5d3fd3" stroke="#4229a8" stroke-width="2.5"/>
-<text font-family="Manrope,sans-serif" font-weight="800" font-size="16" fill="#fff" text-anchor="middle">
-  <tspan x="356" y="479">Siklus Terkunci</tspan>
-</text>
+<g class="node node-light" data-id="J" data-tip="Siklus tertutup yang mengunci generasi muda" tabindex="0">
+  <rect x="244" y="445" width="225" height="54" rx="28" fill="#5d3fd3" stroke="#4229a8" stroke-width="2.5"/>
+  <text font-family="Manrope,sans-serif" font-weight="800" font-size="16" fill="#fff" text-anchor="middle">
+    <tspan x="356" y="479">Siklus Terkunci</tspan>
+  </text>
+</g>
 
 <!-- ARROW LABELS -->
-<text x="220" y="48" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Akses dikuasai elite</text>
-<text x="562" y="70" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Peluang ekonomi terbatas</text>
-<text x="818" y="116" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">Lowongan pekerjaan</text>
-<text x="818" y="131" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">≠ Jumlah Lulusan</text>
-<text x="568" y="168" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Oversupply tenaga kerja</text>
-<text x="228" y="224" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">Pendapatan stagnan,</text>
-<text x="228" y="238" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">biaya hidup meningkat</text>
-<text x="575" y="265" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Aset &amp; pendidikan</text>
-<text x="575" y="279" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">sulit dijangkau</text>
-<text x="818" y="325" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">Sulit naik kelas,</text>
-<text x="818" y="340" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">masa depan tidak pasti</text>
-<text x="560" y="374" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Tidak bisa akumulasi aset</text>
-<text x="175" y="430" text-anchor="start" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Ketimpangan berulang</text>
-<text transform="translate(4,294) rotate(-90)" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#5d3fd3">Oligarki makin kuat</text>
+<text class="arrow-label" data-flow="A-B" data-tip="Akses dikuasai elite" x="220" y="48" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Akses dikuasai elite</text>
+<text class="arrow-label" data-flow="B-C" data-tip="Peluang ekonomi terbatas" x="562" y="70" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Peluang ekonomi terbatas</text>
+<text class="arrow-label" data-flow="C-E" data-tip="Lowongan pekerjaan tidak sebanding dengan jumlah lulusan" x="818" y="116" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">
+  <tspan x="818" y="116">Lowongan pekerjaan</tspan>
+  <tspan x="818" dy="14">≠ Jumlah Lulusan</tspan>
+</text>
+<text class="arrow-label" data-flow="E-D" data-tip="Oversupply tenaga kerja" x="568" y="168" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Oversupply tenaga kerja</text>
+<text class="arrow-label" data-flow="D-F" data-tip="Pendapatan stagnan dan biaya hidup meningkat" x="228" y="224" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">
+  <tspan x="228" y="224">Pendapatan stagnan,</tspan>
+  <tspan x="228" dy="14">biaya hidup meningkat</tspan>
+</text>
+<text class="arrow-label" data-flow="F-G" data-tip="Aset dan pendidikan sulit dijangkau" x="575" y="265" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">
+  <tspan x="575" y="265">Aset &amp; pendidikan</tspan>
+  <tspan x="575" dy="14">sulit dijangkau</tspan>
+</text>
+<text class="arrow-label" data-flow="G-I" data-tip="Sulit naik kelas, masa depan tidak pasti" x="818" y="325" font-family="Manrope,sans-serif" font-size="10.5" fill="#5a4d7a">
+  <tspan x="818" y="325">Sulit naik kelas,</tspan>
+  <tspan x="818" dy="14">masa depan tidak pasti</tspan>
+</text>
+<text class="arrow-label" data-flow="I-H" data-tip="Tidak bisa akumulasi aset" x="560" y="374" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Tidak bisa akumulasi aset</text>
+<text class="arrow-label" data-flow="H-J" data-tip="Ketimpangan berulang" x="175" y="430" text-anchor="start" font-family="Manrope,sans-serif" font-size="11" fill="#5a4d7a">Ketimpangan berulang</text>
+<text class="arrow-label" data-flow="A-J" data-tip="Oligarki makin kuat" transform="translate(4,294) rotate(-90)" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#5d3fd3">Oligarki makin kuat</text>
 </svg>
 </div>
 <div class="source">Sumber: Diolah oleh peneliti</div>
 </div>
+<script>
+  const tooltip = document.getElementById("tooltip");
+  const nodes = Array.from(document.querySelectorAll(".node"));
+  const flows = Array.from(document.querySelectorAll(".flow-link"));
+  const labels = Array.from(document.querySelectorAll(".arrow-label"));
+  let activeId = null;
+
+  const nodesById = new Map(nodes.map(n => [n.dataset.id, n]));
+  const flowsByKey = new Map(flows.map(f => [f.dataset.flow, f]));
+  const labelsByKey = new Map(labels.map(l => [l.dataset.flow, l]));
+
+  function clearActive() {
+    nodes.forEach(n => n.classList.remove("active"));
+    flows.forEach(f => f.classList.remove("active"));
+    labels.forEach(l => l.classList.remove("active"));
+  }
+
+  function showTooltip(evt, text) {
+    if (!text) {
+      tooltip.classList.remove("visible");
+      return;
+    }
+    tooltip.textContent = text;
+    const bounds = evt.currentTarget.getBoundingClientRect();
+    const parentBounds = tooltip.parentElement.getBoundingClientRect();
+    const x = bounds.left + bounds.width / 2 - parentBounds.left;
+    const y = bounds.top - parentBounds.top;
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+    tooltip.classList.add("visible");
+  }
+
+  function handleFocus(targetNode) {
+    const tip = targetNode.dataset.tip;
+    const outgoing = flows.filter(f => f.dataset.from === targetNode.dataset.id);
+    const incoming = flows.filter(f => f.dataset.to === targetNode.dataset.id);
+    clearActive();
+    targetNode.classList.add("active");
+    outgoing.concat(incoming).forEach(flow => {
+      flow.classList.add("active");
+      const label = labelsByKey.get(flow.dataset.flow);
+      if (label) label.classList.add("active");
+    });
+    showTooltip({ currentTarget: targetNode, preventDefault(){} }, tip);
+  }
+
+  nodes.forEach(node => {
+    node.addEventListener("mouseenter", evt => {
+      activeId = node.dataset.id;
+      handleFocus(node);
+      showTooltip(evt, node.dataset.tip);
+    });
+    node.addEventListener("mouseleave", () => {
+      activeId = null;
+      clearActive();
+      tooltip.classList.remove("visible");
+    });
+    node.addEventListener("focus", () => handleFocus(node));
+    node.addEventListener("blur", () => {
+      if (activeId === node.dataset.id) return;
+      clearActive();
+      tooltip.classList.remove("visible");
+    });
+    node.addEventListener("keydown", evt => {
+      if (evt.key === "Enter" || evt.key === " ") {
+        evt.preventDefault();
+        const tip = node.dataset.tip;
+        tooltip.textContent = tip;
+        tooltip.style.left = `${evt.currentTarget.getBoundingClientRect().left - tooltip.parentElement.getBoundingClientRect().left + evt.currentTarget.getBBox().width / 2}px`;
+        tooltip.style.top = `${evt.currentTarget.getBoundingClientRect().top - tooltip.parentElement.getBoundingClientRect().top}px`;
+        tooltip.classList.toggle("visible");
+      }
+    });
+  });
+
+  labels.forEach(label => {
+    label.addEventListener("mouseenter", evt => {
+      const flow = flowsByKey.get(label.dataset.flow);
+      const fromNode = nodesById.get(flow.dataset.from);
+      clearActive();
+      label.classList.add("active");
+      flow.classList.add("active");
+      if (fromNode) fromNode.classList.add("active");
+      showTooltip(evt, label.dataset.tip);
+    });
+    label.addEventListener("mouseleave", () => {
+      clearActive();
+      tooltip.classList.remove("visible");
+    });
+  });
+
+  flows.forEach(flow => {
+    flow.addEventListener("mouseenter", evt => {
+      clearActive();
+      flow.classList.add("active");
+      const fromNode = nodesById.get(flow.dataset.from);
+      const toNode = nodesById.get(flow.dataset.to);
+      const label = labelsByKey.get(flow.dataset.flow);
+      if (fromNode) fromNode.classList.add("active");
+      if (toNode) toNode.classList.add("active");
+      if (label) label.classList.add("active");
+      showTooltip(evt, flow.dataset.tip);
+    });
+    flow.addEventListener("mouseleave", () => {
+      clearActive();
+      tooltip.classList.remove("visible");
+    });
+  });
+
+  document.addEventListener("click", evt => {
+    if (!evt.target.closest("svg")) {
+      clearActive();
+      tooltip.classList.remove("visible");
+    }
+  });
+</script>
 </body>
 </html>
