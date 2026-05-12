@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tabel 3 — Dimensi Eksploitasi & Kontrol Bisnis Ojol</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -95,19 +96,20 @@
   .cell.col-3 { background: #f4f3fb; }
 
   .icon-placeholder {
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background: #ffffff;
-    border: 2px dashed rgba(109, 40, 217, 0.45);
-    color: #6d28d9;
-    font-size: 10px;
-    font-weight: 800;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    background: #6d28d9;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    box-shadow: 0 6px 16px rgba(109, 40, 217, 0.25);
+  }
+  .cell.col-2 .icon-placeholder { background: #7f56eb; }
+  .cell.col-3 .icon-placeholder { background: #6f5bdc; }
+  .icon-placeholder i {
+    color: #ffffff;
+    font-size: 20px;
   }
 
   .cell-text { display: flex; flex-direction: column; gap: 6px; }
@@ -158,19 +160,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-id-card"></i></div>
             <div class="cell-text">
               <div class="cell-title">Status &ldquo;Mitra&rdquo; Semu</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-user-lock"></i></div>
             <div class="cell-text">
               <div class="cell-title">Driver disebut mitra, tapi tidak punya kendali atas tarif dan kerja</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-clipboard-check"></i></div>
             <div class="cell-text">
               <div class="cell-title">Menghindari kewajiban pekerja formal, tapi tetap mengontrol penuh</div>
             </div>
@@ -179,19 +181,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-robot"></i></div>
             <div class="cell-text">
               <div class="cell-title">Algoritma sebagai &ldquo;Bos&rdquo;</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-diagram-project"></i></div>
             <div class="cell-text">
               <div class="cell-title">Order, rating, dan suspend ditentukan sistem</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-user-gear"></i></div>
             <div class="cell-text">
               <div class="cell-title">Kontrol perilaku driver lewat algoritma tertutup</div>
             </div>
@@ -200,19 +202,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-shield-halved"></i></div>
             <div class="cell-text">
               <div class="cell-title">Risiko Ditanggung Driver</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-gas-pump"></i></div>
             <div class="cell-text">
               <div class="cell-title">BBM, perawatan, dan kecelakaan ditanggung sendiri</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <div class="cell-text">
               <div class="cell-title">Risiko dipindahkan agar biaya perusahaan rendah</div>
             </div>
@@ -221,19 +223,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-tags"></i></div>
             <div class="cell-text">
               <div class="cell-title">Tarif Murah</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-coins"></i></div>
             <div class="cell-text">
               <div class="cell-title">Harga rendah menekan pendapatan driver</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-sliders"></i></div>
             <div class="cell-text">
               <div class="cell-title">Tarif dikontrol untuk menarik pasar dan meningkatkan volume transaksi</div>
             </div>
@@ -242,19 +244,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-clock"></i></div>
             <div class="cell-text">
               <div class="cell-title">Eksploitasi Waktu Bekerja</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-hourglass-half"></i></div>
             <div class="cell-text">
               <div class="cell-title">Driver harus bekerja dengan jam yang panjang</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-bullseye"></i></div>
             <div class="cell-text">
               <div class="cell-title">Insentif didesain agar driver terus aktif</div>
             </div>
@@ -263,19 +265,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-heart-pulse"></i></div>
             <div class="cell-text">
               <div class="cell-title">Kematian karena Lelah</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-skull-crossbones"></i></div>
             <div class="cell-text">
               <div class="cell-title">Ada kasus driver meninggal saat bekerja</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-stopwatch"></i></div>
             <div class="cell-text">
               <div class="cell-title">Tidak ada batas jam kerja dalam sistem</div>
             </div>
@@ -284,19 +286,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-gift"></i></div>
             <div class="cell-text">
               <div class="cell-title">Insentif Berisiko</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-fire"></i></div>
             <div class="cell-text">
               <div class="cell-title">Bonus mendorong kerja berlebihan</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-compass"></i></div>
             <div class="cell-text">
               <div class="cell-title">Perilaku diarahkan tanpa paksaan langsung</div>
             </div>
@@ -305,19 +307,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-piggy-bank"></i></div>
             <div class="cell-text">
               <div class="cell-title">Biaya Tersembunyi</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-notes-medical"></i></div>
             <div class="cell-text">
               <div class="cell-title">Kesehatan dan penyusutan tidak dihitung</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-chart-column"></i></div>
             <div class="cell-text">
               <div class="cell-title">Hanya pendapatan kotor yang ditonjolkan</div>
             </div>
@@ -326,19 +328,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-users"></i></div>
             <div class="cell-text">
               <div class="cell-title">Over-supply Driver</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-wallet"></i></div>
             <div class="cell-text">
               <div class="cell-title">Driver banyak, pendapatan makin kecil</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-chart-line"></i></div>
             <div class="cell-text">
               <div class="cell-title">Kompetisi dijaga untuk tekan tarif</div>
             </div>
@@ -347,19 +349,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-bed"></i></div>
             <div class="cell-text">
               <div class="cell-title">Ketimpangan Waktu Hidup</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-house-chimney-user"></i></div>
             <div class="cell-text">
               <div class="cell-title">Waktu istirahat dan keluarga terkorbankan</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
             <div class="cell-text">
               <div class="cell-title">Tidak ada kompensasi atas waktu</div>
             </div>
@@ -368,19 +370,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-route"></i></div>
             <div class="cell-text">
               <div class="cell-title">Mobilitas Mandek</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-arrow-trend-up"></i></div>
             <div class="cell-text">
               <div class="cell-title">Sulit naik kelas secara ekonomi</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-industry"></i></div>
             <div class="cell-text">
               <div class="cell-title">Model tidak dirancang untuk peningkatan ekonomi driver</div>
             </div>
@@ -389,19 +391,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-regular fa-face-tired"></i></div>
             <div class="cell-text">
               <div class="cell-title">Normalisasi Penderitaan</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-hard-hat"></i></div>
             <div class="cell-text">
               <div class="cell-title">Lelah dan risiko dianggap wajar</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-medal"></i></div>
             <div class="cell-text">
               <div class="cell-title">Narasi kerja keras dipertahankan</div>
             </div>
@@ -410,19 +412,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-hand-holding-heart"></i></div>
             <div class="cell-text">
               <div class="cell-title">Ketimpangan Empati</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-gauge-high"></i></div>
             <div class="cell-text">
               <div class="cell-title">Konsumen fokus pada layanan cepat</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-bullhorn"></i></div>
             <div class="cell-text">
               <div class="cell-title">Ekspektasi dibentuk oleh platform</div>
             </div>
@@ -431,19 +433,19 @@
 
         <div class="row">
           <div class="cell col-1">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-scale-balanced"></i></div>
             <div class="cell-text">
               <div class="cell-title">Regulasi Lemah</div>
             </div>
           </div>
           <div class="cell col-2">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-shield-virus"></i></div>
             <div class="cell-text">
               <div class="cell-title">Perlindungan sosial minim</div>
             </div>
           </div>
           <div class="cell col-3">
-            <div class="icon-placeholder">ICON</div>
+            <div class="icon-placeholder"><i class="fa-solid fa-door-open"></i></div>
             <div class="cell-text">
               <div class="cell-title">Celah aturan dimanfaatkan</div>
             </div>
