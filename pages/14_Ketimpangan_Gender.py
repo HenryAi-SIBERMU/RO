@@ -9,7 +9,8 @@ from components.chart_wrapper import chart_header, chart_footer
 BASE_DIR = Path(__file__).resolve().parent.parent
 _G27 = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar27_plotly.html"
 _G28 = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar28_plotly.html"
-_G30 = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar30_plotly.html"
+_G30   = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar30_plotly.html"
+_G31_1 = BASE_DIR / "embed" / "14_Ketimpangan_Gender_gambar31_1_plotly.html"
 
 st.set_page_config(page_title="Ketimpangan Gender", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -43,7 +44,13 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 30"):
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Kesenjangan Upah Berdasarkan Gender", "Gambar 31 — Hal. 54")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 54.")
+components.html(_G31_1.read_text(encoding="utf-8"), height=640, scrolling=True)
+chart_footer("Sakernas Agustus 2025, diolah oleh peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 31 (Distribusi Upah)"):
+    st.code("""<!-- Gambar 31 (1): Perbedaan Distribusi Upah per Jam -->
+<iframe src=\"https://henryai-sibermu.github.io/RO/embed/14_Ketimpangan_Gender_gambar31_1_plotly.html\"
+  width=\"100%\" height=\"640\" frameborder=\"0\"
+  style=\"border-radius:32px; background:#f7f4ff;\" loading=\"lazy\"></iframe>""", language="html")
 
 chart_header("Banyak Perempuan Putus Asa Mencari Kerja", "Gambar 32 — Hal. 55")
 st.info("⏳ Data belum diinput. Lihat PDF hal. 55.")
