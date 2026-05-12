@@ -9,6 +9,7 @@ from components.chart_wrapper import chart_header, chart_footer
 BASE_DIR = Path(__file__).resolve().parent.parent
 _G25_plotly = BASE_DIR / "embed" / "13_Gig_Economy_Ojol_gambar25_plotly.html"
 _G26        = BASE_DIR / "embed" / "13_Gig_Economy_Ojol_gambar26.html"
+_T3         = BASE_DIR / "embed" / "13_Gig_Economy_Ojol_tabel3.html"
 
 st.set_page_config(page_title="Gig Economy & Ojol", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -31,6 +32,15 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 26"):
 <iframe src="https://henryai-sibermu.github.io/RO/embed/13_Gig_Economy_Ojol_gambar26.html"
   width="100%" height="620" frameborder="0"
   style="border-radius:32px; background:#0f0520;" loading="lazy"></iframe>""", language="html")
+
+chart_header("Dimensi Eksploitasi dan Mekanisme Kontrol dalam Bisnis Ojek Online", "Tabel 3 — Hal. 47")
+components.html(_T3.read_text(encoding="utf-8"), height=1180, scrolling=True)
+chart_footer("Analisis Penulis, 2026")
+with st.expander("🔗 Kode Embed WordPress — Tabel 3"):
+    st.code("""<!-- Tabel 3: Dimensi Eksploitasi dan Mekanisme Kontrol dalam Bisnis Ojek Online -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/13_Gig_Economy_Ojol_tabel3.html"
+  width="100%" height="1180" frameborder="0"
+  style="border-radius:32px; background:#ffffff;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Dimensi Eksploitasi dan Mekanisme Kontrol Bisnis Ojol", "Tabel 4 — Hal. 48")
 st.info("⏳ Data belum diinput. Lihat PDF hal. 48.")
