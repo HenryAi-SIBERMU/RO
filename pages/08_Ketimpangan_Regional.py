@@ -20,6 +20,7 @@ _G15_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar15_chartjs.ht
 _G15_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar15_plotly.html"
 _G16_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar16_chartjs.html"
 _G16_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar16_plotly.html"
+_G17 = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar17.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -230,6 +231,23 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 16 (Plotly)"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar16_plotly.html"
   width="100%" height="680" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Generasi Muda yang Terhimpit Sistem Oligarki", "Gambar 17 — Hal. 31"
+)
+components.html(_G17.read_text(encoding="utf-8"), height=700, scrolling=True)
+chart_footer("Diolah oleh peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 17"):
+    st.code(
+        """<!-- Gambar 17: Generasi Muda yang Terhimpit Sistem Oligarki -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar17.html"
+  width="100%" height="700" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",
