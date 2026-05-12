@@ -18,6 +18,8 @@ _G14_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar14_chartjs.ht
 _G14_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar14_plotly.html"
 _G15_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar15_chartjs.html"
 _G15_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar15_plotly.html"
+_G16_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar16_chartjs.html"
+_G16_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar16_plotly.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -196,6 +198,38 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 15 (Plotly)"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar15_plotly.html"
   width="100%" height="720" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Proporsi Pendapatan 1% Teratas vs PPh Badan", "Gambar 16 — Hal. 30"
+)
+tab_g16_chartjs, tab_g16_plotly = st.tabs(["Versi Chart.js", "Versi Plotly"])
+with tab_g16_chartjs:
+    components.html(_G16_chartjs.read_text(encoding="utf-8"), height=680, scrolling=True)
+with tab_g16_plotly:
+    components.html(_G16_plotly.read_text(encoding="utf-8"), height=680, scrolling=True)
+chart_footer("WID.world (2025); Kemenkeu (2025); BPS (2025); Trading Economics (2025), diolah CELIOS")
+with st.expander("🔗 Kode Embed WordPress — Gambar 16 (Chart.js)"):
+    st.code(
+        """<!-- Gambar 16: Proporsi Pendapatan 1% vs PPh Badan — Chart.js -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar16_chartjs.html"
+  width="100%" height="680" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+with st.expander("🔗 Kode Embed WordPress — Gambar 16 (Plotly)"):
+    st.code(
+        """<!-- Gambar 16: Proporsi Pendapatan 1% vs PPh Badan — Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar16_plotly.html"
+  width="100%" height="680" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",
