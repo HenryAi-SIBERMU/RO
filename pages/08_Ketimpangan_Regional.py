@@ -52,55 +52,6 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 11a (Profil Elite)"):
     )
 
 chart_header(
-    "Gen Z Paling Lama Menganggur", "Gambar 18 — Hal. 32"
-)
-tab_g18_chartjs, tab_g18_plotly = st.tabs(["Versi Chart.js", "Versi Plotly"])
-with tab_g18_chartjs:
-    components.html(_G18_chartjs.read_text(encoding="utf-8"), height=640, scrolling=True)
-with tab_g18_plotly:
-    components.html(_G18_plotly.read_text(encoding="utf-8"), height=640, scrolling=True)
-chart_footer("Sakernas Agustus (2025); diolah peneliti")
-with st.expander("🔗 Kode Embed WordPress — Gambar 18 (Chart.js)"):
-    st.code(
-        """<!-- Gambar 18: Gen Z Paling Lama Menganggur — Chart.js -->
-<iframe
-  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar18_chartjs.html"
-  width="100%" height="640" frameborder="0"
-  style="border-radius:32px; background:#f5f3ff;"
-  loading="lazy">
-</iframe>""",
-        language="html",
-    )
-with st.expander("🔗 Kode Embed WordPress — Gambar 18 (Plotly)"):
-    st.code(
-        """<!-- Gambar 18: Gen Z Paling Lama Menganggur — Plotly -->
-<iframe
-  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar18_plotly.html"
-  width="100%" height="640" frameborder="0"
-  style="border-radius:32px; background:#f5f3ff;"
-  loading="lazy">
-</iframe>""",
-        language="html",
-    )
-
-chart_header(
-    "Lulusan Sarjana dan Gen Z Menjadi Pekerja Kasar",
-    "Gambar 19 — Hal. 33",
-)
-components.html(_G19_plotly.read_text(encoding="utf-8"), height=640, scrolling=True)
-chart_footer("Sakernas Agustus 2025; diolah peneliti")
-with st.expander("🔗 Kode Embed WordPress — Gambar 19 (Plotly)"):
-    st.code(
-        """<!-- Gambar 19: Lulusan Sarjana dan Gen Z menjadi Pekerja Kasar — Plotly -->
-<iframe
-  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar19_plotly.html"
-  width="100%" height="640" frameborder="0"
-  style="border-radius:32px; background:#f5f3ff;"
-  loading="lazy">
-</iframe>""",
-        language="html",
-    )
-chart_header(
     "Ketimpangan dan Kemiskinan Regional di Indonesia berdasarkan Pulau",
     "Gambar 11b — Hal. 27",
 )
@@ -331,6 +282,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 18 (Plotly)"):
         """<!-- Gambar 18: Gen Z Paling Lama Menganggur — Plotly -->
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar18_plotly.html"
+  width="100%" height="640" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Lulusan Sarjana dan Gen Z Menjadi Pekerja Kasar",
+    "Gambar 19 — Hal. 33",
+)
+components.html(_G19_plotly.read_text(encoding="utf-8"), height=640, scrolling=True)
+chart_footer("Sakernas Agustus 2025; diolah peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 19 (Plotly)"):
+    st.code(
+        """<!-- Gambar 19: Lulusan Sarjana dan Gen Z menjadi Pekerja Kasar — Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar19_plotly.html"
   width="100%" height="640" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
