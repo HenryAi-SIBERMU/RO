@@ -139,7 +139,7 @@
 
     <div class="plot-wrap">
       <div class="hint">🔍 Klik segmen untuk zoom masuk · Klik pusat untuk zoom keluar</div>
-      <svg id="sunburst-svg" viewBox="-310 -310 620 620"></svg>
+      <svg id="sunburst-svg" viewBox="-305 -305 610 610"></svg>
     </div>
 
     <div class="source">Sumber: Analisis Peneliti</div>
@@ -198,16 +198,19 @@
     };
 
     /* ── D3 Zoomable Sunburst ── */
-    const radius = 280;
     const svg = d3.select("#sunburst-svg");
+
+    /* Fixed ring radii — inner/outer per depth layer */
+    const INNER = [0,   68, 182];
+    const OUTER = [62, 178, 282];
 
     const arc = d3.arc()
       .startAngle(d => d.x0)
       .endAngle(d => d.x1)
-      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.015))
-      .padRadius(radius / 2)
-      .innerRadius(d => d.y0 === 0 ? 0 : d.y0 * radius / 3 + 60)
-      .outerRadius(d => d.y0 === 0 ? 58 : Math.max(d.y0 * radius / 3 + 60, d.y1 * radius / 3 + 54));
+      .padAngle(d => d.depth === 0 ? 0 : 0.013)
+      .padRadius(120)
+      .innerRadius(d => INNER[Math.min(d.depth, 2)])
+      .outerRadius(d => OUTER[Math.min(d.depth, 2)]);
 
     function colorOf(d) {
       if (d.depth === 0) return "#f0eaff";
@@ -266,7 +269,7 @@
     /* Center circle with label */
     svg.append("circle")
       .datum(root)
-      .attr("r", 58)
+      .attr("r", 60)
       .attr("fill", "#f0eaff")
       .attr("stroke", "rgba(93,63,211,0.2)")
       .attr("stroke-width", 1.5)
@@ -320,7 +323,8 @@
     }
     function labelTransform(d) {
       const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-      const r = d.y0 === 0 ? 0 : ((d.y0 * radius / 3 + 60) + (d.y1 * radius / 3 + 54)) / 2;
+      const MID = [30, 123, 232];
+      const r = MID[Math.min(d.depth, 2)];
       return `rotate(${x - 90}) translate(${r},0) rotate(${x < 180 ? 0 : 180})`;
     }
   </script>
