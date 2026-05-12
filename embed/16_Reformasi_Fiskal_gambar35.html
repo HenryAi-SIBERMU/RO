@@ -200,17 +200,16 @@
     /* ── D3 Zoomable Sunburst ── */
     const svg = d3.select("#sunburst-svg");
 
-    /* Fixed ring radii — inner/outer per depth layer */
-    const INNER = [0,   68, 182];
-    const OUTER = [62, 178, 282];
+    /* Radii based on y0/y1 so d.current works in tweens too */
+    const R = 225;
 
     const arc = d3.arc()
       .startAngle(d => d.x0)
       .endAngle(d => d.x1)
-      .padAngle(d => d.depth === 0 ? 0 : 0.013)
-      .padRadius(120)
-      .innerRadius(d => INNER[Math.min(d.depth, 2)])
-      .outerRadius(d => OUTER[Math.min(d.depth, 2)]);
+      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.014))
+      .padRadius(R / 2)
+      .innerRadius(d => d.y0 === 0 ? 0 : d.y0 * R / 3 + 52)
+      .outerRadius(d => d.y0 === 0 ? 60 : Math.max(d.y0 * R / 3 + 52, d.y1 * R / 3 + 48));
 
     function colorOf(d) {
       if (d.depth === 0) return "#f0eaff";
@@ -269,7 +268,7 @@
     /* Center circle with label */
     svg.append("circle")
       .datum(root)
-      .attr("r", 60)
+      .attr("r", 62)
       .attr("fill", "#f0eaff")
       .attr("stroke", "rgba(93,63,211,0.2)")
       .attr("stroke-width", 1.5)
@@ -323,8 +322,9 @@
     }
     function labelTransform(d) {
       const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-      const MID = [30, 123, 232];
-      const r = MID[Math.min(d.depth, 2)];
+      const inner = d.y0 === 0 ? 0 : d.y0 * R / 3 + 52;
+      const outer = d.y0 === 0 ? 60 : Math.max(d.y0 * R / 3 + 52, d.y1 * R / 3 + 48);
+      const r = (inner + outer) / 2;
       return `rotate(${x - 90}) translate(${r},0) rotate(${x < 180 ? 0 : 180})`;
     }
   </script>
