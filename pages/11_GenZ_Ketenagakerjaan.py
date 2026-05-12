@@ -7,6 +7,7 @@ from components.sidebar import render_sidebar
 from components.chart_wrapper import chart_header, chart_footer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+_G17          = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar17.html"
 _G18_chartjs  = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar18_chartjs.html"
 _G18_plotly   = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar18_plotly.html"
 _G19_plotly   = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar19_plotly.html"
@@ -24,6 +25,14 @@ _G23b         = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar23b.html"
 st.set_page_config(page_title="Gen Z & Ketenagakerjaan", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
 render_sidebar()
+
+chart_header("Generasi Muda yang Terhimpit Sistem Oligarki", "Gambar 17 — Hal. 34")
+components.html(_G17.read_text(encoding="utf-8"), height=700, scrolling=True)
+chart_footer("Diolah oleh peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 17"):
+    st.code("""<iframe src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar17.html"
+  width="100%" height="700" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Gen Z Paling Lama Menganggur", "Gambar 18 — Hal. 32")
 tab_g18_chartjs, tab_g18_plotly = st.tabs(["Versi Chart.js", "Versi Plotly"])
