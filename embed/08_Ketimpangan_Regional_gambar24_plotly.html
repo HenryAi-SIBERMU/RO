@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 24 — UMR yang Tidak Cukup untuk Menghidupi Keluarga (Plotly)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    :root { --purple:#5d3fd3; --deep-purple:#37206d; --card-border:rgba(70,48,138,0.2); --lavender:rgba(248,246,255,0.96); }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px;
+      font-family:"Manrope",system-ui,sans-serif;
+      background:radial-gradient(circle at 14% 18%,rgba(93,63,211,0.12),transparent 55%),
+                 radial-gradient(circle at 86% 12%,rgba(242,181,68,0.12),transparent 60%),#f7f4ff;
+    }
+    .card {
+      width:min(980px,96vw); background:#fff; border-radius:26px;
+      border:1px solid var(--card-border); box-shadow:0 32px 70px -34px rgba(40,26,84,0.35);
+      padding:40px 44px 48px; position:relative; overflow:hidden;
+    }
+    .card::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(140deg,rgba(93,63,211,0.06),transparent 45%),
+                 linear-gradient(315deg,rgba(242,181,68,0.05),transparent 58%);
+      pointer-events:none;
+    }
+    header { position:relative; z-index:1; display:flex; flex-wrap:wrap; align-items:center; gap:20px; margin-bottom:28px; }
+    .badge {
+      background:var(--purple); color:#fff; padding:11px 30px; border-radius:0 18px 18px 0;
+      font-weight:800; letter-spacing:0.04em; box-shadow:0 18px 28px -16px rgba(93,63,211,0.65); margin-left:-44px;
+    }
+    h1 { margin:0; font-size:clamp(18px,2.2vw,26px); color:var(--deep-purple); font-weight:800; line-height:1.25; }
+    .plot-wrap { background:var(--lavender); border-radius:22px; padding:24px 28px 32px; border:1px solid rgba(93,63,211,0.15); }
+    #plotly-g24 { width:100%; height:820px; }
+    .source {
+      margin-top:26px; text-align:center; font-size:13px; font-weight:600; color:#513c86;
+      background:#fcefd5; border-radius:16px; padding:14px 18px;
+      border:1px solid rgba(240,193,95,0.45); position:relative; z-index:1;
+    }
+    @media(max-width:900px){ .card{padding:32px 20px 36px;} .badge{margin-left:-20px;} }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 24.</div>
+      <h1>UMR yang Tidak Cukup untuk Menghidupi Keluarga</h1>
+    </header>
+    <div class="plot-wrap">
+      <div id="plotly-g24"></div>
+    </div>
+    <div class="source">Sumber: Kemenaker 2025; diolah peneliti</div>
+  </div>
+
+  <script>
+    const provinces = [
+      "SUMATERA SELATAN","SULAWESI SELATAN","SULAWESI BARAT","SULAWESI UTARA",
+      "ACEH","GORONTALO","DKI JAKARTA","LAMPUNG","SULAWESI TENGGARA","SULAWESI TENGAH",
+      "SUMATERA UTARA","RIAU","KALIMANTAN SELATAN","JAMBI","KALIMANTAN TENGAH",
+      "NUSA TENGGARA TIMUR","BANGKA BELITUNG","NUSA TENGGARA BARAT","PAPUA SELATAN",
+      "PAPUA PEGUNUNGAN","MALUKU","PAPUA","MALUKU UTARA","BENGKULU","SUMATERA BARAT",
+      "PAPUA TENGAH","KALIMANTAN BARAT","JAWA TIMUR","JAWA TENGAH","KALIMANTAN UTARA",
+      "BANTEN","PAPUA BARAT","PAPUA BARAT DAYA","JAWA BARAT","KEP.RIAU",
+      "BALI","KALIMANTAN TIMUR","DI YOGYAKARTA"
+    ];
+
+    const values = [
+       1.55, 1.10, 0.90, 0.70,
+       0.60, 0.50, 0.40, 0.30, 0.20, 0.10,
+       0.05,-0.05,-0.50,-0.55,-0.60,
+      -0.70,-0.75,-0.80,-0.85,
+      -0.90,-1.00,-1.05,-1.10,-1.15,-1.20,
+      -1.30,-1.40,-1.50,-1.55,-1.65,
+      -1.70,-1.80,-1.90,-2.00,-2.10,
+      -2.30,-2.40,-2.50
+    ];
+
+    const colors = values.map(v => v >= 0 ? "#f3c15a" : "#6c3fcc");
+
+    const trace = {
+      type: "bar",
+      orientation: "h",
+      y: provinces,
+      x: values,
+      marker: {
+        color: colors,
+        line: { color: "rgba(255,255,255,0.3)", width: 0.5 }
+      },
+      text: values.map(v => (v >= 0 ? "+" : "") + v.toFixed(2)),
+      textposition: "outside",
+      textfont: { family: "Manrope", size: 10.5, color: "#37206d" },
+      hovertemplate: "%{y}<br><b>%{x:+.2f}</b><extra></extra>",
+      cliponaxis: false
+    };
+
+    const layout = {
+      margin: { t: 12, r: 70, b: 50, l: 175, pad: 4 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)",
+      font: { family: "Manrope" },
+      showlegend: false,
+      xaxis: {
+        range: [-2.85, 2.2],
+        dtick: 0.5,
+        tickfont: { size: 12, color: "rgba(47,36,95,0.7)", family: "Manrope" },
+        gridcolor: "rgba(55,32,109,0.1)",
+        zeroline: true,
+        zerolinecolor: "rgba(30,15,60,0.5)",
+        zerolinewidth: 1.8,
+        tickprefix: "",
+        tickformat: "+.1f"
+      },
+      yaxis: {
+        autorange: "reversed",
+        tickfont: { size: 11, color: "rgba(47,36,95,0.85)", family: "Manrope" },
+        gridcolor: "rgba(0,0,0,0)"
+      },
+      annotations: [
+        {
+          x: -1.8, y: 1.5,
+          text: "UMR Tidak Cukup",
+          showarrow: false,
+          font: { size: 11, color: "#6c3fcc", family: "Manrope", weight: 700 },
+          xanchor: "center"
+        },
+        {
+          x: 1.2, y: 1.5,
+          text: "UMR Cukup / Lebih",
+          showarrow: false,
+          font: { size: 11, color: "#c8880a", family: "Manrope", weight: 700 },
+          xanchor: "center"
+        }
+      ],
+      hoverlabel: {
+        font: { family: "Manrope", size: 12, color: "#fff" },
+        bgcolor: "rgba(47,33,92,0.92)",
+        bordercolor: "transparent"
+      }
+    };
+
+    Plotly.newPlot("plotly-g24", [trace], layout, { displayModeBar: false, responsive: true });
+  </script>
+</body>
+</html>
