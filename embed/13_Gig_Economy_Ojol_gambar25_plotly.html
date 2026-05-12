@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gambar 25 — Mekanisme Pembagian Komisi Ojek Online</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: radial-gradient(ellipse at top left, #2d1b69 0%, #1a0a3c 55%, #0f0520 100%);
+    min-height: 100vh;
+    padding: 28px 24px 20px;
+  }
+  .wrapper { max-width: 960px; margin: 0 auto; }
+  .tag {
+    color: #a78bfa;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h1 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 20px;
+  }
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .kpi {
+    flex: 1 1 140px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .kpi.yellow { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.35); }
+  .kpi.red    { background: rgba(239,68,68,0.10);  border-color: rgba(239,68,68,0.30);  }
+  .kpi-val { display: block; font-size: 22px; font-weight: 800; }
+  .kpi.yellow .kpi-val { color: #FBBF24; }
+  .kpi.red    .kpi-val { color: #FCA5A5; }
+  .kpi:not(.yellow):not(.red) .kpi-val { color: #c4b5fd; }
+  .kpi-desc {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  #chart { width: 100%; }
+  .source { text-align: center; color: rgba(255,255,255,0.38); font-size: 11px; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="tag">Gambar 25 — Hal. 46 &nbsp;·&nbsp; Gig Economy &amp; Ojol</div>
+  <h1>Mekanisme Pembagian Komisi antara Platform dan Pengemudi Ojek Online</h1>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-val">Rp73.500</span>
+      <span class="kpi-desc">Dibayar Pelanggan</span>
+    </div>
+    <div class="kpi yellow">
+      <span class="kpi-val">Rp55.600</span>
+      <span class="kpi-desc">Diterima Pengemudi (80%)</span>
+    </div>
+    <div class="kpi red">
+      <span class="kpi-val">Rp16.900</span>
+      <span class="kpi-desc">Dipotong Platform &amp; Biaya</span>
+    </div>
+    <div class="kpi yellow">
+      <span class="kpi-val">75,6%</span>
+      <span class="kpi-desc">Porsi Pengemudi</span>
+    </div>
+  </div>
+
+  <div id="chart"></div>
+  <div class="source">Sumber: Wawancara kualitatif dengan Pengemudi Ojek Online, 2026</div>
+</div>
+
+<script>
+const YELLOW  = '#FBBF24';
+const RED     = '#F87171';
+const PURPLE  = '#7C3AED';
+const LPURPLE = '#9F7AEA';
+const VLPURPLE= '#C4B5FD';
+const TRANS   = 'rgba(0,0,0,0)';
+
+/* ── Waterfall: alur dana ── */
+const wf = {
+  type: 'waterfall',
+  orientation: 'v',
+  measure: ['absolute','relative','relative','relative','total'],
+  x: [
+    'Dibayar<br>Pelanggan',
+    'Biaya<br>Asuransi',
+    'Biaya Jasa<br>Aplikasi',
+    'Komisi Platform<br>(20% biaya perj.)',
+    'Diterima<br>Pengemudi'
+  ],
+  y: [73500, -1000, -3000, -13900, 55600],
+  text: ['Rp73.500', '−Rp1.000', '−Rp3.000', '−Rp13.900', 'Rp55.600'],
+  textposition: 'outside',
+  textfont: { family:'Manrope', size:12, color:'white' },
+  connector: {
+    line: { color:'rgba(167,139,250,0.35)', width:1.5, dash:'dot' }
+  },
+  increasing: { marker: { color: YELLOW,  line: { color: TRANS, width: 0 } } },
+  decreasing: { marker: { color: RED,     line: { color: TRANS, width: 0 } } },
+  totals:     { marker: { color: PURPLE,  line: { color: YELLOW, width: 2 } } },
+  hovertemplate: '<b>%{x}</b><br>%{text}<extra></extra>',
+  xaxis: 'x', yaxis: 'y',
+  showlegend: false
+};
+
+/* ── Donut: distribusi ── */
+const donut = {
+  type: 'pie',
+  hole: 0.56,
+  values: [55600, 13900, 3000, 1000],
+  labels: ['Pengemudi (80%)', 'Komisi Platform (20%)', 'Biaya Jasa Aplikasi', 'Asuransi PerjalananAman+'],
+  marker: {
+    colors: [YELLOW, RED, LPURPLE, VLPURPLE],
+    line: { color:'rgba(0,0,0,0.25)', width:1 }
+  },
+  textinfo: 'percent',
+  textfont: { family:'Manrope', size:12, color:'white' },
+  hovertemplate: '<b>%{label}</b><br>Rp%{value:,.0f} (%{percent})<extra></extra>',
+  domain: { x:[0.56, 1.0], y:[0.04, 0.96] },
+  showlegend: true
+};
+
+const layout = {
+  paper_bgcolor: TRANS,
+  plot_bgcolor:  TRANS,
+  font: { family:'Manrope', color:'white' },
+  height: 400,
+  margin: { t:44, b:90, l:80, r:10 },
+  showlegend: true,
+  legend: {
+    font: { family:'Manrope', size:10, color:'rgba(255,255,255,0.75)' },
+    bgcolor: TRANS,
+    orientation: 'h',
+    x: 0.5, xanchor: 'center', y: -0.26
+  },
+  xaxis: {
+    domain: [0, 0.50],
+    tickfont: { family:'Manrope', size:10, color:'rgba(255,255,255,0.8)' },
+    showgrid: false, showline: false, zeroline: false
+  },
+  yaxis: {
+    tickfont: { family:'Manrope', size:10, color:'rgba(255,255,255,0.5)' },
+    tickformat: ',.0f', tickprefix: 'Rp',
+    showgrid: true, gridcolor:'rgba(255,255,255,0.07)', gridwidth:1,
+    zeroline: false
+  },
+  annotations: [
+    {
+      text: '<b>Alur Dana per Transaksi</b>',
+      xref:'paper', yref:'paper', x:0.22, y:1.07, showarrow:false,
+      font:{ family:'Manrope', size:12, color:'rgba(255,255,255,0.65)' }
+    },
+    {
+      text: '<b>Distribusi Nilai Transaksi</b>',
+      xref:'paper', yref:'paper', x:0.78, y:1.07, showarrow:false,
+      font:{ family:'Manrope', size:12, color:'rgba(255,255,255,0.65)' }
+    },
+    {
+      text: '<b>75,6%</b><br><span style="font-size:11px;color:rgba(255,255,255,0.75)">untuk<br>pengemudi</span>',
+      xref:'paper', yref:'paper', x:0.778, y:0.50, showarrow:false,
+      font:{ family:'Manrope', size:15, color: YELLOW }, align:'center'
+    }
+  ]
+};
+
+Plotly.newPlot('chart', [wf, donut], layout, {
+  responsive: true,
+  displayModeBar: false
+});
+</script>
+</body>
+</html>
