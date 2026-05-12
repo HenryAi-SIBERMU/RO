@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 20 — Dekomposisi Kesenjangan Upah Gen Z (Plotly)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    :root {
+      --purple: #5d3fd3;
+      --deep-purple: #37206d;
+      --card-border: rgba(70, 48, 138, 0.2);
+      --lavender: rgba(248, 246, 255, 0.96);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: "Manrope", system-ui, sans-serif;
+      background: radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+                  radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+                  #f7f4ff;
+    }
+    .card {
+      width: min(980px, 96vw);
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(93,63,211,0.06), transparent 45%),
+                  linear-gradient(315deg, rgba(242,181,68,0.05), transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: var(--purple);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 0 18px 18px 0;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: var(--deep-purple);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .plot-wrap {
+      background: var(--lavender);
+      border-radius: 22px;
+      padding: 24px 28px 32px;
+      border: 1px solid rgba(93,63,211,0.15);
+    }
+    .plot-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--deep-purple);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+    #plotly-g20-agg { width: 100%; height: 300px; }
+    #plotly-g20-det { width: 100%; height: 460px; }
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(93,63,211,0.15);
+      margin: 20px 0;
+    }
+    .legend-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--deep-purple);
+    }
+    .legend-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+    .source {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #513c86;
+      background: #fcefd5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 900px) {
+      .card { padding: 32px 20px 36px; }
+      .badge { margin-left: -20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 20.</div>
+      <h1>Dekomposisi Kesenjangan Upah Gen Z</h1>
+    </header>
+
+    <div class="plot-wrap">
+      <div class="plot-title">Agregat</div>
+      <div id="plotly-g20-agg"></div>
+      <hr class="divider" />
+      <div class="plot-title">Tampilan Detail per Variabel</div>
+      <div id="plotly-g20-det"></div>
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#6c3fcc;"></div>
+          Komponen yang dapat dijelaskan
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#f3c15a;"></div>
+          Komponen yang tidak dapat dijelaskan
+        </div>
+      </div>
+    </div>
+
+    <div class="source">Sumber: Sakernas Agustus 2025; diolah oleh peneliti</div>
+  </div>
+
+  <script>
+    /* ── AGGREGATE CHART ── */
+    const aggData = [
+      { label: "Total Gap",   val: 0.206,  color: "#6c3fcc" },
+      { label: "Explained",   val: 0.319,  color: "#f3c15a" },
+      { label: "Unexplained", val: -0.113, color: "#41228a" }
+    ];
+
+    const aggTrace = {
+      type: "bar",
+      orientation: "h",
+      y: aggData.map(d => d.label),
+      x: aggData.map(d => d.val),
+      marker: {
+        color: aggData.map(d => d.color),
+        line: { color: "rgba(255,255,255,0.5)", width: 1 }
+      },
+      text: aggData.map(d => d.val.toFixed(3)),
+      textposition: "outside",
+      textfont: { family: "Manrope", size: 13, color: "#37206d" },
+      hovertemplate: "%{y}: <b>%{x:.3f}</b><extra></extra>",
+      cliponaxis: false
+    };
+
+    const aggLayout = {
+      margin: { t: 12, r: 80, b: 50, l: 110, pad: 4 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)",
+      font: { family: "Manrope" },
+      showlegend: false,
+      xaxis: {
+        range: [-0.18, 0.52],
+        dtick: 0.1,
+        tickfont: { size: 12, color: "rgba(47,36,95,0.7)" },
+        gridcolor: "rgba(55,32,109,0.1)",
+        zeroline: true,
+        zerolinecolor: "rgba(55,32,109,0.35)",
+        zerolinewidth: 1.5,
+        title: { text: "Log Wage Difference", font: { size: 12, color: "rgba(47,36,95,0.65)" } }
+      },
+      yaxis: {
+        tickfont: { size: 13, color: "rgba(47,36,95,0.85)" },
+        autorange: "reversed",
+        gridcolor: "rgba(0,0,0,0)"
+      },
+      hoverlabel: {
+        font: { family: "Manrope", size: 12, color: "#fff" },
+        bgcolor: "rgba(47,33,92,0.92)",
+        bordercolor: "transparent"
+      }
+    };
+
+    /* ── DETAIL CHART ── */
+    const variables = [
+      "Total Pengalaman","Umur2","Lama Pengalaman","Perempuan",
+      "Urban","Menikah","Jam Bekerja per Minggu","SMP","SMA","Lulusan Universitas"
+    ];
+
+    const explained   = [ 1.134, -0.903,  0.079, -0.013, -0.000,  0.064, -0.039,  0.013, -0.113,  0.080];
+    const unexplained = [ 0.200, -0.448, -0.023, -0.032, -0.059,  0.011,  0.014,  0.000,  0.084,  0.093];
+
+    const detTraceExp = {
+      type: "bar",
+      orientation: "h",
+      name: "Komponen dapat dijelaskan",
+      y: variables,
+      x: explained,
+      marker: { color: "#6c3fcc", line: { color: "rgba(255,255,255,0.4)", width: 0.8 } },
+      text: explained.map(v => v.toFixed(3)),
+      textposition: "outside",
+      textfont: { family: "Manrope", size: 11, color: "#37206d" },
+      hovertemplate: "%{y}<br>Dapat dijelaskan: <b>%{x:.3f}</b><extra></extra>",
+      cliponaxis: false
+    };
+
+    const detTraceUnexp = {
+      type: "bar",
+      orientation: "h",
+      name: "Komponen tidak dapat dijelaskan",
+      y: variables,
+      x: unexplained,
+      marker: { color: "#f3c15a", line: { color: "rgba(255,255,255,0.4)", width: 0.8 } },
+      text: unexplained.map(v => v.toFixed(3)),
+      textposition: "outside",
+      textfont: { family: "Manrope", size: 11, color: "#37206d" },
+      hovertemplate: "%{y}<br>Tidak dapat dijelaskan: <b>%{x:.3f}</b><extra></extra>",
+      cliponaxis: false
+    };
+
+    const detLayout = {
+      barmode: "group",
+      bargap: 0.28,
+      bargroupgap: 0.08,
+      margin: { t: 12, r: 90, b: 60, l: 170, pad: 4 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)",
+      font: { family: "Manrope" },
+      showlegend: false,
+      xaxis: {
+        range: [-1.1, 1.25],
+        dtick: 0.5,
+        tickfont: { size: 12, color: "rgba(47,36,95,0.7)" },
+        gridcolor: "rgba(55,32,109,0.1)",
+        zeroline: true,
+        zerolinecolor: "rgba(55,32,109,0.4)",
+        zerolinewidth: 1.5,
+        title: { text: "Kontribusi Log Kesenjangan Upah", font: { size: 12, color: "rgba(47,36,95,0.65)" } }
+      },
+      yaxis: {
+        tickfont: { size: 13, color: "rgba(47,36,95,0.85)" },
+        autorange: "reversed",
+        gridcolor: "rgba(0,0,0,0)"
+      },
+      hoverlabel: {
+        font: { family: "Manrope", size: 12, color: "#fff" },
+        bgcolor: "rgba(47,33,92,0.92)",
+        bordercolor: "transparent"
+      }
+    };
+
+    const cfg = { displayModeBar: false, responsive: true };
+    Plotly.newPlot("plotly-g20-agg", [aggTrace], aggLayout, cfg);
+    Plotly.newPlot("plotly-g20-det", [detTraceExp, detTraceUnexp], detLayout, cfg);
+  </script>
+</body>
+</html>

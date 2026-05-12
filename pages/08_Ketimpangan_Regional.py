@@ -24,6 +24,7 @@ _G17 = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar17.html"
 _G18_chartjs = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar18_chartjs.html"
 _G18_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar18_plotly.html"
 _G19_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar19_plotly.html"
+_G20_plotly = BASE_DIR / "embed" / "08_Ketimpangan_Regional_gambar20_plotly.html"
 
 st.set_page_config(
     page_title="Ketimpangan Regional",
@@ -301,6 +302,24 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 19 (Plotly)"):
 <iframe
   src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar19_plotly.html"
   width="100%" height="640" frameborder="0"
+  style="border-radius:32px; background:#f5f3ff;"
+  loading="lazy">
+</iframe>""",
+        language="html",
+    )
+
+chart_header(
+    "Dekomposisi Kesenjangan Upah Gen Z",
+    "Gambar 20 — Hal. 34",
+)
+components.html(_G20_plotly.read_text(encoding="utf-8"), height=820, scrolling=True)
+chart_footer("Sakernas Agustus 2025; diolah peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 20 (Plotly)"):
+    st.code(
+        """<!-- Gambar 20: Dekomposisi Kesenjangan Upah Gen Z — Plotly -->
+<iframe
+  src="https://henryai-sibermu.github.io/RO/embed/08_Ketimpangan_Regional_gambar20_plotly.html"
+  width="100%" height="820" frameborder="0"
   style="border-radius:32px; background:#f5f3ff;"
   loading="lazy">
 </iframe>""",
