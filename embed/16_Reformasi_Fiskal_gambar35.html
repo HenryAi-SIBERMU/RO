@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 35 — Oligarki dalam Pakaian Demokrasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --purple: #5d3fd3;
+      --deep-purple: #37206d;
+      --card-border: rgba(70,48,138,0.2);
+      --lavender: rgba(248,246,255,0.96);
+      --orange: #f59e0b;
+      --seg-a: #f59e0b;
+      --seg-b: #8b5cf6;
+      --seg-c: #3b0764;
+      --seg-d: #6d28d9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: "Manrope", system-ui, sans-serif;
+      background: radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+                  radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+                  #f7f4ff;
+    }
+    .card {
+      width: min(1020px, 96vw);
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg,rgba(93,63,211,0.06),transparent 45%),
+                  linear-gradient(315deg,rgba(242,181,68,0.05),transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: var(--purple);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 0 18px 18px 0;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px;
+      white-space: nowrap;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(15px, 1.9vw, 22px);
+      color: var(--deep-purple);
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .plot-wrap {
+      background: var(--lavender);
+      border-radius: 22px;
+      padding: 32px 28px 36px;
+      border: 1px solid rgba(93,63,211,0.15);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Main diagram grid ── */
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 280px 1fr;
+      grid-template-rows: 1fr 1fr auto;
+      gap: 0 24px;
+      align-items: center;
+      min-height: 380px;
+    }
+
+    /* ── Text blocks ── */
+    .tb {
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+    .tb h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--deep-purple);
+      margin-bottom: 6px;
+    }
+    .tb ul {
+      list-style: none;
+      padding: 0;
+    }
+    .tb ul li {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #4a3272;
+      line-height: 1.8;
+      padding-left: 12px;
+      position: relative;
+    }
+    .tb ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+    }
+
+    /* Grid positions */
+    .kekayaan       { grid-column: 1; grid-row: 1; text-align: right; }
+    .kontrol        { grid-column: 3; grid-row: 1; text-align: left; }
+    .donut-wrap     { grid-column: 2; grid-row: 1 / 3; display: flex; align-items: center; justify-content: center; }
+    .dampak         { grid-column: 1; grid-row: 2; text-align: right; }
+    .pemilu         { grid-column: 3; grid-row: 2; text-align: left; }
+    .kebijakan      { grid-column: 2; grid-row: 3; text-align: center; margin-top: 20px; }
+    .kebijakan .tb  { display: inline-block; text-align: left; }
+
+    /* Connector dots */
+    .kekayaan .tb,
+    .kontrol .tb,
+    .dampak .tb,
+    .pemilu .tb {
+      position: relative;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--purple);
+      display: inline-block;
+      flex-shrink: 0;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--purple);
+    }
+    .connector-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .kekayaan .connector-row  { justify-content: flex-end; margin-bottom: 6px; }
+    .kontrol .connector-row   { justify-content: flex-start; margin-bottom: 6px; }
+    .dampak .connector-row    { justify-content: flex-end; margin-bottom: 6px; }
+    .pemilu .connector-row    { justify-content: flex-start; margin-bottom: 6px; }
+    .line {
+      height: 2px;
+      background: var(--purple);
+      flex: 1;
+      min-width: 16px;
+      max-width: 32px;
+    }
+
+    /* ── Donut ── */
+    .donut-ring {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--seg-a) 0deg 108deg,
+        var(--seg-b) 108deg 198deg,
+        var(--seg-c) 198deg 270deg,
+        var(--seg-d) 270deg 360deg
+      );
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 40px -10px rgba(93,63,211,0.4);
+    }
+    .donut-center {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: #f3eefc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--deep-purple);
+      line-height: 1.35;
+      padding: 12px;
+      box-shadow: inset 0 2px 8px rgba(93,63,211,0.12);
+    }
+    /* Icons inside segments */
+    .seg-icon {
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+    }
+    .seg-icon.top    { top: 22px;  left: 50%; transform: translateX(-50%); }
+    .seg-icon.right  { right: 22px; top: 50%; transform: translateY(-50%); }
+    .seg-icon.bottom { bottom: 22px; left: 50%; transform: translateX(-50%); }
+    .seg-icon.left   { left: 22px; top: 50%; transform: translateY(-50%); }
+
+    /* ── Source ── */
+    .source {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #513c86;
+      background: #fcefd5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 700px) {
+      .diagram { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .kekayaan, .kontrol, .dampak, .pemilu, .kebijakan { grid-column: 1; grid-row: auto; text-align: left; }
+      .donut-wrap { grid-column: 1; grid-row: auto; margin: 20px 0; }
+      .card { padding: 28px 16px 32px; }
+      .badge { margin-left: -16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 35.</div>
+      <h1>Oligarki dalam Pakaian Demokrasi: Bagaimana Elite Mengakuisisi Partai</h1>
+    </header>
+
+    <div class="plot-wrap">
+      <div class="diagram">
+
+        <!-- Kekayaan (top-left) -->
+        <div class="kekayaan">
+          <div class="tb">
+            <div class="connector-row">
+              <h3>Kekayaan</h3>
+              <div class="line"></div>
+              <div class="dot"></div>
+            </div>
+            <ul>
+              <li>Korporasi</li>
+              <li>Konsensi tambang</li>
+              <li>Konsensi hutan</li>
+              <li><em>Data center</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Donut center -->
+        <div class="donut-wrap">
+          <div class="donut-ring">
+            <div class="donut-center">Lingkaran<br>Setan<br>Oligarki</div>
+            <div class="seg-icon top"><i class="fas fa-database"></i></div>
+            <div class="seg-icon right"><i class="fas fa-check-to-slot"></i></div>
+            <div class="seg-icon bottom"><i class="fas fa-file-shield"></i></div>
+            <div class="seg-icon left"><i class="fas fa-coins"></i></div>
+          </div>
+        </div>
+
+        <!-- Kontrol Politik (top-right) -->
+        <div class="kontrol">
+          <div class="tb">
+            <div class="connector-row">
+              <div class="dot"></div>
+              <div class="line"></div>
+              <h3>Kontrol Politik</h3>
+            </div>
+            <ul>
+              <li>Mendanai Partai</li>
+              <li>Sponsor Politik</li>
+              <li>Mahar Politik</li>
+              <li>Punya Partai</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Dampak Kebijakan (bottom-left) -->
+        <div class="dampak">
+          <div class="tb">
+            <div class="connector-row">
+              <h3>Dampak Kebijakan</h3>
+              <div class="line"></div>
+              <div class="dot"></div>
+            </div>
+            <ul>
+              <li>Insentif korporasi</li>
+              <li>Tender konvensi</li>
+              <li>Pajak regresif</li>
+              <li><em>Tax amnesty</em></li>
+              <li>Proyek PSN</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pemilu (middle-right) -->
+        <div class="pemilu">
+          <div class="tb">
+            <div class="connector-row">
+              <div class="dot"></div>
+              <div class="line"></div>
+              <h3>Pemilu</h3>
+            </div>
+            <ul>
+              <li><em>High cost politics</em></li>
+              <li>Media</li>
+              <li><em>Money Politics</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Kebijakan (bottom-center) -->
+        <div class="kebijakan">
+          <div class="tb">
+            <h3>Kebijakan</h3>
+            <ul>
+              <li>Menguasai parlemen</li>
+              <li><em>Bypass</em> Birokrasi</li>
+              <li>Mempengaruhi Kebijakan</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="source">Sumber: Analisis Peneliti</div>
+  </div>
+</body>
+</html>
