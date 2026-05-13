@@ -17,6 +17,7 @@ _G40 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar40_plotly.html"
 _G41 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar41_plotly.html"
 _T5  = BASE_DIR / "embed" / "16_Reformasi_Fiskal_tabel5.html"
 _G42 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar42.html"
+_G43 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar43.html"
 
 st.set_page_config(page_title="Reformasi Fiskal", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -110,4 +111,13 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 42"):
     st.code("""<!-- Gambar 42: Pajak Kekayaan Pejabat Eksekutif dan Legislatif -->
 <iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar42.html"
   width="100%" height="900" frameborder="0"
+  style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
+
+chart_header("Skema Tax Benefit untuk Mengurangi Ketimpangan Ekonomi", "Gambar 43 — Hal. 75")
+components.html(_G43.read_text(encoding="utf-8"), height=950, scrolling=False)
+chart_footer("Analisis Peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 43"):
+    st.code("""<!-- Gambar 43: Skema Tax Benefit -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar43.html"
+  width="100%" height="950" frameborder="0"
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
