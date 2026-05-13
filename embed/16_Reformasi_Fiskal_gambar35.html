@@ -439,12 +439,12 @@
       if (line) {
         line.style.animation = 'none';
         void line.getBoundingClientRect(); // trigger reflow for SVG
-        line.style.animation = 'drawLine 0.6s ease forwards';
+        line.style.animation = 'drawLine 1.2s ease forwards';
       }
       if (dot) {
         dot.style.animation = 'none';
         void dot.getBoundingClientRect(); // trigger reflow for SVG
-        dot.style.animation = 'fadeInDot 0.2s ease 0.4s forwards';
+        dot.style.animation = 'fadeInDot 0.3s ease 1s forwards';
       }
     }
     function bind(el) {
