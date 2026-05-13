@@ -24,126 +24,113 @@ body { font-family: 'Manrope', sans-serif; background: var(--bg); padding: 12px;
   background: #fff;
   border-radius: 20px;
   padding: 28px 24px 32px;
-  box-shadow: 0 4px 24px rgba(116, 52, 180, 0.08);
+  box-shadow: 0 4px 24px rgba(116,52,180,.08);
   max-width: 900px;
   margin: 0 auto;
 }
-
-/* Header */
 .hdr {
   display: flex; align-items: center; gap: 12px; margin-bottom: 30px;
   padding-bottom: 16px; border-bottom: 2px solid #EDE9FC;
 }
-.badge {
-  background: #5D3FD3; color: #fff; font-size: 14px; font-weight: 800;
-  padding: 6px 16px; border-radius: 8px; white-space: nowrap;
-}
+.badge { background: #5D3FD3; color: #fff; font-size: 14px; font-weight: 800; padding: 6px 16px; border-radius: 8px; white-space: nowrap; }
 .hdr h1 { font-size: 18px; font-weight: 800; color: #5D3FD3; }
 
-/* Tree Container */
-.tree {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 10px 0;
-}
+/* ── Tree ── */
+.tree { display: flex; flex-direction: column; align-items: center; padding: 10px 0; }
+.vline { width: 1.5px; background: var(--line); }
 
-/* Lines */
-.vline { width: 1.5px; background: var(--line); margin: 0 auto; }
-.hline { height: 1.5px; background: var(--line); width: 100%; position: absolute; }
-
-/* Arrows */
-.arrow-up {
-  width: 0; height: 0; margin: 0 auto;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 8px solid var(--line);
-}
-.arrow-down {
-  width: 0; height: 0; margin: 0 auto;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 8px solid var(--line);
-}
-
-/* Boxes */
+/* ── Box ── */
 .box {
-  background: var(--purple-box);
-  border-radius: 22px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(116, 52, 180, 0.15);
-  display: flex; flex-direction: column; justify-content: center;
-  transition: transform 0.2s;
+  background: var(--purple-box); border-radius: 22px; position: relative; overflow: hidden;
+  text-align: center; box-shadow: 0 8px 20px rgba(116,52,180,.15);
+  display: flex; flex-direction: column; justify-content: center; transition: transform .2s;
 }
 .box:hover { transform: translateY(-3px); }
-
-.box-content { position: relative; z-index: 2; padding: 22px 14px; }
+.bc { position: relative; z-index: 2; padding: 20px 14px; }
 .wm {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  font-size: 90px; font-weight: 900; color: rgba(255, 255, 255, 0.05);
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-size: 90px; font-weight: 900; color: rgba(255,255,255,.05);
   line-height: 1; z-index: 1; pointer-events: none;
 }
-
-.title { color: var(--gold-text); font-size: 14px; font-weight: 800; margin-bottom: 6px; line-height: 1.3; }
-.title.white { color: var(--white); }
-.title.large { font-size: 19px; }
+.ttl { color: var(--gold-text); font-size: 14px; font-weight: 800; margin-bottom: 6px; line-height: 1.3; }
+.ttl.wh { color: var(--white); }
+.ttl.lg { font-size: 19px; }
 .sub { color: var(--sub); font-size: 11px; line-height: 1.4; font-weight: 600; padding: 0 4px; }
 
-/* Top Row */
-.top-row {
-  display: flex; width: 100%; position: relative; gap: 16px;
-}
-.top-row::after {
-  content: ''; position: absolute; bottom: 0; left: 12.5%; right: 12.5%;
-  border-bottom: 1.5px solid var(--line);
-}
-.col-4 { flex: 1; display: flex; flex-direction: column; }
-.col-4 .box { height: 140px; }
+/* ── Rows (boxes only, no gap math needed) ── */
+.row-4 { display: flex; width: 100%; gap: 12px; }
+.row-4 > div { flex: 1; }
+.row-4 .box { min-height: 130px; }
 
-/* Icons */
-.icon-circle {
+.row-3 { display: flex; width: 100%; gap: 12px; }
+.row-3 > div { flex: 1; }
+.row-3 .box { min-height: 140px; }
+
+/* ── Connector rows — SEPARATE from box rows ── */
+/*
+  conn-up: 4-column connector with stems pointing UP to bar, bar at BOTTOM
+  Layout: stem (flex:1) → arrow-up, packed to bottom
+  bar ::after at bottom:0 = exactly at arrow bases
+*/
+.conn-up {
+  display: flex; width: 100%; height: 32px; position: relative;
+  align-items: flex-end; /* pack content to bottom */
+}
+.conn-up::after {
+  content: ''; position: absolute; bottom: 0;
+  /* with gap:0 and 4 equal cols, centers at 12.5% and 87.5% */
+  left: 12.5%; right: 12.5%;
+  border-bottom: 1.5px solid var(--line);
+  z-index: 0;
+}
+.cu { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; z-index: 1; }
+.cu .st { width: 1.5px; flex: 1; background: var(--line); }
+.cu .au { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid var(--line); }
+
+/*
+  conn-dn: 3-column connector with bar at TOP, stems pointing DOWN to boxes
+  Layout: arrow-down → stem (flex:1), bar ::before at top:0
+*/
+.conn-dn {
+  display: flex; width: 100%; height: 32px; position: relative;
+  align-items: flex-start; /* pack content to top */
+}
+.conn-dn::before {
+  content: ''; position: absolute; top: 0;
+  /* with gap:0 and 3 equal cols, centers at 16.67% and 83.33% */
+  left: 16.67%; right: 16.67%;
+  border-top: 1.5px solid var(--line);
+  z-index: 0;
+}
+.cd { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; z-index: 1; }
+.cd .ad { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid var(--line); }
+.cd .st { width: 1.5px; flex: 1; background: var(--line); }
+
+/* ── Icon circles ── */
+.ic {
   width: 56px; height: 56px; background: var(--gold); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 24px; color: var(--purple-dark);
-  position: relative; z-index: 3; margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(251, 214, 91, 0.4);
+  font-size: 24px; color: var(--purple-dark); position: relative; z-index: 3; margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(251,214,91,.4);
 }
-.overlap-top { margin-bottom: -28px; }
-.overlap-bot { margin-top: -28px; }
+.ot { margin-bottom: -28px; } /* overlap-top: icon straddles box top */
+.ob { margin-top: -28px; }   /* overlap-bot: icon straddles box bottom */
 
-/* Middle Sections */
-.mid-main { width: 340px; padding: 28px 24px; }
-.mid-long {
-  width: 480px; padding: 0; display: flex; align-items: center; text-align: left;
-}
-.mid-long .box-content { padding: 24px 24px 24px 100px; text-align: left; }
+/* ── Middle special boxes ── */
+.mid-main { width: 340px; }
+.mid-long { width: 480px; display: flex; align-items: center; }
+.mid-long .bc { padding: 24px 24px 24px 100px; text-align: left; }
 .long-circle {
   position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
   width: 90px; height: 90px; background: var(--purple-dark); border-radius: 50%;
   border: 3px solid #62289e; display: flex; align-items: center; justify-content: center;
-  z-index: 3; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  z-index: 3; box-shadow: inset 0 0 20px rgba(0,0,0,.5);
 }
-.long-circle .fa-scale-balanced { font-size: 36px; color: #a47fe0; }
+.long-circle i { font-size: 36px; color: #a47fe0; }
 
-/* Bottom Row */
-.bot-row {
-  display: flex; width: 100%; position: relative; gap: 20px;
-}
-.bot-row::before {
-  content: ''; position: absolute; top: 0; left: 16.666%; right: 16.666%;
-  border-top: 1.5px solid var(--line);
-}
-.col-3 { flex: 1; display: flex; flex-direction: column; }
-.col-3 .box { height: 150px; }
-
-/* Source Pill */
-.src-wrap { text-align: center; margin-top: 40px; }
-.src-pill {
-  background: var(--gold); color: #442100; font-size: 13px; font-weight: 700;
-  padding: 10px 40px; border-radius: 20px; display: inline-block;
-  box-shadow: 0 4px 12px rgba(251, 214, 91, 0.3);
-}
-
+/* ── Source ── */
+.src-wrap { text-align: center; margin-top: 36px; }
+.src-pill { background: var(--gold); color: #442100; font-size: 13px; font-weight: 700; padding: 10px 40px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 12px rgba(251,214,91,.3); }
 </style>
 </head>
 <body>
@@ -154,143 +141,89 @@ body { font-family: 'Manrope', sans-serif; background: var(--bg); padding: 12px;
   </div>
 
   <div class="tree">
-    
-    <!-- TOP ROW (4 boxes) -->
-    <div class="top-row">
-      <div class="col-4">
-        <div class="box">
-          <div class="wm">TAX</div>
-          <div class="box-content">
-            <div class="title">Pajak Kekayaan</div>
-            <div class="sub">Implementasi Pajak<br>atas Kekayaan</div>
-          </div>
-        </div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="arrow-up"></div>
+
+    <!-- ① TOP 4 BOXES -->
+    <div class="row-4">
+      <div>
+        <div class="box"><div class="wm">TAX</div><div class="bc"><div class="ttl">Pajak Kekayaan</div><div class="sub">Implementasi Pajak atas Kekayaan</div></div></div>
       </div>
-      <div class="col-4">
-        <div class="box">
-          <div class="wm" style="font-size: 110px;">%</div>
-          <div class="box-content">
-            <div class="title">Pelaksanaan<br><i>Tax Benefit</i></div>
-            <div class="sub">Dukungan Ekonomi<br>untuk Kelas Menengah</div>
-          </div>
-        </div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="arrow-up"></div>
+      <div>
+        <div class="box"><div class="wm" style="font-size:110px">%</div><div class="bc"><div class="ttl">Pelaksanaan<br><i>Tax Benefit</i></div><div class="sub">Dukungan Ekonomi untuk Kelas Menengah</div></div></div>
       </div>
-      <div class="col-4">
-        <div class="box">
-          <div class="wm" style="font-size: 70px;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-          <div class="box-content">
-            <div class="title">Penghapusan Pajak</div>
-            <div class="sub">Menghilangkan beban pajak bagi kelas menengah kebawah</div>
-          </div>
-        </div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="arrow-up"></div>
+      <div>
+        <div class="box"><div class="wm" style="font-size:70px"><i class="fa-solid fa-file-invoice-dollar"></i></div><div class="bc"><div class="ttl">Penghapusan Pajak</div><div class="sub">Menghilangkan beban pajak bagi kelas menengah kebawah</div></div></div>
       </div>
-      <div class="col-4">
-        <div class="box">
-          <div class="wm" style="font-size: 80px;"><i class="fa-solid fa-magnifying-glass"></i></div>
-          <div class="box-content">
-            <div class="title">Transparansi<br>Data Pajak</div>
-            <div class="sub">Keterbukaan Informasi mengenai Data Pajak di Indonesia</div>
-          </div>
-        </div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="arrow-up"></div>
+      <div>
+        <div class="box"><div class="wm" style="font-size:80px"><i class="fa-solid fa-magnifying-glass"></i></div><div class="bc"><div class="ttl">Transparansi<br>Data Pajak</div><div class="sub">Keterbukaan Informasi mengenai Data Pajak di Indonesia</div></div></div>
       </div>
     </div>
 
-    <!-- STEM DOWN -->
-    <div class="vline" style="height: 30px;"></div>
+    <!-- ② TOP CONNECTORS: 4 stems → bar (bar at BOTTOM of this row) -->
+    <div class="conn-up">
+      <div class="cu"><div class="st"></div><div class="au"></div></div>
+      <div class="cu"><div class="st"></div><div class="au"></div></div>
+      <div class="cu"><div class="st"></div><div class="au"></div></div>
+      <div class="cu"><div class="st"></div><div class="au"></div></div>
+    </div>
 
-    <!-- MID 1 -->
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <div class="icon-circle overlap-top"><i class="fa-solid fa-clipboard-list"></i></div>
+    <!-- ③ CENTER STEM DOWN TO MID 1 -->
+    <div class="vline" style="height:30px"></div>
+
+    <!-- ④ MID 1: icon overlapping top of box -->
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="ic ot"><i class="fa-solid fa-clipboard-list"></i></div>
+      <div class="box mid-main"><div class="bc" style="padding:20px 16px"><div class="ttl wh">Reformasi Fiskal yang<br>Progresif dan Akuntabel</div></div></div>
+    </div>
+
+    <div class="vline" style="height:24px"></div>
+
+    <!-- ⑤ MID 2: wide box with circle on left -->
+    <div class="box mid-long">
+      <div class="long-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+      <div class="bc"><div class="ttl wh lg">Reformasi Fiskal dan<br>Tata Kelola Pemerintahan</div></div>
+    </div>
+
+    <div class="vline" style="height:24px"></div>
+
+    <!-- ⑥ MID 3: box with icon overlapping bottom -->
+    <div style="display:flex;flex-direction:column;align-items:center">
       <div class="box mid-main">
-        <div class="box-content" style="padding: 16px;">
-          <div class="title white">Reformasi Fiskal yang<br>Progresif dan Akuntabel</div>
+        <div class="bc" style="padding:16px 16px 26px">
+          <div class="ttl wh">Ketika Oligarki<br>Menentukan Aturan</div>
+          <div class="sub" style="margin-top:6px">Memutus Siklus: Ketika Kekayaan Menentukan Aturan</div>
         </div>
+      </div>
+      <div class="ic ob"><i class="fa-solid fa-building-columns"></i></div>
+    </div>
+
+    <!-- ⑦ CENTER STEM DOWN TO BOTTOM CONNECTOR -->
+    <div class="vline" style="height:30px"></div>
+
+    <!-- ⑧ BOTTOM CONNECTORS: bar at TOP, 3 stems going down to boxes -->
+    <div class="conn-dn">
+      <div class="cd"><div class="ad"></div><div class="st"></div></div>
+      <div class="cd"><div class="ad"></div><div class="st"></div></div>
+      <div class="cd"><div class="ad"></div><div class="st"></div></div>
+    </div>
+
+    <!-- ⑨ BOTTOM 3 BOXES -->
+    <div class="row-3">
+      <div>
+        <div class="box"><div class="wm" style="font-size:80px"><i class="fa-solid fa-arrow-trend-up"></i></div><div class="bc"><div class="ttl">Partai Politik<br>Dibiayai Publik</div><div class="sub">Pendanaan Partai Politik Bersumber dari Publik</div></div></div>
+      </div>
+      <div>
+        <div class="box"><div class="wm" style="font-size:110px">&amp;</div><div class="bc"><div class="ttl">Transparansi<br>Hutang Negara</div><div class="sub">Keterbukaan Informasi Mengenai Hutang Negara</div></div></div>
+      </div>
+      <div>
+        <div class="box"><div class="wm" style="font-size:80px"><i class="fa-solid fa-arrows-rotate"></i></div><div class="bc"><div class="ttl">Reformasi Finansialisasi dan Desentralisasi Pendapatan Ekstraktif</div><div class="sub">Perubahan dalam Pengelolaan Finansial dan Desentralisasi Pendapatan dari Sumber Daya Alam</div></div></div>
       </div>
     </div>
 
-    <!-- STEM DOWN -->
-    <div class="vline" style="height: 24px;"></div>
-
-    <!-- MID 2 -->
-    <div>
-      <div class="box mid-long">
-        <div class="long-circle">
-          <i class="fa-solid fa-scale-balanced"></i>
-        </div>
-        <div class="box-content">
-          <div class="title white large">Reformasi Fiskal dan<br>Tata Kelola Pemerintahan</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEM DOWN -->
-    <div class="vline" style="height: 24px;"></div>
-
-    <!-- MID 3 -->
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <div class="box mid-main">
-        <div class="box-content" style="padding: 16px 16px 24px;">
-          <div class="title white">Ketika Oligarki<br>Menentukan Aturan</div>
-          <div class="sub" style="margin-top: 6px;">Memutus Siklus: Ketika Kekayaan<br>Menentukan Aturan</div>
-        </div>
-      </div>
-      <div class="icon-circle overlap-bot"><i class="fa-solid fa-building-columns"></i></div>
-    </div>
-
-    <!-- STEM DOWN TO BOT ROW -->
-    <div class="vline" style="height: 30px;"></div>
-
-    <!-- BOTTOM ROW (3 boxes) -->
-    <div class="bot-row">
-      <div class="col-3">
-        <div class="arrow-down"></div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="box">
-          <div class="wm" style="font-size: 80px;"><i class="fa-solid fa-arrow-trend-up"></i></div>
-          <div class="box-content">
-            <div class="title">Partai Politik<br>Dibiayai Publik</div>
-            <div class="sub">Pendanaan Partai Politik Bersumber dari Publik</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="arrow-down"></div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="box">
-          <div class="wm" style="font-size: 110px;">&</div>
-          <div class="box-content">
-            <div class="title">Transparansi<br>Hutang Negara</div>
-            <div class="sub">Keterbukaan Informasi Mengenai Hutang Negara</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="arrow-down"></div>
-        <div class="vline" style="height: 20px;"></div>
-        <div class="box" style="padding: 0 10px;">
-          <div class="wm" style="font-size: 80px;"><i class="fa-solid fa-arrows-rotate"></i></div>
-          <div class="box-content">
-            <div class="title">Reformasi Finansialisasi<br>dan Desentralisasi<br>Pendapatan Ekstraktif</div>
-            <div class="sub">Perubahan dalam Pengelolaan Finansial dan Desentralisasi Pendapatan dari Sumber Daya Alam</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div> <!-- tree -->
+  </div><!-- tree -->
 
   <div class="src-wrap">
     <div class="src-pill">Sumber: Diolah oleh peneliti</div>
   </div>
-
 </div>
 </body>
 </html>
