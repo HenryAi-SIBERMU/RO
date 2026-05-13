@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 45 — Donasi Korporasi ke Partai Politik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    :root {
+      --purple: #5d3fd3;
+      --deep-purple: #37206d;
+      --card-border: rgba(70, 48, 138, 0.2);
+      --lavender: rgba(248, 246, 255, 0.96);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: "Manrope", system-ui, sans-serif;
+      background: radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+                  radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+                  #f7f4ff;
+    }
+    .card {
+      width: min(1100px, 96vw);
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(93,63,211,0.06), transparent 45%),
+                  linear-gradient(315deg, rgba(242,181,68,0.05), transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .badge {
+      background: var(--purple);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 0 18px 18px 0;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px;
+      white-space: nowrap;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(17px, 2vw, 24px);
+      color: var(--deep-purple);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .plot-wrap {
+      background: var(--lavender);
+      border-radius: 22px;
+      padding: 20px 20px 18px;
+      border: 1px solid rgba(93,63,211,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    #plotly-g45 { width: 100%; height: 500px; }
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 14px;
+      padding: 0 8px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .legend-row {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--deep-purple);
+    }
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .map-annotation {
+      text-align: right;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--deep-purple);
+      line-height: 1.6;
+    }
+    .map-annotation b {
+      font-style: normal;
+      font-weight: 800;
+    }
+    .source {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #513c86;
+      background: #fcefd5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 700px) {
+      .card { padding: 32px 20px 36px; }
+      .badge { margin-left: -20px; }
+      #plotly-g45 { height: 320px; }
+      .map-annotation { font-size: 13px; }
+      .bottom-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 45.</div>
+      <h1>Donasi Korporasi ke Partai Politik</h1>
+    </header>
+
+    <div class="plot-wrap">
+      <div id="plotly-g45"></div>
+      <div class="bottom-row">
+        <div class="legend-row">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#f0ab00;"></div>
+            Tidak dilarang
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#6225a0;"></div>
+            Dilarang
+          </div>
+        </div>
+        <div class="map-annotation">
+          Pendanaan langsung dari korporasi<br>
+          kepada partai politik <b>dilarang</b><br>
+          di <b>48 dari 172 negara.</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="source">Sumber: The International Institute for Democracy and Electoral Assistance</div>
+  </div>
+
+  <script>
+    /* ── Countries where corporate donations ARE BANNED (Dilarang) ── */
+    const banned = [
+      /* Americas */
+      'USA','CAN','MEX','GTM','BLZ','HND','SLV','NIC','CRI','PAN',
+      'CUB','HTI','DOM','JAM','TTO','BRB','BHS','GRD','LCA','VCT',
+      'BRA','ARG','CHL','COL','PER','BOL','URY','PRY','ECU','VEN','GUY','SUR',
+      /* Europe */
+      'FRA','DEU','AUT','BEL','NLD','NOR','SWE','FIN','DNK','ISL',
+      'IRL','GBR','ESP','PRT','ITA','CHE','LUX','MLT','GRC',
+      'SVN','HRV','BIH','SRB','MNE','ALB','MKD',
+      'BGR','ROU','CZE','SVK','HUN','POL',
+      'EST','LVA','LTU','BLR','MDA','UKR','RUS',
+      'ARM','GEO','AZE','KGZ','LIE','AND','SMR',
+      /* Asia/Other */
+      'KOR','TUR','MNG'
+    ];
+
+    /* ── Countries where corporate donations are NOT BANNED (Tidak Dilarang) ── */
+    const notBanned = [
+      /* Africa */
+      'NGA','EGY','MAR','DZA','TUN','LBY','SDN','SSD','TCD','NER',
+      'MLI','MRT','GNB','GIN','SLE','LBR','CIV','BFA','GHA','TGO','BEN',
+      'CMR','CAF','COD','COG','GAB','GNQ','STP',
+      'AGO','ZMB','ZWE','MOZ','TZA','UGA','RWA','BDI',
+      'SOM','ERI','DJI','MDG','MWI','NAM','BWA','ZAF','LSO','SWZ',
+      'COM','MUS','SYC','CPV','GMB','ETH','KEN','SEN',
+      /* Middle East */
+      'SAU','ARE','QAT','KWT','BHR','OMN','JOR','LBN','SYR','IRQ',
+      'IRN','YEM','ISR','PSE',
+      /* Central Asia */
+      'KAZ','UZB','TKM','TJK',
+      /* South Asia */
+      'IND','PAK','BGD','LKA','AFG','NPL','BTN','MDV',
+      /* SE Asia */
+      'THA','VNM','KHM','LAO','MMR','PHL','IDN','MYS','SGP','BRN','TLS',
+      /* East Asia */
+      'CHN','TWN','JPN',
+      /* Pacific */
+      'AUS','NZL','PNG','FJI','VUT','WSM','TON','SLB','PLW','FSM'
+    ];
+
+    const locations  = [...banned, ...notBanned];
+    const zValues    = [...banned.map(() => 1), ...notBanned.map(() => 0)];
+    const hoverData  = [...banned.map(() => 'Dilarang'), ...notBanned.map(() => 'Tidak Dilarang')];
+
+    const trace = {
+      type: 'choropleth',
+      locationmode: 'ISO-3',
+      locations: locations,
+      z: zValues,
+      colorscale: [[0, '#f0ab00'], [1, '#6225a0']],
+      zmin: 0,
+      zmax: 1,
+      showscale: false,
+      marker: {
+        line: { color: 'rgba(255,255,255,0.7)', width: 0.6 }
+      },
+      customdata: hoverData,
+      hovertemplate: '<b>%{location}</b>: %{customdata}<extra></extra>',
+      hoverlabel: {
+        bgcolor: 'rgba(47,33,92,0.92)',
+        bordercolor: 'transparent',
+        font: { family: 'Manrope', size: 13, color: '#fff' }
+      }
+    };
+
+    const layout = {
+      margin: { t: 0, r: 0, b: 0, l: 0 },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor:  'rgba(0,0,0,0)',
+      geo: {
+        showframe: false,
+        showcoastlines: true,
+        coastlinecolor: 'rgba(255,255,255,0.8)',
+        coastlinewidth: 0.7,
+        showland: true,
+        landcolor: '#c8bfe8',   /* soft purple-gray for no-data countries */
+        showocean: true,
+        oceancolor: '#eeeafc',
+        showlakes: false,
+        showborders: true,
+        bordercolor: 'rgba(255,255,255,0.8)',
+        borderwidth: 0.5,
+        showcountries: true,
+        countrycolor: 'rgba(255,255,255,0.7)',
+        countrywidth: 0.5,
+        projection: { type: 'natural earth' },
+        bgcolor: 'rgba(0,0,0,0)',
+        lataxis: { range: [-60, 85] }
+      }
+    };
+
+    Plotly.newPlot('plotly-g45', [trace], layout,
+      { displayModeBar: false, responsive: true });
+  </script>
+</body>
+</html>
