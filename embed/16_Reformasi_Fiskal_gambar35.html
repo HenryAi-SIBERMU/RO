@@ -432,6 +432,25 @@
       document.querySelectorAll(`[data-id="${id}"]`).forEach(el => {
         el.classList.toggle('active', on);
       });
+
+      const s = SEGMENTS.find(x => x.id === id);
+      if (!s || !s._line) return;
+
+      if (on) {
+        // Re-run the draw animation faster when hovered
+        s._line.style.animation = 'none';
+        s._dot.style.animation = 'none';
+        void s._line.offsetWidth; // trigger reflow
+        s._line.style.animation = 'drawLine 0.6s ease forwards';
+        s._dot.style.animation = 'fadeInDot 0.3s ease 0.5s forwards';
+        s._dot.style.opacity = '0';
+      } else {
+        // Keep them visible when unhovered
+        s._line.style.animation = 'none';
+        s._dot.style.animation = 'none';
+        s._line.style.strokeDashoffset = '0';
+        s._dot.style.opacity = '1';
+      }
     }
     function bind(el) {
       const id = el.dataset.id;
