@@ -138,9 +138,9 @@
       stroke: var(--purple);
       stroke-width: 2;
       fill: none;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: drawLine 1.5s ease forwards;
+      stroke-dasharray: var(--len, 1000);
+      stroke-dashoffset: var(--len, 1000);
+      animation: drawLine 0.8s ease forwards;
       transition: stroke-width 200ms ease, filter 200ms ease;
     }
     @keyframes drawLine {
@@ -152,7 +152,7 @@
       stroke: #fff;
       stroke-width: 2.5;
       opacity: 0;
-      animation: fadeInDot 0.5s ease 1.2s forwards;
+      animation: fadeInDot 0.2s ease 0.8s forwards;
       transition: r 200ms ease, fill 200ms ease;
     }
     @keyframes fadeInDot {
@@ -418,6 +418,7 @@
         s._dot.setAttribute('cy', dY);
         s._line.setAttribute('d',
           `M ${edge.x} ${edge.y} L ${radial.x} ${radial.y} L ${dX} ${dY}`);
+        s._line.style.setProperty('--len', s._line.getTotalLength());
       });
     }
 
@@ -439,12 +440,12 @@
       if (line) {
         line.style.animation = 'none';
         void line.getBoundingClientRect(); // trigger reflow for SVG
-        line.style.animation = 'drawLine 1.2s ease forwards';
+        line.style.animation = 'drawLine 0.8s ease forwards';
       }
       if (dot) {
         dot.style.animation = 'none';
         void dot.getBoundingClientRect(); // trigger reflow for SVG
-        dot.style.animation = 'fadeInDot 0.3s ease 1s forwards';
+        dot.style.animation = 'fadeInDot 0.2s ease 0.8s forwards';
       }
     }
     function bind(el) {
