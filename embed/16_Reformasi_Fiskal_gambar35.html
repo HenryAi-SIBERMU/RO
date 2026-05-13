@@ -10,15 +10,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --purple: #5d3fd3;
-      --deep-purple: #37206d;
+      --purple: #7b43b4;
+      --deep-purple: #4a2574;
       --card-border: rgba(70,48,138,0.2);
       --lavender: rgba(248,246,255,0.96);
-      --c-kekayaan:  #f59e0b;
-      --c-kontrol:   #6d28d9;
-      --c-pemilu:    #9333ea;
-      --c-kebijakan: #4c1d95;
-      --c-dampak:    #a855f7;
+      --c-kekayaan:  #f2a93b;
+      --c-kontrol:   #4a2574;
+      --c-pemilu:    #7b43b4;
+      --c-kebijakan: #8c56b4;
+      --c-dampak:    #9c3484;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -138,16 +138,27 @@
       stroke: var(--purple);
       stroke-width: 2;
       fill: none;
-      transition: stroke-width 200ms ease;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 1.5s ease forwards;
+      transition: stroke-width 200ms ease, filter 200ms ease;
     }
-    .conn-line.active { stroke-width: 3; }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+    .conn-line.active { stroke-width: 3; filter: drop-shadow(0 2px 4px rgba(123, 67, 180, 0.4)); }
     .conn-dot {
       fill: var(--purple);
       stroke: #fff;
       stroke-width: 2.5;
-      transition: r 200ms ease;
+      opacity: 0;
+      animation: fadeInDot 0.5s ease 1.2s forwards;
+      transition: r 200ms ease, fill 200ms ease;
     }
-    .conn-dot.active { r: 8; }
+    @keyframes fadeInDot {
+      to { opacity: 1; }
+    }
+    .conn-dot.active { r: 8; fill: var(--deep-purple); }
 
     /* HTML Text Blocks */
     .tb {
@@ -159,28 +170,29 @@
       cursor: pointer;
     }
     .tb h3 {
-      font-size: 14px; font-weight: 800;
-      color: var(--deep-purple);
-      margin-bottom: 4px;
+      font-size: 16px; font-weight: 800;
+      color: var(--purple);
+      margin-bottom: 6px;
       transition: color 200ms ease;
     }
     .tb ul { list-style: none; padding-left: 12px; }
     .tb ul li {
-      font-size: 12px; font-weight: 500;
-      color: #4a3272;
+      font-size: 13.5px; font-weight: 500;
+      color: #222222;
       line-height: 1.7;
       position: relative;
     }
     .tb ul li::before {
       content: "•";
       position: absolute; left: -10px;
-      color: var(--purple);
+      color: #222222;
+      font-weight: 900;
     }
     .tb.active {
-      background: rgba(93,63,211,0.07);
+      background: rgba(123, 67, 180, 0.08);
       transform: translateY(-2px);
     }
-    .tb.active h3 { color: var(--purple); }
+    .tb.active h3 { color: var(--deep-purple); }
 
     /* Positions aligned to each segment's radial endpoint Y
        kekayaan/kontrol radial.y ≈ 129 → top=(129-16)/700=16%
