@@ -11,6 +11,7 @@ _G35 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar35.html"
 _G36 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar36.html"
 _T4  = BASE_DIR / "embed" / "16_Reformasi_Fiskal_tabel4.html"
 _G37 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar37.html"
+_G38 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar38.html"
 
 st.set_page_config(page_title="Reformasi Fiskal", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -53,5 +54,10 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 37"):
   style="border-radius:32px; background:#f8f6fd;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Reformasi Fiskal melalui Tata Kelola Pajak", "Gambar 38 — Hal. 69")
-st.info("⏳ Data belum diinput. Lihat PDF hal. 69.")
-chart_footer("CELIOS (2026)")
+components.html(_G38.read_text(encoding="utf-8"), height=800, scrolling=False)
+chart_footer("Analisis Peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 38"):
+    st.code("""<!-- Gambar 38: Reformasi Fiskal melalui Tata Kelola Pajak -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar38.html"
+  width="100%" height="800" frameborder="0"
+  style="border-radius:32px; background:#f8f6fd;" loading="lazy"></iframe>""", language="html")

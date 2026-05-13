@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Gambar 38 — Reformasi Fiskal melalui Tata Kelola Pajak</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --purp-box: #523187;
+  --purp-dark: #371e62;
+  --purp-text: #45247c;
+  --yell-box: #f8d548;
+  --yell-dark: #e8bd24;
+  --yell-text: #fbd65b;
+  --white: #ffffff;
+  --sub-purp: #e3d2fa;
+  --bg: #f8f6fd;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Manrope', sans-serif; background: var(--bg); padding: 12px; }
+
+.wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px 32px;
+  box-shadow: 0 4px 24px rgba(82,49,135,.08);
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+/* Header */
+.hdr {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 36px;
+  padding-bottom: 16px; border-bottom: 2px solid #EDE9FC;
+}
+.badge { background: #613b99; color: #fff; font-size: 15px; font-weight: 800; padding: 7px 18px; border-radius: 8px; white-space: nowrap; }
+.hdr h1 { font-size: 18px; font-weight: 800; color: #613b99; }
+
+/* Tree Layout */
+.tree {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 0 20px 20px;
+}
+
+/* Pill Container */
+.pill {
+  position: relative;
+  width: 630px;
+  height: 110px;
+  border-radius: 55px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+}
+.pill:hover {
+  transform: translateX(12px) translateY(-3px);
+  box-shadow: -6px 14px 28px rgba(82,49,135,.15);
+}
+
+/* Staggered margins */
+.p-1 { margin-left: 0; }
+.p-2 { margin-left: 80px; }
+.p-3 { margin-left: 160px; }
+.p-4 { margin-left: 240px; }
+
+/* Themes */
+.pill.purple { background: var(--purp-box); }
+.pill.yellow { background: var(--yell-box); }
+
+/* SVG Background Left */
+.pill-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 220px;
+  height: 110px;
+  z-index: 1;
+}
+
+/* Tech Pattern SVG Right */
+.tech-pattern {
+  position: absolute;
+  top: 30px; right: 30px;
+  width: 120px; height: 50px;
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Pill Content */
+.pill-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Icon Area */
+.icon-area {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pill.purple .icon-area { color: var(--yell-text); }
+.pill.yellow .icon-area { color: var(--purp-dark); }
+
+/* Custom Composite Icons */
+.comp-icon { position: relative; display: flex; align-items: center; justify-content: center; }
+
+/* Text Area */
+.text-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 30px;
+}
+.ttl { font-size: 19px; font-weight: 800; margin-bottom: 4px; line-height: 1.2; letter-spacing: 0.2px; }
+.sub { font-size: 13.5px; font-weight: 500; line-height: 1.35; letter-spacing: 0.1px; }
+
+.pill.purple .ttl { color: var(--yell-text); }
+.pill.purple .sub { color: var(--sub-purp); }
+.pill.yellow .ttl { color: var(--purp-dark); }
+.pill.yellow .sub { color: var(--purp-text); font-weight: 600; }
+
+/* Source */
+.src-wrap { text-align: center; margin-top: 40px; }
+.src-pill { background: var(--yell-box); color: #442100; font-size: 13px; font-weight: 700; padding: 10px 60px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 12px rgba(232,189,36,.3); }
+
+/* Responsive scale down for smaller screens */
+@media (max-width: 940px) {
+  .wrap { overflow-x: auto; }
+  .tree { min-width: 900px; } /* forces scroll if screen is too small */
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <span class="badge">Gambar 38.</span>
+    <h1>Reformasi Fiskal melalui Tata Kelola Pajak</h1>
+  </div>
+
+  <div class="tree">
+
+    <!-- Card 1: Purple -->
+    <div class="pill p-1 purple">
+      <svg class="pill-bg" viewBox="0 0 220 110" preserveAspectRatio="none">
+        <!-- inner fill chevron -->
+        <polygon points="0,0 165,0 190,55 165,110 0,110" fill="var(--purp-dark)" />
+        <!-- yellow border stroke along the chevron edge -->
+        <polyline points="165,0 190,55 165,110" fill="none" stroke="var(--yell-box)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <svg class="tech-pattern" viewBox="0 0 100 50" style="color:var(--white);">
+        <circle cx="90" cy="15" r="2" fill="currentColor"/><line x1="90" y1="15" x2="40" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <circle cx="80" cy="35" r="2" fill="currentColor"/><line x1="80" y1="35" x2="20" y2="35" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+      </svg>
+      
+      <div class="pill-content">
+        <div class="icon-area">
+          <div class="comp-icon" style="width: 70px; height: 60px;">
+            <i class="fa-solid fa-file-invoice" style="font-size: 54px; position:absolute; right: -5px; top: -5px;"></i>
+            <div style="position:absolute; right: 6px; top: 8px; font-size:13px; font-weight:900; color:var(--purp-dark); letter-spacing:0.5px;">TAX</div>
+            <i class="fa-solid fa-boxes-stacked" style="font-size: 38px; position:absolute; left: -10px; bottom: -8px; filter: drop-shadow(2px -2px 0 var(--purp-dark));"></i>
+          </div>
+        </div>
+        <div class="text-area">
+          <div class="ttl">Pajak Kekayaan</div>
+          <div class="sub">Menerapkan pajak kekayaan untuk kelompok<br>ultra-rich</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Yellow -->
+    <div class="pill p-2 yellow">
+      <svg class="pill-bg" viewBox="0 0 220 110" preserveAspectRatio="none">
+        <polygon points="0,0 165,0 190,55 165,110 0,110" fill="var(--yell-dark)" />
+        <polyline points="165,0 190,55 165,110" fill="none" stroke="var(--purp-dark)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <svg class="tech-pattern" viewBox="0 0 100 50" style="color:var(--purp-text);">
+        <circle cx="90" cy="15" r="2" fill="currentColor"/><line x1="90" y1="15" x2="40" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <circle cx="80" cy="35" r="2" fill="currentColor"/><line x1="80" y1="35" x2="20" y2="35" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+      </svg>
+
+      <div class="pill-content">
+        <div class="icon-area">
+          <div class="comp-icon" style="width: 60px; height: 60px;">
+            <i class="fa-solid fa-heart" style="font-size: 26px; z-index:2; margin-top:2px;"></i>
+            <i class="fa-solid fa-circle-notch" style="font-size: 60px; position:absolute; z-index:1; opacity:0.8;"></i>
+            <!-- Small currency symbols around -->
+            <i class="fa-solid fa-dollar-sign" style="font-size: 14px; position:absolute; top: -4px;"></i>
+            <i class="fa-solid fa-yen-sign" style="font-size: 14px; position:absolute; bottom: -4px;"></i>
+            <i class="fa-solid fa-euro-sign" style="font-size: 14px; position:absolute; left: -8px;"></i>
+            <i class="fa-solid fa-sterling-sign" style="font-size: 14px; position:absolute; right: -8px;"></i>
+          </div>
+        </div>
+        <div class="text-area">
+          <div class="ttl">Manfaat Pajak</div>
+          <div class="sub">Menerapkan manfaat pajak untuk kelas<br>menengah</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Purple -->
+    <div class="pill p-3 purple">
+      <svg class="pill-bg" viewBox="0 0 220 110" preserveAspectRatio="none">
+        <polygon points="0,0 165,0 190,55 165,110 0,110" fill="var(--purp-dark)" />
+        <polyline points="165,0 190,55 165,110" fill="none" stroke="var(--yell-box)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <svg class="tech-pattern" viewBox="0 0 100 50" style="color:var(--white);">
+        <circle cx="90" cy="15" r="2" fill="currentColor"/><line x1="90" y1="15" x2="40" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <circle cx="80" cy="35" r="2" fill="currentColor"/><line x1="80" y1="35" x2="20" y2="35" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+      </svg>
+
+      <div class="pill-content">
+        <div class="icon-area">
+          <div class="comp-icon" style="width: 70px; height: 60px;">
+            <i class="fa-solid fa-link-slash" style="font-size: 44px; position:absolute; left: -4px; bottom: 0;"></i>
+            <i class="fa-solid fa-arrow-trend-up" style="font-size: 38px; position:absolute; right: 0; top: 0; filter: drop-shadow(-2px 2px 0 var(--purp-dark));"></i>
+          </div>
+        </div>
+        <div class="text-area">
+          <div class="ttl">Penghapusan Pajak</div>
+          <div class="sub">Mengurangi beban pajak untuk kelas menengah<br>bawah</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Yellow -->
+    <div class="pill p-4 yellow">
+      <svg class="pill-bg" viewBox="0 0 220 110" preserveAspectRatio="none">
+        <polygon points="0,0 165,0 190,55 165,110 0,110" fill="var(--yell-dark)" />
+        <polyline points="165,0 190,55 165,110" fill="none" stroke="var(--purp-dark)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <svg class="tech-pattern" viewBox="0 0 100 50" style="color:var(--purp-text);">
+        <circle cx="90" cy="15" r="2" fill="currentColor"/><line x1="90" y1="15" x2="40" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <circle cx="80" cy="35" r="2" fill="currentColor"/><line x1="80" y1="35" x2="20" y2="35" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 2"/>
+      </svg>
+
+      <div class="pill-content">
+        <div class="icon-area">
+          <div class="comp-icon" style="width: 80px; height: 60px;">
+            <i class="fa-solid fa-server" style="font-size: 50px; position:absolute; left: 16px; top: 2px;"></i>
+            <div style="position:absolute; right: -4px; bottom: -6px; background:var(--yell-dark); border-radius:50%; width:34px; height:34px; display:flex; align-items:center; justify-content:center;">
+              <i class="fa-solid fa-magnifying-glass" style="font-size: 22px;"></i>
+            </div>
+            <div style="position:absolute; left: -14px; top: 2px; font-size: 11px; line-height: 1.1; font-weight:900; font-family:monospace; letter-spacing:1px; text-align:right;">
+              01<br>10<br>01<br>10<br>01
+            </div>
+          </div>
+        </div>
+        <div class="text-area">
+          <div class="ttl">Transparansi Data</div>
+          <div class="sub">Keterbukaan data pajak di Indonesia</div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- tree -->
+
+  <div class="src-wrap">
+    <div class="src-pill">Sumber: Analisis Peneliti</div>
+  </div>
+
+</div>
+
+<script>
+// Simple staggered entrance animation
+document.querySelectorAll('.pill').forEach((pill, idx) => {
+  pill.style.opacity = '0';
+  pill.style.transform = 'translateX(-20px)';
+  setTimeout(() => {
+    pill.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    pill.style.opacity = '1';
+    pill.style.transform = 'translateX(0)';
+    
+    // Restore hover transition after entrance
+    setTimeout(() => {
+      pill.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s';
+    }, 600);
+  }, 100 + (idx * 150));
+});
+</script>
+</body>
+</html>
