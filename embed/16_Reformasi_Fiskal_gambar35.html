@@ -438,12 +438,12 @@
       const dot = document.querySelector(`.conn-dot[data-id="${id}"]`);
       if (line) {
         line.style.animation = 'none';
-        void line.offsetWidth; // trigger reflow
+        void line.getBoundingClientRect(); // trigger reflow for SVG
         line.style.animation = 'drawLine 0.6s ease forwards';
       }
       if (dot) {
         dot.style.animation = 'none';
-        void dot.offsetWidth; // trigger reflow
+        void dot.getBoundingClientRect(); // trigger reflow for SVG
         dot.style.animation = 'fadeInDot 0.2s ease 0.4s forwards';
       }
     }
