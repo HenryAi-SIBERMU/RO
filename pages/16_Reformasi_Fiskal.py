@@ -43,13 +43,13 @@ with st.expander("🔗 Kode Embed WordPress — Tabel 4"):
   width="100%" height="820" frameborder="0"
   style="border-radius:32px; background:#f0ecfb;" loading="lazy"></iframe>""", language="html")
 
-chart_header("Rekomendasi dalam Mengurangi Ketimpangan dan Pengaruh Oligarki", "Gambar 37 — Hal. 68")
-components.html(_G37.read_text(encoding="utf-8"), height=760, scrolling=False)
+chart_header("Rekomendasi dalam mengurangi ketimpangan dan pengaruh oligarki", "Gambar 37 — Hal. 68")
+components.html(_G37.read_text(encoding="utf-8"), height=1020, scrolling=False)
 chart_footer("Diolah oleh peneliti")
 with st.expander("🔗 Kode Embed WordPress — Gambar 37"):
-    st.code("""<!-- Gambar 37: Rekomendasi Mengurangi Ketimpangan -->
+    st.code("""<!-- Gambar 37: Rekomendasi Mengurangi Ketimpangan & Pengaruh Oligarki -->
 <iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar37.html"
-  width="100%" height="760" frameborder="0"
+  width="100%" height="1020" frameborder="0"
   style="border-radius:32px; background:#f0ecfb;" loading="lazy"></iframe>""", language="html")
 
 chart_header("Reformasi Fiskal melalui Tata Kelola Pajak", "Gambar 38 — Hal. 69")

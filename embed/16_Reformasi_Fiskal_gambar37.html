@@ -3,99 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Gambar 37 — Rekomendasi Mengurangi Ketimpangan dan Pengaruh Oligarki</title>
+<title>Gambar 37 — Rekomendasi Mengurangi Ketimpangan & Pengaruh Oligarki</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--purple:#5D3FD3;--gold:#F4A535;--dark:#2d1a6e;--sub:#6b5e8e;--border:#EDE9FC}
+:root{--purple:#5D3FD3;--purple-d:#3a1f9c;--gold:#F4A535;--bg:#faf8ff;--border:#EDE9FC}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Manrope',sans-serif;background:#f0ecfb;padding:12px}
 
-.card{background:#fff;border-radius:20px;padding:24px 20px 28px;
-  box-shadow:0 4px 24px rgba(93,63,211,.1);max-width:860px;margin:0 auto}
-
-/* Header */
-.hdr{display:flex;align-items:center;gap:12px;margin-bottom:24px;
-  padding-bottom:14px;border-bottom:2px solid var(--border)}
+.card{background:#fff;border-radius:20px;padding:22px 20px 24px;
+  box-shadow:0 4px 24px rgba(93,63,211,.1);max-width:820px;margin:0 auto}
+.hdr{display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  padding-bottom:12px;border-bottom:2px solid var(--border)}
 .badge{background:var(--purple);color:#fff;font-size:13px;font-weight:700;
   padding:5px 14px;border-radius:8px;white-space:nowrap}
-.hdr h1{font-size:15px;font-weight:800;color:var(--purple)}
+.hdr h1{font-size:16px;font-weight:800;color:var(--purple)}
 
-/* Main flow container */
-.flow{display:flex;flex-direction:column;align-items:center;gap:0}
+/* Diagram */
+.diagram{position:relative;width:100%}
+.svg-overlay{position:absolute;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:1;overflow:visible}
+.row{display:grid;gap:10px;position:relative;z-index:2}
+.row-4{grid-template-columns:repeat(4,1fr)}
+.row-3{grid-template-columns:repeat(3,1fr)}
 
-/* ── Recommendation card ── */
-.rec{background:var(--purple);border-radius:14px;padding:14px 12px 16px;
-  cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:center;
-  position:relative}
-.rec:hover,.rec.active{transform:translateY(-3px) scale(1.02);
-  box-shadow:0 8px 24px rgba(93,63,211,.3)}
-.rec-title{font-size:12.5px;font-weight:800;color:var(--gold);margin-bottom:5px;line-height:1.3}
-.rec-sub  {font-size:10px;color:rgba(255,255,255,.8);line-height:1.4}
+/* Leaf card */
+.leaf{background:var(--purple);color:#fff;border-radius:14px;padding:14px 12px;
+  text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;
+  display:flex;flex-direction:column;justify-content:center;min-height:130px}
+.leaf:hover,.leaf.active{transform:translateY(-2px);box-shadow:0 8px 24px rgba(93,63,211,.35)}
+.leaf .lt{font-size:12.5px;font-weight:800;color:var(--gold);line-height:1.25;margin-bottom:6px}
+.leaf .lt em{font-style:italic}
+.leaf .ls{font-size:9.5px;font-weight:600;line-height:1.35;color:#fff;opacity:.95}
 
-/* ── Convergence (4 cards → 1) ── */
-.convg{display:flex;width:100%;gap:10px}
-.cb{flex:1;position:relative;padding-bottom:30px;display:flex;flex-direction:column;align-items:center}
-/* vertical line down from card to H-bar */
-.cb::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:30px;border-left:2px solid var(--purple)}
-/* horizontal bar piece at bottom */
-.cb::before{content:'';position:absolute;bottom:0;left:0;right:0;height:0;border-bottom:2px solid var(--purple)}
-.cb:first-child::before{left:50%}
-.cb:last-child::before {right:50%}
+/* Branch (sub-hub) */
+.branch-wrap{position:relative;display:flex;justify-content:center;z-index:2}
+.branch-wrap.top{margin-top:52px}
+.branch-wrap.bot{margin-top:14px}
+.branch{background:var(--purple);color:#fff;border-radius:14px;
+  padding:18px 26px;text-align:center;max-width:340px;cursor:pointer;
+  transition:box-shadow .2s}
+.branch:hover,.branch.active{box-shadow:0 8px 24px rgba(93,63,211,.35)}
+.branch .bt{font-size:13.5px;font-weight:800;color:var(--gold);line-height:1.3}
+.branch .bs{font-size:9px;font-weight:600;opacity:.85;margin-top:4px;line-height:1.3}
+.branch-icon{position:absolute;width:44px;height:44px;border-radius:50%;
+  background:var(--gold);display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--purple-d);left:50%;transform:translateX(-50%);
+  z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.branch-wrap.top .branch-icon{top:-22px}
+.branch-wrap.bot .branch-icon{bottom:-22px}
 
-/* ── Gold icon node ── */
-.inode{width:54px;height:54px;border-radius:50%;background:var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;color:#fff;flex-shrink:0;
-  box-shadow:0 4px 14px rgba(244,165,53,.4);
-  transition:transform .2s}
-.inode:hover{transform:scale(1.1)}
+/* Center hub */
+.hub-wrap{display:flex;justify-content:center;margin-top:20px;position:relative;z-index:2}
+.hub{background:var(--purple);color:#fff;border-radius:18px;padding:18px 24px;
+  display:flex;align-items:center;gap:16px;max-width:560px;width:100%;
+  cursor:pointer;transition:box-shadow .2s}
+.hub:hover,.hub.active{box-shadow:0 8px 28px rgba(93,63,211,.4)}
+.hub-emblem{width:62px;height:62px;border-radius:50%;background:var(--purple-d);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:24px;color:var(--gold)}
+.hub h2{font-size:18px;font-weight:900;color:#fff;line-height:1.25}
 
-/* ── Vertical connector stems ── */
-.vstep{width:2px;background:var(--purple);margin:0 auto;position:relative;flex-shrink:0}
-.vstep.h16{height:16px}.vstep.h24{height:24px}.vstep.h32{height:32px}
-/* Arrowhead pointing down */
-.vstep.arrow::after{
-  content:'';position:absolute;bottom:-8px;left:-6px;
-  border-left:7px solid transparent;border-right:7px solid transparent;
-  border-top:9px solid var(--purple)
-}
-
-/* ── Central box ── */
-.cbox{background:var(--purple);border-radius:14px;padding:16px 24px;
-  text-align:center;width:70%;color:#fff;font-size:13.5px;font-weight:800;line-height:1.4;
-  box-shadow:0 4px 14px rgba(93,63,211,.2)}
-
-/* ── Banner ── */
-.banner{display:flex;align-items:center;width:90%;border-radius:20px;overflow:hidden;
-  background:linear-gradient(135deg,#3d28a8,var(--purple));
-  box-shadow:0 6px 20px rgba(93,63,211,.3)}
-.banner-icon{background:rgba(255,255,255,.12);width:86px;height:86px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--gold)}
-.banner-text{padding:18px 22px;color:#fff;font-size:19px;font-weight:900;line-height:1.3}
-
-/* ── Middle connector box (lighter) ── */
-.midbox{background:#7B5EA7;border-radius:14px;padding:14px 24px;
-  text-align:center;width:58%;color:#fff}
-.midbox-title{font-size:13px;font-weight:800;line-height:1.3;margin-bottom:4px}
-.midbox-sub  {font-size:10px;opacity:.75;line-height:1.3}
-
-/* ── Branch (1 → 3 cards) ── */
-.brch{display:flex;width:100%;gap:10px}
-.bd{flex:1;position:relative;padding-top:30px;display:flex;flex-direction:column;align-items:center}
-/* vertical line down from H-bar to card */
-.bd::before{content:'';position:absolute;top:0;left:50%;width:0;height:30px;border-left:2px solid var(--purple)}
-/* horizontal bar piece at top */
-.bd::after{content:'';position:absolute;top:0;left:0;right:0;height:0;border-top:2px solid var(--purple)}
-.bd:first-child::after{left:50%}
-.bd:last-child::after {right:50%}
-/* arrowhead on each branch vertical line */
-.bd::before{content:'';position:absolute;top:0;left:50%;width:0;height:22px;border-left:2px solid var(--purple)}
+/* Spacing for lower branch */
+.lower-gap{height:30px}
 
 /* Source */
-.src-wrap{text-align:center;margin-top:20px}
-.src{background:#fcefd5;color:#513c86;font-size:12px;font-weight:600;
-  border-radius:16px;padding:7px 22px;display:inline-block}
+.src-wrap{margin-top:18px;text-align:center}
+.src{background:var(--gold);color:var(--purple-d);font-size:12px;font-weight:700;
+  border-radius:12px;padding:8px 24px;display:inline-block;width:100%;max-width:680px}
+
+/* Connector lines */
+.conn-line{fill:none;stroke:var(--purple-d);stroke-width:1.8}
+.conn-line.dim{opacity:.35}
+.conn-line.hi {opacity:1;stroke-width:2.4}
 </style>
 </head>
 <body>
@@ -105,99 +85,166 @@ body{font-family:'Manrope',sans-serif;background:#f0ecfb;padding:12px}
   <h1>Rekomendasi dalam mengurangi ketimpangan dan pengaruh oligarki</h1>
 </div>
 
-<div class="flow">
+<div class="diagram" id="diagram">
+  <svg class="svg-overlay" id="connSvg" preserveAspectRatio="none">
+    <defs>
+      <marker id="arrUp" viewBox="0 0 10 10" refX="5" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,8 L5,1 L10,8 Z" fill="#3a1f9c"/>
+      </marker>
+      <marker id="arrDown" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,2 L5,9 L10,2 Z" fill="#3a1f9c"/>
+      </marker>
+    </defs>
+  </svg>
 
-  <!-- ── TOP 4: Rekomendasi Reformasi Fiskal ── -->
-  <div class="convg">
-    <div class="cb">
-      <div class="rec" data-id="pajak-kekayaan">
-        <div class="rec-title">Pajak Kekayaan</div>
-        <div class="rec-sub">Implementasi Pajak atas Kekayaan</div>
-      </div>
+  <!-- Top leaves -->
+  <div class="row row-4">
+    <div class="leaf" data-id="t1">
+      <div class="lt">Pajak Kekayaan</div>
+      <div class="ls">Implementasi Pajak atas Kekayaan</div>
     </div>
-    <div class="cb">
-      <div class="rec" data-id="tax-benefit">
-        <div class="rec-title">Pelaksanaan <em>Tax Benefit</em></div>
-        <div class="rec-sub">Dukungan Ekonomi untuk Kelas Menengah</div>
-      </div>
+    <div class="leaf" data-id="t2">
+      <div class="lt">Pelaksanaan<br><em>Tax Benefit</em></div>
+      <div class="ls">Dukungan Ekonomi untuk Kelas Menengah</div>
     </div>
-    <div class="cb">
-      <div class="rec" data-id="hapus-pajak">
-        <div class="rec-title">Penghapusan Pajak</div>
-        <div class="rec-sub">Menghilangkan beban pajak bagi kelas menengah kebawah</div>
-      </div>
+    <div class="leaf" data-id="t3">
+      <div class="lt">Penghapusan Pajak</div>
+      <div class="ls">Menghilangkan beban pajak bagi kelas menengah kebawah</div>
     </div>
-    <div class="cb">
-      <div class="rec" data-id="trans-pajak">
-        <div class="rec-title">Transparansi Data Pajak</div>
-        <div class="rec-sub">Keterbukaan Informasi mengenai Data Pajak di Indonesia</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- converge stem → gold icon (tax) -->
-  <div class="vstep h16"></div>
-  <div class="inode"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-  <div class="vstep h24 arrow"></div>
-
-  <!-- Central reform card -->
-  <div class="cbox">Reformasi Fiskal yang Progresif dan Akuntabel</div>
-  <div class="vstep h24 arrow"></div>
-
-  <!-- Banner -->
-  <div class="banner">
-    <div class="banner-icon"><i class="fa-solid fa-handshake"></i></div>
-    <div class="banner-text">Reformasi Fiskal dan<br>Tata Kelola Pemerintahan</div>
-  </div>
-  <div class="vstep h24 arrow"></div>
-
-  <!-- Mid box: Ketika Oligarki -->
-  <div class="midbox">
-    <div class="midbox-title">Ketika Oligarki Menentukan Aturan</div>
-    <div class="midbox-sub">Memutus Siklus: Ketika Kekayaan Menentukan Aturan</div>
-  </div>
-  <div class="vstep h16 arrow"></div>
-
-  <!-- Gold icon (government) -->
-  <div class="inode"><i class="fa-solid fa-landmark"></i></div>
-
-  <!-- ── BOTTOM 3: Rekomendasi Tata Kelola ── -->
-  <div class="brch">
-    <div class="bd">
-      <div class="rec" data-id="parpol-publik">
-        <div class="rec-title">Partai Politik Dibiayai Publik</div>
-        <div class="rec-sub">Pendanaan Partai Politik Bersumber dari Publik</div>
-      </div>
-    </div>
-    <div class="bd">
-      <div class="rec" data-id="trans-hutang">
-        <div class="rec-title">Transparansi Hutang Negara</div>
-        <div class="rec-sub">Keterbukaan Informasi Mengenai Hutang Negara</div>
-      </div>
-    </div>
-    <div class="bd">
-      <div class="rec" data-id="finansialisasi">
-        <div class="rec-title">Reformasi Finansialisasi dan Desentralisasi Pendapatan Ekstraktif</div>
-        <div class="rec-sub">Perubahan dalam Pengelolaan Finansial dan Desentralisasi Pendapatan dan Sumber Daya Alam</div>
-      </div>
+    <div class="leaf" data-id="t4">
+      <div class="lt">Transparansi<br>Data Pajak</div>
+      <div class="ls">Keterbukaan Informasi mengenai Data Pajak di Indonesia</div>
     </div>
   </div>
 
-</div><!-- flow -->
+  <!-- Branch 1: progressive tax -->
+  <div class="branch-wrap top">
+    <div class="branch-icon" id="iconTop"><i class="fa-solid fa-clipboard-check"></i></div>
+    <div class="branch" data-id="branch-top">
+      <div class="bt">Reformasi Fiskal yang<br>Progresif dan Akuntabel</div>
+    </div>
+  </div>
 
-<div class="src-wrap">
-  <div class="src">Sumber: Diolah oleh peneliti</div>
-</div>
+  <!-- Center hub -->
+  <div class="hub-wrap">
+    <div class="hub" data-id="hub">
+      <div class="hub-emblem"><i class="fa-solid fa-scale-balanced"></i></div>
+      <h2>Reformasi Fiskal dan<br>Tata Kelola Pemerintahan</h2>
+    </div>
+  </div>
+
+  <!-- Branch 2: oligarchy rules -->
+  <div class="branch-wrap bot">
+    <div class="branch" data-id="branch-bot">
+      <div class="bt">Ketika Oligarki<br>Menentukan Aturan</div>
+      <div class="bs">Memutus Siklus: Ketika Kekayaan Menentukan Aturan</div>
+    </div>
+    <div class="branch-icon" id="iconBot"><i class="fa-solid fa-building-columns"></i></div>
+  </div>
+
+  <div class="lower-gap"></div>
+
+  <!-- Bottom leaves -->
+  <div class="row row-3">
+    <div class="leaf" data-id="b1">
+      <div class="lt">Partai Politik<br>Dibiayai Publik</div>
+      <div class="ls">Pendanaan Partai Politik Bersumber dari Publik</div>
+    </div>
+    <div class="leaf" data-id="b2">
+      <div class="lt">Transparansi<br>Hutang Negara</div>
+      <div class="ls">Keterbukaan Informasi Mengenai Hutang Negara</div>
+    </div>
+    <div class="leaf" data-id="b3">
+      <div class="lt">Reformasi Finansialisasi<br>dan Desentralisasi<br>Pendapatan Ekstraktif</div>
+      <div class="ls">Perubahan dalam Pengelolaan Finansial dan Desentralisasi Pendapatan dari Sumber Daya Alam</div>
+    </div>
+  </div>
+</div><!-- diagram -->
+
+<div class="src-wrap"><div class="src">Sumber: Diolah oleh peneliti</div></div>
 </div><!-- card -->
 
 <script>
-document.querySelectorAll('.rec').forEach(r => {
-  r.addEventListener('mouseenter', () => r.classList.add('active'));
-  r.addEventListener('mouseleave', () => r.classList.remove('active'));
-  r.addEventListener('click', () => {
-    const on = r.classList.contains('active');
-    document.querySelectorAll('.rec.active').forEach(a => a.classList.remove('active'));
-    if (!on) r.classList.add('active');
+const svg = document.getElementById('connSvg');
+const diagram = document.getElementById('diagram');
+
+function center(el, ref){
+  const r = el.getBoundingClientRect();
+  return { x: r.left - ref.left + r.width/2, y: r.top - ref.top + r.height/2,
+           top: r.top - ref.top, bottom: r.bottom - ref.top,
+           left: r.left - ref.left, right: r.right - ref.left };
+}
+
+function makePath(d, cls, marker){
+  const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d', d);
+  p.setAttribute('class', 'conn-line ' + (cls||''));
+  if (marker) p.setAttribute('marker-end', marker);
+  return p;
+}
+
+function drawConnectors(){
+  // Clear existing paths (keep defs)
+  Array.from(svg.querySelectorAll('path.conn-line')).forEach(p => p.remove());
+
+  const ref = diagram.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${ref.width} ${ref.height}`);
+  svg.style.height = ref.height + 'px';
+
+  const iconTop = center(document.getElementById('iconTop'), ref);
+  const iconBot = center(document.getElementById('iconBot'), ref);
+
+  // Top: from iconTop UP to each top leaf bottom-center
+  ['t1','t2','t3','t4'].forEach(id => {
+    const leaf = document.querySelector(`.leaf[data-id="${id}"]`);
+    const r = center(leaf, ref);
+    const sx = iconTop.x, sy = iconTop.y - 22;        // start just above icon
+    const ex = r.x,       ey = r.bottom + 4;          // end at leaf bottom
+    const midY = (sy + ey) / 2;
+    const d = `M ${sx} ${sy} C ${sx} ${midY}, ${ex} ${midY}, ${ex} ${ey}`;
+    const path = makePath(d, '', 'url(#arrUp)');
+    path.dataset.target = id;
+    svg.appendChild(path);
+  });
+
+  // Bottom: from iconBot DOWN to each bottom leaf top-center
+  ['b1','b2','b3'].forEach(id => {
+    const leaf = document.querySelector(`.leaf[data-id="${id}"]`);
+    const r = center(leaf, ref);
+    const sx = iconBot.x, sy = iconBot.y + 22;
+    const ex = r.x,       ey = r.top - 4;
+    const midY = (sy + ey) / 2;
+    const d = `M ${sx} ${sy} C ${sx} ${midY}, ${ex} ${midY}, ${ex} ${ey}`;
+    const path = makePath(d, '', 'url(#arrDown)');
+    path.dataset.target = id;
+    svg.appendChild(path);
+  });
+
+  // Vertical stems between branches and hub
+  const hub = center(document.querySelector('.hub'), ref);
+  const branchTop = center(document.querySelector('.branch-wrap.top .branch'), ref);
+  const branchBot = center(document.querySelector('.branch-wrap.bot .branch'), ref);
+
+  svg.appendChild(makePath(
+    `M ${branchTop.x} ${branchTop.bottom} L ${hub.x} ${hub.top}`, ''));
+  svg.appendChild(makePath(
+    `M ${hub.x} ${hub.bottom} L ${branchBot.x} ${branchBot.top}`, ''));
+}
+
+let _rt;
+window.addEventListener('load', drawConnectors);
+window.addEventListener('resize', () => { clearTimeout(_rt); _rt = setTimeout(drawConnectors, 80); });
+setTimeout(drawConnectors, 200);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawConnectors);
+
+// Hover/click interactivity
+document.querySelectorAll('.leaf, .branch, .hub').forEach(el => {
+  el.addEventListener('mouseenter', () => el.classList.add('active'));
+  el.addEventListener('mouseleave', () => el.classList.remove('active'));
+  el.addEventListener('click', () => {
+    const on = el.classList.contains('active');
+    document.querySelectorAll('.leaf.active,.branch.active,.hub.active').forEach(a => a.classList.remove('active'));
+    if (!on) el.classList.add('active');
   });
 });
 </script>
