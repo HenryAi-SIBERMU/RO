@@ -3,232 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Gambar 37 — Rekomendasi Mengurangi Ketimpangan & Pengaruh Oligarki</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Gambar 37 — Rekomendasi dalam mengurangi ketimpangan dan pengaruh oligarki</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{
-  --purple:#5D3FD3;
-  --purple-d:#4A2FBE;
-  --purple-l:#7050E0;
-  --gold:#F4A535;
-  --gold-l:#F8C46F;
-  --bg:#f4eefb;
-  --watermark:rgba(93,63,211,.06);
+:root {
+  --purple-box: #7434b4;
+  --purple-dark: #3b1764;
+  --gold: #fbd65b;
+  --gold-text: #f1cd57;
+  --white: #ffffff;
+  --sub: #e0d1f5;
+  --line: #222222;
+  --bg: #f8f6fd;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Manrope',sans-serif;background:#f0ecfb;padding:12px}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Manrope', sans-serif; background: var(--bg); padding: 12px; }
 
-.wrap{background:#fff;border-radius:20px;padding:22px 18px 26px;
-  box-shadow:0 4px 24px rgba(93,63,211,.1);max-width:900px;margin:0 auto}
+.wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px 32px;
+  box-shadow: 0 4px 24px rgba(116, 52, 180, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 /* Header */
-.hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.badge{background:var(--purple);color:#fff;font-size:13px;font-weight:700;
-  padding:6px 14px;border-radius:8px;white-space:nowrap}
-.hdr h1{font-size:16px;font-weight:800;color:var(--purple)}
+.hdr {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 30px;
+  padding-bottom: 16px; border-bottom: 2px solid #EDE9FC;
+}
+.badge {
+  background: #5D3FD3; color: #fff; font-size: 14px; font-weight: 800;
+  padding: 6px 16px; border-radius: 8px; white-space: nowrap;
+}
+.hdr h1 { font-size: 18px; font-weight: 800; color: #5D3FD3; }
 
-/* Canvas — fixed aspect ratio so SVG arrows align with HTML cards */
-.canvas{position:relative;width:100%;aspect-ratio:900/1090;background:var(--bg);
-  border-radius:14px;overflow:hidden}
-.canvas svg.bg{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+/* Tree Container */
+.tree {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 10px 0;
+}
 
-/* Cards (purple) */
-.pcard{position:absolute;background:var(--purple);color:#fff;border-radius:14px;
-  padding:12px 12px 10px;text-align:center;z-index:2;
-  box-shadow:0 4px 12px rgba(74,47,190,.25);
-  display:flex;flex-direction:column;justify-content:flex-start;
-  cursor:pointer;transition:transform .2s,box-shadow .2s}
-.pcard:hover,.pcard.active{transform:translateY(-2px);
-  box-shadow:0 8px 22px rgba(74,47,190,.4);background:var(--purple-l)}
-.pcard .t{font-size:13.5px;font-weight:800;line-height:1.2;margin-bottom:6px}
-.pcard .s{font-size:9.5px;font-weight:500;line-height:1.35;opacity:.92;color:#e9e2fa}
-.pcard .t em{font-style:italic;font-weight:800}
+/* Lines */
+.vline { width: 1.5px; background: var(--line); margin: 0 auto; }
+.hline { height: 1.5px; background: var(--line); width: 100%; position: absolute; }
 
-/* Top row 4 cards */
-.t1{left:2.8%;  top:5.5%;  width:21.5%; height:15.2%}
-.t2{left:26%;   top:5.5%;  width:21.5%; height:15.2%}
-.t3{left:49.2%; top:5.5%;  width:21.5%; height:15.2%}
-.t4{left:72.4%; top:5.5%;  width:24.8%; height:15.2%}
+/* Arrows */
+.arrow-up {
+  width: 0; height: 0; margin: 0 auto;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid var(--line);
+}
+.arrow-down {
+  width: 0; height: 0; margin: 0 auto;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid var(--line);
+}
 
-/* Central node 1: small card + yellow clipboard on top */
-.cnode1{left:31%; top:28%; width:38%; height:11.8%}
-.cnode1 .t{font-size:14px;margin-top:14px}
-.icon1{position:absolute;left:46.2%;top:23.3%;width:7.6%;aspect-ratio:1;
-  background:var(--gold);border-radius:50%;z-index:3;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.18);
-  border:3px solid #fff}
-.icon1 i{color:var(--purple);font-size:22px}
+/* Boxes */
+.box {
+  background: var(--purple-box);
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(116, 52, 180, 0.15);
+  display: flex; flex-direction: column; justify-content: center;
+  transition: transform 0.2s;
+}
+.box:hover { transform: translateY(-3px); }
 
-/* Big bar */
-.bigbar{position:absolute;left:12.5%;top:43.2%;width:75%;height:12.5%;
-  background:var(--purple);border-radius:18px;z-index:2;
-  display:flex;align-items:center;padding:10px 24px 10px 18px;gap:18px;
-  box-shadow:0 6px 16px rgba(74,47,190,.3);color:#fff;
-  cursor:pointer;transition:background .2s}
-.bigbar:hover{background:var(--purple-l)}
-.bigbar .big-icon{flex-shrink:0;width:90px;height:90px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#FFD58A,var(--gold) 70%);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.18);position:relative}
-.bigbar .big-icon::before{content:'';position:absolute;inset:8px;border-radius:50%;
-  background:rgba(255,255,255,.18)}
-.bigbar .big-icon i{position:relative;color:var(--purple-d);font-size:38px;z-index:1}
-.bigbar .big-icon .i2{position:absolute;color:var(--purple-d);font-size:14px;
-  right:14px;bottom:18px;z-index:2}
-.bigbar h2{font-size:20px;font-weight:800;line-height:1.2;flex:1}
+.box-content { position: relative; z-index: 2; padding: 22px 14px; }
+.wm {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 90px; font-weight: 900; color: rgba(255, 255, 255, 0.05);
+  line-height: 1; z-index: 1; pointer-events: none;
+}
 
-/* Center node 2: Ketika Oligarki card */
-.cnode2{left:33%; top:58.5%; width:34%; height:13%}
-.cnode2 .t{font-size:14px}
-.cnode2 .s{font-size:9px;font-style:italic;opacity:.85;margin-top:4px}
+.title { color: var(--gold-text); font-size: 14px; font-weight: 800; margin-bottom: 6px; line-height: 1.3; }
+.title.white { color: var(--white); }
+.title.large { font-size: 19px; }
+.sub { color: var(--sub); font-size: 11px; line-height: 1.4; font-weight: 600; padding: 0 4px; }
 
-/* Yellow bank circle */
-.icon2{position:absolute;left:46.2%;top:69%;width:7.6%;aspect-ratio:1;
-  background:var(--gold);border-radius:50%;z-index:3;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.18);
-  border:3px solid #fff}
-.icon2 i{color:var(--purple);font-size:22px}
+/* Top Row */
+.top-row {
+  display: flex; width: 100%; position: relative; padding-bottom: 24px; gap: 16px;
+}
+.top-row::after {
+  content: ''; position: absolute; bottom: 0; left: 12.5%; right: 12.5%;
+  border-bottom: 1.5px solid var(--line);
+}
+.col-4 { flex: 1; display: flex; flex-direction: column; }
+.col-4 .box { height: 140px; }
 
-/* Bottom row 3 cards */
-.b1{left:4%;    top:78%;  width:28%; height:18%}
-.b2{left:36%;   top:78%;  width:28%; height:18%}
-.b3{left:68%;   top:78%;  width:28%; height:18%}
+/* Icons */
+.icon-circle {
+  width: 56px; height: 56px; background: var(--gold); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; color: var(--purple-dark);
+  position: relative; z-index: 3; margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(251, 214, 91, 0.4);
+}
+.overlap-top { margin-bottom: -28px; }
+.overlap-bot { margin-top: -28px; }
 
-/* Source */
-.src-wrap{margin-top:14px;text-align:center}
-.src{background:var(--gold-l);color:var(--purple-d);font-size:12px;font-weight:700;
-  border-radius:18px;padding:9px 24px;display:inline-block;width:100%;max-width:740px}
+/* Middle Sections */
+.mid-main { width: 340px; padding: 28px 24px; }
+.mid-long {
+  width: 480px; padding: 0; display: flex; align-items: center; text-align: left;
+}
+.mid-long .box-content { padding: 24px 24px 24px 100px; text-align: left; }
+.long-circle {
+  position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+  width: 90px; height: 90px; background: var(--purple-dark); border-radius: 50%;
+  border: 3px solid #62289e; display: flex; align-items: center; justify-content: center;
+  z-index: 3; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+.long-circle .fa-scale-balanced { font-size: 36px; color: #a47fe0; }
+
+/* Bottom Row */
+.bot-row {
+  display: flex; width: 100%; position: relative; padding-top: 24px; gap: 20px;
+}
+.bot-row::before {
+  content: ''; position: absolute; top: 0; left: 16.666%; right: 16.666%;
+  border-top: 1.5px solid var(--line);
+}
+.col-3 { flex: 1; display: flex; flex-direction: column; }
+.col-3 .box { height: 150px; }
+
+/* Source Pill */
+.src-wrap { text-align: center; margin-top: 40px; }
+.src-pill {
+  background: var(--gold); color: #442100; font-size: 13px; font-weight: 700;
+  padding: 10px 40px; border-radius: 20px; display: inline-block;
+  box-shadow: 0 4px 12px rgba(251, 214, 91, 0.3);
+}
+
 </style>
 </head>
 <body>
 <div class="wrap">
-
-<div class="hdr">
-  <span class="badge">Gambar 37.</span>
-  <h1>Rekomendasi dalam mengurangi ketimpangan dan pengaruh oligarki</h1>
-</div>
-
-<div class="canvas">
-
-  <!-- Background SVG: watermark text + arrows -->
-  <svg class="bg" viewBox="0 0 900 1090" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <marker id="arrUp" viewBox="0 0 10 10" refX="5" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,9 L5,1 L10,9 Z" fill="#1a1a1a"/>
-      </marker>
-      <marker id="arrDn" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,1 L5,9 L10,1 Z" fill="#1a1a1a"/>
-      </marker>
-    </defs>
-
-    <!-- Watermark "Pajak" / "Tax" text behind cards -->
-    <g font-family="Manrope, sans-serif" font-weight="900" fill="var(--watermark)" style="fill:rgba(93,63,211,.07)">
-      <text x="40"  y="180" font-size="78" font-style="italic">Pajak</text>
-      <text x="240" y="155" font-size="62" font-style="italic">Tax</text>
-      <text x="560" y="180" font-size="68" font-style="italic">Pajak</text>
-      <text x="50"  y="940" font-size="80" font-style="italic">Pajak</text>
-      <text x="600" y="930" font-size="64" font-style="italic">Tax</text>
-    </g>
-
-    <!-- TOP arrows: from clipboard circle (450, 258) UP to under each top card (Y=240) -->
-    <g fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrUp)">
-      <path d="M 450 270 C 450 260, 130 260, 130 245"/>
-      <path d="M 450 270 C 450 260, 340 260, 340 245"/>
-      <path d="M 450 270 C 450 260, 560 260, 560 245"/>
-      <path d="M 450 270 C 450 260, 780 260, 780 245"/>
-    </g>
-
-    <!-- Middle connectors (thin) -->
-    <g fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round">
-      <!-- Reformasi Progresif card bottom (Y=434) → Big bar top (Y=470) -->
-      <line x1="450" y1="434" x2="450" y2="468" marker-end="url(#arrDn)"/>
-      <!-- Big bar bottom (Y=606) → Ketika Oligarki top (Y=638) -->
-      <line x1="450" y1="606" x2="450" y2="635" marker-end="url(#arrDn)"/>
-    </g>
-
-    <!-- BOTTOM arrows: from bank circle bottom (450, 815) DOWN to top of each bottom card (Y=845) -->
-    <g fill="none" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrDn)">
-      <path d="M 450 805 C 450 815, 162 820, 162 838"/>
-      <path d="M 450 805 C 450 815, 450 820, 450 838"/>
-      <path d="M 450 805 C 450 815, 738 820, 738 838"/>
-    </g>
-  </svg>
-
-  <!-- TOP ROW (4 cards) -->
-  <div class="pcard t1" data-id="t1">
-    <div class="t">Pajak Kekayaan</div>
-    <div class="s">Implementasi Pajak<br>atas Kekayaan</div>
-  </div>
-  <div class="pcard t2" data-id="t2">
-    <div class="t">Pelaksanaan<br><em>Tax Benefit</em></div>
-    <div class="s">Dukungan Ekonomi<br>untuk Kelas Menengah</div>
-  </div>
-  <div class="pcard t3" data-id="t3">
-    <div class="t">Penghapusan Pajak</div>
-    <div class="s">Menghilangkan beban<br>pajak bagi kelas menengah<br>kebawah</div>
-  </div>
-  <div class="pcard t4" data-id="t4">
-    <div class="t">Transparansi<br>Data Pajak</div>
-    <div class="s">Keterbukaan Informasi<br>mengenai Data Pajak<br>di Indonesia</div>
+  <div class="hdr">
+    <span class="badge">Gambar 37.</span>
+    <h1>Rekomendasi dalam mengurangi ketimpangan dan pengaruh oligarki</h1>
   </div>
 
-  <!-- Central node 1 -->
-  <div class="pcard cnode1" data-id="cnode1">
-    <div class="t">Reformasi Fiskal yang<br>Progresif dan Akuntabel</div>
-  </div>
-  <div class="icon1"><i class="fa-solid fa-clipboard-check"></i></div>
-
-  <!-- Big bar -->
-  <div class="bigbar" data-id="bigbar">
-    <div class="big-icon">
-      <i class="fa-solid fa-landmark"></i>
-      <i class="fa-solid fa-handshake-angle i2"></i>
+  <div class="tree">
+    
+    <!-- TOP ROW (4 boxes) -->
+    <div class="top-row">
+      <div class="col-4">
+        <div class="box">
+          <div class="wm">TAX</div>
+          <div class="box-content">
+            <div class="title">Pajak Kekayaan</div>
+            <div class="sub">Implementasi Pajak<br>atas Kekayaan</div>
+          </div>
+        </div>
+        <div class="arrow-up" style="margin-top: 4px;"></div>
+        <div class="vline" style="height: 20px; margin-top: -1px;"></div>
+      </div>
+      <div class="col-4">
+        <div class="box">
+          <div class="wm" style="font-size: 110px;">%</div>
+          <div class="box-content">
+            <div class="title">Pelaksanaan<br><i>Tax Benefit</i></div>
+            <div class="sub">Dukungan Ekonomi<br>untuk Kelas Menengah</div>
+          </div>
+        </div>
+        <div class="arrow-up" style="margin-top: 4px;"></div>
+        <div class="vline" style="height: 20px; margin-top: -1px;"></div>
+      </div>
+      <div class="col-4">
+        <div class="box">
+          <div class="wm" style="font-size: 70px;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          <div class="box-content">
+            <div class="title">Penghapusan Pajak</div>
+            <div class="sub">Menghilangkan beban pajak bagi kelas menengah kebawah</div>
+          </div>
+        </div>
+        <div class="arrow-up" style="margin-top: 4px;"></div>
+        <div class="vline" style="height: 20px; margin-top: -1px;"></div>
+      </div>
+      <div class="col-4">
+        <div class="box">
+          <div class="wm" style="font-size: 80px;"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <div class="box-content">
+            <div class="title">Transparansi<br>Data Pajak</div>
+            <div class="sub">Keterbukaan Informasi mengenai Data Pajak di Indonesia</div>
+          </div>
+        </div>
+        <div class="arrow-up" style="margin-top: 4px;"></div>
+        <div class="vline" style="height: 20px; margin-top: -1px;"></div>
+      </div>
     </div>
-    <h2>Reformasi Fiskal dan<br>Tata Kelola Pemerintahan</h2>
+
+    <!-- STEM DOWN -->
+    <div class="vline" style="height: 30px;"></div>
+
+    <!-- MID 1 -->
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div class="icon-circle overlap-top"><i class="fa-solid fa-clipboard-list"></i></div>
+      <div class="box mid-main">
+        <div class="box-content" style="padding: 16px;">
+          <div class="title white">Reformasi Fiskal yang<br>Progresif dan Akuntabel</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEM DOWN -->
+    <div class="vline" style="height: 24px;"></div>
+
+    <!-- MID 2 -->
+    <div>
+      <div class="box mid-long">
+        <div class="long-circle">
+          <i class="fa-solid fa-scale-balanced"></i>
+        </div>
+        <div class="box-content">
+          <div class="title white large">Reformasi Fiskal dan<br>Tata Kelola Pemerintahan</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEM DOWN -->
+    <div class="vline" style="height: 24px;"></div>
+
+    <!-- MID 3 -->
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div class="box mid-main">
+        <div class="box-content" style="padding: 16px 16px 24px;">
+          <div class="title white">Ketika Oligarki<br>Menentukan Aturan</div>
+          <div class="sub" style="margin-top: 6px;">Memutus Siklus: Ketika Kekayaan<br>Menentukan Aturan</div>
+        </div>
+      </div>
+      <div class="icon-circle overlap-bot"><i class="fa-solid fa-building-columns"></i></div>
+    </div>
+
+    <!-- STEM DOWN TO BOT ROW -->
+    <div class="vline" style="height: 30px;"></div>
+
+    <!-- BOTTOM ROW (3 boxes) -->
+    <div class="bot-row">
+      <div class="col-3">
+        <div class="vline" style="height: 20px;"></div>
+        <div class="arrow-down" style="margin-bottom: 4px; margin-top: -1px;"></div>
+        <div class="box">
+          <div class="wm" style="font-size: 80px;"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <div class="box-content">
+            <div class="title">Partai Politik<br>Dibiayai Publik</div>
+            <div class="sub">Pendanaan Partai Politik Bersumber dari Publik</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="vline" style="height: 20px;"></div>
+        <div class="arrow-down" style="margin-bottom: 4px; margin-top: -1px;"></div>
+        <div class="box">
+          <div class="wm" style="font-size: 110px;">&</div>
+          <div class="box-content">
+            <div class="title">Transparansi<br>Hutang Negara</div>
+            <div class="sub">Keterbukaan Informasi Mengenai Hutang Negara</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="vline" style="height: 20px;"></div>
+        <div class="arrow-down" style="margin-bottom: 4px; margin-top: -1px;"></div>
+        <div class="box" style="padding: 0 10px;">
+          <div class="wm" style="font-size: 80px;"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <div class="box-content">
+            <div class="title">Reformasi Finansialisasi<br>dan Desentralisasi<br>Pendapatan Ekstraktif</div>
+            <div class="sub">Perubahan dalam Pengelolaan Finansial dan Desentralisasi Pendapatan dari Sumber Daya Alam</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- tree -->
+
+  <div class="src-wrap">
+    <div class="src-pill">Sumber: Diolah oleh peneliti</div>
   </div>
 
-  <!-- Center node 2 -->
-  <div class="pcard cnode2" data-id="cnode2">
-    <div class="t">Ketika Oligarki<br>Menentukan Aturan</div>
-    <div class="s">Memutus Siklus: Ketika Kekayaan Menentukan Aturan</div>
-  </div>
-  <div class="icon2"><i class="fa-solid fa-building-columns"></i></div>
-
-  <!-- BOTTOM ROW (3 cards) -->
-  <div class="pcard b1" data-id="b1">
-    <div class="t">Partai Politik<br>Dibiayai Publik</div>
-    <div class="s">Pendanaan Partai Politik<br>Bersumber dari Publik</div>
-  </div>
-  <div class="pcard b2" data-id="b2">
-    <div class="t">Transparansi<br>Hutang Negara</div>
-    <div class="s">Keterbukaan Informasi<br>Mengenai Hutang Negara</div>
-  </div>
-  <div class="pcard b3" data-id="b3">
-    <div class="t">Reformasi Finansialisasi<br>dan Desentralisasi<br>Pendapatan Ekstraktif</div>
-    <div class="s">Perubahan dalam Pengelolaan<br>Finansial dan Desentralisasi<br>Pendapatan dari Sumber<br>Daya Alam</div>
-  </div>
-
-</div><!-- canvas -->
-
-<div class="src-wrap">
-  <div class="src">Sumber: Diolah oleh peneliti</div>
 </div>
-
-</div><!-- wrap -->
-
-<script>
-document.querySelectorAll('.pcard, .bigbar').forEach(c => {
-  c.addEventListener('mouseenter', () => c.classList.add('active'));
-  c.addEventListener('mouseleave', () => c.classList.remove('active'));
-  c.addEventListener('click', () => {
-    const on = c.classList.contains('active');
-    document.querySelectorAll('.active').forEach(a => a.classList.remove('active'));
-    if (!on) c.classList.add('active');
-  });
-});
-</script>
 </body>
 </html>
