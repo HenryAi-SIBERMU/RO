@@ -16,6 +16,7 @@ _G39 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar39_plotly.html"
 _G40 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar40_plotly.html"
 _G41 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar41_plotly.html"
 _T5  = BASE_DIR / "embed" / "16_Reformasi_Fiskal_tabel5.html"
+_G42 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar42.html"
 
 st.set_page_config(page_title="Reformasi Fiskal", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -100,4 +101,13 @@ with st.expander("🔗 Kode Embed WordPress — Tabel 5"):
     st.code("""<!-- Tabel 5: Simulasi Pajak Kekayaan -->
 <iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_tabel5.html"
   width="100%" height="620" frameborder="0"
+  style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
+
+chart_header("Pajak Kekayaan Pejabat Eksekutif dan Legislatif", "Gambar 42 — Hal. 74")
+components.html(_G42.read_text(encoding="utf-8"), height=900, scrolling=False)
+chart_footer("Data Forbes 50 orang terkaya 2026, diolah oleh peneliti")
+with st.expander("🔗 Kode Embed WordPress — Gambar 42"):
+    st.code("""<!-- Gambar 42: Pajak Kekayaan Pejabat Eksekutif dan Legislatif -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar42.html"
+  width="100%" height="900" frameborder="0"
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
