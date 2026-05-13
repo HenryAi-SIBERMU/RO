@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambar 41 — Potensi Pajak Kekayaan 50 Triliuner (2019-2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    :root {
+      --purple: #5d3fd3;
+      --deep-purple: #37206d;
+      --card-border: rgba(70, 48, 138, 0.2);
+      --lavender: rgba(248, 246, 255, 0.96);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      font-family: "Manrope", system-ui, sans-serif;
+      background: radial-gradient(circle at 14% 18%, rgba(93,63,211,0.12), transparent 55%),
+                  radial-gradient(circle at 86% 12%, rgba(242,181,68,0.12), transparent 60%),
+                  #f7f4ff;
+    }
+    .card {
+      width: min(900px, 96vw);
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 32px 70px -34px rgba(40,26,84,0.35);
+      padding: 40px 44px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(93,63,211,0.06), transparent 45%),
+                  linear-gradient(315deg, rgba(242,181,68,0.05), transparent 58%);
+      pointer-events: none;
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: var(--purple);
+      color: #fff;
+      padding: 11px 30px;
+      border-radius: 0 18px 18px 0;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 0 18px 28px -16px rgba(93,63,211,0.65);
+      margin-left: -44px;
+      white-space: nowrap;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(16px, 2vw, 22px);
+      color: var(--deep-purple);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    h1 span { color: #9370db; font-weight: 700; }
+    .plot-wrap {
+      background: var(--lavender);
+      border-radius: 22px;
+      padding: 24px 28px 28px;
+      border: 1px solid rgba(93,63,211,0.15);
+      position: relative;
+      z-index: 1;
+    }
+    #plotly-g41 { width: 100%; height: 440px; }
+    .legend-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--deep-purple);
+    }
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .source {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #513c86;
+      background: #fcefd5;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(240,193,95,0.45);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 700px) {
+      .card { padding: 32px 20px 36px; }
+      .badge { margin-left: -20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="badge">Gambar 41.</div>
+      <h1>Potensi Pajak Kekayaan 50 Triliuner <span>(2019-2026)</span></h1>
+    </header>
+
+    <div class="plot-wrap">
+      <div id="plotly-g41"></div>
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#5d3fd3;"></div>
+          Realisasi (2019–2025)
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#f0ab00;"></div>
+          Proyeksi (2026)
+        </div>
+      </div>
+    </div>
+
+    <div class="source">Sumber: Data Forbes 50 orang terkaya 2026, diolah oleh peneliti</div>
+  </div>
+
+  <script>
+    const years  = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
+    const vals   = [51.08, 50.41, 55.45, 60.69, 60.89, 90.63, 88.10, 93.02];
+    const labels = vals.map(v => `Rp${v.toFixed(2).replace(".", ",")}`);
+    const colors = [
+      "#5d3fd3","#5d3fd3","#5d3fd3","#5d3fd3",
+      "#5d3fd3","#5d3fd3","#5d3fd3","#f0ab00"
+    ];
+    const tickColors = [
+      "#37206d","#37206d","#37206d","#37206d",
+      "#37206d","#37206d","#37206d","#7a5400"
+    ];
+
+    const trace = {
+      type: "bar",
+      x: years,
+      y: vals,
+      marker: {
+        color: colors,
+        line: { color: "rgba(255,255,255,0.4)", width: 1.5 }
+      },
+      text: labels,
+      textposition: "outside",
+      textfont: { family: "Manrope", size: 13, color: "#37206d" },
+      hovertemplate: "<b>%{x}</b><br>Rp%{y:.2f} T<extra></extra>",
+      cliponaxis: false,
+      width: 0.55
+    };
+
+    /* Custom bold x-tick for 2026 via annotation */
+    const annotations = [{
+      x: "2026",
+      y: -9,
+      yref: "paper",
+      yanchor: "top",
+      text: "<b>2026</b>",
+      showarrow: false,
+      font: { family: "Manrope", size: 13, color: "#7a5400" },
+      xanchor: "center"
+    }];
+
+    const layout = {
+      margin: { t: 40, r: 30, b: 60, l: 55, pad: 4 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor:  "rgba(0,0,0,0)",
+      font: { family: "Manrope" },
+      showlegend: false,
+      bargap: 0.3,
+      annotations: annotations,
+      xaxis: {
+        tickfont: { size: 13, color: "rgba(55,32,109,0.85)" },
+        gridcolor: "rgba(0,0,0,0)",
+        fixedrange: true,
+        /* Hide 2026 from default tick and show via annotation */
+        tickvals: ["2019","2020","2021","2022","2023","2024","2025","2026"],
+        ticktext: ["2019","2020","2021","2022","2023","2024","2025",""]
+      },
+      yaxis: {
+        range: [0, 108],
+        dtick: 20,
+        tickfont: { size: 12, color: "rgba(47,36,95,0.7)" },
+        gridcolor: "rgba(93,63,211,0.1)",
+        zeroline: true,
+        zerolinecolor: "rgba(93,63,211,0.2)",
+        zerolinewidth: 1,
+        fixedrange: true
+      },
+      hoverlabel: {
+        font: { family: "Manrope", size: 13, color: "#fff" },
+        bgcolor: "rgba(47,33,92,0.92)",
+        bordercolor: "transparent"
+      }
+    };
+
+    Plotly.newPlot("plotly-g41", [trace], layout,
+      { displayModeBar: false, responsive: true });
+  </script>
+</body>
+</html>
