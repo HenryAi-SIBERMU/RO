@@ -15,6 +15,7 @@ _G38 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar38.html"
 _G39 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar39_plotly.html"
 _G40 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar40_plotly.html"
 _G41 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar41_plotly.html"
+_T5  = BASE_DIR / "embed" / "16_Reformasi_Fiskal_tabel5.html"
 
 st.set_page_config(page_title="Reformasi Fiskal", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -90,4 +91,13 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 41"):
     st.code("""<!-- Gambar 41: Potensi Pajak Kekayaan 50 Triliuner -->
 <iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar41_plotly.html"
   width="100%" height="660" frameborder="0"
+  style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
+
+chart_header("Simulasi Pajak Kekayaan Berdasarkan Ambang Batas Kekayaan", "Tabel 5 — Hal. 73")
+components.html(_T5.read_text(encoding="utf-8"), height=620, scrolling=False)
+chart_footer("Global Wealth Tax Simulator (2026), diolah CELIOS")
+with st.expander("🔗 Kode Embed WordPress — Tabel 5"):
+    st.code("""<!-- Tabel 5: Simulasi Pajak Kekayaan -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_tabel5.html"
+  width="100%" height="620" frameborder="0"
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
