@@ -13,6 +13,7 @@ _T4  = BASE_DIR / "embed" / "16_Reformasi_Fiskal_tabel4.html"
 _G37 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar37.html"
 _G38 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar38.html"
 _G39 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar39_plotly.html"
+_G40 = BASE_DIR / "embed" / "16_Reformasi_Fiskal_gambar40_plotly.html"
 
 st.set_page_config(page_title="Reformasi Fiskal", layout="wide", page_icon="c:/Users/yooma/OneDrive/Desktop/duniahub/client/15. Celios6-WPEmbedded/celios-streamlit/assets/logo_celios.png")
 apply_embed_mode()
@@ -70,4 +71,13 @@ with st.expander("🔗 Kode Embed WordPress — Gambar 39"):
     st.code("""<!-- Gambar 39: Dukungan Publik terhadap Penerapan Pajak Kekayaan -->
 <iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar39_plotly.html"
   width="100%" height="660" frameborder="0"
+  style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
+
+chart_header("Persepsi Publik terhadap Dampak Pajak Kekayaan dalam Mengurangi Ketimpangan Ekonomi", "Gambar 40 — Hal. 71")
+components.html(_G40.read_text(encoding="utf-8"), height=640, scrolling=True)
+chart_footer("Survei Pajak Kekayaan CELIOS, 2025")
+with st.expander("🔗 Kode Embed WordPress — Gambar 40"):
+    st.code("""<!-- Gambar 40: Persepsi Publik Dampak Pajak Kekayaan -->
+<iframe src="https://henryai-sibermu.github.io/RO/embed/16_Reformasi_Fiskal_gambar40_plotly.html"
+  width="100%" height="640" frameborder="0"
   style="border-radius:32px; background:#f7f4ff;" loading="lazy"></iframe>""", language="html")
